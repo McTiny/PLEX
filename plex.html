@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<!--
+  PLEX v2.2 — Power Load EXaminer
+  Compiled by Limited Energy eXperts · limitedenergy.net
+  Open reuse permitted with credit.
+  For preliminary engineering and coordination only.
+  Final electrical design by licensed EE.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLEX v2.2 — Power Load EXaminer | Limited Energy eXperts</title>
+<meta name="description" content="PLEX — Power Load EXaminer. Telecom room and equipment room power, UPS, generator, PoE, and cooling load sizing. Built by an RCDD for Division 27/28 coordination.">
+<meta property="og:title" content="PLEX — Power Load EXaminer">
+<meta property="og:description" content="TR/ER infrastructure sizing — power, UPS, generator, PoE, cooling. Built by an RCDD for Division 27/28 coordination.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600&family=Barlow+Condensed:wght@500;600&family=Oswald:wght@300;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0A1628; --navy-mid:#122040; --navy-light:#1C3058;
+  --red:#C8102E; --red-dark:#9E0B23;
+  --white:#FFFFFF; --gray-light:#B8C5D3; --gray-mid:#6B7F95; --gray-dark:#3A4D62;
+  --border:rgba(255,255,255,0.08); --border2:rgba(255,255,255,0.15);
+  --green:#22c55e; --warn:#f59e0b; --danger:#ef4444;
+  --blue:#3b82f6; --purple:#8b5cf6; --teal:#14b8a6;
+  --body:'Barlow',sans-serif; --display:'Oswald',sans-serif;
+  --label:'Barlow Condensed',sans-serif; --mono:'Space Mono',monospace;
+}
+body{background:var(--navy);color:var(--gray-light);font-family:var(--body);min-height:100vh;font-weight:400;}
+#header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);border-bottom:1px solid rgba(200,16,46,0.3);padding:14px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.header-brand{display:flex;align-items:center;gap:14px;flex:1;min-width:280px;}
+.header-mark{width:38px;height:38px;background:rgba(200,16,46,0.12);border:1.5px solid var(--red);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.header-title{font-family:var(--display);font-weight:700;font-size:22px;color:var(--white);letter-spacing:0.04em;line-height:1;}
+.header-sub{font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.2em;text-transform:uppercase;margin-top:4px;}
+.header-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.saved-indicator{font-family:var(--mono);font-size:10px;color:var(--gray-mid);letter-spacing:0.1em;padding:6px 12px;border:1px solid var(--border);border-radius:3px;}
+.saved-indicator.fresh{color:var(--green);border-color:rgba(34,197,94,0.3);}
+.hbtn{background:transparent;border:1px solid var(--border2);color:var(--gray-light);padding:8px 14px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.15s;}
+.hbtn:hover{border-color:var(--red);color:var(--white);background:rgba(200,16,46,0.08);}
+.hbtn.primary{background:var(--red);border-color:var(--red);color:var(--white);}
+.hbtn.primary:hover{background:var(--red-dark);}
+#tabs{display:flex;gap:2px;border-bottom:1px solid var(--border);padding:0 24px;background:var(--navy);}
+.tab-btn{background:transparent;border:none;color:var(--gray-mid);padding:12px 22px;font-family:var(--label);font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;}
+.tab-btn.active{color:var(--red);border-bottom-color:var(--red);}
+.tab-btn:not(.active):hover{color:var(--white);}
+#main{padding:20px 24px 40px;max-width:1200px;margin:0 auto;}
+.tab-pane{display:none;}
+.tab-pane.active{display:block;}
+.two-col{display:grid;grid-template-columns:320px 1fr;gap:20px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.panel{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:12px;}
+.panel-label{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.2em;margin-bottom:10px;display:flex;align-items:center;gap:8px;text-transform:uppercase;font-weight:700;}
+.panel-label.teal{color:var(--teal);}
+.panel-header{background:none;border:none;width:100%;padding:0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--red);}
+.caret{transition:transform 0.2s;font-size:10px;}
+.collapsible.collapsed .caret{transform:rotate(-90deg);}
+.collapsible.collapsed .panel-body{display:none;}
+.panel-body input,.panel-body select,.panel-body textarea{margin-bottom:8px;}
+.panel-body textarea{resize:vertical;min-height:60px;}
+.stat-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;padding:12px 14px;}
+.stat-label{font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.2em;margin-bottom:6px;text-transform:uppercase;}
+.stat-value{font-family:var(--display);font-size:20px;font-weight:600;color:var(--white);}
+.stat-sub{font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:2px;}
+input[type=text],input[type=number],input[type=date],select,textarea{background:var(--navy);border:1px solid var(--border2);border-radius:3px;color:var(--white);padding:7px 10px;font-size:13px;font-family:var(--body);width:100%;outline:none;transition:border-color 0.15s;}
+input[type=number]{-moz-appearance:textfield;}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--red);}
+select option{background:var(--navy);}
+.field{margin-bottom:10px;}
+.field label,.field-label{font-family:var(--label);font-size:10px;color:var(--gray-mid);letter-spacing:0.15em;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:4px;font-weight:600;}
+.btn-primary{background:var(--red);border:none;border-radius:3px;color:var(--white);padding:10px 14px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;width:100%;transition:background 0.15s;}
+.btn-primary:hover{background:var(--red-dark);}
+.btn-delete{background:transparent;border:1px solid var(--danger);color:var(--danger);padding:6px 12px;font-family:var(--label);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;margin-top:8px;}
+.btn-delete:hover{background:var(--danger);color:var(--white);}
+.btn-remove{background:transparent;border:1px solid var(--border2);color:var(--danger);border-radius:3px;width:26px;height:26px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.btn-remove:hover{border-color:var(--danger);}
+.help-btn{background:transparent;border:1px solid var(--border2);color:var(--gray-mid);border-radius:50%;width:16px;height:16px;font-size:9px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;}
+.help-btn:hover{border-color:var(--red);color:var(--red);}
+.callout{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:4px;padding:9px 11px;font-size:11px;color:var(--gray-light);margin:10px 0;line-height:1.5;}
+.callout strong{color:var(--blue);}
+.pill{border-radius:3px;padding:2px 8px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
+.pill-ok{background:rgba(34,197,94,0.15);border:1px solid var(--green);color:var(--green);}
+.pill-warn{background:rgba(245,158,11,0.15);border:1px solid var(--warn);color:var(--warn);}
+.pill-over{background:rgba(239,68,68,0.15);border:1px solid var(--danger);color:var(--danger);}
+.pill-none{background:rgba(107,127,149,0.15);border:1px solid var(--gray-mid);color:var(--gray-mid);}
+#status-row{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.status-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.status-lbl{font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.15em;}
+.gauge-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-bottom:3px;}
+.gauge-track{background:var(--navy);border-radius:2px;height:8px;overflow:hidden;}
+.gauge-fill{height:100%;border-radius:2px;transition:width 0.4s;}
+.rack-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px;}
+.rack-tab{background:var(--navy-mid);border:1px solid var(--border);color:var(--gray-mid);padding:6px 12px;font-family:var(--label);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.15s;}
+.rack-tab.active{background:var(--navy-light);border-color:var(--red);color:var(--white);}
+.rack-tab.add{border-style:dashed;color:var(--red);}
+.rack-tab:hover:not(.active){color:var(--white);}
+.device-table{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:14px;}
+.tbl-hdr{display:grid;gap:8px;padding:9px 12px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.15em;text-transform:uppercase;font-weight:700;}
+.tbl-hdr.wall{color:var(--teal);}
+.tbl-row{display:grid;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border);align-items:center;font-size:12px;}
+.tbl-row:hover{background:var(--navy-light);}
+.rack-cols{grid-template-columns:1fr 50px 64px 50px 50px 72px 28px;}
+.wall-cols{grid-template-columns:1fr 50px 64px 50px 70px 70px 60px 1fr 28px;}
+.tbl-footer{gap:8px;padding:10px 12px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;display:grid;background:var(--navy-light);}
+.device-name{color:var(--white);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;}
+.device-tag{font-family:var(--mono);font-size:9px;color:var(--gray-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.total-w{color:var(--red);font-weight:600;font-family:var(--mono);}
+.wall-w{color:var(--teal);font-weight:600;font-family:var(--mono);}
+.u-val{color:var(--gray-mid);font-family:var(--mono);font-size:11px;}
+.tbl-empty{padding:24px;text-align:center;color:var(--gray-dark);font-size:12px;font-style:italic;}
+.ri{background:var(--navy);border:1px solid var(--border2);border-radius:3px;color:var(--white);font-family:var(--mono);font-size:11px;padding:4px 6px;}
+.section-divider{display:flex;align-items:center;gap:10px;margin:18px 0 10px;}
+.section-divider span{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:0.2em;white-space:nowrap;font-weight:700;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border2);}
+.loc-toggle{display:flex;gap:4px;margin-bottom:10px;}
+.loc-btn{flex:1;background:var(--navy);border:1px solid var(--border2);color:var(--gray-mid);padding:6px;font-family:var(--label);font-size:10px;font-weight:600;letter-spacing:0.1em;cursor:pointer;border-radius:3px;text-transform:uppercase;transition:all 0.15s;}
+.loc-btn.active-rack{background:rgba(200,16,46,0.15);border-color:var(--red);color:var(--red);}
+.loc-btn.active-wall{background:rgba(20,184,166,0.15);border-color:var(--teal);color:var(--teal);}
+.check-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--gray-light);margin-bottom:8px;cursor:pointer;font-family:var(--label);letter-spacing:0.05em;}
+input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--navy-mid);border:1px solid var(--red);border-radius:8px;padding:24px;max-width:480px;width:100%;position:relative;max-height:90vh;overflow-y:auto;}
+.modal-title{font-family:var(--display);color:var(--red);font-size:15px;font-weight:600;letter-spacing:0.1em;margin-bottom:14px;text-transform:uppercase;}
+.modal-body{font-size:13px;color:var(--gray-light);line-height:1.8;}
+.modal-body strong{color:var(--white);}
+.modal-close{position:absolute;top:12px;right:14px;background:transparent;border:none;color:var(--gray-mid);font-size:20px;cursor:pointer;line-height:1;}
+.modal-close:hover{color:var(--danger);}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.sum-key{color:var(--gray-mid);font-family:var(--label);letter-spacing:0.05em;}
+.sum-val{color:var(--white);font-weight:600;font-family:var(--mono);}
+.summary-header{margin-bottom:20px;display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:14px;}
+.summary-header h1{font-family:var(--display);font-size:28px;color:var(--white);font-weight:700;letter-spacing:0.02em;}
+.sum-meta{font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-top:6px;}
+.circuit-row{display:grid;grid-template-columns:1fr 80px 80px 80px 80px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;align-items:center;}
+.circuit-row.hdr{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.15em;text-transform:uppercase;font-weight:700;}
+.circuit-name{color:var(--white);font-weight:500;}
+.circuit-num{font-family:var(--mono);color:var(--gray-light);}
+.circuit-breaker{font-family:var(--mono);color:var(--red);font-weight:700;}
+.import-status{padding:10px;border-radius:4px;font-size:12px;margin-top:10px;font-family:var(--mono);}
+#intro-block{max-width:1200px;margin:18px auto 8px;padding:0 24px;font-family:var(--body);font-size:13px;color:var(--gray-light);line-height:1.7;}
+#intro-block .intro-lead{color:var(--white);font-size:14px;margin-bottom:10px;}
+#intro-block .intro-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.intro-badge{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:4px 10px;border-radius:2px;background:transparent;cursor:pointer;transition:background 0.15s,color 0.15s;position:relative;}
+.intro-badge:hover{background:rgba(200,16,46,0.12);}
+.badge-popover{display:none;position:absolute;top:calc(100% + 8px);left:0;background:var(--navy-mid);border:1px solid var(--border);border-radius:3px;padding:12px 14px;font-size:11px;font-family:var(--body);color:var(--gray-light);line-height:1.6;width:280px;z-index:500;box-shadow:0 4px 20px rgba(0,0,0,0.5);text-transform:none;letter-spacing:0;}
+.badge-popover.right{left:auto;right:0;}
+.intro-badge.active .badge-popover{display:block;}
+.best-viewed{max-width:1200px;margin:0 auto 4px;padding:0 24px;}
+.best-viewed-inner{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--gray-mid);padding:5px 0;}
+@media(max-width:600px){
+  #header{flex-wrap:wrap;gap:6px;padding:10px 12px;}
+  .header-title{font-size:20px;}
+  .header-sub{font-size:8px;}
+  .hbtn{font-size:10px;padding:5px 8px;}
+  .saved-indicator{font-size:9px;}
+  #main{padding:0 8px 24px;}
+  #intro-block{padding:0 12px;}
+  .best-viewed{padding:0 12px;}
+  .badge-popover{width:230px;}
+  .panel{padding:10px 10px;}
+  .form-row{flex-direction:column;}
+  .form-row .form-group{width:100%;}
+  .device-row,.tbl-row{flex-wrap:wrap;}
+  .device-name,.circuit-name{font-size:11px;min-width:0;flex:1 1 100%;}
+  .u-val,.circuit-breaker,.wall-w,.total-w{font-size:11px;}
+  .sum-row{flex-wrap:wrap;}
+  .sum-key{font-size:11px;flex:1 1 60%;}
+  .sum-val{font-size:13px;}
+}
+.assumptions-panel{margin-top:14px;}
+.assumptions-panel ul{list-style:none;padding:0;margin:0;}
+.assumptions-panel li{padding:6px 0 6px 18px;border-bottom:1px dashed var(--border);position:relative;font-size:12px;line-height:1.6;color:var(--gray-light);}
+.assumptions-panel li::before{content:'▸';position:absolute;left:0;color:var(--red);font-size:10px;}
+.assumptions-panel li:last-child{border-bottom:none;}
+.assumptions-panel li strong{color:var(--white);font-weight:600;}
+#credit-line{max-width:1200px;margin:18px auto 8px;padding:14px 24px;font-family:var(--mono);font-size:11px;color:var(--gray-mid);letter-spacing:0.08em;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--navy-mid);}
+#credit-line strong{color:var(--red);letter-spacing:0.12em;text-transform:uppercase;}
+#credit-line a{color:var(--gray-light);text-decoration:none;border-bottom:1px dotted var(--gray-mid);}
+#credit-line a:hover{color:var(--red);border-bottom-color:var(--red);}
+.import-status.ok{background:rgba(34,197,94,0.1);border:1px solid var(--green);color:var(--green);}
+.import-status.err{background:rgba(239,68,68,0.1);border:1px solid var(--danger);color:var(--danger);}
+@media(max-width:880px){.two-col{grid-template-columns:1fr;}.grid-4{grid-template-columns:1fr 1fr;}#status-row{grid-template-columns:1fr;}.circuit-row{grid-template-columns:1fr 60px 60px 60px;font-size:11px;}.circuit-row>:nth-child(5),.circuit-row>:nth-child(6){display:none;}}
+@media print{body{background:white !important;color:black !important;font-size:11pt;}#header,#tabs,.tab-btn,.hbtn,.saved-indicator,.header-actions,#pane-build,#intro-block,#credit-line,.intro-badges,.best-viewed{display:none !important;}#pane-summary,#sum-assumptions-panel{display:block !important;}#sum-assumptions-panel.collapsed .panel-body{display:block !important;}.panel{background:white !important;border:1px solid #999 !important;page-break-inside:avoid;margin-bottom:12pt;padding:10pt;}.panel-label{color:#9E0B23 !important;font-weight:700;}.stat-card{background:white !important;border:1px solid #ccc !important;}.stat-value,.sum-val,.circuit-name,.device-name{color:black !important;}.stat-label,.sum-key,.gauge-meta,.status-lbl,.device-tag,.u-val,.sum-meta{color:#555 !important;}.summary-header h1{color:black !important;}.total-w,.wall-w,.circuit-breaker{color:#9E0B23 !important;}#printBtn,.no-print{display:none !important;}.circuit-row,.sum-row{border-bottom:1px solid #ccc !important;}.tbl-row{border-bottom:1px solid #ccc !important;}.assumptions-panel li{color:#222 !important;}.assumptions-panel li strong{color:black !important;}.assumptions-panel li::before{color:#9E0B23 !important;}#print-credit{display:block !important;text-align:center;font-family:monospace;font-size:9pt;color:#666 !important;margin-top:16pt;padding-top:8pt;border-top:1px solid #ccc;}@page{margin:0.5in;}}
+#print-credit{display:none;}
+</style>
+</head>
+<body>
+<div id="header">
+  <div class="header-brand">
+    <div class="header-mark">⚡</div>
+    <div>
+      <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.2</span></div>
+      <div class="header-sub">POWER LOAD EXaminer &nbsp;·&nbsp; TR/ER INFRASTRUCTURE SIZING</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <span class="saved-indicator" id="savedInd">Unsaved</span>
+    <button class="hbtn" id="newBtn">🗒 New</button>
+    <button class="hbtn" id="importBtn">📥 Import</button>
+    <button class="hbtn primary" id="exportBtn">📤 Export</button>
+  </div>
+</div>
+<div class="best-viewed">
+  <div class="best-viewed-inner">&#9432; Best viewed on a PC or tablet.</div>
+</div>
+<div id="intro-block">
+  <div class="intro-lead">
+    PLEX sizes telecom room and equipment room infrastructure &mdash; power, UPS, generator, PoE budget, and cooling load &mdash; from a list of devices you actually plan to install. Add presets, edit quantities, review the summary, export a portable <code>.plex</code> file or print to PDF.
+  </div>
+  <div class="intro-badges">
+    <button class="intro-badge" id="badge-scope" onclick="toggleBadge('badge-scope')">
+      SCOPE
+      <div class="badge-popover">For preliminary engineering and coordination only. Final electrical design must be performed by a licensed electrical engineer.</div>
+    </button>
+    <button class="intro-badge" id="badge-nec" onclick="toggleBadge('badge-nec')">
+      NEC 125%
+      <div class="badge-popover">Continuous load factor per NEC applied to breaker and generator sizing where applicable. Verify interpretation with your AHJ and engineer of record.</div>
+    </button>
+    <button class="intro-badge" id="badge-rcdd" onclick="toggleBadge('badge-rcdd')">
+      RCDD BUILT
+      <div class="badge-popover right">Designed and built by a BICSI Registered Communications Distribution Designer with active credentials and Division 27/28 design experience.</div>
+    </button>
+  </div>
+</div>
+<div id="tabs">
+  <button class="tab-btn active" data-tab="build">⚡ Builder</button>
+  <button class="tab-btn" data-tab="summary">📋 Summary &amp; Handoff</button>
+</div>
+<div id="main">
+<div id="pane-build" class="tab-pane active">
+  <div class="two-col">
+    <div>
+      <div class="panel collapsible" id="projPanel">
+        <button class="panel-header" id="projToggle">
+          <span class="panel-label" style="margin-bottom:0">PROJECT INFO</span>
+          <span class="caret">▼</span>
+        </button>
+        <div class="panel-body" style="margin-top:10px">
+          <input type="text" id="proj-name" placeholder="Project Name">
+          <input type="text" id="proj-room" placeholder="Room / Closet Label">
+          <input type="text" id="proj-building" placeholder="Building">
+          <input type="text" id="proj-floor" placeholder="Floor">
+          <input type="text" id="proj-designer" placeholder="Designer (your name)">
+          <input type="date" id="proj-date">
+          <textarea id="proj-notes" placeholder="Project notes" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-label">GLOBAL SETTINGS</div>
+        <div class="field">
+          <div class="field-label">POWER FACTOR <button class="help-btn" id="pfHelpBtn">?</button></div>
+          <input type="number" id="powerFactor" value="0.90" min="0.5" max="1.0" step="0.05">
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-label">ADD FROM LIBRARY</div>
+        <div class="field"><select id="presetSelect"><option value="">-- Select device --</option></select></div>
+        <div class="callout"><strong>Dual PSU:</strong> Redundant power supplies share the load — total draw is unchanged.</div>
+        <button class="btn-primary" id="addPresetBtn">+ ADD TO CURRENT</button>
+      </div>
+      <div class="panel">
+        <div class="panel-label">ADD CUSTOM DEVICE</div>
+        <div class="field"><input type="text" id="customName" placeholder="Device name"></div>
+        <div class="grid-3">
+          <div><div class="field-label">WATTS</div><input type="number" id="customWatts" placeholder="0" min="0"></div>
+          <div><div class="field-label">U <span style="font-size:9px;color:var(--gray-dark);font-style:italic;">(opt.)</span></div><input type="number" id="customU" placeholder="0" min="0"></div>
+          <div><div class="field-label">QTY</div><input type="number" id="customQty" value="1" min="1"></div>
+        </div>
+        <div class="field"><div class="field-label">VOLTAGE</div>
+          <select id="customV"><option value="120">120V</option><option value="208">208V</option><option value="240">240V</option></select>
+        </div>
+        <label class="check-row"><input type="checkbox" id="customPoE"> PoE Consumer (camera/device)</label>
+        <div class="field"><div class="field-label">PLACEMENT</div>
+          <div class="loc-toggle">
+            <button class="loc-btn active-rack" id="locRack" data-loc="rack">🗄 Active Rack</button>
+            <button class="loc-btn" id="locWall" data-loc="wall">🔧 Wall/Field</button>
+          </div>
+        </div>
+        <button class="btn-primary" id="addCustomBtn">+ ADD CUSTOM</button>
+      </div>
+    </div>
+    <div>
+      <div class="grid-4">
+        <div class="stat-card"><div class="stat-label">TOTAL WATTS</div><div class="stat-value" id="sc-watts">0 W</div><div class="stat-sub" id="sc-va">0 VA</div></div>
+        <div class="stat-card"><div class="stat-label">HEAT LOAD</div><div class="stat-value" id="sc-btu">0 BTU/h</div><div class="stat-sub" id="sc-tons">0.00 tons</div></div>
+        <div class="stat-card"><div class="stat-label">GENERATOR</div><div class="stat-value" id="sc-gen">0.0 kW</div><div class="stat-sub">@ 1.25× continuous</div></div>
+        <div class="stat-card"><div class="stat-label">RACK USED</div><div class="stat-value" id="sc-u">0U / 42U</div><div class="stat-sub" id="sc-ufree">— free</div></div>
+      </div>
+      <div id="status-row">
+        <div>
+          <div class="status-hdr"><span class="status-lbl">UPS LOAD</span><span id="pill-ups" class="pill pill-none">N/A</span></div>
+          <div class="gauge-meta"><span id="g-ups-lbl">0W / 0W</span><span id="g-ups-pct">0%</span></div>
+          <div class="gauge-track"><div class="gauge-fill" id="g-ups-fill" style="width:0%;background:var(--blue)"></div></div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:4px;" id="ups-runtime-line">Runtime: —</div>
+        </div>
+        <div>
+          <div class="status-hdr"><span class="status-lbl">PoE BUDGET</span><span id="pill-poe" class="pill pill-none">N/A</span></div>
+          <div class="gauge-meta"><span id="g-poe-lbl">0W / 0W</span><span id="g-poe-pct">0%</span></div>
+          <div class="gauge-track"><div class="gauge-fill" id="g-poe-fill" style="width:0%;background:var(--purple)"></div></div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:4px;" id="poe-headroom-line">Headroom: —</div>
+        </div>
+        <div>
+          <div class="status-hdr"><span class="status-lbl">RACK FILL</span><span id="pill-rack" class="pill pill-ok">OK</span></div>
+          <div class="gauge-meta"><span id="g-rack-lbl">0U / 42U</span><span id="g-rack-pct">0%</span></div>
+          <div class="gauge-track"><div class="gauge-fill" id="g-rack-fill" style="width:0%;background:var(--green)"></div></div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:4px;" id="rack-breaker-line">Breaker: —</div>
+        </div>
+      </div>
+      <div class="rack-tabs" id="rackTabs"></div>
+      <div class="panel" id="rackSettings">
+        <div class="panel-label">RACK SETTINGS</div>
+        <div class="grid-2">
+          <div><div class="field-label">RACK LABEL</div><input type="text" id="rack-label" placeholder="TR-1, ER-2, IDF-3"></div>
+          <div><div class="field-label">RACK SIZE (U)</div><input type="number" id="rack-size" min="1" max="52" value="42"></div>
+        </div>
+        <div class="grid-2">
+          <div><div class="field-label">PDU INPUT VOLTAGE</div>
+            <select id="rack-voltage"><option value="120">120V</option><option value="208">208V</option><option value="240">240V</option></select>
+          </div>
+          <div><div class="field-label">REDUNDANCY</div>
+            <label class="check-row" style="margin-top:8px"><input type="checkbox" id="rack-redundant"> N+1 Redundant</label>
+          </div>
+        </div>
+        <div class="field"><div class="field-label">RACK NOTES</div><textarea id="rack-notes" placeholder="Rack-specific notes" rows="2"></textarea></div>
+        <button class="btn-delete" id="deleteRackBtn">DELETE THIS RACK</button>
+      </div>
+      <div class="device-table">
+        <div class="tbl-hdr rack-cols"><span>RACK DEVICE</span><span>QTY</span><span>W/UNIT</span><span>V</span><span>U</span><span>TOTAL W</span><span></span></div>
+        <div id="rack-body"><div class="tbl-empty">No devices in this rack yet.</div></div>
+        <div class="tbl-footer rack-cols" id="rack-footer" style="display:none">
+          <span style="color:var(--white);font-weight:700">RACK TOTAL</span><span></span><span></span><span></span>
+          <span id="tf-u" class="u-val"></span><span id="tf-rw" class="total-w"></span><span></span>
+        </div>
+      </div>
+      <div class="section-divider"><span>🔧 WALL / FIELD DEVICES — INDEPENDENT CIRCUITS</span></div>
+      <div class="device-table">
+        <div class="tbl-hdr wall-cols" style="color:var(--teal)"><span>DEVICE</span><span>QTY</span><span>W/UNIT</span><span>V</span><span>TOTAL W</span><span>AMPS</span><span>BREAKER</span><span>NOTES</span><span></span></div>
+        <div id="wall-body"><div class="tbl-empty">No wall/field devices yet. Add ACS power supplies, controllers, locks, or DAS/EERC.</div></div>
+        <div class="tbl-footer wall-cols" id="wall-footer" style="display:none">
+          <span style="color:var(--white);font-weight:700">WALL TOTAL</span><span></span><span></span><span></span>
+          <span id="tf-ww" class="wall-w"></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="pane-summary" class="tab-pane">
+  <div class="summary-header">
+    <div><h1 id="sum-title">PLEX Project Summary</h1><div class="sum-meta" id="sum-subtitle">No project loaded</div></div>
+    <button class="hbtn primary no-print" id="printBtn">🖨 Print / Save PDF</button>
+  </div>
+  <div class="panel"><div class="panel-label">PROJECT INFORMATION</div><div id="sum-project"></div></div>
+  <div class="panel"><div class="panel-label">ELECTRICAL LOAD SUMMARY</div><div id="sum-electrical"></div></div>
+  <div class="panel"><div class="panel-label">CIRCUITS &amp; BREAKER SIZING <span style="font-family:var(--body);color:var(--gray-mid);font-size:11px;letter-spacing:normal;text-transform:none;">— NEC 125% continuous load</span></div><div id="sum-circuits"></div></div>
+  <div class="panel"><div class="panel-label">UPS STATUS &amp; RUNTIME</div><div id="sum-ups"></div></div>
+  <div class="panel"><div class="panel-label">GENERATOR SIZING</div><div id="sum-gen"></div></div>
+  <div class="panel"><div class="panel-label">MECHANICAL / COOLING LOAD <span style="font-family:var(--body);color:var(--gray-mid);font-size:11px;letter-spacing:normal;text-transform:none;">— for HVAC sizing</span></div><div id="sum-mech"></div></div>
+  <div class="panel"><div class="panel-label">PoE SUMMARY</div><div id="sum-poe"></div></div>
+  <div class="panel"><div class="panel-label">PER-RACK BREAKDOWN</div><div id="sum-racks"></div></div>
+  <div class="panel"><div class="panel-label teal">WALL / FIELD DEVICES — INDIVIDUAL CIRCUITS</div><div id="sum-wall"></div></div>
+  <div class="panel collapsible assumptions-panel" id="sum-assumptions-panel">
+    <button class="panel-header" id="assumptionsToggle">
+      <span class="panel-label" style="margin-bottom:0">KNOWN ASSUMPTIONS &amp; METHODOLOGY</span>
+      <span class="caret">▼</span>
+    </button>
+    <div class="panel-body" style="margin-top:10px">
+      <ul>
+        <li><strong>Power Factor.</strong> Default 0.90 applied to all loads. Adjust under Global Settings for known equipment behavior.</li>
+        <li><strong>NEC 125% Continuous Load.</strong> Applied to breaker and generator sizing where applicable. Verify with AHJ and EOR.</li>
+        <li><strong>PoE Budget.</strong> Compared against camera <em>real draw</em> (typical operating watts), not maximum PoE class budget. Headroom is calculated against switch published PoE budget.</li>
+        <li><strong>Mercury Controller Wattages.</strong> Assume 2 DESFire-class readers per reader port at approximately 1.5W each. Adjust the device wattage in the table if your reader hardware draws differently or port count varies.</li>
+        <li><strong>Cooling Load.</strong> BTU/h = Watts &times; 3.412. Cooling tons = BTU/h &divide; 12,000. HVAC recommendation includes a 25% buffer.</li>
+        <li><strong>Generator Sizing.</strong> Total load &times; 1.25 (continuous). Growth recommendations show +25% and +50% above continuous.</li>
+        <li><strong>UPS Runtime.</strong> Linear estimate from nameplate full-load runtime, scaled by load percentage. Actual runtime varies with battery age, temperature, and load profile.</li>
+        <li><strong>Breaker Selection.</strong> Next standard size at or above the 125% continuous current draw, from the NEC commercial breaker series.</li>
+        <li><strong>Redundant Power Supplies.</strong> Total system draw is unchanged &mdash; dual PSU equipment shares the load between supplies.</li>
+        <li><strong>Scope.</strong> Preliminary engineering and coordination only. Final electrical design by a licensed electrical engineer.</li>
+      </ul>
+    </div>
+  </div>
+  <div id="print-credit">
+    PLEX v2.2 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+  </div>
+  <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);text-align:center;margin-top:20px;letter-spacing:0.1em;" class="no-print">Generated by PLEX &mdash; Power Load EXaminer &middot; limitedenergy.net/plex</div>
+</div>
+</div>
+<div id="credit-line">
+  <strong>PLEX</strong> is free to use. Please credit <a href="https://limitedenergy.net" target="_blank" rel="noopener">Limited Energy eXperts &middot; limitedenergy.net</a>
+</div>
+<div class="modal-overlay" id="pfModal">
+  <div class="modal-box">
+    <button class="modal-close" id="pfModalClose">×</button>
+    <div class="modal-title">POWER FACTOR EXPLAINED</div>
+    <div class="modal-body">
+      <p><strong>Power Factor (PF)</strong> is the ratio of <strong>real power</strong> (watts — what does work and generates heat) to <strong>apparent power</strong> (volt-amps — what the utility delivers and UPS must supply).</p><br>
+      <p><strong>Example:</strong> A 500W server at PF 0.90 draws <strong>556 VA</strong> from the UPS and circuit. Size UPS and breakers to VA, not watts.</p><br>
+      <p><strong>Typical values:</strong><br>· Modern servers with active PFC: <strong>0.95–0.99</strong><br>· Network switches: <strong>0.90–0.95</strong><br>· Older or mixed IT loads: <strong>0.80–0.90</strong><br>· Conservative design default: <strong>0.90</strong></p>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="importModal">
+  <div class="modal-box">
+    <button class="modal-close" id="importModalClose">×</button>
+    <div class="modal-title">IMPORT .PLEX FILE</div>
+    <div class="modal-body">
+      <p>Select a <strong>.plex</strong> file previously exported from PLEX. The current session will be replaced.</p>
+      <div style="margin-top:14px;"><input type="file" id="importFile" accept=".plex,.json"></div>
+      <div id="importStatus"></div>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="newModal">
+  <div class="modal-box">
+    <button class="modal-close" id="newModalClose">×</button>
+    <div class="modal-title">START NEW PROJECT?</div>
+    <div class="modal-body">
+      <p>This will clear the current project. Export first if you want to save it.</p>
+      <div style="display:flex;gap:8px;margin-top:18px;">
+        <button class="hbtn" id="newCancelBtn">Cancel</button>
+        <button class="hbtn primary" id="newConfirmBtn">Yes, Clear &amp; Start New</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const PRESETS=[
+{cat:"NVR / VMS Servers",items:[
+{name:"Milestone Husky IVO 1800R",w:450,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Milestone Husky IVO 800R",w:350,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Milestone Husky IVO 500R",w:250,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Genetec Streamvault SV-100",w:120,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Genetec Streamvault SV-110",w:200,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Genetec Streamvault SV-500",w:350,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Genetec Streamvault SV-1100",w:450,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Dell PowerEdge R350",w:350,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Generic 1U Server",w:300,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
+{cat:"PoE Switches",items:[
+{name:"Cisco CBS350 24P (185W PoE)",w:60,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:24,poeB:185,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Cisco CBS350 48P (370W PoE)",w:80,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:48,poeB:370,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Cisco CBS350 24FP (370W PoE)",w:80,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:24,poeB:370,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Axis D8004 PoE (60W)",w:20,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:4,poeB:60,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Hanwha SPOEx-200P8 (240W PoE)",w:55,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:8,poeB:240,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Generic Unmanaged 8P PoE (120W)",w:30,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:8,poeB:120,cW:0,cVA:0,rtMin:0,ups:false}]},
+{cat:"Cameras (PoE)",items:[
+{name:"Axis P32 Series (Indoor Dome)",w:8,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Axis Q61 Series (PTZ)",w:60,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Axis P14 Series (Bullet)",w:13,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Hanwha QNV Series (Vandal Dome)",w:11,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Hanwha XNV Series (Outdoor)",w:13,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Generic IP Camera (PoE)",w:12,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Generic IP PTZ (HiPoE/PoE+)",w:25,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
+{cat:"UPS",items:[
+{name:"APC Smart-UPS 1500VA LCD (980W)",w:25,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:980,cVA:1500,rtMin:6,ups:true},
+{name:"APC Smart-UPS 2200VA LCD (1980W)",w:35,u:2,v:208,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:1980,cVA:2200,rtMin:7,ups:true},
+{name:"APC Smart-UPS 3000VA LCD (2700W)",w:45,u:2,v:208,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:9,ups:true},
+{name:"Eaton 9PX 1500VA (1350W)",w:25,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:1350,cVA:1500,rtMin:5,ups:true},
+{name:"Eaton 9PX 3000VA (2700W)",w:40,u:2,v:208,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:5,ups:true}]},
+{cat:"Networking / Other (Rack)",items:[
+{name:"Cisco C9300 24-Port (non-PoE)",w:40,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"1U Patch Panel (passive)",w:0,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"2U Patch Panel (passive)",w:0,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Fiber Distribution Unit (FDU 1U)",w:0,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"KVM Over IP (1U)",w:15,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Console Server (1U)",w:15,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"PDU (Rack, metered)",w:10,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"1U Blank Panel",w:0,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
+{cat:"ACS Power Supplies (Wall)",items:[
+{name:"LifeSafety Power FlexPower e2 (2A)",w:30,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"LifeSafety Power FlexPower e4 (4A)",w:55,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"LifeSafety Power FlexPower e8 (8A)",w:110,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"LifeSafety Power FlexPower e12 (12A)",w:170,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Altronix AL600ULX (6A 12/24V)",w:100,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Altronix AL1012ULACM (10A 12V)",w:150,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
+{cat:"ACS Door Controllers (Wall)",items:[
+{name:"Mercury MR-52 (2-door, 2 readers/port)",w:11,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Mercury MR-50 (1-door, 2 readers/port)",w:6,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Mercury MR-16 (16-input monitor)",w:3,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Mercury LP1502 (2-door, 2 readers/port)",w:12,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Mercury LP2500 (intelligent controller)",w:10,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Mercury LP4502 (4-door)",w:18,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"HID VertX EVO V1000 (1-door)",w:12,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"HID VertX EVO V2000 (2-door)",w:15,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Genetec SY-ACU222 Synergis (2-door)",w:14,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
+{cat:"Door Hardware / Locks (Wall)",items:[
+{name:"Electric Strike, Fail Secure (12VDC)",w:6,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Electric Strike, Fail Secure (24VDC)",w:6,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Mortise Lock, Fail Secure (12VDC)",w:8,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Mortise Lock, Fail Secure (24VDC)",w:8,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Electromagnetic Lock, Fail Safe",w:5,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Electric Latch Retraction (ELR)",w:18,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Request-to-Exit (REX) Sensor",w:2,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
+{cat:"Field / Wall Equipment",items:[
+{name:"DAS BDA Head End Unit",w:100,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"EERC Master Station",w:25,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"EERC Remote Station",w:15,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Intercom Master Station (wall)",w:20,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Generic Wall-Mount Enclosure",w:30,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]}
+];
+const ALL_FLAT=PRESETS.flatMap(c=>c.items.map(i=>({...i,category:c.cat})));
+const BTU_PER_WATT=3.41214;
+const STORAGE_KEY='plex_session_v2';
+const PLEX_SIG='PLEX-LEX';
+const PLEX_VERSION='2.2';
+const STD_BREAKERS=[15,20,25,30,35,40,45,50,60,70,80,90,100,110,125,150,175,200];
+let state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false}],items:[],activeRackId:1};
+let nextItemId=1,nextRackId=2,customLoc='rack',dirty=false,lastSaveTime=null;
+const v=id=>document.getElementById(id);
+function autoSave(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({state,nextItemId,nextRackId,savedAt:Date.now()}));lastSaveTime=Date.now();dirty=false;updateSavedIndicator();}catch(e){console.error('Save failed:',e);}}
+function loadSaved(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return false;const p=JSON.parse(raw);if(!p.state)return false;state=p.state;nextItemId=p.nextItemId||1;nextRackId=p.nextRackId||2;lastSaveTime=p.savedAt;return true;}catch(e){return false;}}
+function updateSavedIndicator(){const el=v('savedInd');if(!lastSaveTime){el.textContent='Unsaved';el.classList.remove('fresh');return;}const d=Math.floor((Date.now()-lastSaveTime)/1000);let t;if(d<5)t='✓ Saved just now';else if(d<60)t=`✓ Saved ${d}s ago`;else if(d<3600)t=`✓ Saved ${Math.floor(d/60)}m ago`;else t=`✓ Saved ${Math.floor(d/3600)}h ago`;el.textContent=t;el.classList.toggle('fresh',d<10);}
+function markDirty(){dirty=true;autoSave();}
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
+setInterval(updateSavedIndicator,15000);
+const getActiveRack=()=>state.racks.find(r=>r.id===state.activeRackId)||state.racks[0];
+function standardBreaker(amps){const c=amps*1.25;const f=STD_BREAKERS.find(s=>s>=c);return f||'>200A';}
+function upsRuntime(capW,loadW,fullMin){if(loadW<=0||capW<=0||fullMin<=0)return null;if(loadW>capW)return 0;return fullMin/(loadW/capW);}
+function calc(){
+  const pf=state.settings.powerFactor||0.9;
+  let totalW=0,wallW=0,poeCW=0,poeBW=0,upsW=0,upsVA=0,upsRuntimeMin=null;
+  const perRack={},perWall=[],rackW={};
+  state.racks.forEach(r=>{perRack[r.id]={rack:r,watts:0,u:0,items:[],upsItems:[]};rackW[r.id]=0;});
+  for(const it of state.items){
+    const q=it.qty||1,w=it.w*q;totalW+=w;
+    if(it.loc==='wall'){wallW+=w;const a=it.v>0?w/it.v:0;perWall.push({item:it,watts:w,amps:a,breaker:standardBreaker(a)});}
+    else{const t=perRack[it.rackId]||perRack[state.racks[0].id];if(t){t.watts+=w;t.u+=(it.u||0)*q;t.items.push(it);if(it.ups)t.upsItems.push(it);if(!it.ups)rackW[t.rack.id]=(rackW[t.rack.id]||0)+w;}}
+    if(it.poeS)poeBW+=(it.poeB||0)*q;
+    if(it.poeC)poeCW+=it.w*q;
+    if(it.ups){upsW+=(it.cW||0)*q;upsVA+=(it.cVA||0)*q;}
+  }
+  const allUpsItems=state.items.filter(i=>i.ups);
+  if(allUpsItems.length>0){const f=allUpsItems[0];const pl=state.items.filter(i=>!i.ups).reduce((s,i)=>s+i.w*(i.qty||1),0);upsRuntimeMin=upsRuntime(f.cW||0,pl,f.rtMin||5);}
+  const nonUpsW=state.items.filter(i=>!i.ups).reduce((s,i)=>s+i.w*(i.qty||1),0);
+  const totalVA=pf>0?totalW/pf:0;
+  const btu=totalW*BTU_PER_WATT;
+  const tons=btu/12000;
+  const upsP=upsW>0?(nonUpsW/upsW)*100:0;
+  const poeP=poeBW>0?(poeCW/poeBW)*100:0;
+  const generatorKW=(totalW*1.25)/1000;
+  Object.values(perRack).forEach(r=>{const n=rackW[r.rack.id]||0;r.nonUpsWatts=n;r.va=pf>0?n/pf:0;r.amps=r.rack.voltage>0?r.va/r.rack.voltage:0;r.breaker=standardBreaker(r.amps);r.fillPct=r.rack.sizeU>0?(r.u/r.rack.sizeU)*100:0;r.remU=r.rack.sizeU-r.u;});
+  return{totalW,totalVA,btu,tons,wallW,nonUpsW,poeBW,poeCW,poeP,upsW,upsVA,upsP,upsRuntimeMin,allUpsItems,generatorKW,perRack,perWall,a120:totalVA/120,a208:totalVA/208,a240:totalVA/240};
+}
+const pillCls=s=>({ok:'pill-ok',warn:'pill-warn',over:'pill-over',none:'pill-none'}[s]);
+const pillTxt=s=>({ok:'OK',warn:'MARGINAL',over:'OVER',none:'N/A'}[s]);
+function setPill(id,st){const e=v(id);e.className='pill '+pillCls(st);e.textContent=pillTxt(st);}
+function setGauge(id,pct,col){const e=v(id);e.style.width=Math.min(pct,100)+'%';e.style.background=pct>90?'var(--danger)':pct>75?'var(--warn)':col;}
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function dtag(it){if(it.poeS)return`PoE Switch · ${it.poeB}W budget · ${it.poeP}p`;if(it.poeC)return'PoE Device';if(it.ups)return`UPS · ${it.cW}W / ${it.cVA}VA · ${it.rtMin}min @ full`;return it.category||'';}
+function fmtRuntime(m){if(m===null||m===undefined)return'—';if(m<=0)return'OVERLOADED';if(m>=60)return`~${(m/60).toFixed(1)} hrs`;return`~${Math.round(m)} min`;}
+function render(){
+  const s=calc();const r=getActiveRack();
+  ['name','room','building','floor','designer','date','notes'].forEach(f=>{const el=v('proj-'+f);if(el&&el.value!==(state.project[f]||''))el.value=state.project[f]||'';});
+  if(v('powerFactor').value!==String(state.settings.powerFactor))v('powerFactor').value=state.settings.powerFactor;
+  if(r){if(v('rack-label').value!==r.label)v('rack-label').value=r.label;if(parseInt(v('rack-size').value)!==r.sizeU)v('rack-size').value=r.sizeU;if(v('rack-voltage').value!==String(r.voltage))v('rack-voltage').value=r.voltage;if(v('rack-notes').value!==r.notes)v('rack-notes').value=r.notes;v('rack-redundant').checked=!!r.redundant;}
+  v('sc-watts').textContent=s.totalW.toFixed(0)+' W';v('sc-va').textContent=s.totalVA.toFixed(0)+' VA';
+  v('sc-btu').textContent=s.btu.toFixed(0)+' BTU/h';v('sc-tons').textContent=s.tons.toFixed(2)+' tons';
+  v('sc-gen').textContent=s.generatorKW.toFixed(2)+' kW';
+  const ri=r?s.perRack[r.id]:null;
+  if(ri){v('sc-u').textContent=ri.u+'U / '+r.sizeU+'U';v('sc-ufree').textContent=ri.remU+'U free';}
+  const uSt=s.upsW===0?'none':s.upsP>90?'over':s.upsP>75?'warn':'ok';
+  setPill('pill-ups',uSt);
+  v('g-ups-lbl').textContent=s.nonUpsW+'W / '+s.upsW+'W';
+  v('g-ups-pct').textContent=(s.upsW>0?s.upsP.toFixed(1):'0')+'%';
+  setGauge('g-ups-fill',s.upsW>0?s.upsP:0,'var(--blue)');
+  v('ups-runtime-line').textContent='Runtime: '+fmtRuntime(s.upsRuntimeMin);
+  const pSt=s.poeBW===0?'none':s.poeP>90?'over':s.poeP>75?'warn':'ok';
+  setPill('pill-poe',pSt);
+  v('g-poe-lbl').textContent=s.poeCW+'W / '+s.poeBW+'W';
+  v('g-poe-pct').textContent=(s.poeBW>0?s.poeP.toFixed(1):'0')+'%';
+  setGauge('g-poe-fill',s.poeP,'var(--purple)');
+  v('poe-headroom-line').textContent=s.poeBW>0?`Headroom: ${s.poeBW-s.poeCW}W`:'No PoE switches';
+  if(ri){const rSt=ri.remU<=0?'over':ri.remU<4?'warn':'ok';setPill('pill-rack',rSt);v('g-rack-lbl').textContent=ri.u+'U / '+r.sizeU+'U';v('g-rack-pct').textContent=ri.fillPct.toFixed(1)+'%';setGauge('g-rack-fill',ri.fillPct,'var(--green)');v('rack-breaker-line').textContent=`Breaker: ${ri.breaker}A @ ${r.voltage}V (${ri.amps.toFixed(1)}A continuous)`;}
+  renderRackTabs();renderRack(s);renderWall(s);renderSummary(s);
+}
+function renderRackTabs(){
+  const c=v('rackTabs');
+  c.innerHTML=state.racks.map(r=>`<button class="rack-tab ${r.id===state.activeRackId?'active':''}" data-rack-id="${r.id}">${esc(r.label||'Rack '+r.id)}</button>`).join('')+`<button class="rack-tab add" id="addRackBtn">+ Add Rack</button>`;
+  c.querySelectorAll('.rack-tab[data-rack-id]').forEach(btn=>{btn.addEventListener('click',()=>{state.activeRackId=parseInt(btn.dataset.rackId);render();markDirty();});});
+  v('addRackBtn').addEventListener('click',()=>{const nr={id:nextRackId++,label:'Rack '+(state.racks.length+1),sizeU:42,voltage:120,notes:'',redundant:false};state.racks.push(nr);state.activeRackId=nr.id;render();markDirty();});
+}
+function makeRackRow(it){const q=it.qty||1;return`<div class="tbl-row rack-cols"><div><div class="device-name">${esc(it.name)}</div><div class="device-tag">${esc(dtag(it))}</div></div><input type="number" class="ri" style="width:46px;text-align:center" value="${q}" min="1" data-id="${it.id}" data-f="qty"><input type="number" class="ri" style="width:60px" value="${it.w}" min="0" data-id="${it.id}" data-f="w"><select class="ri" style="width:48px" data-id="${it.id}" data-f="v"><option value="120"${it.v==120?' selected':''}>120</option><option value="208"${it.v==208?' selected':''}>208</option><option value="240"${it.v==240?' selected':''}>240</option></select><span class="u-val">${it.u>0?it.u+'U':'--'}</span><span class="total-w">${(it.w*q).toFixed(0)}W</span><button class="btn-remove" data-id="${it.id}">×</button></div>`;}
+function makeWallRow(it){const q=it.qty||1;const w=it.w*q;const a=it.v>0?w/it.v:0;const b=standardBreaker(a);return`<div class="tbl-row wall-cols"><div><div class="device-name">${esc(it.name)}</div><div class="device-tag">${esc(it.category||'')}</div></div><input type="number" class="ri" style="width:46px;text-align:center" value="${q}" min="1" data-id="${it.id}" data-f="qty"><input type="number" class="ri" style="width:60px" value="${it.w}" min="0" data-id="${it.id}" data-f="w"><select class="ri" style="width:48px" data-id="${it.id}" data-f="v"><option value="120"${it.v==120?' selected':''}>120</option><option value="208"${it.v==208?' selected':''}>208</option><option value="240"${it.v==240?' selected':''}>240</option></select><span class="wall-w">${w.toFixed(0)}W</span><span style="font-family:var(--mono);color:var(--gray-light);font-size:11px;">${a.toFixed(1)}A</span><span style="font-family:var(--mono);color:var(--teal);font-weight:700;font-size:11px;">${b}A</span><input type="text" class="ri" placeholder="Circuit notes" value="${esc(it.circuitNotes||'')}" data-id="${it.id}" data-f="circuitNotes" style="font-size:11px;"><button class="btn-remove" data-id="${it.id}">×</button></div>`;}
+function bindRowEvents(el){
+  el.querySelectorAll('[data-f]').forEach(inp=>{inp.addEventListener('change',()=>{const it=state.items.find(i=>i.id===parseInt(inp.dataset.id));if(!it)return;const f=inp.dataset.f;if(f==='qty')it.qty=Math.max(1,parseInt(inp.value)||1);else if(f==='w')it.w=parseFloat(inp.value)||0;else if(f==='v')it.v=parseInt(inp.value);else if(f==='circuitNotes')it.circuitNotes=inp.value;render();markDirty();});});
+  el.querySelectorAll('.btn-remove').forEach(btn=>{btn.addEventListener('click',()=>{state.items=state.items.filter(i=>i.id!==parseInt(btn.dataset.id));render();markDirty();});});
+}
+function renderRack(s){const r=getActiveRack();const body=v('rack-body'),ft=v('rack-footer');const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===r.id);if(!items.length){body.innerHTML='<div class="tbl-empty">No devices in this rack yet.</div>';ft.style.display='none';return;}body.innerHTML=items.map(makeRackRow).join('');ft.style.display='grid';const ri=s.perRack[r.id];v('tf-u').textContent=ri.u+'U';v('tf-rw').textContent=ri.watts.toFixed(0)+'W';bindRowEvents(body);}
+function renderWall(s){const body=v('wall-body'),ft=v('wall-footer');const items=state.items.filter(i=>i.loc==='wall');if(!items.length){body.innerHTML='<div class="tbl-empty">No wall/field devices yet. Add ACS power supplies, controllers, locks, or DAS/EERC.</div>';ft.style.display='none';return;}body.innerHTML=items.map(makeWallRow).join('');ft.style.display='grid';v('tf-ww').textContent=s.wallW.toFixed(0)+'W';bindRowEvents(body);}
+function sRow(k,val){return`<div class="sum-row"><span class="sum-key">${esc(k)}</span><span class="sum-val">${val}</span></div>`;}
+function renderSummary(s){
+  const p=state.project;
+  v('sum-title').textContent=p.name||'PLEX Project Summary';
+  const sp=[];if(p.room)sp.push(p.room);if(p.building)sp.push(p.building);if(p.floor)sp.push('Floor '+p.floor);if(p.date)sp.push(p.date);
+  v('sum-subtitle').textContent=sp.length?sp.join(' · '):'Enter project info in the Builder tab';
+  v('sum-project').innerHTML=[['Project Name',p.name||'—'],['Room / Closet',p.room||'—'],['Building',p.building||'—'],['Floor',p.floor||'—'],['Designer',p.designer||'—'],['Date',p.date||'—'],['Notes',p.notes||'—']].map(r=>sRow(r[0],r[1])).join('');
+  v('sum-electrical').innerHTML=[['Total Real Power',s.totalW.toFixed(0)+' W'],['Total Apparent Power',s.totalVA.toFixed(0)+' VA'],['Power Factor Applied',state.settings.powerFactor.toFixed(2)],['Amperage @ 120V',s.a120.toFixed(1)+'A'],['Amperage @ 208V',s.a208.toFixed(1)+'A'],['Amperage @ 240V',s.a240.toFixed(1)+'A'],['Rack Load Subtotal',(s.totalW-s.wallW).toFixed(0)+' W'],['Wall/Field Subtotal',s.wallW.toFixed(0)+' W']].map(r=>sRow(r[0],r[1])).join('');
+  let ch=`<div class="circuit-row hdr"><span>Circuit / Source</span><span>Voltage</span><span>Load (W)</span><span>Continuous (A)</span><span>Breaker</span><span>Notes</span></div>`;
+  Object.values(s.perRack).forEach(rk=>{if(rk.nonUpsWatts>0)ch+=`<div class="circuit-row"><span class="circuit-name">${esc(rk.rack.label)} (PDU)${rk.rack.redundant?' · N+1':''}</span><span class="circuit-num">${rk.rack.voltage}V</span><span class="circuit-num">${rk.nonUpsWatts.toFixed(0)}W</span><span class="circuit-num">${(rk.amps*1.25).toFixed(1)}A</span><span class="circuit-breaker">${rk.breaker}A</span><span style="color:var(--gray-mid);font-size:11px;">${esc(rk.rack.notes||'')}</span></div>`;});
+  s.allUpsItems.forEach(u=>{const w=u.w*(u.qty||1);const a=u.v>0?w/u.v:0;ch+=`<div class="circuit-row"><span class="circuit-name">${esc(u.name)}</span><span class="circuit-num">${u.v}V</span><span class="circuit-num">${w.toFixed(0)}W</span><span class="circuit-num">${(a*1.25).toFixed(1)}A</span><span class="circuit-breaker">${standardBreaker(a)}A</span><span style="color:var(--gray-mid);font-size:11px;">UPS input circuit</span></div>`;});
+  s.perWall.forEach(wd=>{ch+=`<div class="circuit-row"><span class="circuit-name">${esc(wd.item.name)} (×${wd.item.qty||1})</span><span class="circuit-num">${wd.item.v}V</span><span class="circuit-num">${wd.watts.toFixed(0)}W</span><span class="circuit-num">${(wd.amps*1.25).toFixed(1)}A</span><span class="circuit-breaker">${wd.breaker}A</span><span style="color:var(--gray-mid);font-size:11px;">${esc(wd.item.circuitNotes||'')}</span></div>`;});
+  if(s.perWall.length===0&&Object.values(s.perRack).every(r=>r.nonUpsWatts===0)&&s.allUpsItems.length===0)ch+='<div style="padding:16px;color:var(--gray-dark);font-style:italic;text-align:center;">No circuits yet.</div>';
+  v('sum-circuits').innerHTML=ch;
+  v('sum-ups').innerHTML=[['Protected Load',s.nonUpsW.toFixed(0)+' W'],['UPS Capacity (W)',s.upsW+' W'],['UPS Capacity (VA)',s.upsVA+' VA'],['UPS Load %',s.upsW>0?s.upsP.toFixed(1)+'%':'No UPS configured'],['Estimated Runtime',fmtRuntime(s.upsRuntimeMin)],['UPS Units in Project',s.allUpsItems.length]].map(r=>sRow(r[0],r[1])).join('');
+  v('sum-gen').innerHTML=[['Total Load',s.totalW.toFixed(0)+' W'],['Continuous Load (×1.25)',(s.totalW*1.25/1000).toFixed(2)+' kW'],['Recommended Min Gen Size',s.generatorKW.toFixed(2)+' kW'],['Recommended with 25% Growth',(s.generatorKW*1.25).toFixed(2)+' kW'],['Recommended with 50% Growth',(s.generatorKW*1.50).toFixed(2)+' kW']].map(r=>sRow(r[0],r[1])).join('');
+  v('sum-mech').innerHTML=[['Total Heat Dissipation',s.btu.toFixed(0)+' BTU/hr'],['Cooling Load (tons)',s.tons.toFixed(2)+' tons'],['Cooling Load (kW thermal)',(s.totalW/1000).toFixed(2)+' kW'],['Recommended HVAC (+25%)',(s.tons*1.25).toFixed(2)+' tons']].map(r=>sRow(r[0],r[1])).join('');
+  v('sum-poe').innerHTML=[['PoE Budget Available',s.poeBW+' W'],['PoE Load (cameras)',s.poeCW+' W'],['PoE Utilization',s.poeBW>0?s.poeP.toFixed(1)+'%':'No PoE switches'],['PoE Headroom',(s.poeBW-s.poeCW)+' W']].map(r=>sRow(r[0],r[1])).join('');
+  v('sum-racks').innerHTML=state.racks.map(rk=>{const ri=s.perRack[rk.id];const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===rk.id);let inner=`<div style="margin-bottom:14px;padding:10px;background:var(--navy);border-radius:4px;"><div style="font-family:var(--display);font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">${esc(rk.label)}${rk.redundant?' <span class="pill pill-warn" style="margin-left:8px">N+1</span>':''}</div><div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-bottom:8px;">${rk.sizeU}U · PDU ${rk.voltage}V · Fill ${ri.fillPct.toFixed(0)}% · Load ${ri.watts.toFixed(0)}W · Breaker ${ri.breaker}A</div>`;if(rk.notes)inner+=`<div style="font-size:11px;color:var(--gray-light);margin-bottom:8px;font-style:italic;">Notes: ${esc(rk.notes)}</div>`;if(items.length){inner+=`<div style="font-size:11px;color:var(--gray-light);">`;inner+=items.map(i=>`· ${i.qty}× ${esc(i.name)} (${(i.w*i.qty).toFixed(0)}W)`).join('<br>');inner+=`</div>`;}else inner+=`<div style="font-size:11px;color:var(--gray-dark);font-style:italic;">No devices</div>`;inner+=`</div>`;return inner;}).join('');
+  if(s.perWall.length===0)v('sum-wall').innerHTML='<div style="color:var(--gray-dark);font-style:italic;">No wall/field devices.</div>';
+  else v('sum-wall').innerHTML=s.perWall.map(wd=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);"><div style="color:var(--white);font-weight:500;">${esc(wd.item.name)} <span style="color:var(--gray-mid);font-size:11px;">× ${wd.item.qty||1}</span></div><div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-top:2px;">${wd.watts.toFixed(0)}W @ ${wd.item.v}V · ${wd.amps.toFixed(1)}A continuous (×1.25 = ${(wd.amps*1.25).toFixed(1)}A) · <span style="color:var(--teal);font-weight:700;">${wd.breaker}A breaker</span></div>${wd.item.circuitNotes?`<div style="font-size:11px;color:var(--gray-light);margin-top:2px;font-style:italic;">${esc(wd.item.circuitNotes)}</div>`:''}</div>`).join('');
+}
+(function buildPresets(){const sel=v('presetSelect');PRESETS.forEach(cat=>{const og=document.createElement('optgroup');og.label='── '+cat.cat+' ──';cat.items.forEach(it=>{const opt=document.createElement('option');opt.value=it.name;opt.textContent=it.name+(it.loc==='wall'?' [Wall]':'');og.appendChild(opt);});sel.appendChild(og);});})();
+v('addPresetBtn').addEventListener('click',()=>{const name=v('presetSelect').value;if(!name)return;const p=ALL_FLAT.find(i=>i.name===name);if(!p)return;const n={...p,id:nextItemId++,qty:1,circuitNotes:''};if(p.loc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('presetSelect').value='';render();markDirty();});
+v('addCustomBtn').addEventListener('click',()=>{const name=v('customName').value.trim();const w=parseFloat(v('customWatts').value)||0;const u=parseFloat(v('customU').value)||0;const qty=parseInt(v('customQty').value)||1;const vv=parseInt(v('customV').value)||120;const poeC=v('customPoE').checked;if(!name){v('customName').focus();return;}const n={id:nextItemId++,name,w,u,qty,v:vv,loc:customLoc,category:'Custom',poeC,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,circuitNotes:''};if(customLoc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('customName').value='';v('customWatts').value='';v('customU').value='';v('customQty').value='1';v('customPoE').checked=false;render();markDirty();});
+document.querySelectorAll('.loc-btn').forEach(btn=>{btn.addEventListener('click',()=>{customLoc=btn.dataset.loc;v('locRack').className='loc-btn'+(customLoc==='rack'?' active-rack':'');v('locWall').className='loc-btn'+(customLoc==='wall'?' active-wall':'');});});
+['name','room','building','floor','designer','date','notes'].forEach(f=>{v('proj-'+f).addEventListener('input',()=>{state.project[f]=v('proj-'+f).value;markDirty();});});
+v('powerFactor').addEventListener('input',()=>{state.settings.powerFactor=parseFloat(v('powerFactor').value)||0.9;render();markDirty();});
+v('rack-label').addEventListener('input',()=>{const r=getActiveRack();if(r){r.label=v('rack-label').value;renderRackTabs();markDirty();}});
+v('rack-size').addEventListener('input',()=>{const r=getActiveRack();if(r){r.sizeU=parseInt(v('rack-size').value)||42;render();markDirty();}});
+v('rack-voltage').addEventListener('change',()=>{const r=getActiveRack();if(r){r.voltage=parseInt(v('rack-voltage').value);render();markDirty();}});
+v('rack-notes').addEventListener('input',()=>{const r=getActiveRack();if(r){r.notes=v('rack-notes').value;markDirty();}});
+v('rack-redundant').addEventListener('change',()=>{const r=getActiveRack();if(r){r.redundant=v('rack-redundant').checked;markDirty();}});
+v('deleteRackBtn').addEventListener('click',()=>{if(state.racks.length<=1){alert('At least one rack required.');return;}const r=getActiveRack();if(!confirm(`Delete "${r.label}" and all its devices?`))return;state.items=state.items.filter(i=>!(i.loc==='rack'&&i.rackId===r.id));state.racks=state.racks.filter(x=>x.id!==r.id);state.activeRackId=state.racks[0].id;render();markDirty();});
+v('projToggle').addEventListener('click',()=>{v('projPanel').classList.toggle('collapsed');});
+v('sum-assumptions-panel').classList.add('collapsed');
+v('assumptionsToggle').addEventListener('click',()=>{v('sum-assumptions-panel').classList.toggle('collapsed');});
+
+function toggleBadge(id){
+  const badge=document.getElementById(id);
+  const isActive=badge.classList.contains('active');
+  document.querySelectorAll('.intro-badge').forEach(b=>b.classList.remove('active'));
+  if(!isActive) badge.classList.add('active');
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.intro-badge')){
+    document.querySelectorAll('.intro-badge').forEach(b=>b.classList.remove('active'));
+  }
+});
+document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));btn.classList.add('active');v('pane-'+btn.dataset.tab).classList.add('active');render();});});
+function openModal(id){v(id).classList.add('open');}
+function closeModal(id){v(id).classList.remove('open');}
+v('pfHelpBtn').addEventListener('click',()=>openModal('pfModal'));
+v('pfModalClose').addEventListener('click',()=>closeModal('pfModal'));
+v('pfModal').addEventListener('click',e=>{if(e.target===v('pfModal'))closeModal('pfModal');});
+v('exportBtn').addEventListener('click',()=>{
+  const s=calc();
+  const payload={
+    _plex:{signature:PLEX_SIG,version:PLEX_VERSION,exported:new Date().toISOString()},
+    _credit:"Compiled by Limited Energy eXperts · limitedenergy.net · Open reuse permitted with credit.",
+    project:state.project,settings:state.settings,racks:state.racks,items:state.items,
+    summary:{
+      totalWatts:Math.round(s.totalW),totalVA:Math.round(s.totalVA),
+      btuPerHour:Math.round(s.btu),coolingTons:parseFloat(s.tons.toFixed(2)),
+      generatorKW:parseFloat(s.generatorKW.toFixed(2)),
+      amperage120:parseFloat(s.a120.toFixed(2)),amperage208:parseFloat(s.a208.toFixed(2)),amperage240:parseFloat(s.a240.toFixed(2)),
+      upsRuntimeMin:s.upsRuntimeMin?Math.round(s.upsRuntimeMin):null,
+      perRack:Object.values(s.perRack).map(r=>({label:r.rack.label,sizeU:r.rack.sizeU,voltage:r.rack.voltage,redundant:r.rack.redundant,loadWatts:Math.round(r.watts),nonUpsWatts:Math.round(r.nonUpsWatts),amperage:parseFloat(r.amps.toFixed(2)),breaker:r.breaker,fillPct:parseFloat(r.fillPct.toFixed(1))})),
+      perWallDevice:s.perWall.map(wd=>({name:wd.item.name,qty:wd.item.qty||1,voltage:wd.item.v,watts:Math.round(wd.watts),amperage:parseFloat(wd.amps.toFixed(2)),continuousAmps:parseFloat((wd.amps*1.25).toFixed(2)),breaker:wd.breaker,circuitNotes:wd.item.circuitNotes||''}))
+    }
+  };
+  const fn=((state.project.room||state.project.name||'project').replace(/[^a-z0-9-_]+/gi,'_'))+'.plex';
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+});
+v('importBtn').addEventListener('click',()=>{v('importStatus').innerHTML='';v('importFile').value='';openModal('importModal');});
+v('importModalClose').addEventListener('click',()=>closeModal('importModal'));
+v('importModal').addEventListener('click',e=>{if(e.target===v('importModal'))closeModal('importModal');});
+v('importFile').addEventListener('change',e=>{
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);
+      if(!data._plex||data._plex.signature!==PLEX_SIG){v('importStatus').innerHTML='<div class="import-status err">✗ Not a valid PLEX file. Missing or wrong signature.</div>';return;}
+      if(!data.project||!data.settings||!Array.isArray(data.racks)||!Array.isArray(data.items)){v('importStatus').innerHTML='<div class="import-status err">✗ File structure is invalid.</div>';return;}
+      state.project=data.project;state.settings=data.settings;state.racks=data.racks;state.items=data.items;state.activeRackId=data.racks[0]?.id||1;
+      nextRackId=Math.max(...data.racks.map(r=>r.id),0)+1;
+      nextItemId=Math.max(...data.items.map(i=>i.id),0)+1;
+      v('importStatus').innerHTML=`<div class="import-status ok">✓ Imported successfully. ${data.racks.length} rack(s), ${data.items.length} device(s).</div>`;
+      render();markDirty();
+      setTimeout(()=>closeModal('importModal'),1200);
+    }catch(err){v('importStatus').innerHTML='<div class="import-status err">✗ Could not parse file: '+esc(err.message)+'</div>';}
+  };
+  reader.readAsText(file);
+});
+v('newBtn').addEventListener('click',()=>openModal('newModal'));
+v('newModalClose').addEventListener('click',()=>closeModal('newModal'));
+v('newCancelBtn').addEventListener('click',()=>closeModal('newModal'));
+v('newConfirmBtn').addEventListener('click',()=>{state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false}],items:[],activeRackId:1};nextItemId=1;nextRackId=2;closeModal('newModal');render();markDirty();});
+v('printBtn').addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));document.querySelector('.tab-btn[data-tab="summary"]').classList.add('active');v('pane-summary').classList.add('active');render();setTimeout(()=>window.print(),200);});
+if(loadSaved()){console.log('Loaded saved session');}
+if(!state.project.date)state.project.date=new Date().toISOString().slice(0,10);
+render();
+updateSavedIndicator();
+</script>
+</body>
+</html>

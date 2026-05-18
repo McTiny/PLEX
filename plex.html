@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  PLEX v2.22 — Power Load EXaminer
+  PLEX v2.23 — Power Load EXaminer
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary engineering and coordination only.
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLEX v2.22 — Power Load EXaminer | Limited Energy eXperts</title>
+<title>PLEX v2.23 — Power Load EXaminer | Limited Energy eXperts</title>
 <meta name="description" content="PLEX — Power Load EXaminer. Telecom room and equipment room power, UPS, generator, PoE, and cooling load sizing. Built by an RCDD for Division 27/28 coordination.">
 <meta property="og:title" content="PLEX — Power Load EXaminer">
 <meta property="og:description" content="TR/ER infrastructure sizing — power, UPS, generator, PoE, cooling. Built by an RCDD for Division 27/28 coordination.">
@@ -31,7 +31,8 @@
   --label:'Barlow Condensed',sans-serif; --mono:'Space Mono',monospace;
 }
 body{background:var(--navy);color:var(--gray-light);font-family:var(--body);min-height:100vh;font-weight:400;}
-#header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);border-bottom:1px solid rgba(200,16,46,0.3);padding:14px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+#header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);border-bottom:1px solid rgba(200,16,46,0.3);}
+.header-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap;max-width:1200px;margin:0 auto;padding:14px 24px;}
 .header-brand{display:flex;align-items:center;gap:14px;flex:1;min-width:280px;}
 .header-mark{width:38px;height:38px;background:rgba(200,16,46,0.12);border:1.5px solid var(--red);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;}
 .header-title{font-family:var(--display);font-weight:700;font-size:22px;color:var(--white);letter-spacing:0.04em;line-height:1;}
@@ -43,7 +44,8 @@ body{background:var(--navy);color:var(--gray-light);font-family:var(--body);min-
 .hbtn:hover{border-color:var(--red);color:var(--white);background:rgba(200,16,46,0.08);}
 .hbtn.primary{background:var(--red);border-color:var(--red);color:var(--white);}
 .hbtn.primary:hover{background:var(--red-dark);}
-#tabs{display:flex;gap:2px;border-bottom:1px solid var(--border);padding:0 24px;background:var(--navy);}
+#tabs{border-bottom:1px solid var(--border);background:var(--navy);}
+.tabs-inner{display:flex;gap:2px;max-width:1200px;margin:0 auto;padding:0 24px;}
 .tab-btn{background:transparent;border:none;color:var(--gray-mid);padding:12px 22px;font-family:var(--label);font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;}
 .tab-btn.active{color:var(--red);border-bottom-color:var(--red);}
 .tab-btn:not(.active):hover{color:var(--white);}
@@ -155,7 +157,7 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 .best-viewed{max-width:1200px;margin:0 auto 4px;padding:0 24px;}
 .best-viewed-inner{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--gray-mid);padding:5px 0;}
 @media(max-width:600px){
-  #header{flex-wrap:wrap;gap:6px;padding:10px 12px;}
+  .header-inner{flex-wrap:wrap;gap:6px;padding:10px 12px;}
   .header-title{font-size:20px;}
   .header-sub{font-size:8px;}
   .hbtn{font-size:10px;padding:5px 8px;}
@@ -193,18 +195,20 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 </head>
 <body>
 <div id="header">
-  <div class="header-brand">
-    <div class="header-mark">⚡</div>
-    <div>
-      <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.22</span></div>
-      <div class="header-sub">POWER LOAD EXaminer &nbsp;·&nbsp; TR/ER INFRASTRUCTURE SIZING</div>
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-mark">⚡</div>
+      <div>
+        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.23</span></div>
+        <div class="header-sub">POWER LOAD EXaminer &nbsp;·&nbsp; TR/ER INFRASTRUCTURE SIZING</div>
+      </div>
     </div>
-  </div>
-  <div class="header-actions">
-    <span class="saved-indicator" id="savedInd">Unsaved</span>
-    <button class="hbtn" id="newBtn">🗒 New</button>
-    <button class="hbtn" id="importBtn">📥 Import</button>
-    <button class="hbtn primary" id="exportBtn">📤 Export</button>
+    <div class="header-actions">
+      <span class="saved-indicator" id="savedInd">Unsaved</span>
+      <button class="hbtn" id="newBtn">🗒 New</button>
+      <button class="hbtn" id="importBtn">📥 Import</button>
+      <button class="hbtn primary" id="exportBtn">📤 Export</button>
+    </div>
   </div>
 </div>
 <div class="best-viewed">
@@ -230,8 +234,10 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
   </div>
 </div>
 <div id="tabs">
-  <button class="tab-btn active" data-tab="build">⚡ Builder</button>
-  <button class="tab-btn" data-tab="summary">📋 Summary &amp; Handoff</button>
+  <div class="tabs-inner">
+    <button class="tab-btn active" data-tab="build">⚡ Builder</button>
+    <button class="tab-btn" data-tab="summary">📋 Summary &amp; Handoff</button>
+  </div>
 </div>
 <div id="main">
 <div id="pane-build" class="tab-pane active">
@@ -386,7 +392,7 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
     </div>
   </div>
   <div id="print-credit">
-    PLEX v2.22 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    PLEX v2.23 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
   <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);text-align:center;margin-top:20px;letter-spacing:0.1em;" class="no-print">Generated by PLEX &mdash; Power Load EXaminer &middot; limitedenergy.net/plex</div>
 </div>
@@ -507,7 +513,7 @@ const ALL_FLAT=PRESETS.flatMap(c=>c.items.map(i=>({...i,category:c.cat})));
 const BTU_PER_WATT=3.41214;
 const STORAGE_KEY='plex_session_v2';
 const PLEX_SIG='PLEX-LEX';
-const PLEX_VERSION='2.22';
+const PLEX_VERSION='2.23';
 const STD_BREAKERS=[15,20,25,30,35,40,45,50,60,70,80,90,100,110,125,150,175,200];
 let state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false}],items:[],activeRackId:1};
 let nextItemId=1,nextRackId=2,customLoc='rack',dirty=false,lastSaveTime=null;

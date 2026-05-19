@@ -1,0 +1,20 @@
+# https://limitedenergy.net/robots.txt
+# Limited Energy eXperts · Shawn C. Tovey, RCDD
+
+User-agent: *
+Allow: /
+
+# Disallow noisy crawlers that don't drive useful traffic
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+Sitemap: https://limitedenergy.net/sitemap.xml

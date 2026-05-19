@@ -1,0 +1,112 @@
+# Netlify configuration · limitedenergy.net
+# ------------------------------------------
+# Drops scanner noise, sets safe security headers, enforces apex.
+#
+# Test before deploying: `netlify dev` locally or stage on a branch deploy.
+
+# ─── Block scanner probes (return 410 Gone) ──────────────────────────────────
+# These return HTTP 410 so scanners learn "this URL will never exist" and
+# (in theory) deprioritize the host on their next pass.
+
+[[redirects]]
+  from = "/wp-admin/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/wp-login.php"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/xmlrpc.php"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/.env"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/.env.*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/*/.env"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/.git/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/phpmyadmin/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# ─── Canonical host enforcement ──────────────────────────────────────────────
+# Send www → apex so canonical URLs are clean.
+
+[[redirects]]
+  from = "https://www.limitedenergy.net/*"
+  to = "https://limitedenergy.net/:splat"
+  status = 301
+  force = true
+
+# ─── Security headers ────────────────────────────────────────────────────────
+# Conservative set. Does NOT enable CSP since PLEX uses inline scripts; adding
+# CSP later requires auditing every inline <script>.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+
+# Long cache for static images
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# robots.txt and sitemap should not be heavily cached
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

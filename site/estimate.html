@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  THE ESTIMATOR v1.0 — Limited Energy Job Estimation
+  THE ESTIMATOR v1.1 — Limited Energy Job Estimation
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary estimation and proposal use only.
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Estimator v1.0 — Limited Energy Job Estimation | Limited Energy eXperts</title>
+<title>The Estimator v1.1 — Limited Energy Job Estimation | Limited Energy eXperts</title>
 <meta name="description" content="The Estimator — limited energy job estimation. Schedule-driven crew sizing, BICSI-coded scope, federal/California overtime, local/remote cost variants. Built by an RCDD for Division 27/28 estimating.">
 <meta property="og:title" content="The Estimator — Limited Energy Job Estimation">
 <meta property="og:description" content="Schedule-driven crew sizing, BICSI-coded scope, OT math, local/remote variants. Client-side JSON save/load.">
@@ -191,7 +191,70 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
 .odc-auto-line{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;}
 .odc-auto-line .k{color:var(--gray-mid);}
 .odc-auto-line .v{color:var(--white);font-family:var(--mono);font-weight:600;}
-@media(max-width:880px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}.headline-card .breakdown{grid-template-columns:1fr 1fr;}.wbs-item{grid-template-columns:1fr;gap:4px;}.wbs-item.hdr{display:none;}}
+/* Materials */
+.lib-health{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;color:var(--gray-mid);text-transform:none;font-weight:400;letter-spacing:0;}
+.lib-health.fresh{color:var(--green);}
+.lib-health.warn{color:var(--warn);}
+.mat-toolbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.mat-list-head{display:grid;grid-template-columns:1fr 60px 50px 80px 80px 60px 110px 90px 28px;gap:6px;padding:6px 4px 4px;font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border);}
+.mat-row{display:grid;grid-template-columns:1fr 60px 50px 80px 80px 60px 110px 90px 28px;gap:6px;padding:6px 4px;border-bottom:1px solid var(--border);align-items:center;font-size:12px;}
+.mat-row input,.mat-row select{font-size:12px;padding:5px 8px;margin-bottom:0;}
+.mat-row input[type=number]{text-align:right;font-family:var(--mono);}
+.mat-row .mat-eff{font-family:var(--mono);color:var(--gray-light);text-align:right;font-size:11px;}
+.mat-row .mat-total{font-family:var(--mono);color:var(--red);text-align:right;font-weight:600;}
+.mat-row.empty{padding:14px 0;text-align:center;color:var(--gray-dark);font-style:italic;font-size:11px;border-bottom:none;}
+.mat-row-row2{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;padding:2px 4px 8px;}
+.mat-row-row2 input{font-size:11px;padding:4px 8px;margin-bottom:0;}
+.mat-row-row2-lbl{font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.1em;text-transform:uppercase;padding-top:4px;}
+/* Pick from Library modal */
+.modal-box.wide{max-width:880px;}
+.pick-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.pick-filters input,.pick-filters select{flex:1;min-width:140px;font-size:12px;margin-bottom:0;}
+.pick-table{max-height:55vh;overflow-y:auto;border:1px solid var(--border);border-radius:4px;background:var(--navy);}
+.pick-row{display:grid;grid-template-columns:auto 1fr 90px 70px 60px 80px;gap:8px;padding:8px 10px;border-bottom:1px solid var(--border);align-items:center;font-size:12px;}
+.pick-row.hdr{font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;background:var(--navy-mid);position:sticky;top:0;}
+.pick-row:hover:not(.hdr){background:var(--navy-light);}
+.pick-row .desc{color:var(--white);}
+.pick-row .meta{font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:2px;}
+.pick-row .price{font-family:var(--mono);color:var(--gray-light);text-align:right;}
+.pick-row .price .src{font-size:9px;color:var(--gray-mid);}
+.pick-row .cat{font-family:var(--mono);font-size:10px;color:var(--teal);text-transform:uppercase;letter-spacing:0.05em;}
+.pick-row .add-btn{background:var(--red);border:none;color:var(--white);padding:5px 8px;font-family:var(--label);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;}
+.pick-row .add-btn:hover{background:var(--red-dark);}
+.pick-row .add-btn.added{background:var(--green);}
+/* Cost composition chart */
+.chart-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;padding:16px 18px;margin-bottom:14px;}
+.chart-title{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.2em;margin-bottom:12px;text-transform:uppercase;font-weight:700;}
+.chart-stack{display:flex;height:36px;border-radius:4px;overflow:hidden;border:1px solid var(--border2);background:var(--navy);}
+.chart-seg{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--white);font-weight:700;letter-spacing:0.05em;border-right:1px solid rgba(0,0,0,0.25);min-width:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:0 4px;}
+.chart-seg:last-child{border-right:none;}
+.chart-seg.labor{background:var(--red);}
+.chart-seg.materials{background:var(--blue);}
+.chart-seg.odc{background:var(--teal);}
+.chart-seg.overhead{background:var(--warn);}
+.chart-seg.margin{background:var(--green);}
+.chart-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-family:var(--mono);font-size:11px;}
+.chart-legend .li{display:flex;align-items:center;gap:6px;color:var(--gray-light);}
+.chart-legend .sw{width:10px;height:10px;border-radius:2px;display:inline-block;}
+.chart-legend .sw.labor{background:var(--red);}
+.chart-legend .sw.materials{background:var(--blue);}
+.chart-legend .sw.odc{background:var(--teal);}
+.chart-legend .sw.overhead{background:var(--warn);}
+.chart-legend .sw.margin{background:var(--green);}
+.chart-legend .pct{color:var(--gray-mid);font-size:10px;}
+.bar-row{display:grid;grid-template-columns:160px 1fr 90px;gap:10px;align-items:center;padding:5px 0;font-family:var(--mono);font-size:11px;}
+.bar-label{color:var(--gray-light);font-size:11px;}
+.bar-track{height:12px;background:var(--navy);border-radius:2px;overflow:hidden;border:1px solid var(--border);}
+.bar-fill{height:100%;background:var(--red);}
+.bar-fill.materials{background:var(--blue);}
+.bar-val{font-family:var(--mono);color:var(--white);text-align:right;font-size:11px;}
+@media print{
+  .chart-stack{border:1px solid #999 !important;}
+  .chart-seg{color:white !important;}
+  .bar-track{background:#eee !important;border-color:#ccc !important;}
+  .chart-title,.bar-label,.bar-val{color:#222 !important;}
+}
+@media(max-width:880px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}.headline-card .breakdown{grid-template-columns:1fr 1fr;}.wbs-item{grid-template-columns:1fr;gap:4px;}.wbs-item.hdr{display:none;}.mat-row,.mat-list-head{grid-template-columns:1fr;}.mat-list-head{display:none;}.pick-row{grid-template-columns:1fr 80px;}.pick-row .cat,.pick-row .meta,.pick-row .price{display:none;}.bar-row{grid-template-columns:1fr;}}
 @media(max-width:600px){
   .header-inner{flex-wrap:wrap;gap:6px;padding:10px 12px;}
   .header-title{font-size:20px;}
@@ -233,7 +296,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
     <div class="header-brand">
       <div class="header-mark">🧮</div>
       <div>
-        <div class="header-title">THE ESTIMATOR <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v1.0</span></div>
+        <div class="header-title">THE ESTIMATOR <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v1.1</span></div>
         <div class="header-sub">LIMITED ENERGY &nbsp;·&nbsp; JOB ESTIMATION</div>
       </div>
     </div>
@@ -394,9 +457,45 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   <!-- Settings -->
   <div class="panel">
     <div class="panel-label">OVERHEAD &amp; MARGIN <button class="help-btn" id="marginHelpBtn">?</button></div>
-    <div class="grid-2">
+    <div class="grid-3">
       <div class="field"><div class="field-label">OVERHEAD %</div><input type="number" id="set-overhead" min="0" max="100" step="0.5" value="15"></div>
       <div class="field"><div class="field-label">MARGIN % (FORM, NOT MARKUP)</div><input type="number" id="set-margin" min="0" max="90" step="0.5" value="20"></div>
+      <div class="field"><div class="field-label">INFLATION FACTOR <button class="help-btn" id="inflHelpBtn">?</button></div><input type="number" id="set-inflation" min="0.5" max="3" step="0.01" value="1.10"></div>
+    </div>
+    <div class="callout"><strong>Inflation factor</strong> multiplies all material <em>source prices</em> at display and calc time. Default 1.10 = ~3 years of 2023-baseline inflation. Library items store their source year; this knob bulk-adjusts pricing to current dollars. Override individual items by editing source price directly.</div>
+  </div>
+
+  <!-- Materials -->
+  <div class="panel">
+    <div class="panel-label">MATERIALS <button class="help-btn" id="matHelpBtn">?</button>
+      <span id="lib-health" class="lib-health">Library: 0 items</span>
+    </div>
+    <div class="mat-toolbar">
+      <button class="btn-secondary" id="pickFromLibBtn">＋ Pick from Library</button>
+      <button class="btn-secondary" id="importCsvBtn">📥 Import CSV</button>
+      <button class="btn-secondary" id="downloadTplBtn">📄 Download CSV Template</button>
+      <button class="btn-secondary" id="exportLibBtn">📤 Export Library</button>
+      <button class="btn-secondary" id="editLibBtn">📚 Edit Library</button>
+    </div>
+    <div class="callout"><strong>How this works:</strong> The library is your shop&rsquo;s catalog of common items with baseline pricing. Pick items into the project, then set quantities. CSV imports go to the library; library lives in this browser only &mdash; export often to back up. Inflation factor (Overhead &amp; Margin panel) bulk-adjusts pricing to current dollars.</div>
+    <div class="mat-list-head">
+      <span>Description</span>
+      <span style="text-align:right">Qty</span>
+      <span>Unit</span>
+      <span style="text-align:right">Src Price</span>
+      <span style="text-align:right">Eff. $/U</span>
+      <span style="text-align:right">Hrs/U</span>
+      <span>Role</span>
+      <span style="text-align:right">Total</span>
+      <span></span>
+    </div>
+    <div id="mat-list"></div>
+    <button class="btn-secondary" id="addCustomMatBtn" style="margin-top:8px">＋ ADD CUSTOM MATERIAL</button>
+    <div class="stat-row" id="matStats">
+      <div class="stat-line"><span class="lbl">Material items (active qty &gt; 0)</span><span class="val" id="ms-active">0</span></div>
+      <div class="stat-line"><span class="lbl">Total material hours</span><span class="val" id="ms-hrs">0</span></div>
+      <div class="stat-line"><span class="lbl">Total material labor cost</span><span class="val" id="ms-lcost">$0</span></div>
+      <div class="stat-line"><span class="lbl">Total materials cost</span><span class="val" id="ms-mcost">$0</span></div>
     </div>
   </div>
 
@@ -444,6 +543,15 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
     </div>
   </div>
 
+  <div class="chart-card">
+    <div class="chart-title">COST COMPOSITION &mdash; HOW THE FINAL PRICE BREAKS DOWN</div>
+    <div class="chart-stack" id="chart-stack"></div>
+    <div class="chart-legend" id="chart-legend"></div>
+  </div>
+
+  <div class="panel"><div class="panel-label">PER-SECTION BARS (BICSI WBS)</div><div id="sum-section-bars"></div></div>
+  <div class="panel"><div class="panel-label">PER-CATEGORY BARS (MATERIALS)</div><div id="sum-category-bars"></div></div>
+
   <div class="panel"><div class="panel-label">PROJECT INFORMATION</div><div id="sum-project"></div></div>
   <div class="panel"><div class="panel-label">SCHEDULE &amp; CREW</div><div id="sum-sched"></div></div>
   <div class="panel"><div class="panel-label">LABOR ROLL-UP</div><div id="sum-labor"></div></div>
@@ -473,7 +581,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   </div>
 
   <div id="print-credit">
-    The Estimator v1.0 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    The Estimator v1.1 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
   <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);text-align:center;margin-top:20px;letter-spacing:0.1em;" class="no-print">Generated by The Estimator &middot; limitedenergy.net/estimate</div>
 </div>
@@ -591,6 +699,80 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   </div>
 </div>
 
+<div class="modal-overlay" id="matHelpModal">
+  <div class="modal-box">
+    <button class="modal-close" id="matHelpModalClose">×</button>
+    <div class="modal-title">MATERIALS &amp; LIBRARY</div>
+    <div class="modal-body">
+      <p><strong>Library</strong> is your shop&rsquo;s catalog of materials. It lives in this browser only (localStorage) &mdash; export it often to back up.</p><br>
+      <p><strong>Pick from Library</strong> opens a browser to add items into your current project. After picking, set quantities in the Materials list.</p><br>
+      <p><strong>Import CSV</strong> reads a CSV file (e.g. a supplier quote) and adds rows to your library. If a CSV row has <em>qty &gt; 0</em>, the item is also added to the current project with that quantity.</p><br>
+      <p><strong>CSV columns</strong> (all optional except <code>description</code>): <code>category, description, manufacturer, model, partNumber, sourcePrice, sourceYear, unit, hoursEach, defaultRole, qty, notes</code>. Header row is required; column order doesn&rsquo;t matter (case-insensitive).</p><br>
+      <p><strong>Effective price</strong> = source price &times; project inflation factor. Edit the source price to change pricing.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="inflHelpModal">
+  <div class="modal-box">
+    <button class="modal-close" id="inflHelpModalClose">×</button>
+    <div class="modal-title">INFLATION FACTOR</div>
+    <div class="modal-body">
+      <p>The seed library carries <strong>2023 baseline prices</strong>. The <strong>inflation factor</strong> multiplies those source prices at display and calc time to give a ballpark current dollar.</p><br>
+      <p>Default <code>1.10</code> represents ~3 years of cumulative inflation (2023 &rarr; 2026). Set to <code>1.0</code> to disable inflation. Set higher if you&rsquo;re estimating for a future year or a high-volatility commodity period.</p><br>
+      <p>For known-current quotes (supplier just sent you a 2026 sheet), edit the source price directly &mdash; or set <code>sourceYear</code> in the CSV to the quote year and adjust the factor accordingly.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pickModal">
+  <div class="modal-box wide">
+    <button class="modal-close" id="pickModalClose">×</button>
+    <div class="modal-title">PICK FROM LIBRARY</div>
+    <div class="modal-body">
+      <div class="pick-filters">
+        <input type="text" id="pickSearch" placeholder="Search description, manufacturer, model, part#…">
+        <select id="pickCategory"><option value="">All categories</option></select>
+      </div>
+      <div class="pick-table" id="pickTable"></div>
+      <div style="margin-top:10px;font-size:11px;color:var(--gray-mid);font-family:var(--mono);">Click ＋ ADD to copy an item into the current project (qty = 0). Then close this modal and set quantities in the Materials list.</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="libraryModal">
+  <div class="modal-box wide">
+    <button class="modal-close" id="libraryModalClose">×</button>
+    <div class="modal-title">EDIT LIBRARY</div>
+    <div class="modal-body">
+      <div class="pick-filters">
+        <input type="text" id="libSearch" placeholder="Search…">
+        <select id="libCategory"><option value="">All categories</option></select>
+        <button class="btn-secondary" id="libAddItemBtn">＋ ADD ITEM</button>
+        <button class="btn-secondary" id="libResetBtn">↺ Reset to Defaults</button>
+      </div>
+      <div class="pick-table" id="libTable"></div>
+      <div style="margin-top:10px;font-size:11px;color:var(--gray-mid);font-family:var(--mono);">Library changes save automatically. Export to CSV regularly to back up.</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="csvImportModal">
+  <div class="modal-box">
+    <button class="modal-close" id="csvImportModalClose">×</button>
+    <div class="modal-title">IMPORT MATERIALS CSV</div>
+    <div class="modal-body">
+      <p>Imports go to the library. If a row has <code>qty &gt; 0</code>, the item is also added to the current project with that quantity.</p>
+      <p style="margin-top:10px"><strong>Required:</strong> header row with at least a <code>description</code> column. All other columns optional.</p>
+      <div style="margin-top:14px;"><input type="file" id="csvImportFile" accept=".csv,text/csv"></div>
+      <div id="csvImportStatus"></div>
+      <div style="margin-top:14px;display:flex;gap:8px;">
+        <button class="btn-secondary" id="csvTemplateBtn">📄 Download Template CSV</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ============================================================================
 // THE ESTIMATOR v1.0 — Limited Energy Job Estimation
@@ -625,7 +807,7 @@ const DEFAULT_MGMT_ROLES = [
 
 const STORAGE_KEY = 'lex_est_session_v1';
 const SIG = 'LEX-EST';
-const EST_VERSION = '1.0';
+const EST_VERSION = '1.1';
 
 const WORKWEEK_PATTERNS = {
   '5x8':  {hpd:8,  dpw:5},
@@ -634,6 +816,187 @@ const WORKWEEK_PATTERNS = {
   '6x8':  {hpd:8,  dpw:6},
   '6x10': {hpd:10, dpw:6}
 };
+
+// ============================================================================
+// MATERIALS LIBRARY
+// ============================================================================
+const LIBRARY_KEY = 'lex_est_library_v1';
+const LIBRARY_VERSION = 1;
+const LIB_SIG = 'LEX-EST-LIB';
+
+const LIBRARY_CATEGORIES = [
+  'Cable / Horizontal',
+  'Cable / Backbone',
+  'Connectors & Jacks',
+  'Faceplates & Boxes',
+  'Patch Panels',
+  'Patch Cables',
+  'Cable Management',
+  'Conduit / Innerduct',
+  'Fiber Hardware',
+  'Access Control (ACS)',
+  'Intrusion Detection (IDS)',
+  'Video Surveillance',
+  'Audio / Visual',
+  'Network Electronics',
+  'Misc'
+];
+
+// Seed library. Prices = 2023 baseline; default inflation factor (1.10)
+// applied at display/calc time gives ~2026 ballpark. Role IDs:
+// 1 Lead Tech, 2 Tech I, 3 Tech II, 4 Helper, 5 Apprentice,
+// 6 PM, 7 PE, 8 Foreman.
+const SEED_LIBRARY = [
+  // Cable / Horizontal
+  {category:'Cable / Horizontal',  description:'CAT6 Plenum (Blue)',                 sourcePrice:0.30, sourceYear:2023, unit:'ft', hoursEach:0.008, defaultRoleId:2, notes:'1000 ft box'},
+  {category:'Cable / Horizontal',  description:'CAT6 Plenum (Other Color)',          sourcePrice:0.30, sourceYear:2023, unit:'ft', hoursEach:0.008, defaultRoleId:2, notes:''},
+  {category:'Cable / Horizontal',  description:'CAT6 Riser (Blue)',                  sourcePrice:0.22, sourceYear:2023, unit:'ft', hoursEach:0.008, defaultRoleId:2, notes:'1000 ft box'},
+  {category:'Cable / Horizontal',  description:'CAT6A Plenum (Blue)',                sourcePrice:0.65, sourceYear:2023, unit:'ft', hoursEach:0.008, defaultRoleId:2, notes:''},
+  {category:'Cable / Horizontal',  description:'CAT6 Shielded Plenum',               sourcePrice:0.83, sourceYear:2023, unit:'ft', hoursEach:0.010, defaultRoleId:2, notes:''},
+  {category:'Cable / Horizontal',  description:'CAT6 Outdoor Burial (Gamechanger)',  sourcePrice:0.89, sourceYear:2023, unit:'ft', hoursEach:0.016, defaultRoleId:1, notes:''},
+  // Cable / Backbone
+  {category:'Cable / Backbone',    description:'OS2 6-Strand Plenum Armored',        sourcePrice:1.30, sourceYear:2023, unit:'ft', hoursEach:0.016, defaultRoleId:1, notes:''},
+  {category:'Cable / Backbone',    description:'OS2 12-Strand Plenum Armored',       sourcePrice:1.92, sourceYear:2023, unit:'ft', hoursEach:0.020, defaultRoleId:1, notes:''},
+  {category:'Cable / Backbone',    description:'OS2 24-Strand Aerial',               sourcePrice:2.60, sourceYear:2023, unit:'ft', hoursEach:0.100, defaultRoleId:1, notes:''},
+  {category:'Cable / Backbone',    description:'OS2 24-Strand Burial',               sourcePrice:2.40, sourceYear:2023, unit:'ft', hoursEach:0.100, defaultRoleId:1, notes:''},
+  {category:'Cable / Backbone',    description:'OM3 6-Strand Plenum Armored',        sourcePrice:1.55, sourceYear:2023, unit:'ft', hoursEach:0.016, defaultRoleId:1, notes:''},
+  {category:'Cable / Backbone',    description:'OM3 12-Strand Plenum Armored',       sourcePrice:2.80, sourceYear:2023, unit:'ft', hoursEach:0.016, defaultRoleId:1, notes:''},
+  {category:'Cable / Backbone',    description:'OM4 12-Strand Plenum Armored I/O',   sourcePrice:2.60, sourceYear:2023, unit:'ft', hoursEach:0.016, defaultRoleId:1, notes:''},
+  {category:'Cable / Backbone',    description:'Copper Backbone 25-Pair CAT3 Plenum',sourcePrice:0.79, sourceYear:2023, unit:'ft', hoursEach:0.016, defaultRoleId:1, notes:''},
+  {category:'Cable / Backbone',    description:'Copper Backbone 50-Pair CAT5e Plenum',sourcePrice:4.95,sourceYear:2023, unit:'ft', hoursEach:0.020, defaultRoleId:1, notes:''},
+  // Connectors & Jacks
+  {category:'Connectors & Jacks',  description:'CAT6 Keystone Jack',                 sourcePrice:4.91, sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  {category:'Connectors & Jacks',  description:'CAT6A Keystone Jack',                sourcePrice:8.87, sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  {category:'Connectors & Jacks',  description:'RJ45 Field-Term Plug',               sourcePrice:2.36, sourceYear:2023, unit:'ea', hoursEach:0.15, defaultRoleId:2, notes:''},
+  {category:'Connectors & Jacks',  description:'HDMI Keystone Jack',                 sourcePrice:31.00,sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  {category:'Connectors & Jacks',  description:'3.5mm Stereo Keystone Jack',         sourcePrice:7.50, sourceYear:2023, unit:'ea', hoursEach:0.50, defaultRoleId:2, notes:''},
+  {category:'Connectors & Jacks',  description:'F-Style Coax Keystone Jack',         sourcePrice:2.61, sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  // Faceplates & Boxes
+  {category:'Faceplates & Boxes',  description:'Single-Gang 2-Port Faceplate',       sourcePrice:2.00, sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  {category:'Faceplates & Boxes',  description:'Single-Gang 4-Port Faceplate',       sourcePrice:2.00, sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  {category:'Faceplates & Boxes',  description:'Blank Keystone Insert (10-pack)',    sourcePrice:2.90, sourceYear:2023, unit:'box',hoursEach:0.00, defaultRoleId:2, notes:''},
+  {category:'Faceplates & Boxes',  description:'Surface-Mount Biscuit Plenum',       sourcePrice:2.00, sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  // Patch Panels
+  {category:'Patch Panels',        description:'24-Port Keystone Patch Panel',       sourcePrice:75.00,sourceYear:2023, unit:'ea', hoursEach:1.0,  defaultRoleId:1, notes:''},
+  {category:'Patch Panels',        description:'48-Port Keystone Patch Panel',       sourcePrice:130.00,sourceYear:2023,unit:'ea', hoursEach:1.5,  defaultRoleId:1, notes:''},
+  // Patch Cables
+  {category:'Patch Cables',        description:'CAT6 Patch Cable 1 ft',              sourcePrice:3.23, sourceYear:2023, unit:'ea', hoursEach:0.00, defaultRoleId:2, notes:''},
+  {category:'Patch Cables',        description:'CAT6 Patch Cable 3 ft',              sourcePrice:4.50, sourceYear:2023, unit:'ea', hoursEach:0.00, defaultRoleId:2, notes:''},
+  {category:'Patch Cables',        description:'CAT6 Patch Cable 7 ft',              sourcePrice:5.95, sourceYear:2023, unit:'ea', hoursEach:0.00, defaultRoleId:2, notes:''},
+  {category:'Patch Cables',        description:'CAT6 Patch Cable 10 ft',             sourcePrice:6.91, sourceYear:2023, unit:'ea', hoursEach:0.00, defaultRoleId:2, notes:''},
+  {category:'Patch Cables',        description:'CAT6A Patch Cable 3 ft',             sourcePrice:4.50, sourceYear:2023, unit:'ea', hoursEach:0.00, defaultRoleId:2, notes:''},
+  {category:'Patch Cables',        description:'CAT6A Patch Cable 10 ft',            sourcePrice:8.20, sourceYear:2023, unit:'ea', hoursEach:0.00, defaultRoleId:2, notes:''},
+  // Cable Management
+  {category:'Cable Management',    description:'1U Brush Guard',                     sourcePrice:35.00,sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  {category:'Cable Management',    description:'1U Horizontal Cable Manager',        sourcePrice:55.00,sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  {category:'Cable Management',    description:'J-Hook 2" (Loose)',                  sourcePrice:1.20, sourceYear:2023, unit:'ea', hoursEach:0.08, defaultRoleId:2, notes:''},
+  {category:'Cable Management',    description:'D-Ring Wall Cable Manager',          sourcePrice:8.50, sourceYear:2023, unit:'ea', hoursEach:0.20, defaultRoleId:2, notes:''},
+  // Conduit / Innerduct
+  {category:'Conduit / Innerduct', description:'1" Plenum Innerduct',                sourcePrice:1.96, sourceYear:2023, unit:'ft', hoursEach:0.016, defaultRoleId:1, notes:''},
+  {category:'Conduit / Innerduct', description:'4" Maxcell 3-Cell Innerduct',        sourcePrice:3.26, sourceYear:2023, unit:'ft', hoursEach:0.016, defaultRoleId:1, notes:''},
+  // Fiber Hardware
+  {category:'Fiber Hardware',      description:'1U Fiber Distribution Unit',         sourcePrice:250.00,sourceYear:2023,unit:'ea', hoursEach:1.0,  defaultRoleId:1, notes:''},
+  {category:'Fiber Hardware',      description:'2U Fiber Distribution Unit',         sourcePrice:162.00,sourceYear:2023,unit:'ea', hoursEach:1.0,  defaultRoleId:1, notes:''},
+  {category:'Fiber Hardware',      description:'LC Adapter Panel 12-Strand MM',      sourcePrice:67.13,sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:1, notes:''},
+  {category:'Fiber Hardware',      description:'LC Adapter Panel 12-Strand SM',      sourcePrice:89.62,sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:1, notes:''},
+  {category:'Fiber Hardware',      description:'LC Pigtail MM OM3 6-Strand 1m',      sourcePrice:93.73,sourceYear:2023, unit:'ea', hoursEach:4.5,  defaultRoleId:1, notes:''},
+  {category:'Fiber Hardware',      description:'LC Pigtail SM 6-Strand 1m',          sourcePrice:105.81,sourceYear:2023,unit:'ea', hoursEach:5.0,  defaultRoleId:1, notes:''},
+  {category:'Fiber Hardware',      description:'LC Unicam Connector',                sourcePrice:18.00,sourceYear:2023, unit:'ea', hoursEach:0.5,  defaultRoleId:1, notes:''},
+  {category:'Fiber Hardware',      description:'Fusion Splice Tray',                 sourcePrice:250.00,sourceYear:2023,unit:'ea', hoursEach:0.0,  defaultRoleId:1, notes:''},
+  {category:'Fiber Hardware',      description:'Splice Sleeves (50-pack)',           sourcePrice:66.58,sourceYear:2023, unit:'box',hoursEach:0.0,  defaultRoleId:1, notes:''},
+  // ACS
+  {category:'Access Control (ACS)',description:'Door Contact 3/4" Recessed DPDT',    sourcePrice:17.99,sourceYear:2023, unit:'ea', hoursEach:0.5,  defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'Overhead Surface Door Contact DPDT', sourcePrice:23.65,sourceYear:2023, unit:'ea', hoursEach:1.0,  defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'REX PIR Above Door',                 sourcePrice:65.00,sourceYear:2023, unit:'ea', hoursEach:1.0,  defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'Multi-Tech Card Reader (Mullion)',   sourcePrice:229.99,sourceYear:2023,unit:'ea', hoursEach:1.0,  defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'Multi-Tech Card Reader (Standard)',  sourcePrice:191.49,sourceYear:2023,unit:'ea', hoursEach:1.0,  defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'Door Release Push Button (Momentary)',sourcePrice:30.99,sourceYear:2023,unit:'ea', hoursEach:1.0,  defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'Mag Lock 600 lb (12/24 VDC)',        sourcePrice:275.99,sourceYear:2023,unit:'ea', hoursEach:4.0,  defaultRoleId:1, notes:''},
+  {category:'Access Control (ACS)',description:'Push-to-Exit Button (30-sec)',       sourcePrice:88.99,sourceYear:2023, unit:'ea', hoursEach:2.0,  defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'ACS Power Supply 12VDC 10A',         sourcePrice:176.00,sourceYear:2023,unit:'ea', hoursEach:1.0,  defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'ACS Maglock Power Supply',           sourcePrice:119.72,sourceYear:2023,unit:'ea', hoursEach:2.0,  defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'ACS Battery 12VDC 7Ah',              sourcePrice:31.00,sourceYear:2023, unit:'ea', hoursEach:0.25, defaultRoleId:2, notes:''},
+  {category:'Access Control (ACS)',description:'ACS Enclosure (5-panel + 1 PSU)',    sourcePrice:460.99,sourceYear:2023,unit:'ea', hoursEach:4.0,  defaultRoleId:1, notes:''},
+  {category:'Access Control (ACS)',description:'ACS Enclosure (9-panel + 2 PSU)',    sourcePrice:756.53,sourceYear:2023,unit:'ea', hoursEach:4.0,  defaultRoleId:1, notes:''},
+  {category:'Access Control (ACS)',description:'IP Door Controller (2 doors)',       sourcePrice:1300.00,sourceYear:2023,unit:'ea',hoursEach:4.0,  defaultRoleId:1, notes:''},
+  {category:'Access Control (ACS)',description:'RS-485 Sub-Panel (2 doors)',         sourcePrice:800.00,sourceYear:2023,unit:'ea', hoursEach:2.0,  defaultRoleId:1, notes:''},
+  {category:'Access Control (ACS)',description:'iClass Prox Cards (25-pack)',        sourcePrice:88.74,sourceYear:2023, unit:'box',hoursEach:0.5,  defaultRoleId:2, notes:''},
+  // IDS
+  {category:'Intrusion Detection (IDS)',description:'Burg Panel (commercial)',       sourcePrice:400.99,sourceYear:2023,unit:'ea', hoursEach:16.0, defaultRoleId:1, notes:''},
+  {category:'Intrusion Detection (IDS)',description:'8-Zone Expander',               sourcePrice:102.99,sourceYear:2023,unit:'ea', hoursEach:2.0,  defaultRoleId:2, notes:''},
+  {category:'Intrusion Detection (IDS)',description:'Wall Motion Detector PIR/Microwave',sourcePrice:77.00,sourceYear:2023,unit:'ea',hoursEach:0.5,defaultRoleId:2, notes:''},
+  {category:'Intrusion Detection (IDS)',description:'Ceiling Motion 360-degree',     sourcePrice:77.00,sourceYear:2023, unit:'ea', hoursEach:0.5,  defaultRoleId:2, notes:''},
+  {category:'Intrusion Detection (IDS)',description:'IDS Power Supply 8-Output 12VDC',sourcePrice:310.99,sourceYear:2023,unit:'ea',hoursEach:2.0, defaultRoleId:2, notes:''},
+  // Video Surveillance (placeholders, sourcePrice 0 — user fills from quote)
+  {category:'Video Surveillance',  description:'Fixed Indoor Dome Camera (generic)', sourcePrice:0,    sourceYear:2023, unit:'ea', hoursEach:2.0, defaultRoleId:2, notes:'Set sourcePrice from quote'},
+  {category:'Video Surveillance',  description:'Fixed Outdoor Bullet Camera (generic)',sourcePrice:0,  sourceYear:2023, unit:'ea', hoursEach:2.0, defaultRoleId:2, notes:'Set sourcePrice from quote'},
+  {category:'Video Surveillance',  description:'PTZ Camera (generic)',               sourcePrice:0,    sourceYear:2023, unit:'ea', hoursEach:2.0, defaultRoleId:2, notes:'Set sourcePrice from quote'},
+  {category:'Video Surveillance',  description:'Multi-Sensor / Panoramic Camera',    sourcePrice:0,    sourceYear:2023, unit:'ea', hoursEach:2.0, defaultRoleId:2, notes:'Set sourcePrice from quote'},
+  {category:'Video Surveillance',  description:'Camera Wall/Ceiling Mount',          sourcePrice:0,    sourceYear:2023, unit:'ea', hoursEach:0.5, defaultRoleId:2, notes:''},
+  {category:'Video Surveillance',  description:'VMS Server (generic enterprise)',    sourcePrice:30000.00,sourceYear:2023,unit:'ea',hoursEach:16.0,defaultRoleId:1, notes:''},
+  {category:'Video Surveillance',  description:'Camera NAS (generic)',               sourcePrice:12000.00,sourceYear:2023,unit:'ea',hoursEach:8.0, defaultRoleId:1, notes:''},
+  {category:'Video Surveillance',  description:'PC Client Workstation',              sourcePrice:1300.00,sourceYear:2023,unit:'ea',hoursEach:3.0, defaultRoleId:2, notes:''},
+  {category:'Video Surveillance',  description:'32" 4K Monitor',                     sourcePrice:275.00,sourceYear:2023,unit:'ea',hoursEach:1.0, defaultRoleId:2, notes:''},
+  {category:'Video Surveillance',  description:'Dual 32" Monitor Mount',             sourcePrice:60.00,sourceYear:2023, unit:'ea', hoursEach:1.0, defaultRoleId:2, notes:''},
+  // AV
+  {category:'Audio / Visual',      description:'8K HDMI Cable 10 ft',                sourcePrice:20.00,sourceYear:2023, unit:'ea', hoursEach:0.1, defaultRoleId:2, notes:''},
+  {category:'Audio / Visual',      description:'DisplayPort Cable 10 ft',            sourcePrice:20.00,sourceYear:2023, unit:'ea', hoursEach:0.1, defaultRoleId:2, notes:''},
+  {category:'Audio / Visual',      description:'Rackmount KVM 17"',                  sourcePrice:2700.00,sourceYear:2023,unit:'ea',hoursEach:2.0, defaultRoleId:1, notes:''},
+  {category:'Audio / Visual',      description:'IP Intercom Master Station 7"',      sourcePrice:977.98,sourceYear:2023,unit:'ea',hoursEach:4.0, defaultRoleId:1, notes:''},
+  {category:'Audio / Visual',      description:'IP Door Station (Vandal Resistant)', sourcePrice:948.99,sourceYear:2023,unit:'ea',hoursEach:2.0, defaultRoleId:2, notes:''}
+];
+
+let library = {version:LIBRARY_VERSION, lastModified:Date.now(), lastExported:null, items:[]};
+let nextLibId = 1;
+
+function defaultLibrary(){
+  const items = SEED_LIBRARY.map((it,i) => ({
+    id: i+1,
+    category: it.category,
+    description: it.description,
+    manufacturer: '',
+    model: '',
+    partNumber: '',
+    sourcePrice: it.sourcePrice,
+    sourceYear: it.sourceYear,
+    unit: it.unit,
+    hoursEach: it.hoursEach,
+    defaultRoleId: it.defaultRoleId,
+    notes: it.notes || ''
+  }));
+  return {version:LIBRARY_VERSION, lastModified:Date.now(), lastExported:null, items, nextId:items.length+1};
+}
+
+function saveLibrary(){
+  try{
+    library.lastModified = Date.now();
+    localStorage.setItem(LIBRARY_KEY, JSON.stringify(library));
+  }catch(e){console.error('Library save failed:', e);}
+}
+function loadLibrary(){
+  try{
+    const raw = localStorage.getItem(LIBRARY_KEY);
+    if(!raw) return false;
+    const p = JSON.parse(raw);
+    if(!p || !Array.isArray(p.items)) return false;
+    library = p;
+    nextLibId = p.nextId || (Math.max(0, ...p.items.map(x=>x.id||0)) + 1);
+    return true;
+  }catch(e){return false;}
+}
+function libraryHealth(){
+  if(!library.items || library.items.length === 0) return {state:'empty', msg:'Library is empty'};
+  if(!library.lastExported){
+    const daysSinceMod = (Date.now() - (library.lastModified||Date.now())) / 86400000;
+    if(daysSinceMod > 7) return {state:'warn', msg:`⚠ Library: ${library.items.length} items · never exported · ${Math.floor(daysSinceMod)} days since modified`};
+    return {state:'info', msg:`Library: ${library.items.length} items · never exported`};
+  }
+  const daysSinceExport = (Date.now() - library.lastExported) / 86400000;
+  const modAfterExport = (library.lastModified||0) > (library.lastExported||0);
+  if(modAfterExport && daysSinceExport > 7) return {state:'warn', msg:`⚠ Library: ${library.items.length} items · modified, last exported ${Math.floor(daysSinceExport)} days ago`};
+  if(daysSinceExport < 1) return {state:'fresh', msg:`Library: ${library.items.length} items · exported today ✓`};
+  return {state:'fresh', msg:`Library: ${library.items.length} items · exported ${Math.floor(daysSinceExport)} days ago ✓`};
+}
 
 function defaultState(){
   return {
@@ -657,20 +1020,21 @@ function defaultState(){
       mgmt:DEFAULT_MGMT_ROLES.map(r=>({...r})),
       vehicleAdder:{perHour:10, description:'Truck / tools'}
     },
-    settings:{overheadPct:0.15, marginPct:0.20},
+    settings:{overheadPct:0.15, marginPct:0.20, inflationFactor:1.10},
     wbs:{sections:BICSI_SECTIONS.map(s=>({...s, items:[], collapsed:false}))},
-    odc:{rentals:[], subcontractors:[]}
+    odc:{rentals:[], subcontractors:[]},
+    materials:{items:[]}
   };
 }
 
 let state = defaultState();
-let nextWbsId = 1, nextOdcId = 1;
+let nextWbsId = 1, nextOdcId = 1, nextMatId = 1;
 let dirty = false, lastSaveTime = null, hideEmpty = false;
 const v = id => document.getElementById(id);
 
 function autoSave(){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({state, nextWbsId, nextOdcId, hideEmpty, savedAt:Date.now()}));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({state, nextWbsId, nextOdcId, nextMatId, hideEmpty, savedAt:Date.now()}));
     lastSaveTime = Date.now();
     dirty = false;
     updateSavedIndicator();
@@ -683,8 +1047,12 @@ function loadSaved(){
     const p = JSON.parse(raw);
     if(!p.state) return false;
     state = p.state;
+    // Backward compat: ensure new slots exist
+    if(!state.materials) state.materials = {items:[]};
+    if(state.settings && state.settings.inflationFactor === undefined) state.settings.inflationFactor = 1.10;
     nextWbsId = p.nextWbsId || 1;
     nextOdcId = p.nextOdcId || 1;
+    nextMatId = p.nextMatId || (Math.max(0, ...state.materials.items.map(x=>x.id||0)) + 1);
     hideEmpty = !!p.hideEmpty;
     lastSaveTime = p.savedAt;
     return true;
@@ -740,6 +1108,31 @@ function calc(){
     sectionTotals[sec.id] = {hours:h, laborCost:lc, materialsCost:mc, total:lc+mc};
     totalHours += h; totalLaborCost += lc; totalMaterialsCost += mc;
   }
+
+  // Per Materials item / category totals
+  const inflation = +state.settings.inflationFactor || 1.0;
+  const categoryTotals = {};
+  let matActive = 0, matHours = 0, matLaborCost = 0, matCost = 0;
+  for(const mi of state.materials.items){
+    const qty = +mi.qty || 0;
+    if(qty <= 0) continue;
+    matActive++;
+    const eff = (+mi.sourcePrice || 0) * inflation;
+    const hrs = qty * (+mi.hoursEach || 0);
+    const role = roleById.get(mi.roleId);
+    const rate = role ? (+role.rate||0) : 0;
+    const lcost = hrs * rate;
+    const mcost = qty * eff;
+    matHours += hrs; matLaborCost += lcost; matCost += mcost;
+    const cat = mi.category || 'Misc';
+    if(!categoryTotals[cat]) categoryTotals[cat] = {hours:0, laborCost:0, materialsCost:0, total:0, count:0};
+    categoryTotals[cat].hours += hrs;
+    categoryTotals[cat].laborCost += lcost;
+    categoryTotals[cat].materialsCost += mcost;
+    categoryTotals[cat].total += lcost + mcost;
+    categoryTotals[cat].count++;
+  }
+  totalHours += matHours; totalLaborCost += matLaborCost; totalMaterialsCost += matCost;
 
   // Schedule
   const sched = state.schedule;
@@ -815,7 +1208,9 @@ function calc(){
 
   return {
     totalHours, totalLaborCost, totalMaterialsCost,
-    sectionTotals,
+    sectionTotals, categoryTotals,
+    matActive, matHours, matLaborCost, matCost,
+    inflation,
     requiredCrew, weeksRequired, targetWorkingDays:target, baselineCrew, isAccelerated,
     weeklyHours, regHrsPerTechPerWk, otHrsPerTechPerWk, dtHrsPerTechPerWk,
     otHoursTotal, dtHoursTotal, otPremium, dtPremium,
@@ -884,6 +1279,11 @@ function render(){
   // Settings
   setIfDiff('set-overhead', state.settings.overheadPct * 100);
   setIfDiff('set-margin', state.settings.marginPct * 100);
+  setIfDiff('set-inflation', state.settings.inflationFactor);
+
+  // Materials + Library
+  renderMaterials(s);
+  renderLibraryHealth();
 
   // WBS
   renderWBS(s);
@@ -1120,6 +1520,292 @@ function sumRow(k, val){
   return `<div class="sum-row"><span class="sum-key">${esc(k)}</span><span class="sum-val">${val}</span></div>`;
 }
 
+// =========================================================================
+// MATERIALS PANEL RENDER
+// =========================================================================
+function renderMaterials(s){
+  const host = v('mat-list');
+  const items = state.materials.items;
+  if(items.length === 0){
+    host.innerHTML = '<div class="mat-row empty">No materials yet. Click ＋ Pick from Library or Import a CSV.</div>';
+  } else {
+    host.innerHTML = items.map(mi => matRowHTML(mi)).join('');
+    host.querySelectorAll('[data-mid]').forEach(bindMatInput);
+    host.querySelectorAll('[data-rm-mid]').forEach(b => b.addEventListener('click', () => removeMat(b.dataset.rmMid)));
+  }
+  v('ms-active').textContent = String(s.matActive);
+  v('ms-hrs').textContent = fmtHrs(s.matHours);
+  v('ms-lcost').textContent = fmtMoney(s.matLaborCost);
+  v('ms-mcost').textContent = fmtMoney(s.matCost);
+}
+
+function matRowHTML(mi){
+  const inflation = +state.settings.inflationFactor || 1.0;
+  const eff = (+mi.sourcePrice || 0) * inflation;
+  const qty = +mi.qty || 0;
+  const total = qty * eff + qty * (+mi.hoursEach || 0) * (roleRateById(mi.roleId));
+  const roleOptions = [...state.crew.field, ...state.crew.mgmt]
+    .map(r => `<option value="${r.id}"${r.id===mi.roleId?' selected':''}>${esc(r.role)}</option>`).join('');
+  return `<div class="mat-row">
+    <div><input type="text" data-mid="${mi.id}" data-mf="description" value="${esc(mi.description)}" placeholder="Description"></div>
+    <input type="number" data-mid="${mi.id}" data-mf="qty" min="0" step="1" value="${mi.qty}">
+    <input type="text" data-mid="${mi.id}" data-mf="unit" value="${esc(mi.unit||'')}" placeholder="ea/ft">
+    <input type="number" data-mid="${mi.id}" data-mf="sourcePrice" min="0" step="0.01" value="${mi.sourcePrice}">
+    <span class="mat-eff">${fmtMoneyDec(eff)}</span>
+    <input type="number" data-mid="${mi.id}" data-mf="hoursEach" min="0" step="0.01" value="${mi.hoursEach}">
+    <select data-mid="${mi.id}" data-mf="roleId">${roleOptions}</select>
+    <span class="mat-total">${fmtMoney(total)}</span>
+    <button class="btn-remove" data-rm-mid="${mi.id}">×</button>
+  </div>
+  <div class="mat-row-row2">
+    <input type="text" data-mid="${mi.id}" data-mf="category"     value="${esc(mi.category||'')}" placeholder="Category">
+    <input type="text" data-mid="${mi.id}" data-mf="manufacturer" value="${esc(mi.manufacturer||'')}" placeholder="Manufacturer (opt.)">
+    <input type="text" data-mid="${mi.id}" data-mf="model"        value="${esc(mi.model||'')}" placeholder="Model (opt.)">
+    <input type="text" data-mid="${mi.id}" data-mf="partNumber"   value="${esc(mi.partNumber||'')}" placeholder="Part # (opt.)">
+  </div>`;
+}
+
+function roleRateById(id){
+  const allRoles = [...state.crew.field, ...state.crew.mgmt];
+  const r = allRoles.find(x => x.id === id);
+  return r ? (+r.rate||0) : 0;
+}
+
+function bindMatInput(el){
+  const id = +el.dataset.mid;
+  const field = el.dataset.mf;
+  el.addEventListener('change', () => {
+    const mi = state.materials.items.find(x => x.id === id);
+    if(!mi) return;
+    if(['qty','sourcePrice','hoursEach','roleId'].includes(field)){
+      mi[field] = field === 'roleId' ? (parseInt(el.value)||0) : (parseFloat(el.value)||0);
+    } else {
+      mi[field] = el.value;
+    }
+    render(); markDirty();
+  });
+}
+
+function addCustomMaterial(){
+  state.materials.items.push({
+    id: nextMatId++,
+    libraryRef: null,
+    category: '',
+    description: '',
+    manufacturer: '',
+    model: '',
+    partNumber: '',
+    sourcePrice: 0,
+    sourceYear: new Date().getFullYear(),
+    unit: 'ea',
+    hoursEach: 0,
+    roleId: state.crew.field[0]?.id || 1,
+    qty: 0,
+    notes: ''
+  });
+  render(); markDirty();
+}
+function removeMat(id){
+  id = +id;
+  state.materials.items = state.materials.items.filter(x => x.id !== id);
+  render(); markDirty();
+}
+function addLibraryItemToProject(libId){
+  const li = library.items.find(x => x.id === +libId);
+  if(!li) return null;
+  const mi = {
+    id: nextMatId++,
+    libraryRef: li.id,
+    category: li.category,
+    description: li.description,
+    manufacturer: li.manufacturer || '',
+    model: li.model || '',
+    partNumber: li.partNumber || '',
+    sourcePrice: li.sourcePrice,
+    sourceYear: li.sourceYear,
+    unit: li.unit,
+    hoursEach: li.hoursEach,
+    roleId: li.defaultRoleId,
+    qty: 0,
+    notes: li.notes || ''
+  };
+  state.materials.items.push(mi);
+  render(); markDirty();
+  return mi;
+}
+
+// =========================================================================
+// LIBRARY HEALTH + MODAL RENDER
+// =========================================================================
+function renderLibraryHealth(){
+  const h = libraryHealth();
+  const el = v('lib-health');
+  el.textContent = h.msg;
+  el.className = 'lib-health';
+  if(h.state === 'fresh') el.classList.add('fresh');
+  else if(h.state === 'warn') el.classList.add('warn');
+}
+
+function renderPickModal(){
+  populateCategoryFilter('pickCategory');
+  const search = (v('pickSearch').value||'').toLowerCase();
+  const cat = v('pickCategory').value;
+  const inProjLibIds = new Set(state.materials.items.map(m => m.libraryRef).filter(x=>x));
+  const filtered = library.items.filter(li => {
+    if(cat && li.category !== cat) return false;
+    if(search){
+      const hay = `${li.description} ${li.manufacturer||''} ${li.model||''} ${li.partNumber||''} ${li.category||''}`.toLowerCase();
+      if(!hay.includes(search)) return false;
+    }
+    return true;
+  });
+  const host = v('pickTable');
+  let html = `<div class="pick-row hdr"><span></span><span>Description</span><span>Part #</span><span>Src $</span><span>Hrs</span><span></span></div>`;
+  if(filtered.length === 0){
+    html += `<div class="pick-row"><span></span><span style="color:var(--gray-dark);font-style:italic">No matches.</span><span></span><span></span><span></span><span></span></div>`;
+  } else {
+    html += filtered.map(li => {
+      const added = inProjLibIds.has(li.id);
+      const meta = [li.manufacturer, li.model].filter(Boolean).join(' · ');
+      return `<div class="pick-row">
+        <span class="cat">${esc(li.category)}</span>
+        <span><span class="desc">${esc(li.description)}</span>${meta?'<div class="meta">'+esc(meta)+'</div>':''}</span>
+        <span class="meta">${esc(li.partNumber||'')}</span>
+        <span class="price">${fmtMoneyDec(li.sourcePrice)}<span class="src"> ${li.sourceYear}</span></span>
+        <span class="price">${li.hoursEach.toFixed(2)}</span>
+        <span><button class="add-btn ${added?'added':''}" data-pick-lid="${li.id}">${added?'✓ Added':'＋ Add'}</button></span>
+      </div>`;
+    }).join('');
+  }
+  host.innerHTML = html;
+  host.querySelectorAll('[data-pick-lid]').forEach(b => b.addEventListener('click', () => {
+    addLibraryItemToProject(b.dataset.pickLid);
+    b.textContent = '✓ Added';
+    b.classList.add('added');
+  }));
+}
+
+function populateCategoryFilter(selectId){
+  const sel = v(selectId);
+  const cur = sel.value;
+  const cats = [...new Set([...LIBRARY_CATEGORIES, ...library.items.map(x => x.category).filter(Boolean)])];
+  sel.innerHTML = '<option value="">All categories</option>' + cats.map(c => `<option value="${esc(c)}"${c===cur?' selected':''}>${esc(c)}</option>`).join('');
+}
+
+function renderLibraryModal(){
+  populateCategoryFilter('libCategory');
+  const search = (v('libSearch').value||'').toLowerCase();
+  const cat = v('libCategory').value;
+  const filtered = library.items.filter(li => {
+    if(cat && li.category !== cat) return false;
+    if(search){
+      const hay = `${li.description} ${li.manufacturer||''} ${li.model||''} ${li.partNumber||''} ${li.category||''}`.toLowerCase();
+      if(!hay.includes(search)) return false;
+    }
+    return true;
+  });
+  const host = v('libTable');
+  let html = `<div class="pick-row hdr" style="grid-template-columns:1fr 90px 70px 60px 80px"><span>Description / Category / Mfr · Model · Part#</span><span>Src $ / Yr</span><span>Hrs</span><span>Unit</span><span></span></div>`;
+  if(filtered.length === 0){
+    html += `<div class="pick-row" style="grid-template-columns:1fr"><span style="color:var(--gray-dark);font-style:italic">No matches.</span></div>`;
+  } else {
+    html += filtered.map(li => `<div class="pick-row" style="grid-template-columns:1fr 90px 70px 60px 80px" data-lib-row="${li.id}">
+      <span>
+        <input type="text" data-lib-id="${li.id}" data-lib-f="description" value="${esc(li.description)}" style="font-size:12px;margin-bottom:4px;width:100%">
+        <input type="text" data-lib-id="${li.id}" data-lib-f="category" value="${esc(li.category||'')}" placeholder="Category" style="font-size:11px;margin-bottom:4px;width:100%">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
+          <input type="text" data-lib-id="${li.id}" data-lib-f="manufacturer" value="${esc(li.manufacturer||'')}" placeholder="Mfr" style="font-size:11px;margin-bottom:0">
+          <input type="text" data-lib-id="${li.id}" data-lib-f="model" value="${esc(li.model||'')}" placeholder="Model" style="font-size:11px;margin-bottom:0">
+          <input type="text" data-lib-id="${li.id}" data-lib-f="partNumber" value="${esc(li.partNumber||'')}" placeholder="Part #" style="font-size:11px;margin-bottom:0">
+        </div>
+      </span>
+      <span>
+        <input type="number" data-lib-id="${li.id}" data-lib-f="sourcePrice" value="${li.sourcePrice}" min="0" step="0.01" style="font-size:11px;margin-bottom:4px;text-align:right">
+        <input type="number" data-lib-id="${li.id}" data-lib-f="sourceYear"  value="${li.sourceYear}" min="2000" max="2099" step="1" style="font-size:11px;margin-bottom:0;text-align:right">
+      </span>
+      <span><input type="number" data-lib-id="${li.id}" data-lib-f="hoursEach" value="${li.hoursEach}" min="0" step="0.01" style="font-size:11px;text-align:right"></span>
+      <span><input type="text" data-lib-id="${li.id}" data-lib-f="unit" value="${esc(li.unit||'')}" style="font-size:11px;text-align:center"></span>
+      <span><button class="btn-remove" data-rm-lib="${li.id}">×</button></span>
+    </div>`).join('');
+  }
+  host.innerHTML = html;
+  host.querySelectorAll('[data-lib-id]').forEach(el => bindLibInput(el));
+  host.querySelectorAll('[data-rm-lib]').forEach(b => b.addEventListener('click', () => {
+    if(confirm('Delete this library item? This does not affect items already in your project.')){
+      const id = +b.dataset.rmLib;
+      library.items = library.items.filter(x => x.id !== id);
+      saveLibrary(); renderLibraryModal(); renderLibraryHealth();
+    }
+  }));
+}
+
+function bindLibInput(el){
+  const id = +el.dataset.libId;
+  const field = el.dataset.libF;
+  el.addEventListener('change', () => {
+    const li = library.items.find(x => x.id === id);
+    if(!li) return;
+    if(el.type === 'number') li[field] = parseFloat(el.value)||0;
+    else li[field] = el.value;
+    saveLibrary(); render(); renderLibraryHealth();
+  });
+}
+
+// =========================================================================
+// COST COMPOSITION CHART + BARS
+// =========================================================================
+function renderCostChart(s){
+  const stack = v('chart-stack');
+  const total = s.finalPrice || 1;
+  const segs = [
+    {key:'labor',     label:'Labor',     val: s.directLabor},
+    {key:'materials', label:'Mat',       val: s.directMaterials},
+    {key:'odc',       label:'ODC',       val: s.directODC},
+    {key:'overhead',  label:'OH',        val: s.overheadAmount},
+    {key:'margin',    label:'Margin',    val: s.marginAmount}
+  ];
+  stack.innerHTML = segs.map(seg => {
+    const pct = Math.max(0, (seg.val / total) * 100);
+    if(pct < 0.5) return '';
+    const inside = pct > 8 ? `${seg.label} ${fmtMoney(seg.val)}` : '';
+    return `<div class="chart-seg ${seg.key}" style="width:${pct.toFixed(2)}%" title="${seg.label}: ${fmtMoney(seg.val)} (${pct.toFixed(1)}%)">${esc(inside)}</div>`;
+  }).join('');
+  v('chart-legend').innerHTML = segs.map(seg => {
+    const pct = total > 0 ? (seg.val / total * 100) : 0;
+    return `<span class="li"><span class="sw ${seg.key}"></span>${esc(seg.label)} <strong style="color:var(--white)">${fmtMoney(seg.val)}</strong><span class="pct">(${pct.toFixed(1)}%)</span></span>`;
+  }).join('');
+}
+
+function renderSectionBars(s){
+  const host = v('sum-section-bars');
+  const rows = state.wbs.sections.map(sec => ({label:`${sec.id} ${sec.name}`, val:s.sectionTotals[sec.id].total}));
+  const maxV = Math.max(1, ...rows.map(r => r.val));
+  const visible = rows.filter(r => r.val > 0);
+  if(visible.length === 0){
+    host.innerHTML = '<div style="color:var(--gray-dark);font-style:italic;font-size:12px">No section spend yet.</div>';
+    return;
+  }
+  host.innerHTML = visible.sort((a,b)=>b.val-a.val).map(r => {
+    const pct = (r.val / maxV) * 100;
+    return `<div class="bar-row"><span class="bar-label">${esc(r.label)}</span><div class="bar-track"><div class="bar-fill" style="width:${pct.toFixed(1)}%"></div></div><span class="bar-val">${fmtMoney(r.val)}</span></div>`;
+  }).join('');
+}
+
+function renderCategoryBars(s){
+  const host = v('sum-category-bars');
+  const entries = Object.entries(s.categoryTotals || {});
+  if(entries.length === 0){
+    host.innerHTML = '<div style="color:var(--gray-dark);font-style:italic;font-size:12px">No material spend yet.</div>';
+    return;
+  }
+  const rows = entries.map(([k,v]) => ({label:k, val:v.total}));
+  const maxV = Math.max(1, ...rows.map(r => r.val));
+  host.innerHTML = rows.sort((a,b)=>b.val-a.val).map(r => {
+    const pct = (r.val / maxV) * 100;
+    return `<div class="bar-row"><span class="bar-label">${esc(r.label)}</span><div class="bar-track"><div class="bar-fill materials" style="width:${pct.toFixed(1)}%"></div></div><span class="bar-val">${fmtMoney(r.val)}</span></div>`;
+  }).join('');
+}
+
 function renderSummary(s){
   const p = state.project;
   v('sum-title').textContent = p.name || 'Limited Energy Job Estimate';
@@ -1168,9 +1854,17 @@ function renderSummary(s){
     ['Total DT hours', s.isCA ? fmtHrs(s.dtHoursTotal) : 'n/a']
   ].map(r => sumRow(r[0], r[1])).join('');
 
+  // Cost composition chart + bars
+  renderCostChart(s);
+  renderSectionBars(s);
+  renderCategoryBars(s);
+
   // Labor roll-up
+  const wbsLabor = s.totalLaborCost - s.matLaborCost;
   v('sum-labor').innerHTML = [
-    ['Base labor (regular)', fmtMoney(s.totalLaborCost)],
+    ['WBS section labor', fmtMoney(wbsLabor)],
+    ['Materials labor (qty × hours × rate)', fmtMoney(s.matLaborCost)],
+    ['Combined base labor', fmtMoney(s.totalLaborCost)],
     ['OT premium', fmtMoney(s.otPremium)],
     ['DT premium', s.isCA ? fmtMoney(s.dtPremium) : 'n/a'],
     ['Vehicle / tools adder', fmtMoney(s.vehicleCost) + ` (${fmtHrs(s.totalHours)} × $${s.vehicleRate}/hr)`],
@@ -1178,7 +1872,12 @@ function renderSummary(s){
   ].map(r => sumRow(r[0], r[1])).join('');
 
   // Materials roll-up
+  const wbsMat = s.totalMaterialsCost - s.matCost;
   v('sum-mat').innerHTML = [
+    ['Inflation factor applied', `× ${(+state.settings.inflationFactor||1).toFixed(2)}`],
+    ['Materials library items active', `${s.matActive}`],
+    ['Materials library cost', fmtMoney(s.matCost)],
+    ['WBS section materials', fmtMoney(wbsMat)],
     ['Total direct materials', fmtMoney(s.directMaterials)]
   ].map(r => sumRow(r[0], r[1])).join('');
 
@@ -1258,6 +1957,41 @@ function bindAll(){
   // Settings
   v('set-overhead').addEventListener('input', e=>{state.settings.overheadPct=(parseFloat(e.target.value)||0)/100;render();markDirty();});
   v('set-margin').addEventListener('input', e=>{state.settings.marginPct=(parseFloat(e.target.value)||0)/100;render();markDirty();});
+  v('set-inflation').addEventListener('input', e=>{state.settings.inflationFactor=parseFloat(e.target.value)||1.0;render();markDirty();});
+  v('inflHelpBtn').addEventListener('click', ()=>openModal('inflHelpModal'));
+  v('inflHelpModalClose').addEventListener('click', ()=>closeModal('inflHelpModal'));
+  v('inflHelpModal').addEventListener('click', e=>{if(e.target===v('inflHelpModal'))closeModal('inflHelpModal');});
+
+  // Materials toolbar
+  v('matHelpBtn').addEventListener('click', ()=>openModal('matHelpModal'));
+  v('matHelpModalClose').addEventListener('click', ()=>closeModal('matHelpModal'));
+  v('matHelpModal').addEventListener('click', e=>{if(e.target===v('matHelpModal'))closeModal('matHelpModal');});
+  v('pickFromLibBtn').addEventListener('click', ()=>{ openModal('pickModal'); v('pickSearch').value=''; v('pickCategory').value=''; renderPickModal(); });
+  v('importCsvBtn').addEventListener('click', ()=>{ v('csvImportStatus').innerHTML=''; v('csvImportFile').value=''; openModal('csvImportModal'); });
+  v('downloadTplBtn').addEventListener('click', downloadCsvTemplate);
+  v('exportLibBtn').addEventListener('click', exportLibraryCSV);
+  v('editLibBtn').addEventListener('click', ()=>{ openModal('libraryModal'); v('libSearch').value=''; v('libCategory').value=''; renderLibraryModal(); });
+  v('addCustomMatBtn').addEventListener('click', addCustomMaterial);
+
+  // Pick modal
+  v('pickModalClose').addEventListener('click', ()=>{ closeModal('pickModal'); render(); });
+  v('pickModal').addEventListener('click', e=>{ if(e.target===v('pickModal')){ closeModal('pickModal'); render(); } });
+  v('pickSearch').addEventListener('input', renderPickModal);
+  v('pickCategory').addEventListener('change', renderPickModal);
+
+  // Library modal
+  v('libraryModalClose').addEventListener('click', ()=>{ closeModal('libraryModal'); render(); });
+  v('libraryModal').addEventListener('click', e=>{ if(e.target===v('libraryModal')){ closeModal('libraryModal'); render(); } });
+  v('libSearch').addEventListener('input', renderLibraryModal);
+  v('libCategory').addEventListener('change', renderLibraryModal);
+  v('libAddItemBtn').addEventListener('click', addEmptyLibraryItem);
+  v('libResetBtn').addEventListener('click', resetLibraryToDefaults);
+
+  // CSV import modal
+  v('csvImportModalClose').addEventListener('click', ()=>closeModal('csvImportModal'));
+  v('csvImportModal').addEventListener('click', e=>{if(e.target===v('csvImportModal'))closeModal('csvImportModal');});
+  v('csvImportFile').addEventListener('change', importMaterialsCSV);
+  v('csvTemplateBtn').addEventListener('click', downloadCsvTemplate);
 
   // WBS hide empty
   v('hideEmpty').addEventListener('change', e=>{hideEmpty=e.target.checked;render();markDirty();});
@@ -1344,6 +2078,7 @@ function exportEstimate(){
     settings:state.settings,
     wbs:state.wbs,
     odc:state.odc,
+    materials:state.materials,
     summary:{
       finalPrice:Math.round(s.finalPrice),
       directCosts:Math.round(s.directCosts),
@@ -1387,18 +2122,20 @@ function importEstimate(e){
         schedule:data.schedule,
         jobType:data.jobType || defaultState().jobType,
         crew:data.crew,
-        settings:data.settings || defaultState().settings,
+        settings:Object.assign({}, defaultState().settings, data.settings || {}),
         wbs:data.wbs,
-        odc:data.odc || {rentals:[], subcontractors:[]}
+        odc:data.odc || {rentals:[], subcontractors:[]},
+        materials:data.materials || {items:[]}
       };
       // Re-seed ID counters
-      let mw = 0, mo = 0;
+      let mw = 0, mo = 0, mm = 0;
       for(const sec of state.wbs.sections){
         for(const it of sec.items) if(it.id > mw) mw = it.id;
       }
       for(const x of state.odc.rentals) if(x.id > mo) mo = x.id;
       for(const x of state.odc.subcontractors) if(x.id > mo) mo = x.id;
-      nextWbsId = mw + 1; nextOdcId = mo + 1;
+      for(const x of state.materials.items) if(x.id > mm) mm = x.id;
+      nextWbsId = mw + 1; nextOdcId = mo + 1; nextMatId = mm + 1;
       v('importStatus').innerHTML = `<div class="import-status ok">✓ Imported successfully. ${state.wbs.sections.length} sections, ${state.wbs.sections.reduce((a,s)=>a+s.items.length,0)} items.</div>`;
       render(); markDirty();
       setTimeout(()=>closeModal('importModal'), 1200);
@@ -1409,9 +2146,214 @@ function importEstimate(e){
   reader.readAsText(file);
 }
 
+// =========================================================================
+// CSV PARSE / GENERATE
+// =========================================================================
+function parseCSV(text){
+  if(text.charCodeAt(0) === 0xFEFF) text = text.slice(1); // BOM
+  const rows = [];
+  let row = [], field = '';
+  let inQuotes = false;
+  for(let i = 0; i < text.length; i++){
+    const c = text[i];
+    if(inQuotes){
+      if(c === '"' && text[i+1] === '"'){ field += '"'; i++; }
+      else if(c === '"'){ inQuotes = false; }
+      else field += c;
+    } else {
+      if(c === '"') inQuotes = true;
+      else if(c === ','){ row.push(field); field = ''; }
+      else if(c === '\n' || c === '\r'){
+        if(field !== '' || row.length > 0){ row.push(field); rows.push(row); row = []; field = ''; }
+        if(c === '\r' && text[i+1] === '\n') i++;
+      } else field += c;
+    }
+  }
+  if(field !== '' || row.length > 0){ row.push(field); rows.push(row); }
+  return rows;
+}
+function toCSV(rows){
+  return rows.map(r => r.map(cell => {
+    const s = (cell === null || cell === undefined) ? '' : String(cell);
+    if(s.includes(',') || s.includes('"') || s.includes('\n') || s.includes('\r')){
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }).join(',')).join('\r\n');
+}
+function downloadFile(filename, content, mime){
+  const blob = new Blob([content], {type: mime || 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// =========================================================================
+// CSV TEMPLATE + LIBRARY EXPORT + CSV IMPORT
+// =========================================================================
+const CSV_HEADERS = ['category','description','manufacturer','model','partNumber','sourcePrice','sourceYear','unit','hoursEach','defaultRole','qty','notes'];
+
+function downloadCsvTemplate(){
+  const rows = [
+    CSV_HEADERS,
+    ['Cable / Horizontal','CAT6 Plenum (Blue)','','','',0.30,2023,'ft',0.008,'Tech I',5000,'1000 ft box example'],
+    ['Connectors & Jacks','CAT6 Keystone Jack (Blue)','','','',4.91,2023,'ea',0.25,'Tech I',48,''],
+    ['Patch Panels','24-Port Patch Panel','','','',75,2023,'ea',1.0,'Lead Tech',2,''],
+    ['Cable Management','1U Brush Guard','','','',35,2023,'ea',0.25,'Tech I','',''],
+    ['Misc','Custom Item with All Optional Fields','Acme','Model-X','PN-12345','12.34',2024,'ea',0.5,'Helper','','Notes go here']
+  ];
+  downloadFile('estimator-materials-template.csv', toCSV(rows), 'text/csv');
+}
+
+function exportLibraryCSV(){
+  const rows = [CSV_HEADERS];
+  for(const li of library.items){
+    const roleName = ([...DEFAULT_FIELD_ROLES, ...DEFAULT_MGMT_ROLES].find(r => r.id === li.defaultRoleId) || {}).role || '';
+    rows.push([
+      li.category||'', li.description||'', li.manufacturer||'', li.model||'', li.partNumber||'',
+      li.sourcePrice, li.sourceYear, li.unit||'', li.hoursEach, roleName, '', li.notes||''
+    ]);
+  }
+  const fn = `estimator-library-${new Date().toISOString().slice(0,10)}.csv`;
+  downloadFile(fn, toCSV(rows), 'text/csv');
+  library.lastExported = Date.now();
+  saveLibrary();
+  renderLibraryHealth();
+}
+
+function importMaterialsCSV(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try{
+      const rows = parseCSV(ev.target.result);
+      if(rows.length < 2){ v('csvImportStatus').innerHTML = '<div class="import-status err">✗ CSV has no data rows.</div>'; return; }
+      const header = rows[0].map(h => h.trim().toLowerCase());
+      const idx = {};
+      CSV_HEADERS.forEach(h => { idx[h] = header.indexOf(h.toLowerCase()); });
+      if(idx.description === -1){ v('csvImportStatus').innerHTML = '<div class="import-status err">✗ Required column missing: description</div>'; return; }
+      const allRoles = [...state.crew.field, ...state.crew.mgmt];
+      let addedLib = 0, updatedLib = 0, addedProj = 0;
+      for(let r = 1; r < rows.length; r++){
+        const row = rows[r];
+        const get = key => idx[key] >= 0 ? (row[idx[key]] || '').trim() : '';
+        const desc = get('description');
+        if(!desc) continue;
+        const partNumber = get('partNumber');
+        const sourcePrice = parseFloat(get('sourcePrice')) || 0;
+        const sourceYear  = parseInt(get('sourceYear')) || 2023;
+        const hoursEach   = parseFloat(get('hoursEach')) || 0;
+        const qty         = parseFloat(get('qty')) || 0;
+        const roleName    = get('defaultRole');
+        const role = allRoles.find(x => x.role.toLowerCase() === roleName.toLowerCase());
+        const defaultRoleId = role ? role.id : (state.crew.field[0]?.id || 1);
+        // Match existing library item by partNumber (if both set) OR description
+        let existing = null;
+        if(partNumber){
+          existing = library.items.find(x => (x.partNumber||'').toLowerCase() === partNumber.toLowerCase() && partNumber);
+        }
+        if(!existing){
+          existing = library.items.find(x => x.description.toLowerCase() === desc.toLowerCase() && (x.category||'').toLowerCase() === (get('category')||'').toLowerCase());
+        }
+        if(existing){
+          existing.category     = get('category')     || existing.category;
+          existing.manufacturer = get('manufacturer') || existing.manufacturer;
+          existing.model        = get('model')        || existing.model;
+          existing.partNumber   = partNumber          || existing.partNumber;
+          if(get('sourcePrice') !== '') existing.sourcePrice = sourcePrice;
+          if(get('sourceYear')  !== '') existing.sourceYear  = sourceYear;
+          if(get('unit')        !== '') existing.unit        = get('unit');
+          if(get('hoursEach')   !== '') existing.hoursEach   = hoursEach;
+          if(roleName) existing.defaultRoleId = defaultRoleId;
+          if(get('notes')) existing.notes = get('notes');
+          updatedLib++;
+        } else {
+          const newLi = {
+            id: nextLibId++,
+            category: get('category')||'Misc',
+            description: desc,
+            manufacturer: get('manufacturer'),
+            model: get('model'),
+            partNumber: partNumber,
+            sourcePrice, sourceYear,
+            unit: get('unit')||'ea',
+            hoursEach,
+            defaultRoleId,
+            notes: get('notes')
+          };
+          library.items.push(newLi);
+          existing = newLi;
+          addedLib++;
+        }
+        if(qty > 0){
+          // Also add to project materials with that qty
+          const mi = {
+            id: nextMatId++,
+            libraryRef: existing.id,
+            category: existing.category,
+            description: existing.description,
+            manufacturer: existing.manufacturer || '',
+            model: existing.model || '',
+            partNumber: existing.partNumber || '',
+            sourcePrice: existing.sourcePrice,
+            sourceYear: existing.sourceYear,
+            unit: existing.unit,
+            hoursEach: existing.hoursEach,
+            roleId: existing.defaultRoleId,
+            qty,
+            notes: existing.notes || ''
+          };
+          state.materials.items.push(mi);
+          addedProj++;
+        }
+      }
+      library.nextId = nextLibId;
+      saveLibrary();
+      v('csvImportStatus').innerHTML = `<div class="import-status ok">✓ Library: +${addedLib} new, ${updatedLib} updated. Project: +${addedProj} active items.</div>`;
+      render(); renderLibraryHealth(); markDirty();
+      setTimeout(()=>closeModal('csvImportModal'), 1500);
+    }catch(err){
+      v('csvImportStatus').innerHTML = '<div class="import-status err">✗ CSV parse error: ' + esc(err.message) + '</div>';
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+function resetLibraryToDefaults(){
+  if(!confirm('Reset the library to seed defaults? Custom items you added will be lost. (Project materials are not affected.)')) return;
+  library = defaultLibrary();
+  nextLibId = library.nextId;
+  saveLibrary();
+  renderLibraryModal(); renderLibraryHealth();
+}
+
+function addEmptyLibraryItem(){
+  const li = {
+    id: nextLibId++,
+    category: 'Misc',
+    description: 'New Item',
+    manufacturer: '',
+    model: '',
+    partNumber: '',
+    sourcePrice: 0,
+    sourceYear: 2023,
+    unit: 'ea',
+    hoursEach: 0,
+    defaultRoleId: state.crew.field[0]?.id || 1,
+    notes: ''
+  };
+  library.items.push(li);
+  library.nextId = nextLibId;
+  saveLibrary();
+  renderLibraryModal(); renderLibraryHealth();
+}
+
 function confirmNew(){
   state = defaultState();
-  nextWbsId = 1; nextOdcId = 1; hideEmpty = false;
+  nextWbsId = 1; nextOdcId = 1; nextMatId = 1; hideEmpty = false;
   closeModal('newModal');
   render(); markDirty();
 }
@@ -1419,6 +2361,14 @@ function confirmNew(){
 // =========================================================================
 // BOOT
 // =========================================================================
+if(loadLibrary()){
+  console.log(`Loaded library: ${library.items.length} items`);
+} else {
+  library = defaultLibrary();
+  nextLibId = library.nextId;
+  saveLibrary();
+  console.log(`Seeded library with ${library.items.length} default items`);
+}
 if(loadSaved()) console.log('Loaded saved Estimator session');
 if(!state.project.proposalDate) state.project.proposalDate = new Date().toISOString().slice(0,10);
 bindAll();

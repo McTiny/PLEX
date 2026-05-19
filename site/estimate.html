@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  THE ESTIMATOR v1.1 — Limited Energy Job Estimation
+  THE ESTIMATOR v1.2 — Limited Energy Job Estimation
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary estimation and proposal use only.
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Estimator v1.1 — Limited Energy Job Estimation | Limited Energy eXperts</title>
+<title>The Estimator v1.2 — Limited Energy Job Estimation | Limited Energy eXperts</title>
 <meta name="description" content="The Estimator — limited energy job estimation. Schedule-driven crew sizing, BICSI-coded scope, federal/California overtime, local/remote cost variants. Built by an RCDD for Division 27/28 estimating.">
 <meta property="og:title" content="The Estimator — Limited Energy Job Estimation">
 <meta property="og:description" content="Schedule-driven crew sizing, BICSI-coded scope, OT math, local/remote variants. Client-side JSON save/load.">
@@ -100,10 +100,11 @@ select option{background:var(--navy);}
 .stat-row .stat-line .val.red{color:var(--red);}
 .stat-row .stat-line .val.warn{color:var(--warn);}
 .stat-row .stat-line .val.green{color:var(--green);}
-.rate-row{display:grid;grid-template-columns:1fr 90px 28px;gap:8px;align-items:center;margin-bottom:6px;}
+.rate-row{display:grid;grid-template-columns:1fr 85px 85px 28px;gap:6px;align-items:center;margin-bottom:6px;}
 .rate-row input[type=text]{font-size:12px;}
 .rate-row input[type=number]{text-align:right;font-family:var(--mono);}
 .rate-row .rate-prefix{font-family:var(--mono);font-size:11px;color:var(--gray-mid);text-align:right;padding-right:4px;}
+.rate-row.hdr-row > div{font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.1em;text-transform:uppercase;}
 .wbs-section{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;overflow:hidden;}
 .wbs-section.collapsed .wbs-body{display:none;}
 .wbs-section-head{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;background:var(--navy-light);border-bottom:1px solid var(--border);user-select:none;}
@@ -182,7 +183,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
 #credit-line strong{color:var(--red);letter-spacing:0.12em;text-transform:uppercase;}
 #credit-line a{color:var(--gray-light);text-decoration:none;border-bottom:1px dotted var(--gray-mid);}
 #credit-line a:hover{color:var(--red);border-bottom-color:var(--red);}
-.odc-row{display:grid;grid-template-columns:1fr 110px 1fr 28px;gap:8px;align-items:center;margin-bottom:6px;}
+.odc-row{display:grid;grid-template-columns:1fr 90px 60px 1fr 28px;gap:8px;align-items:center;margin-bottom:6px;}
 .odc-row input{font-size:12px;margin-bottom:0;}
 .odc-row input[type=number]{text-align:right;font-family:var(--mono);}
 .odc-row.hdr{font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;}
@@ -196,8 +197,8 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
 .lib-health.fresh{color:var(--green);}
 .lib-health.warn{color:var(--warn);}
 .mat-toolbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
-.mat-list-head{display:grid;grid-template-columns:1fr 60px 50px 80px 80px 60px 110px 90px 28px;gap:6px;padding:6px 4px 4px;font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border);}
-.mat-row{display:grid;grid-template-columns:1fr 60px 50px 80px 80px 60px 110px 90px 28px;gap:6px;padding:6px 4px;border-bottom:1px solid var(--border);align-items:center;font-size:12px;}
+.mat-list-head{display:grid;grid-template-columns:1fr 55px 45px 70px 55px 75px 55px 100px 85px 28px;gap:6px;padding:6px 4px 4px;font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border);}
+.mat-row{display:grid;grid-template-columns:1fr 55px 45px 70px 55px 75px 55px 100px 85px 28px;gap:6px;padding:6px 4px;border-bottom:1px solid var(--border);align-items:center;font-size:12px;}
 .mat-row input,.mat-row select{font-size:12px;padding:5px 8px;margin-bottom:0;}
 .mat-row input[type=number]{text-align:right;font-family:var(--mono);}
 .mat-row .mat-eff{font-family:var(--mono);color:var(--gray-light);text-align:right;font-size:11px;}
@@ -296,7 +297,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
     <div class="header-brand">
       <div class="header-mark">🧮</div>
       <div>
-        <div class="header-title">THE ESTIMATOR <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v1.1</span></div>
+        <div class="header-title">THE ESTIMATOR <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v1.2</span></div>
         <div class="header-sub">LIMITED ENERGY &nbsp;·&nbsp; JOB ESTIMATION</div>
       </div>
     </div>
@@ -437,13 +438,20 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
     <div class="panel-body" style="margin-top:10px">
       <div class="callout"><strong>Defaults shown.</strong> Override role names and sell rates per your shop. WBS items reference roles by ID so renames don&rsquo;t break links.</div>
       <div class="section-divider"><span>FIELD ROLES</span></div>
-      <div class="rate-row" style="grid-template-columns:1fr 90px 28px">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.1em;text-transform:uppercase">Role name</div>
-        <div style="font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.1em;text-transform:uppercase;text-align:right">Sell $/hr</div>
+      <div class="rate-row hdr-row">
+        <div>Role name</div>
+        <div style="text-align:right">Cost $/hr</div>
+        <div style="text-align:right">Sell $/hr</div>
         <div></div>
       </div>
       <div id="field-roles"></div>
       <div class="section-divider"><span>MANAGEMENT ROLES</span></div>
+      <div class="rate-row hdr-row">
+        <div>Role name</div>
+        <div style="text-align:right">Cost $/hr</div>
+        <div style="text-align:right">Sell $/hr</div>
+        <div></div>
+      </div>
       <div id="mgmt-roles"></div>
       <div class="section-divider"><span>VEHICLE / TOOLS ADDER</span></div>
       <div class="grid-2">
@@ -482,8 +490,9 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
       <span>Description</span>
       <span style="text-align:right">Qty</span>
       <span>Unit</span>
-      <span style="text-align:right">Src Price</span>
-      <span style="text-align:right">Eff. $/U</span>
+      <span style="text-align:right">Src $</span>
+      <span style="text-align:right">Markup</span>
+      <span style="text-align:right">Sell $/U</span>
       <span style="text-align:right">Hrs/U</span>
       <span>Role</span>
       <span style="text-align:right">Total</span>
@@ -514,11 +523,11 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
     <div class="panel-label teal">OTHER DIRECT COSTS (ODC)</div>
     <div id="odc-auto-block"></div>
     <div class="section-divider"><span>RENTALS</span></div>
-    <div class="odc-row hdr"><span>Description</span><span style="text-align:right">Cost</span><span>Notes</span><span></span></div>
+    <div class="odc-row hdr"><span>Description</span><span style="text-align:right">Cost</span><span style="text-align:right">Markup</span><span>Notes</span><span></span></div>
     <div id="odc-rentals"></div>
     <button class="btn-secondary" id="addRentalBtn" style="margin-top:6px">+ ADD RENTAL</button>
     <div class="section-divider"><span>SUBCONTRACTORS</span></div>
-    <div class="odc-row hdr"><span>Description</span><span style="text-align:right">Cost</span><span>Notes</span><span></span></div>
+    <div class="odc-row hdr"><span>Description</span><span style="text-align:right">Cost</span><span style="text-align:right">Markup</span><span>Notes</span><span></span></div>
     <div id="odc-subs"></div>
     <button class="btn-secondary" id="addSubBtn" style="margin-top:6px">+ ADD SUBCONTRACTOR</button>
   </div>
@@ -528,9 +537,20 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
 <!-- SUMMARY TAB -->
 <div id="pane-summary" class="tab-pane">
   <div class="summary-header">
-    <div><h1 id="sum-title">Limited Energy Job Estimate</h1><div class="sum-meta" id="sum-subtitle">No project loaded</div></div>
-    <button class="hbtn primary no-print" id="printBtn">🖨 Print / Save PDF</button>
+    <div>
+      <h1 id="sum-title">Limited Energy Job Estimate</h1>
+      <div class="sum-meta" id="sum-subtitle">No project loaded</div>
+      <div class="radio-row no-print" style="margin-top:10px">
+        <label><input type="radio" name="sumview" value="customer" id="sv-customer" checked> Customer Proposal</label>
+        <label><input type="radio" name="sumview" value="internal" id="sv-internal"> Internal Bid Report</label>
+      </div>
+    </div>
+    <div class="header-actions no-print">
+      <button class="hbtn primary" id="printBtn">🖨 Print Customer</button>
+      <button class="hbtn" id="printInternalBtn">🖨 Print Internal</button>
+    </div>
   </div>
+  <div id="internal-watermark" style="display:none;background:rgba(245,158,11,0.12);border:1px solid var(--warn);color:var(--warn);font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;text-align:center;padding:8px 12px;margin-bottom:14px;border-radius:4px;font-weight:700">⚠ INTERNAL BID REPORT &mdash; CONTAINS COST &amp; MARGIN &mdash; DO NOT SHARE WITH CUSTOMER</div>
 
   <div class="headline-card">
     <div class="lbl">FINAL PROPOSAL PRICE</div>
@@ -581,7 +601,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   </div>
 
   <div id="print-credit">
-    The Estimator v1.1 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    The Estimator v1.2 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
   <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);text-align:center;margin-top:20px;letter-spacing:0.1em;" class="no-print">Generated by The Estimator &middot; limitedenergy.net/estimate</div>
 </div>
@@ -793,21 +813,25 @@ const BICSI_SECTIONS = [
 ];
 
 const DEFAULT_FIELD_ROLES = [
-  {id:1, role:'Lead Tech',  rate:90},
-  {id:2, role:'Tech I',     rate:75},
-  {id:3, role:'Tech II',    rate:60},
-  {id:4, role:'Helper',     rate:50},
-  {id:5, role:'Apprentice', rate:40}
+  {id:1, role:'Lead Tech',  costRate:54, sellRate:90},
+  {id:2, role:'Tech I',     costRate:45, sellRate:75},
+  {id:3, role:'Tech II',    costRate:36, sellRate:60},
+  {id:4, role:'Helper',     costRate:30, sellRate:50},
+  {id:5, role:'Apprentice', costRate:24, sellRate:40}
 ];
 const DEFAULT_MGMT_ROLES = [
-  {id:6, role:'Project Manager',  rate:130},
-  {id:7, role:'Project Engineer', rate:115},
-  {id:8, role:'Foreman',          rate:95}
+  {id:6, role:'Project Manager',  costRate:78, sellRate:130},
+  {id:7, role:'Project Engineer', costRate:69, sellRate:115},
+  {id:8, role:'Foreman',          costRate:57, sellRate:95}
 ];
+const DEFAULT_MATERIAL_MARKUP = 1.33;
+const DEFAULT_ODC_MARKUP_RENTALS = 1.20;
+const DEFAULT_ODC_MARKUP_SUBS = 1.00;
+const DEFAULT_COST_BURDEN = 0.60; // legacy v1.1 migration: costRate = sellRate × this
 
 const STORAGE_KEY = 'lex_est_session_v1';
 const SIG = 'LEX-EST';
-const EST_VERSION = '1.1';
+const EST_VERSION = '1.2';
 
 const WORKWEEK_PATTERNS = {
   '5x8':  {hpd:8,  dpw:5},
@@ -959,12 +983,54 @@ function defaultLibrary(){
     partNumber: '',
     sourcePrice: it.sourcePrice,
     sourceYear: it.sourceYear,
+    markup: DEFAULT_MATERIAL_MARKUP,
     unit: it.unit,
     hoursEach: it.hoursEach,
     defaultRoleId: it.defaultRoleId,
     notes: it.notes || ''
   }));
   return {version:LIBRARY_VERSION, lastModified:Date.now(), lastExported:null, items, nextId:items.length+1};
+}
+
+function migrateRoles(crew){
+  if(!crew) return;
+  for(const arr of [crew.field, crew.mgmt]){
+    if(!Array.isArray(arr)) continue;
+    for(const r of arr){
+      if(r.rate !== undefined && r.sellRate === undefined){
+        r.sellRate = r.rate;
+        r.costRate = Math.round(r.rate * DEFAULT_COST_BURDEN);
+        delete r.rate;
+      }
+      if(r.costRate === undefined) r.costRate = Math.round((r.sellRate||0) * DEFAULT_COST_BURDEN);
+      if(r.sellRate === undefined) r.sellRate = r.costRate || 0;
+    }
+  }
+}
+function migrateMaterialItems(items){
+  if(!Array.isArray(items)) return;
+  for(const m of items){
+    if(m.markup === undefined) m.markup = DEFAULT_MATERIAL_MARKUP;
+  }
+}
+function migrateLibraryItems(items){
+  if(!Array.isArray(items)) return;
+  for(const li of items){
+    if(li.markup === undefined) li.markup = DEFAULT_MATERIAL_MARKUP;
+  }
+}
+function migrateOdc(odc){
+  if(!odc) return;
+  if(Array.isArray(odc.rentals)){
+    for(const x of odc.rentals){
+      if(x.markup === undefined) x.markup = DEFAULT_ODC_MARKUP_RENTALS;
+    }
+  }
+  if(Array.isArray(odc.subcontractors)){
+    for(const x of odc.subcontractors){
+      if(x.markup === undefined) x.markup = DEFAULT_ODC_MARKUP_SUBS;
+    }
+  }
 }
 
 function saveLibrary(){
@@ -980,6 +1046,7 @@ function loadLibrary(){
     const p = JSON.parse(raw);
     if(!p || !Array.isArray(p.items)) return false;
     library = p;
+    migrateLibraryItems(library.items);
     nextLibId = p.nextId || (Math.max(0, ...p.items.map(x=>x.id||0)) + 1);
     return true;
   }catch(e){return false;}
@@ -1030,6 +1097,7 @@ function defaultState(){
 let state = defaultState();
 let nextWbsId = 1, nextOdcId = 1, nextMatId = 1;
 let dirty = false, lastSaveTime = null, hideEmpty = false;
+let summaryView = 'customer';  // 'customer' or 'internal'
 const v = id => document.getElementById(id);
 
 function autoSave(){
@@ -1050,6 +1118,9 @@ function loadSaved(){
     // Backward compat: ensure new slots exist
     if(!state.materials) state.materials = {items:[]};
     if(state.settings && state.settings.inflationFactor === undefined) state.settings.inflationFactor = 1.10;
+    migrateRoles(state.crew);
+    migrateMaterialItems(state.materials.items);
+    migrateOdc(state.odc);
     nextWbsId = p.nextWbsId || 1;
     nextOdcId = p.nextOdcId || 1;
     nextMatId = p.nextMatId || (Math.max(0, ...state.materials.items.map(x=>x.id||0)) + 1);
@@ -1086,53 +1157,72 @@ const fmtPct = p => (p*100).toFixed(1) + '%';
 function calc(){
   const allRoles = [...state.crew.field, ...state.crew.mgmt];
   const roleById = new Map(allRoles.map(r => [r.id, r]));
-  const avgFieldRate = state.crew.field.length
-    ? state.crew.field.reduce((s,r)=>s + (r.rate||0), 0) / state.crew.field.length
-    : 0;
+  const avgFieldSell = state.crew.field.length
+    ? state.crew.field.reduce((s,r)=>s + (+r.sellRate||0), 0) / state.crew.field.length : 0;
+  const avgFieldCost = state.crew.field.length
+    ? state.crew.field.reduce((s,r)=>s + (+r.costRate||0), 0) / state.crew.field.length : 0;
 
-  // Per WBS item / section totals
-  let totalHours = 0, totalLaborCost = 0, totalMaterialsCost = 0;
+  // Per WBS item / section totals — tracks both COST and SELL
+  let totalHours = 0;
+  let wbsLaborCost = 0, wbsLaborSell = 0, wbsMatCost = 0, wbsMatSell = 0;
   const sectionTotals = {};
   for(const sec of state.wbs.sections){
-    let h=0, lc=0, mc=0;
+    let h=0, lc=0, ls=0, mc=0, ms=0;
     for(const it of sec.items){
       const lq = +it.labor.qty||0, le = +it.labor.hoursEach||0;
       const itHours = lq * le;
       const role = roleById.get(it.labor.roleId);
-      const rate = role ? (+role.rate||0) : 0;
-      const itLaborCost = itHours * rate;
+      const costRate = role ? (+role.costRate||0) : 0;
+      const sellRate = role ? (+role.sellRate||0) : 0;
+      const itLaborCost = itHours * costRate;
+      const itLaborSell = itHours * sellRate;
       const mq = +it.materials.qty||0, mu = +it.materials.unitCost||0;
+      // WBS materials: treat unitCost as cost; sell = cost (pass-through, no markup)
       const itMatCost = mq * mu;
-      h += itHours; lc += itLaborCost; mc += itMatCost;
+      const itMatSell = itMatCost;
+      h += itHours; lc += itLaborCost; ls += itLaborSell; mc += itMatCost; ms += itMatSell;
     }
-    sectionTotals[sec.id] = {hours:h, laborCost:lc, materialsCost:mc, total:lc+mc};
-    totalHours += h; totalLaborCost += lc; totalMaterialsCost += mc;
+    sectionTotals[sec.id] = {
+      hours:h, laborCost:lc, laborSell:ls, materialsCost:mc, materialsSell:ms,
+      totalCost: lc+mc, totalSell: ls+ms, profit: (ls+ms) - (lc+mc)
+    };
+    totalHours += h; wbsLaborCost += lc; wbsLaborSell += ls; wbsMatCost += mc; wbsMatSell += ms;
   }
 
-  // Per Materials item / category totals
+  // Per Materials item / category totals — dual cost+sell with per-item markup
   const inflation = +state.settings.inflationFactor || 1.0;
   const categoryTotals = {};
-  let matActive = 0, matHours = 0, matLaborCost = 0, matCost = 0;
+  let matActive = 0, matHours = 0;
+  let matLaborCost = 0, matLaborSell = 0, matCost = 0, matSell = 0;
   for(const mi of state.materials.items){
     const qty = +mi.qty || 0;
     if(qty <= 0) continue;
     matActive++;
     const eff = (+mi.sourcePrice || 0) * inflation;
+    const markup = +mi.markup || 1.0;
+    const sellEach = eff * markup;
     const hrs = qty * (+mi.hoursEach || 0);
     const role = roleById.get(mi.roleId);
-    const rate = role ? (+role.rate||0) : 0;
-    const lcost = hrs * rate;
+    const costRate = role ? (+role.costRate||0) : 0;
+    const sellRate = role ? (+role.sellRate||0) : 0;
+    const lcost = hrs * costRate;
+    const lsell = hrs * sellRate;
     const mcost = qty * eff;
-    matHours += hrs; matLaborCost += lcost; matCost += mcost;
+    const msell = qty * sellEach;
+    matHours += hrs;
+    matLaborCost += lcost; matLaborSell += lsell;
+    matCost += mcost; matSell += msell;
     const cat = mi.category || 'Misc';
-    if(!categoryTotals[cat]) categoryTotals[cat] = {hours:0, laborCost:0, materialsCost:0, total:0, count:0};
+    if(!categoryTotals[cat]) categoryTotals[cat] = {hours:0, laborCost:0, laborSell:0, materialsCost:0, materialsSell:0, totalCost:0, totalSell:0, profit:0, count:0};
     categoryTotals[cat].hours += hrs;
-    categoryTotals[cat].laborCost += lcost;
-    categoryTotals[cat].materialsCost += mcost;
-    categoryTotals[cat].total += lcost + mcost;
+    categoryTotals[cat].laborCost += lcost; categoryTotals[cat].laborSell += lsell;
+    categoryTotals[cat].materialsCost += mcost; categoryTotals[cat].materialsSell += msell;
+    categoryTotals[cat].totalCost += lcost + mcost;
+    categoryTotals[cat].totalSell += lsell + msell;
+    categoryTotals[cat].profit  += (lsell + msell) - (lcost + mcost);
     categoryTotals[cat].count++;
   }
-  totalHours += matHours; totalLaborCost += matLaborCost; totalMaterialsCost += matCost;
+  totalHours += matHours;
 
   // Schedule
   const sched = state.schedule;
@@ -1164,14 +1254,17 @@ function calc(){
   const regHrsPerTechPerWk = weeklyHours - otHrsPerTechPerWk - dtHrsPerTechPerWk;
   const otHoursTotal = requiredCrew * otHrsPerTechPerWk * weeksRequired;
   const dtHoursTotal = requiredCrew * dtHrsPerTechPerWk * weeksRequired;
-  const otPremium = otHoursTotal * avgFieldRate * (otMult - 1);
-  const dtPremium = dtHoursTotal * avgFieldRate * (dtMult - 1);
+  const otPremiumCost = otHoursTotal * avgFieldCost * (otMult - 1);
+  const otPremiumSell = otHoursTotal * avgFieldSell * (otMult - 1);
+  const dtPremiumCost = dtHoursTotal * avgFieldCost * (dtMult - 1);
+  const dtPremiumSell = dtHoursTotal * avgFieldSell * (dtMult - 1);
 
-  // Vehicle adder (on total field labor hours)
+  // Vehicle adder (cost-only; passes through to sell at cost)
   const vehicleRate = +state.crew.vehicleAdder.perHour||0;
   const vehicleCost = totalHours * vehicleRate;
+  const vehicleSell = vehicleCost; // pass-through
 
-  // Remote ODC auto-populate
+  // Remote ODC auto-populate (pass-through both sides)
   const remote = {perDiem:0, hotel:0, travel:0, total:0, breakdown:''};
   if(state.jobType.mode === 'remote' && requiredCrew > 0){
     const r = state.jobType.remote;
@@ -1188,37 +1281,79 @@ function calc(){
     remote.breakdown = `${requiredCrew} techs × ${onsiteDays} days · ${nights} nights`;
   }
 
-  // Manual ODC
-  const odcRentals = state.odc.rentals.reduce((s,x)=>s + (+x.cost||0), 0);
-  const odcSubs = state.odc.subcontractors.reduce((s,x)=>s + (+x.cost||0), 0);
-  const odcManual = odcRentals + odcSubs;
+  // Manual ODC — cost + sell per item (markup per bucket default)
+  let odcRentalsCost = 0, odcRentalsSell = 0;
+  for(const x of state.odc.rentals){
+    const c = +x.cost||0;
+    const m = +x.markup||DEFAULT_ODC_MARKUP_RENTALS;
+    odcRentalsCost += c;
+    odcRentalsSell += c * m;
+  }
+  let odcSubsCost = 0, odcSubsSell = 0;
+  for(const x of state.odc.subcontractors){
+    const c = +x.cost||0;
+    const m = +x.markup||DEFAULT_ODC_MARKUP_SUBS;
+    odcSubsCost += c;
+    odcSubsSell += c * m;
+  }
+  const odcManualCost = odcRentalsCost + odcSubsCost;
+  const odcManualSell = odcRentalsSell + odcSubsSell;
 
-  // Roll-up
-  const directLabor = totalLaborCost + otPremium + dtPremium + vehicleCost;
-  const directMaterials = totalMaterialsCost;
-  const directODC = odcManual + remote.total;
-  const directCosts = directLabor + directMaterials + directODC;
+  // Subtotals — COST side
+  const directLaborCost = wbsLaborCost + matLaborCost + otPremiumCost + dtPremiumCost + vehicleCost;
+  const directMaterialsCost = wbsMatCost + matCost;
+  const directODCCost = odcManualCost + remote.total;
+  const directCostSubtotal = directLaborCost + directMaterialsCost + directODCCost;
+
+  // Subtotals — SELL side
+  const directLaborSell = wbsLaborSell + matLaborSell + otPremiumSell + dtPremiumSell + vehicleSell;
+  const directMaterialsSell = wbsMatSell + matSell;
+  const directODCSell = odcManualSell + remote.total;
+  const directSellSubtotal = directLaborSell + directMaterialsSell + directODCSell;
+
+  // Overhead — applied to both subtotals
   const overheadPct = +state.settings.overheadPct||0;
+  const overheadCost = directCostSubtotal * overheadPct;
+  const overheadSell = directSellSubtotal * overheadPct;
+  const costWithOH = directCostSubtotal + overheadCost;
+  const sellWithOH = directSellSubtotal + overheadSell;
+
+  // Margin form bumps SELL price further (stacked on item-level markups)
   const marginPct = +state.settings.marginPct||0;
-  const overheadAmount = directCosts * overheadPct;
-  const subtotalWithOH = directCosts + overheadAmount;
-  const finalPrice = marginPct < 1 ? subtotalWithOH / (1 - marginPct) : subtotalWithOH;
-  const marginAmount = finalPrice - subtotalWithOH;
+  const finalPrice = marginPct < 1 ? sellWithOH / (1 - marginPct) : sellWithOH;
+  const marginAmount = finalPrice - sellWithOH;
+
+  // Profit + effective margin (cost side is "fully burdened cost")
+  const totalCost = costWithOH;
+  const totalProfit = finalPrice - totalCost;
+  const effectiveMargin = finalPrice > 0 ? totalProfit / finalPrice : 0;
+
   const totalDays = (hpd > 0 && requiredCrew > 0) ? totalHours / (hpd * requiredCrew) : 0;
 
   return {
-    totalHours, totalLaborCost, totalMaterialsCost,
+    totalHours,
+    // WBS & material aggregates
+    wbsLaborCost, wbsLaborSell, wbsMatCost, wbsMatSell,
+    matActive, matHours, matLaborCost, matLaborSell, matCost, matSell,
     sectionTotals, categoryTotals,
-    matActive, matHours, matLaborCost, matCost,
     inflation,
+    // Schedule
     requiredCrew, weeksRequired, targetWorkingDays:target, baselineCrew, isAccelerated,
     weeklyHours, regHrsPerTechPerWk, otHrsPerTechPerWk, dtHrsPerTechPerWk,
-    otHoursTotal, dtHoursTotal, otPremium, dtPremium,
-    avgFieldRate, vehicleCost, vehicleRate,
-    remote, odcManual, odcRentals, odcSubs,
-    directLabor, directMaterials, directODC, directCosts,
-    overheadPct, overheadAmount, subtotalWithOH,
+    otHoursTotal, dtHoursTotal,
+    otPremiumCost, otPremiumSell, dtPremiumCost, dtPremiumSell,
+    avgFieldSell, avgFieldCost,
+    vehicleCost, vehicleSell, vehicleRate,
+    // ODC
+    remote,
+    odcRentalsCost, odcRentalsSell, odcSubsCost, odcSubsSell,
+    odcManualCost, odcManualSell,
+    // Subtotals & final
+    directLaborCost, directLaborSell, directMaterialsCost, directMaterialsSell,
+    directODCCost, directODCSell, directCostSubtotal, directSellSubtotal,
+    overheadPct, overheadCost, overheadSell, costWithOH, sellWithOH,
     marginPct, marginAmount, finalPrice,
+    totalCost, totalProfit, effectiveMargin,
     totalDays, isCA, otMult, dtMult, hpd, dpw
   };
 }
@@ -1313,8 +1448,9 @@ function renderRoles(){
 function roleRowHTML(r, kind){
   return `<div class="rate-row">
     <input type="text" data-rid="${r.id}" data-rk="${kind}" data-rf="role" value="${esc(r.role)}">
-    <input type="number" data-rid="${r.id}" data-rk="${kind}" data-rf="rate" min="0" step="0.5" value="${r.rate}">
-    <span class="rate-prefix">$/hr</span>
+    <input type="number" data-rid="${r.id}" data-rk="${kind}" data-rf="costRate" min="0" step="0.5" value="${r.costRate||0}" title="Cost rate (what you pay)">
+    <input type="number" data-rid="${r.id}" data-rk="${kind}" data-rf="sellRate" min="0" step="0.5" value="${r.sellRate||0}" title="Sell rate (what you bill)">
+    <span></span>
   </div>`;
 }
 function bindRoleRow(row){
@@ -1326,7 +1462,8 @@ function bindRoleRow(row){
     const r = arr.find(x => x.id === id);
     if(!r) return;
     if(field === 'role') r.role = row.value;
-    else if(field === 'rate') r.rate = parseFloat(row.value)||0;
+    else if(field === 'costRate') r.costRate = parseFloat(row.value)||0;
+    else if(field === 'sellRate') r.sellRate = parseFloat(row.value)||0;
     render(); markDirty();
   });
 }
@@ -1334,7 +1471,7 @@ function bindRoleRow(row){
 function renderWBS(s){
   const host = v('wbs-sections');
   host.innerHTML = state.wbs.sections.map(sec => {
-    const t = s.sectionTotals[sec.id] || {hours:0, laborCost:0, materialsCost:0, total:0};
+    const t = s.sectionTotals[sec.id] || {hours:0, laborSell:0, materialsSell:0, totalSell:0};
     if(hideEmpty && sec.items.length === 0) return '';
     const collapsed = sec.collapsed ? ' collapsed' : '';
     const itemsHTML = sec.items.length === 0
@@ -1348,9 +1485,9 @@ function renderWBS(s){
         <div class="wbs-section-name">${esc(sec.name)}</div>
         <div class="wbs-section-totals">
           <span class="hrs">${fmtHrs(t.hours)}</span>
-          <span class="lbr">Lbr ${fmtMoney(t.laborCost)}</span>
-          <span class="mat">Mat ${fmtMoney(t.materialsCost)}</span>
-          <span class="tot">${fmtMoney(t.total)}</span>
+          <span class="lbr">Lbr ${fmtMoney(t.laborSell)}</span>
+          <span class="mat">Mat ${fmtMoney(t.materialsSell)}</span>
+          <span class="tot">${fmtMoney(t.totalSell)}</span>
           <span style="color:var(--gray-mid)">${sec.collapsed?'▸':'▼'}</span>
         </div>
       </div>
@@ -1487,9 +1624,12 @@ function renderODC(s){
   sub.querySelectorAll('[data-rm-oid]').forEach(b => b.addEventListener('click', () => removeOdc('subcontractors', b.dataset.rmOid)));
 }
 function odcRowHTML(x, bucket){
+  const defMk = bucket === 'rentals' ? DEFAULT_ODC_MARKUP_RENTALS : DEFAULT_ODC_MARKUP_SUBS;
+  const markup = x.markup === undefined ? defMk : x.markup;
   return `<div class="odc-row" data-bucket="${bucket}">
     <input type="text" data-oid="${x.id}" data-ob="${bucket}" data-of="description" placeholder="Description" value="${esc(x.description)}">
     <input type="number" data-oid="${x.id}" data-ob="${bucket}" data-of="cost" min="0" step="0.01" value="${x.cost}">
+    <input type="number" data-oid="${x.id}" data-ob="${bucket}" data-of="markup" min="0" step="0.01" value="${markup}" title="Markup factor (1.00 = pass-through)">
     <input type="text" data-oid="${x.id}" data-ob="${bucket}" data-of="notes" placeholder="Notes" value="${esc(x.notes||'')}">
     <button class="btn-remove" data-rm-oid="${x.id}" data-rm-ob="${bucket}">×</button>
   </div>`;
@@ -1507,7 +1647,8 @@ function bindOdcInput(el){
   });
 }
 function addOdc(bucket){
-  state.odc[bucket].push({id:nextOdcId++, description:'', cost:0, notes:''});
+  const defMk = bucket === 'rentals' ? DEFAULT_ODC_MARKUP_RENTALS : DEFAULT_ODC_MARKUP_SUBS;
+  state.odc[bucket].push({id:nextOdcId++, description:'', cost:0, markup:defMk, notes:''});
   render(); markDirty();
 }
 function removeOdc(bucket, id){
@@ -1535,26 +1676,30 @@ function renderMaterials(s){
   }
   v('ms-active').textContent = String(s.matActive);
   v('ms-hrs').textContent = fmtHrs(s.matHours);
-  v('ms-lcost').textContent = fmtMoney(s.matLaborCost);
-  v('ms-mcost').textContent = fmtMoney(s.matCost);
+  v('ms-lcost').textContent = `${fmtMoney(s.matLaborSell)} sell · ${fmtMoney(s.matLaborCost)} cost`;
+  v('ms-mcost').textContent = `${fmtMoney(s.matSell)} sell · ${fmtMoney(s.matCost)} cost`;
 }
 
 function matRowHTML(mi){
   const inflation = +state.settings.inflationFactor || 1.0;
   const eff = (+mi.sourcePrice || 0) * inflation;
+  const markup = +mi.markup || DEFAULT_MATERIAL_MARKUP;
+  const sellEach = eff * markup;
   const qty = +mi.qty || 0;
-  const total = qty * eff + qty * (+mi.hoursEach || 0) * (roleRateById(mi.roleId));
+  const sellRate = roleSellRateById(mi.roleId);
+  const totalSell = qty * sellEach + qty * (+mi.hoursEach || 0) * sellRate;
   const roleOptions = [...state.crew.field, ...state.crew.mgmt]
     .map(r => `<option value="${r.id}"${r.id===mi.roleId?' selected':''}>${esc(r.role)}</option>`).join('');
   return `<div class="mat-row">
     <div><input type="text" data-mid="${mi.id}" data-mf="description" value="${esc(mi.description)}" placeholder="Description"></div>
     <input type="number" data-mid="${mi.id}" data-mf="qty" min="0" step="1" value="${mi.qty}">
     <input type="text" data-mid="${mi.id}" data-mf="unit" value="${esc(mi.unit||'')}" placeholder="ea/ft">
-    <input type="number" data-mid="${mi.id}" data-mf="sourcePrice" min="0" step="0.01" value="${mi.sourcePrice}">
-    <span class="mat-eff">${fmtMoneyDec(eff)}</span>
+    <input type="number" data-mid="${mi.id}" data-mf="sourcePrice" min="0" step="0.01" value="${mi.sourcePrice}" title="Source / cost price">
+    <input type="number" data-mid="${mi.id}" data-mf="markup" min="0" step="0.01" value="${markup}" title="Markup factor — 1.33 = 33% markup = 25% margin">
+    <span class="mat-eff" title="Eff cost: ${fmtMoneyDec(eff)} × markup ${markup.toFixed(2)} = sell">${fmtMoneyDec(sellEach)}</span>
     <input type="number" data-mid="${mi.id}" data-mf="hoursEach" min="0" step="0.01" value="${mi.hoursEach}">
     <select data-mid="${mi.id}" data-mf="roleId">${roleOptions}</select>
-    <span class="mat-total">${fmtMoney(total)}</span>
+    <span class="mat-total">${fmtMoney(totalSell)}</span>
     <button class="btn-remove" data-rm-mid="${mi.id}">×</button>
   </div>
   <div class="mat-row-row2">
@@ -1565,10 +1710,15 @@ function matRowHTML(mi){
   </div>`;
 }
 
-function roleRateById(id){
+function roleSellRateById(id){
   const allRoles = [...state.crew.field, ...state.crew.mgmt];
   const r = allRoles.find(x => x.id === id);
-  return r ? (+r.rate||0) : 0;
+  return r ? (+r.sellRate||0) : 0;
+}
+function roleCostRateById(id){
+  const allRoles = [...state.crew.field, ...state.crew.mgmt];
+  const r = allRoles.find(x => x.id === id);
+  return r ? (+r.costRate||0) : 0;
 }
 
 function bindMatInput(el){
@@ -1597,6 +1747,7 @@ function addCustomMaterial(){
     partNumber: '',
     sourcePrice: 0,
     sourceYear: new Date().getFullYear(),
+    markup: DEFAULT_MATERIAL_MARKUP,
     unit: 'ea',
     hoursEach: 0,
     roleId: state.crew.field[0]?.id || 1,
@@ -1623,6 +1774,7 @@ function addLibraryItemToProject(libId){
     partNumber: li.partNumber || '',
     sourcePrice: li.sourcePrice,
     sourceYear: li.sourceYear,
+    markup: li.markup || DEFAULT_MATERIAL_MARKUP,
     unit: li.unit,
     hoursEach: li.hoursEach,
     roleId: li.defaultRoleId,
@@ -1705,7 +1857,7 @@ function renderLibraryModal(){
     return true;
   });
   const host = v('libTable');
-  let html = `<div class="pick-row hdr" style="grid-template-columns:1fr 90px 70px 60px 80px"><span>Description / Category / Mfr · Model · Part#</span><span>Src $ / Yr</span><span>Hrs</span><span>Unit</span><span></span></div>`;
+  let html = `<div class="pick-row hdr" style="grid-template-columns:1fr 90px 70px 60px 80px"><span>Description / Category / Mfr · Model · Part#</span><span>Cost / Markup / Yr</span><span>Hrs</span><span>Unit</span><span></span></div>`;
   if(filtered.length === 0){
     html += `<div class="pick-row" style="grid-template-columns:1fr"><span style="color:var(--gray-dark);font-style:italic">No matches.</span></div>`;
   } else {
@@ -1720,8 +1872,9 @@ function renderLibraryModal(){
         </div>
       </span>
       <span>
-        <input type="number" data-lib-id="${li.id}" data-lib-f="sourcePrice" value="${li.sourcePrice}" min="0" step="0.01" style="font-size:11px;margin-bottom:4px;text-align:right">
-        <input type="number" data-lib-id="${li.id}" data-lib-f="sourceYear"  value="${li.sourceYear}" min="2000" max="2099" step="1" style="font-size:11px;margin-bottom:0;text-align:right">
+        <input type="number" data-lib-id="${li.id}" data-lib-f="sourcePrice" value="${li.sourcePrice}" min="0" step="0.01" style="font-size:11px;margin-bottom:3px;text-align:right" title="Cost / source price">
+        <input type="number" data-lib-id="${li.id}" data-lib-f="markup" value="${li.markup||DEFAULT_MATERIAL_MARKUP}" min="0" step="0.01" style="font-size:11px;margin-bottom:3px;text-align:right" title="Markup (1.33 = 33% markup = 25% margin)">
+        <input type="number" data-lib-id="${li.id}" data-lib-f="sourceYear"  value="${li.sourceYear}" min="2000" max="2099" step="1" style="font-size:11px;margin-bottom:0;text-align:right" title="Source year">
       </span>
       <span><input type="number" data-lib-id="${li.id}" data-lib-f="hoursEach" value="${li.hoursEach}" min="0" step="0.01" style="font-size:11px;text-align:right"></span>
       <span><input type="text" data-lib-id="${li.id}" data-lib-f="unit" value="${esc(li.unit||'')}" style="font-size:11px;text-align:center"></span>
@@ -1758,10 +1911,10 @@ function renderCostChart(s){
   const stack = v('chart-stack');
   const total = s.finalPrice || 1;
   const segs = [
-    {key:'labor',     label:'Labor',     val: s.directLabor},
-    {key:'materials', label:'Mat',       val: s.directMaterials},
-    {key:'odc',       label:'ODC',       val: s.directODC},
-    {key:'overhead',  label:'OH',        val: s.overheadAmount},
+    {key:'labor',     label:'Labor',     val: s.directLaborSell},
+    {key:'materials', label:'Mat',       val: s.directMaterialsSell},
+    {key:'odc',       label:'ODC',       val: s.directODCSell},
+    {key:'overhead',  label:'OH',        val: s.overheadSell},
     {key:'margin',    label:'Margin',    val: s.marginAmount}
   ];
   stack.innerHTML = segs.map(seg => {
@@ -1778,7 +1931,7 @@ function renderCostChart(s){
 
 function renderSectionBars(s){
   const host = v('sum-section-bars');
-  const rows = state.wbs.sections.map(sec => ({label:`${sec.id} ${sec.name}`, val:s.sectionTotals[sec.id].total}));
+  const rows = state.wbs.sections.map(sec => ({label:`${sec.id} ${sec.name}`, val:s.sectionTotals[sec.id].totalSell}));
   const maxV = Math.max(1, ...rows.map(r => r.val));
   const visible = rows.filter(r => r.val > 0);
   if(visible.length === 0){
@@ -1798,7 +1951,7 @@ function renderCategoryBars(s){
     host.innerHTML = '<div style="color:var(--gray-dark);font-style:italic;font-size:12px">No material spend yet.</div>';
     return;
   }
-  const rows = entries.map(([k,v]) => ({label:k, val:v.total}));
+  const rows = entries.map(([k,v]) => ({label:k, val:v.totalSell}));
   const maxV = Math.max(1, ...rows.map(r => r.val));
   host.innerHTML = rows.sort((a,b)=>b.val-a.val).map(r => {
     const pct = (r.val / maxV) * 100;
@@ -1817,10 +1970,16 @@ function renderSummary(s){
 
   // Headline card
   v('hdl-price').textContent = fmtMoney(s.finalPrice);
-  v('hdl-direct').textContent = fmtMoney(s.directCosts);
-  v('hdl-oh').textContent = fmtMoney(s.overheadAmount);
+  v('hdl-direct').textContent = fmtMoney(s.directSellSubtotal);
+  v('hdl-oh').textContent = fmtMoney(s.overheadSell);
   v('hdl-margin').textContent = fmtMoney(s.marginAmount);
   v('hdl-hours').textContent = `${fmtHrs(s.totalHours)} / ${s.totalDays.toFixed(1)} days`;
+
+  // View mode toggle visuals
+  v('internal-watermark').style.display = (summaryView === 'internal') ? 'block' : 'none';
+  const svC = v('sv-customer'); const svI = v('sv-internal');
+  if(svC) svC.checked = summaryView === 'customer';
+  if(svI) svI.checked = summaryView === 'internal';
 
   // Project info
   v('sum-project').innerHTML = [
@@ -1859,59 +2018,89 @@ function renderSummary(s){
   renderSectionBars(s);
   renderCategoryBars(s);
 
-  // Labor roll-up
-  const wbsLabor = s.totalLaborCost - s.matLaborCost;
+  // Labor roll-up — sell side (customer-visible); internal view also surfaces cost & profit
+  const isInternal = summaryView === 'internal';
   v('sum-labor').innerHTML = [
-    ['WBS section labor', fmtMoney(wbsLabor)],
-    ['Materials labor (qty × hours × rate)', fmtMoney(s.matLaborCost)],
-    ['Combined base labor', fmtMoney(s.totalLaborCost)],
-    ['OT premium', fmtMoney(s.otPremium)],
-    ['DT premium', s.isCA ? fmtMoney(s.dtPremium) : 'n/a'],
+    ['WBS labor sell', fmtMoney(s.wbsLaborSell)],
+    ['Materials labor sell', fmtMoney(s.matLaborSell)],
+    ['OT premium (sell)', fmtMoney(s.otPremiumSell)],
+    ['DT premium (sell)', s.isCA ? fmtMoney(s.dtPremiumSell) : 'n/a'],
     ['Vehicle / tools adder', fmtMoney(s.vehicleCost) + ` (${fmtHrs(s.totalHours)} × $${s.vehicleRate}/hr)`],
-    ['Total direct labor', fmtMoney(s.directLabor)]
+    ['Total direct labor (sell)', fmtMoney(s.directLaborSell)],
+    ...(isInternal ? [
+      ['— Internal —', ''],
+      ['Total direct labor (cost)', fmtMoney(s.directLaborCost)],
+      ['Labor profit', `<span style="color:var(--green)">${fmtMoney(s.directLaborSell - s.directLaborCost)}</span>`]
+    ] : [])
   ].map(r => sumRow(r[0], r[1])).join('');
 
   // Materials roll-up
-  const wbsMat = s.totalMaterialsCost - s.matCost;
   v('sum-mat').innerHTML = [
     ['Inflation factor applied', `× ${(+state.settings.inflationFactor||1).toFixed(2)}`],
-    ['Materials library items active', `${s.matActive}`],
-    ['Materials library cost', fmtMoney(s.matCost)],
-    ['WBS section materials', fmtMoney(wbsMat)],
-    ['Total direct materials', fmtMoney(s.directMaterials)]
+    ['Materials library active items', `${s.matActive}`],
+    ['Materials library sell', fmtMoney(s.matSell)],
+    ['WBS materials sell', fmtMoney(s.wbsMatSell)],
+    ['Total direct materials (sell)', fmtMoney(s.directMaterialsSell)],
+    ...(isInternal ? [
+      ['— Internal —', ''],
+      ['Materials library cost', fmtMoney(s.matCost)],
+      ['WBS materials cost', fmtMoney(s.wbsMatCost)],
+      ['Total direct materials (cost)', fmtMoney(s.directMaterialsCost)],
+      ['Materials profit', `<span style="color:var(--green)">${fmtMoney(s.directMaterialsSell - s.directMaterialsCost)}</span>`]
+    ] : [])
   ].map(r => sumRow(r[0], r[1])).join('');
 
   // Per-section breakdown
   const secRows = state.wbs.sections.map(sec => {
     const t = s.sectionTotals[sec.id];
     if(t.total === 0 && hideEmpty) return '';
-    return `<div class="sum-row"><span class="sum-key">${sec.id} · ${esc(sec.name)} <span style="color:var(--gray-mid);font-size:11px">(${fmtHrs(t.hours)})</span></span><span class="sum-val">${fmtMoney(t.total)}</span></div>`;
+    const profitSpan = isInternal ? ` <span style="color:var(--green);font-size:11px">+${fmtMoney(t.profit)}</span>` : '';
+    return `<div class="sum-row"><span class="sum-key">${sec.id} · ${esc(sec.name)} <span style="color:var(--gray-mid);font-size:11px">(${fmtHrs(t.hours)})</span>${profitSpan}</span><span class="sum-val">${fmtMoney(t.totalSell)}</span></div>`;
   }).join('');
   v('sum-sections').innerHTML = secRows || `<div style="color:var(--gray-dark);font-style:italic">No WBS items yet.</div>`;
 
-  // ODC
+  // ODC — sell-side rollup
   const odcRows = [];
   if(state.jobType.mode === 'remote' && s.remote.total > 0){
     odcRows.push(['Remote: per diem', fmtMoney(s.remote.perDiem)]);
     odcRows.push(['Remote: hotel / lodging', fmtMoney(s.remote.hotel)]);
     odcRows.push(['Remote: travel', fmtMoney(s.remote.travel)]);
   }
-  if(s.odcRentals > 0) odcRows.push(['Rentals (manual)', fmtMoney(s.odcRentals)]);
-  if(s.odcSubs > 0) odcRows.push(['Subcontractors (manual)', fmtMoney(s.odcSubs)]);
-  odcRows.push(['Total ODC', fmtMoney(s.directODC)]);
+  if(s.odcRentalsSell > 0) odcRows.push(['Rentals (sell)', fmtMoney(s.odcRentalsSell)]);
+  if(s.odcSubsSell > 0) odcRows.push(['Subcontractors (sell)', fmtMoney(s.odcSubsSell)]);
+  odcRows.push(['Total ODC (sell)', fmtMoney(s.directODCSell)]);
+  if(isInternal){
+    odcRows.push(['— Internal —', '']);
+    odcRows.push(['Total ODC (cost)', fmtMoney(s.directODCCost)]);
+    odcRows.push(['ODC profit', `<span style="color:var(--green)">${fmtMoney(s.directODCSell - s.directODCCost)}</span>`]);
+  }
   v('sum-odc').innerHTML = odcRows.map(r => sumRow(r[0], r[1])).join('');
 
-  // Financial roll-up
-  v('sum-financial').innerHTML = [
-    ['Direct labor', fmtMoney(s.directLabor)],
-    ['Direct materials', fmtMoney(s.directMaterials)],
-    ['Direct ODC', fmtMoney(s.directODC)],
-    ['Direct costs (subtotal)', fmtMoney(s.directCosts)],
-    [`Overhead @ ${fmtPct(s.overheadPct)}`, fmtMoney(s.overheadAmount)],
-    ['Subtotal with overhead', fmtMoney(s.subtotalWithOH)],
-    [`Margin @ ${fmtPct(s.marginPct)} (form)`, fmtMoney(s.marginAmount)],
+  // Financial roll-up — customer view shows sell-side stack to final price.
+  // Internal view stacks cost side underneath with profit & effective margin.
+  const sellRows = [
+    ['Direct labor (sell)', fmtMoney(s.directLaborSell)],
+    ['Direct materials (sell)', fmtMoney(s.directMaterialsSell)],
+    ['Direct ODC (sell)', fmtMoney(s.directODCSell)],
+    ['Direct subtotal (sell)', fmtMoney(s.directSellSubtotal)],
+    [`Overhead @ ${fmtPct(s.overheadPct)} (sell)`, fmtMoney(s.overheadSell)],
+    ['Subtotal with overhead (sell)', fmtMoney(s.sellWithOH)],
+    [`Margin form @ ${fmtPct(s.marginPct)}`, fmtMoney(s.marginAmount)],
     ['Final proposal price', `<span style="color:var(--red);font-size:18px">${fmtMoney(s.finalPrice)}</span>`]
-  ].map(r => sumRow(r[0], r[1])).join('');
+  ];
+  const intRows = isInternal ? [
+    ['— Internal: COST side —', ''],
+    ['Direct labor (cost)', fmtMoney(s.directLaborCost)],
+    ['Direct materials (cost)', fmtMoney(s.directMaterialsCost)],
+    ['Direct ODC (cost)', fmtMoney(s.directODCCost)],
+    ['Direct subtotal (cost)', fmtMoney(s.directCostSubtotal)],
+    [`Overhead @ ${fmtPct(s.overheadPct)} (cost)`, fmtMoney(s.overheadCost)],
+    ['Fully burdened cost', fmtMoney(s.totalCost)],
+    ['— Profit —', ''],
+    ['Total project profit', `<span style="color:var(--green);font-size:16px">${fmtMoney(s.totalProfit)}</span>`],
+    ['Effective margin', `<span style="color:var(--green);font-size:16px">${fmtPct(s.effectiveMargin)}</span>`]
+  ] : [];
+  v('sum-financial').innerHTML = [...sellRows, ...intRows].map(r => sumRow(r[0], r[1])).join('');
 }
 
 // =========================================================================
@@ -2037,8 +2226,24 @@ function bindAll(){
   v('newCancelBtn').addEventListener('click', ()=>closeModal('newModal'));
   v('newConfirmBtn').addEventListener('click', confirmNew);
 
-  // Print
+  // Summary view toggle
+  v('sv-customer').addEventListener('change', ()=>{ summaryView = 'customer'; render(); });
+  v('sv-internal').addEventListener('change', ()=>{ summaryView = 'internal'; render(); });
+
+  // Print — customer
   v('printBtn').addEventListener('click', () => {
+    summaryView = 'customer';
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+    document.querySelector('.tab-btn[data-tab="summary"]').classList.add('active');
+    v('pane-summary').classList.add('active');
+    render();
+    setTimeout(()=>window.print(), 200);
+  });
+
+  // Print — internal
+  v('printInternalBtn').addEventListener('click', () => {
+    summaryView = 'internal';
     document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
     document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
     document.querySelector('.tab-btn[data-tab="summary"]').classList.add('active');
@@ -2081,17 +2286,24 @@ function exportEstimate(){
     materials:state.materials,
     summary:{
       finalPrice:Math.round(s.finalPrice),
-      directCosts:Math.round(s.directCosts),
-      overheadAmount:Math.round(s.overheadAmount),
+      directCostSubtotal:Math.round(s.directCostSubtotal),
+      directSellSubtotal:Math.round(s.directSellSubtotal),
+      overheadCost:Math.round(s.overheadCost),
+      overheadSell:Math.round(s.overheadSell),
       marginAmount:Math.round(s.marginAmount),
+      totalCost:Math.round(s.totalCost),
+      totalProfit:Math.round(s.totalProfit),
+      effectiveMargin:+s.effectiveMargin.toFixed(4),
       totalHours:Math.round(s.totalHours*10)/10,
       totalDays:Math.round(s.totalDays*10)/10,
       requiredCrew:s.requiredCrew,
       isAccelerated:s.isAccelerated,
-      otPremium:Math.round(s.otPremium),
-      dtPremium:Math.round(s.dtPremium),
+      otPremiumCost:Math.round(s.otPremiumCost),
+      otPremiumSell:Math.round(s.otPremiumSell),
+      dtPremiumCost:Math.round(s.dtPremiumCost),
+      dtPremiumSell:Math.round(s.dtPremiumSell),
       remoteODC:Math.round(s.remote.total),
-      perSection:Object.entries(s.sectionTotals).map(([id,t])=>({id, hours:Math.round(t.hours*10)/10, total:Math.round(t.total)}))
+      perSection:Object.entries(s.sectionTotals).map(([id,t])=>({id, hours:Math.round(t.hours*10)/10, totalSell:Math.round(t.totalSell), totalCost:Math.round(t.totalCost), profit:Math.round(t.profit)}))
     }
   };
   const fn = ((state.project.name||'estimate').replace(/[^a-z0-9-_]+/gi,'_')) + '.json';
@@ -2193,16 +2405,16 @@ function downloadFile(filename, content, mime){
 // =========================================================================
 // CSV TEMPLATE + LIBRARY EXPORT + CSV IMPORT
 // =========================================================================
-const CSV_HEADERS = ['category','description','manufacturer','model','partNumber','sourcePrice','sourceYear','unit','hoursEach','defaultRole','qty','notes'];
+const CSV_HEADERS = ['category','description','manufacturer','model','partNumber','sourcePrice','sourceYear','markup','unit','hoursEach','defaultRole','qty','notes'];
 
 function downloadCsvTemplate(){
   const rows = [
     CSV_HEADERS,
-    ['Cable / Horizontal','CAT6 Plenum (Blue)','','','',0.30,2023,'ft',0.008,'Tech I',5000,'1000 ft box example'],
-    ['Connectors & Jacks','CAT6 Keystone Jack (Blue)','','','',4.91,2023,'ea',0.25,'Tech I',48,''],
-    ['Patch Panels','24-Port Patch Panel','','','',75,2023,'ea',1.0,'Lead Tech',2,''],
-    ['Cable Management','1U Brush Guard','','','',35,2023,'ea',0.25,'Tech I','',''],
-    ['Misc','Custom Item with All Optional Fields','Acme','Model-X','PN-12345','12.34',2024,'ea',0.5,'Helper','','Notes go here']
+    ['Cable / Horizontal','CAT6 Plenum (Blue)','','','',0.30,2023,1.33,'ft',0.008,'Tech I',5000,'1000 ft box example'],
+    ['Connectors & Jacks','CAT6 Keystone Jack (Blue)','','','',4.91,2023,1.33,'ea',0.25,'Tech I',48,''],
+    ['Patch Panels','24-Port Patch Panel','','','',75,2023,1.33,'ea',1.0,'Lead Tech',2,''],
+    ['Cable Management','1U Brush Guard','','','',35,2023,1.33,'ea',0.25,'Tech I','',''],
+    ['Misc','Custom Item with All Optional Fields','Acme','Model-X','PN-12345','12.34',2024,1.50,'ea',0.5,'Helper','','Notes go here — markup 1.50 = 50% markup = 33% margin']
   ];
   downloadFile('estimator-materials-template.csv', toCSV(rows), 'text/csv');
 }
@@ -2213,7 +2425,7 @@ function exportLibraryCSV(){
     const roleName = ([...DEFAULT_FIELD_ROLES, ...DEFAULT_MGMT_ROLES].find(r => r.id === li.defaultRoleId) || {}).role || '';
     rows.push([
       li.category||'', li.description||'', li.manufacturer||'', li.model||'', li.partNumber||'',
-      li.sourcePrice, li.sourceYear, li.unit||'', li.hoursEach, roleName, '', li.notes||''
+      li.sourcePrice, li.sourceYear, li.markup||DEFAULT_MATERIAL_MARKUP, li.unit||'', li.hoursEach, roleName, '', li.notes||''
     ]);
   }
   const fn = `estimator-library-${new Date().toISOString().slice(0,10)}.csv`;
@@ -2244,6 +2456,7 @@ function importMaterialsCSV(e){
         const partNumber = get('partNumber');
         const sourcePrice = parseFloat(get('sourcePrice')) || 0;
         const sourceYear  = parseInt(get('sourceYear')) || 2023;
+        const markup      = parseFloat(get('markup')) || DEFAULT_MATERIAL_MARKUP;
         const hoursEach   = parseFloat(get('hoursEach')) || 0;
         const qty         = parseFloat(get('qty')) || 0;
         const roleName    = get('defaultRole');
@@ -2264,6 +2477,7 @@ function importMaterialsCSV(e){
           existing.partNumber   = partNumber          || existing.partNumber;
           if(get('sourcePrice') !== '') existing.sourcePrice = sourcePrice;
           if(get('sourceYear')  !== '') existing.sourceYear  = sourceYear;
+          if(get('markup')      !== '') existing.markup      = markup;
           if(get('unit')        !== '') existing.unit        = get('unit');
           if(get('hoursEach')   !== '') existing.hoursEach   = hoursEach;
           if(roleName) existing.defaultRoleId = defaultRoleId;
@@ -2277,7 +2491,7 @@ function importMaterialsCSV(e){
             manufacturer: get('manufacturer'),
             model: get('model'),
             partNumber: partNumber,
-            sourcePrice, sourceYear,
+            sourcePrice, sourceYear, markup,
             unit: get('unit')||'ea',
             hoursEach,
             defaultRoleId,
@@ -2299,6 +2513,7 @@ function importMaterialsCSV(e){
             partNumber: existing.partNumber || '',
             sourcePrice: existing.sourcePrice,
             sourceYear: existing.sourceYear,
+            markup: existing.markup || DEFAULT_MATERIAL_MARKUP,
             unit: existing.unit,
             hoursEach: existing.hoursEach,
             roleId: existing.defaultRoleId,
@@ -2340,6 +2555,7 @@ function addEmptyLibraryItem(){
     partNumber: '',
     sourcePrice: 0,
     sourceYear: 2023,
+    markup: DEFAULT_MATERIAL_MARKUP,
     unit: 'ea',
     hoursEach: 0,
     defaultRoleId: state.crew.field[0]?.id || 1,

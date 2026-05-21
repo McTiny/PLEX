@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!--
-  PLEX v2.25 — Power Load EXaminer
+  PLEX v2.26 — Power Load EXaminer
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary engineering and coordination only.
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLEX v2.25 — Power Load EXaminer | Limited Energy eXperts</title>
+<title>PLEX v2.26 — Power Load EXaminer | Limited Energy eXperts</title>
 <meta name="description" content="PLEX — Power Load EXaminer. Telecom room and equipment room power, UPS, generator, PoE, and cooling load sizing. Built by an RCDD for Division 27/28 coordination.">
 <meta property="og:title" content="PLEX — Power Load EXaminer">
 <meta property="og:description" content="TR/ER infrastructure sizing — power, UPS, generator, PoE, cooling. Built by an RCDD for Division 27/28 coordination.">
@@ -185,6 +185,20 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 .assumptions-panel li::before{content:'▸';position:absolute;left:0;color:var(--red);font-size:10px;}
 .assumptions-panel li:last-child{border-bottom:none;}
 .assumptions-panel li strong{color:var(--white);font-weight:600;}
+.ps-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.ps-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;min-width:800px;}
+.ps-table th{background:var(--navy-light);color:var(--red);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 8px;text-align:left;white-space:nowrap;border-bottom:2px solid var(--border2);}
+.ps-table td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:middle;color:var(--gray-light);white-space:nowrap;}
+.ps-table tbody tr:hover td{background:var(--navy-light);}
+.ps-table .ps-loc{color:var(--teal);}
+.ps-table .ps-name{color:var(--white);}
+.ps-table .ps-w{color:var(--red);font-weight:600;}
+.ps-table .ps-wall{color:var(--teal);font-weight:600;}
+.ps-table .ps-brk-rack{color:var(--red);font-weight:700;}
+.ps-table .ps-brk-wall{color:var(--teal);font-weight:700;}
+.ps-table .ps-dim{color:var(--gray-mid);}
+.ps-table tr.ps-total td{background:var(--navy-light);font-weight:700;border-top:2px solid var(--border2);}
+.ps-table tr.ps-total .ps-w{font-size:13px;}
 #credit-line{max-width:1200px;margin:18px auto 8px;padding:14px 24px;font-family:var(--mono);font-size:11px;color:var(--gray-mid);letter-spacing:0.08em;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--navy-mid);}
 #credit-line strong{color:var(--red);letter-spacing:0.12em;text-transform:uppercase;}
 #credit-line a{color:var(--gray-light);text-decoration:none;border-bottom:1px dotted var(--gray-mid);}
@@ -192,7 +206,7 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 .import-status.ok{background:rgba(34,197,94,0.1);border:1px solid var(--green);color:var(--green);}
 .import-status.err{background:rgba(239,68,68,0.1);border:1px solid var(--danger);color:var(--danger);}
 @media(max-width:880px){.two-col{grid-template-columns:1fr;}.grid-4{grid-template-columns:1fr 1fr;}#status-row{grid-template-columns:1fr;}.circuit-row{grid-template-columns:1fr 60px 60px 60px;font-size:11px;}.circuit-row>:nth-child(5),.circuit-row>:nth-child(6){display:none;}}
-@media print{body{background:white !important;color:black !important;font-size:11pt;}#header,#tabs,.tab-btn,.hbtn,.saved-indicator,.header-actions,#pane-build,#intro-block,#credit-line,.intro-badges,.best-viewed{display:none !important;}#pane-summary,#sum-assumptions-panel{display:block !important;}#sum-assumptions-panel.collapsed .panel-body{display:block !important;}.panel{background:white !important;border:1px solid #999 !important;page-break-inside:avoid;margin-bottom:12pt;padding:10pt;}.panel-label{color:#9E0B23 !important;font-weight:700;}.stat-card{background:white !important;border:1px solid #ccc !important;}.stat-value,.sum-val,.circuit-name,.device-name{color:black !important;}.stat-label,.sum-key,.gauge-meta,.status-lbl,.device-tag,.u-val,.sum-meta{color:#555 !important;}.summary-header h1{color:black !important;}.total-w,.wall-w,.circuit-breaker{color:#9E0B23 !important;}#printBtn,.no-print{display:none !important;}.circuit-row,.sum-row{border-bottom:1px solid #ccc !important;}.tbl-row{border-bottom:1px solid #ccc !important;}.assumptions-panel li{color:#222 !important;}.assumptions-panel li strong{color:black !important;}.assumptions-panel li::before{color:#9E0B23 !important;}#print-credit{display:block !important;text-align:center;font-family:monospace;font-size:9pt;color:#666 !important;margin-top:16pt;padding-top:8pt;border-top:1px solid #ccc;}@page{margin:0.5in;}}
+@media print{body{background:white !important;color:black !important;font-size:11pt;}#header,#tabs,.tab-btn,.hbtn,.saved-indicator,.header-actions,#pane-build,#intro-block,#credit-line,.intro-badges,.best-viewed{display:none !important;}#pane-summary,#sum-assumptions-panel{display:block !important;}#sum-assumptions-panel.collapsed .panel-body{display:block !important;}.panel{background:white !important;border:1px solid #999 !important;page-break-inside:avoid;margin-bottom:12pt;padding:10pt;}.panel-label{color:#9E0B23 !important;font-weight:700;}.stat-card{background:white !important;border:1px solid #ccc !important;}.stat-value,.sum-val,.circuit-name,.device-name{color:black !important;}.stat-label,.sum-key,.gauge-meta,.status-lbl,.device-tag,.u-val,.sum-meta{color:#555 !important;}.summary-header h1{color:black !important;}.total-w,.wall-w,.circuit-breaker{color:#9E0B23 !important;}#printBtn,.no-print{display:none !important;}.circuit-row,.sum-row{border-bottom:1px solid #ccc !important;}.tbl-row{border-bottom:1px solid #ccc !important;}.assumptions-panel li{color:#222 !important;}.assumptions-panel li strong{color:black !important;}.assumptions-panel li::before{color:#9E0B23 !important;}#sum-power-schedule{page-break-inside:auto !important;}.ps-wrap{overflow-x:visible !important;}.ps-table{width:100% !important;min-width:0 !important;font-size:7.5pt !important;border-collapse:collapse !important;}.ps-table th{background:#f0f0f0 !important;color:#9E0B23 !important;font-size:7pt !important;border:1px solid #ccc !important;padding:3pt 5pt !important;white-space:normal !important;}.ps-table td{border:1px solid #ddd !important;padding:3pt 5pt !important;color:black !important;white-space:normal !important;}.ps-table tr.ps-total td{background:#f5f5f5 !important;font-weight:700 !important;border-top:2px solid #999 !important;}.ps-table .ps-name,.ps-table .ps-loc,.ps-table .ps-dim{color:#333 !important;}.ps-table .ps-w,.ps-table .ps-brk-rack{color:#9E0B23 !important;}.ps-table .ps-wall,.ps-table .ps-brk-wall{color:#0a7a70 !important;}#print-credit{display:block !important;text-align:center;font-family:monospace;font-size:9pt;color:#666 !important;margin-top:16pt;padding-top:8pt;border-top:1px solid #ccc;}@page{margin:0.5in;}}
 #print-credit{display:none;}
 </style>
 </head>
@@ -202,7 +216,7 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
     <div class="header-brand">
       <div class="header-mark">⚡</div>
       <div>
-        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.25</span></div>
+        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.26</span></div>
         <div class="header-sub">POWER LOAD EXaminer &nbsp;·&nbsp; TR/ER INFRASTRUCTURE SIZING</div>
       </div>
     </div>
@@ -261,6 +275,8 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
           <input type="text" id="proj-designer" placeholder="Designer (your name)">
           <input type="date" id="proj-date">
           <textarea id="proj-notes" placeholder="Project notes" rows="3"></textarea>
+          <div class="field-label" style="margin-top:4px">POWER SCHEDULE TITLE</div>
+          <input type="text" id="proj-scheduleTitle" placeholder="Power Consumption &amp; Circuit Schedule">
         </div>
       </div>
       <div class="panel">
@@ -340,6 +356,11 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
           </div>
         </div>
         <div class="field"><div class="field-label">RACK NOTES</div><textarea id="rack-notes" placeholder="Rack-specific notes" rows="2"></textarea></div>
+        <div class="grid-2">
+          <div><div class="field-label">LEVEL / FLOOR</div><input type="text" id="rack-level" placeholder="Level 1, Floor 2"></div>
+          <div><div class="field-label">OUTLET TYPE</div><input type="text" id="rack-outlet" placeholder="NEMA 5-20R, L6-30R"></div>
+        </div>
+        <div class="field"><div class="field-label">CIRCUIT # / PANEL</div><input type="text" id="rack-circuitnum" placeholder="Panel A, Ckt 12"></div>
         <button class="btn-delete" id="deleteRackBtn">DELETE THIS RACK</button>
       </div>
       <div class="device-table">
@@ -376,6 +397,10 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
   <div class="panel"><div class="panel-label">PoE SUMMARY</div><div id="sum-poe"></div></div>
   <div class="panel"><div class="panel-label">PER-RACK BREAKDOWN</div><div id="sum-racks"></div></div>
   <div class="panel"><div class="panel-label teal">WALL / FIELD DEVICES — INDIVIDUAL CIRCUITS</div><div id="sum-wall"></div></div>
+  <div class="panel" id="sum-power-schedule">
+    <div class="panel-label" id="sum-ps-label">POWER CONSUMPTION &amp; CIRCUIT SCHEDULE</div>
+    <div id="sum-ps-table"></div>
+  </div>
   <div class="panel collapsible assumptions-panel" id="sum-assumptions-panel">
     <button class="panel-header" id="assumptionsToggle">
       <span class="panel-label" style="margin-bottom:0">KNOWN ASSUMPTIONS &amp; METHODOLOGY</span>
@@ -397,7 +422,7 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
     </div>
   </div>
   <div id="print-credit">
-    PLEX v2.25 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    PLEX v2.26 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
   <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);text-align:center;margin-top:20px;letter-spacing:0.1em;" class="no-print">Generated by PLEX &mdash; Power Load EXaminer &middot; limitedenergy.net/plex</div>
 </div>
@@ -524,9 +549,9 @@ const ALL_FLAT=PRESETS.flatMap(c=>c.items.map(i=>({...i,category:c.cat})));
 const BTU_PER_WATT=3.41214;
 const STORAGE_KEY='plex_session_v2';
 const PLEX_SIG='PLEX-LEX';
-const PLEX_VERSION='2.25';
+const PLEX_VERSION='2.26';
 const STD_BREAKERS=[15,20,25,30,35,40,45,50,60,70,80,90,100,110,125,150,175,200];
-let state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false}],items:[],activeRackId:1};
+let state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:'',scheduleTitle:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''}],items:[],activeRackId:1};
 let nextItemId=1,nextRackId=2,customLoc='rack',dirty=false,lastSaveTime=null;
 const v=id=>document.getElementById(id);
 function autoSave(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({state,nextItemId,nextRackId,savedAt:Date.now()}));lastSaveTime=Date.now();dirty=false;updateSavedIndicator();}catch(e){console.error('Save failed:',e);}}
@@ -572,9 +597,9 @@ function dtag(it){if(it.poeS)return`PoE Switch · ${it.poeB}W budget · ${it.poe
 function fmtRuntime(m){if(m===null||m===undefined)return'—';if(m<=0)return'OVERLOADED';if(m>=60)return`~${(m/60).toFixed(1)} hrs`;return`~${Math.round(m)} min`;}
 function render(){
   const s=calc();const r=getActiveRack();
-  ['name','room','building','floor','designer','date','notes'].forEach(f=>{const el=v('proj-'+f);if(el&&el.value!==(state.project[f]||''))el.value=state.project[f]||'';});
+  ['name','room','building','floor','designer','date','notes','scheduleTitle'].forEach(f=>{const el=v('proj-'+f);if(el&&el.value!==(state.project[f]||''))el.value=state.project[f]||'';});
   if(v('powerFactor').value!==String(state.settings.powerFactor))v('powerFactor').value=state.settings.powerFactor;
-  if(r){if(v('rack-label').value!==r.label)v('rack-label').value=r.label;if(parseInt(v('rack-size').value)!==r.sizeU)v('rack-size').value=r.sizeU;if(v('rack-voltage').value!==String(r.voltage))v('rack-voltage').value=r.voltage;if(v('rack-notes').value!==r.notes)v('rack-notes').value=r.notes;v('rack-redundant').checked=!!r.redundant;}
+  if(r){if(v('rack-label').value!==r.label)v('rack-label').value=r.label;if(parseInt(v('rack-size').value)!==r.sizeU)v('rack-size').value=r.sizeU;if(v('rack-voltage').value!==String(r.voltage))v('rack-voltage').value=r.voltage;if(v('rack-notes').value!==r.notes)v('rack-notes').value=r.notes;v('rack-redundant').checked=!!r.redundant;if(v('rack-level').value!==(r.level||''))v('rack-level').value=r.level||'';if(v('rack-outlet').value!==(r.outletType||''))v('rack-outlet').value=r.outletType||'';if(v('rack-circuitnum').value!==(r.circuitNum||''))v('rack-circuitnum').value=r.circuitNum||'';}
   v('sc-watts').textContent=s.totalW.toFixed(0)+' W';v('sc-va').textContent=s.totalVA.toFixed(0)+' VA';
   v('sc-btu').textContent=s.btu.toFixed(0)+' BTU/h';v('sc-tons').textContent=s.tons.toFixed(2)+' tons';
   v('sc-gen').textContent=s.generatorKW.toFixed(2)+' kW';
@@ -599,12 +624,12 @@ function renderRackTabs(){
   const c=v('rackTabs');
   c.innerHTML=state.racks.map(r=>`<button class="rack-tab ${r.id===state.activeRackId?'active':''}" data-rack-id="${r.id}">${esc(r.label||'Rack '+r.id)}</button>`).join('')+`<button class="rack-tab add" id="addRackBtn">+ Add Rack</button>`;
   c.querySelectorAll('.rack-tab[data-rack-id]').forEach(btn=>{btn.addEventListener('click',()=>{state.activeRackId=parseInt(btn.dataset.rackId);render();markDirty();});});
-  v('addRackBtn').addEventListener('click',()=>{const nr={id:nextRackId++,label:'Rack '+(state.racks.length+1),sizeU:42,voltage:120,notes:'',redundant:false};state.racks.push(nr);state.activeRackId=nr.id;render();markDirty();});
+  v('addRackBtn').addEventListener('click',()=>{const nr={id:nextRackId++,label:'Rack '+(state.racks.length+1),sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''};state.racks.push(nr);state.activeRackId=nr.id;render();markDirty();});
 }
 function makeRackRow(it){const q=it.qty||1;return`<div class="tbl-row rack-cols"><div><div class="device-name">${esc(it.name)}</div><div class="device-tag">${esc(dtag(it))}</div></div><input type="number" class="ri" style="width:46px;text-align:center" value="${q}" min="1" data-id="${it.id}" data-f="qty"><input type="number" class="ri" style="width:60px" value="${it.w}" min="0" data-id="${it.id}" data-f="w"><select class="ri" style="width:48px" data-id="${it.id}" data-f="v"><option value="120"${it.v==120?' selected':''}>120</option><option value="208"${it.v==208?' selected':''}>208</option><option value="240"${it.v==240?' selected':''}>240</option></select><span class="u-val">${it.u>0?it.u+'U':'--'}</span><span class="total-w">${(it.w*q).toFixed(0)}W</span><button class="btn-remove" data-id="${it.id}">×</button></div>`;}
-function makeWallRow(it){const q=it.qty||1;const w=it.w*q;const a=it.v>0?w/it.v:0;const b=standardBreaker(a);return`<div class="tbl-row wall-cols"><div><div class="device-name">${esc(it.name)}</div><div class="device-tag">${esc(it.category||'')}</div></div><input type="number" class="ri" style="width:46px;text-align:center" value="${q}" min="1" data-id="${it.id}" data-f="qty"><input type="number" class="ri" style="width:60px" value="${it.w}" min="0" data-id="${it.id}" data-f="w"><select class="ri" style="width:48px" data-id="${it.id}" data-f="v"><option value="120"${it.v==120?' selected':''}>120</option><option value="208"${it.v==208?' selected':''}>208</option><option value="240"${it.v==240?' selected':''}>240</option></select><span class="wall-w">${w.toFixed(0)}W</span><span style="font-family:var(--mono);color:var(--gray-light);font-size:11px;">${a.toFixed(1)}A</span><span style="font-family:var(--mono);color:var(--teal);font-weight:700;font-size:11px;">${b}A</span><input type="text" class="ri" placeholder="Circuit notes" value="${esc(it.circuitNotes||'')}" data-id="${it.id}" data-f="circuitNotes" style="font-size:11px;"><button class="btn-remove" data-id="${it.id}">×</button></div>`;}
+function makeWallRow(it){const q=it.qty||1;const w=it.w*q;const a=it.v>0?w/it.v:0;const b=standardBreaker(a);return`<div class="tbl-row wall-cols"><div><div class="device-name">${esc(it.name)}</div><div class="device-tag">${esc(it.category||'')}</div><input type="text" class="ri" placeholder="Level" value="${esc(it.level||'')}" data-id="${it.id}" data-f="level" style="font-size:10px;padding:2px 5px;margin-top:3px;width:100%;"></div><input type="number" class="ri" style="width:46px;text-align:center" value="${q}" min="1" data-id="${it.id}" data-f="qty"><input type="number" class="ri" style="width:60px" value="${it.w}" min="0" data-id="${it.id}" data-f="w"><select class="ri" style="width:48px" data-id="${it.id}" data-f="v"><option value="120"${it.v==120?' selected':''}>120</option><option value="208"${it.v==208?' selected':''}>208</option><option value="240"${it.v==240?' selected':''}>240</option></select><span class="wall-w">${w.toFixed(0)}W</span><span style="font-family:var(--mono);color:var(--gray-light);font-size:11px;">${a.toFixed(1)}A</span><span style="font-family:var(--mono);color:var(--teal);font-weight:700;font-size:11px;">${b}A</span><input type="text" class="ri" placeholder="Circuit notes" value="${esc(it.circuitNotes||'')}" data-id="${it.id}" data-f="circuitNotes" style="font-size:11px;"><button class="btn-remove" data-id="${it.id}">×</button></div>`;}
 function bindRowEvents(el){
-  el.querySelectorAll('[data-f]').forEach(inp=>{inp.addEventListener('change',()=>{const it=state.items.find(i=>i.id===parseInt(inp.dataset.id));if(!it)return;const f=inp.dataset.f;if(f==='qty')it.qty=Math.max(1,parseInt(inp.value)||1);else if(f==='w')it.w=parseFloat(inp.value)||0;else if(f==='v')it.v=parseInt(inp.value);else if(f==='circuitNotes')it.circuitNotes=inp.value;render();markDirty();});});
+  el.querySelectorAll('[data-f]').forEach(inp=>{inp.addEventListener('change',()=>{const it=state.items.find(i=>i.id===parseInt(inp.dataset.id));if(!it)return;const f=inp.dataset.f;if(f==='qty')it.qty=Math.max(1,parseInt(inp.value)||1);else if(f==='w')it.w=parseFloat(inp.value)||0;else if(f==='v')it.v=parseInt(inp.value);else if(f==='circuitNotes')it.circuitNotes=inp.value;else if(f==='level')it.level=inp.value;render();markDirty();});});
   el.querySelectorAll('.btn-remove').forEach(btn=>{btn.addEventListener('click',()=>{state.items=state.items.filter(i=>i.id!==parseInt(btn.dataset.id));render();markDirty();});});
 }
 function renderRack(s){const r=getActiveRack();const body=v('rack-body'),ft=v('rack-footer');const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===r.id);if(!items.length){body.innerHTML='<div class="tbl-empty">No devices in this rack yet.</div>';ft.style.display='none';return;}body.innerHTML=items.map(makeRackRow).join('');ft.style.display='grid';const ri=s.perRack[r.id];v('tf-u').textContent=ri.u+'U';v('tf-rw').textContent=ri.watts.toFixed(0)+'W';bindRowEvents(body);}
@@ -630,18 +655,96 @@ function renderSummary(s){
   v('sum-racks').innerHTML=state.racks.map(rk=>{const ri=s.perRack[rk.id];const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===rk.id);let inner=`<div style="margin-bottom:14px;padding:10px;background:var(--navy);border-radius:4px;"><div style="font-family:var(--display);font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">${esc(rk.label)}${rk.redundant?' <span class="pill pill-warn" style="margin-left:8px">N+1</span>':''}</div><div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-bottom:8px;">${rk.sizeU}U · PDU ${rk.voltage}V · Fill ${ri.fillPct.toFixed(0)}% · Load ${ri.watts.toFixed(0)}W · Breaker ${ri.breaker}A</div>`;if(rk.notes)inner+=`<div style="font-size:11px;color:var(--gray-light);margin-bottom:8px;font-style:italic;">Notes: ${esc(rk.notes)}</div>`;if(items.length){inner+=`<div style="font-size:11px;color:var(--gray-light);">`;inner+=items.map(i=>`· ${i.qty}× ${esc(i.name)} (${(i.w*i.qty).toFixed(0)}W)`).join('<br>');inner+=`</div>`;}else inner+=`<div style="font-size:11px;color:var(--gray-dark);font-style:italic;">No devices</div>`;inner+=`</div>`;return inner;}).join('');
   if(s.perWall.length===0)v('sum-wall').innerHTML='<div style="color:var(--gray-dark);font-style:italic;">No wall/field devices.</div>';
   else v('sum-wall').innerHTML=s.perWall.map(wd=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);"><div style="color:var(--white);font-weight:500;">${esc(wd.item.name)} <span style="color:var(--gray-mid);font-size:11px;">× ${wd.item.qty||1}</span></div><div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-top:2px;">${wd.watts.toFixed(0)}W @ ${wd.item.v}V · ${wd.amps.toFixed(1)}A continuous (×1.25 = ${(wd.amps*1.25).toFixed(1)}A) · <span style="color:var(--teal);font-weight:700;">${wd.breaker}A breaker</span></div>${wd.item.circuitNotes?`<div style="font-size:11px;color:var(--gray-light);margin-top:2px;font-style:italic;">${esc(wd.item.circuitNotes)}</div>`:''}</div>`).join('');
+  // Power Schedule Table
+  const psTitle=(state.project.scheduleTitle||'').trim();
+  v('sum-ps-label').textContent=(psTitle||'Power Consumption & Circuit Schedule').toUpperCase();
+  let psRows='';
+  Object.values(s.perRack).forEach(rk=>{
+    if(rk.nonUpsWatts<=0&&rk.items.length===0)return;
+    const btu=(rk.nonUpsWatts*BTU_PER_WATT).toFixed(0);
+    const contA=(rk.amps*1.25).toFixed(1);
+    psRows+=`<tr>
+      <td class="ps-dim">${esc(rk.rack.level||'—')}</td>
+      <td class="ps-loc">${esc(rk.rack.label)}</td>
+      <td class="ps-name">Rack PDU Load${rk.rack.redundant?' <span class="pill pill-warn" style="font-size:8px;vertical-align:middle;margin-left:4px;">N+1</span>':''}</td>
+      <td>${rk.rack.voltage}</td>
+      <td>1</td>
+      <td>${rk.nonUpsWatts.toFixed(0)}</td>
+      <td class="ps-w">${rk.nonUpsWatts.toFixed(0)}</td>
+      <td>${contA}A</td>
+      <td class="ps-brk-rack">${rk.breaker}A</td>
+      <td>${btu}</td>
+      <td class="ps-dim">${esc(rk.rack.outletType||'—')}</td>
+      <td class="ps-dim">${esc(rk.rack.circuitNum||'—')}</td>
+    </tr>`;
+  });
+  s.allUpsItems.forEach(u=>{
+    const rack=state.racks.find(r=>r.id===u.rackId);
+    const qty=u.qty||1;const totalW=u.w*qty;const a=u.v>0?totalW/u.v:0;
+    const btu=(totalW*BTU_PER_WATT).toFixed(0);const contA=(a*1.25).toFixed(1);
+    psRows+=`<tr>
+      <td class="ps-dim">${esc(rack?rack.level||'—':'—')}</td>
+      <td class="ps-loc">${esc(rack?rack.label:'—')}</td>
+      <td class="ps-name">${esc(u.name)} <span class="pill pill-warn" style="font-size:8px;vertical-align:middle;margin-left:4px;">UPS</span></td>
+      <td>${u.v}</td>
+      <td>${qty}</td>
+      <td>${u.w}</td>
+      <td class="ps-w">${totalW}</td>
+      <td>${contA}A</td>
+      <td class="ps-brk-rack">${standardBreaker(a)}A</td>
+      <td>${btu}</td>
+      <td class="ps-dim">—</td>
+      <td class="ps-dim">UPS input</td>
+    </tr>`;
+  });
+  s.perWall.forEach(wd=>{
+    const qty=wd.item.qty||1;const btu=(wd.watts*BTU_PER_WATT).toFixed(0);const contA=(wd.amps*1.25).toFixed(1);
+    psRows+=`<tr>
+      <td class="ps-dim">${esc(wd.item.level||'—')}</td>
+      <td class="ps-loc" style="color:var(--teal);">Field / Wall</td>
+      <td class="ps-name">${esc(wd.item.name)}</td>
+      <td>${wd.item.v}</td>
+      <td>${qty}</td>
+      <td>${wd.item.w}</td>
+      <td class="ps-wall">${wd.watts.toFixed(0)}</td>
+      <td>${contA}A</td>
+      <td class="ps-brk-wall">${wd.breaker}A</td>
+      <td>${btu}</td>
+      <td class="ps-dim">—</td>
+      <td class="ps-dim">${esc(wd.item.circuitNotes||'—')}</td>
+    </tr>`;
+  });
+  if(psRows){psRows+=`<tr class="ps-total">
+    <td colspan="4" style="font-family:var(--label);letter-spacing:0.1em;text-transform:uppercase;color:var(--white);">TOTAL</td>
+    <td></td><td></td>
+    <td class="ps-w">${s.totalW.toFixed(0)} W</td>
+    <td></td><td></td>
+    <td style="color:var(--white);">${s.btu.toFixed(0)}</td>
+    <td></td><td></td>
+  </tr>`;}
+  v('sum-ps-table').innerHTML=psRows
+    ?`<div class="ps-wrap"><table class="ps-table"><thead><tr>
+        <th>Level</th><th>Location</th><th>Equipment / Description</th>
+        <th>V</th><th>Qty</th><th>W/Unit</th><th>Total W</th>
+        <th>A (Cont.)</th><th>Breaker</th><th>BTU/hr</th>
+        <th>Outlet Type</th><th>Circuit #</th>
+      </tr></thead><tbody>${psRows}</tbody></table></div>`
+    :'<div style="color:var(--gray-dark);font-style:italic;padding:10px 0;">No devices added yet.</div>';
 }
 (function buildPresets(){const sel=v('presetSelect');PRESETS.forEach(cat=>{const og=document.createElement('optgroup');og.label='── '+cat.cat+' ──';cat.items.forEach(it=>{const opt=document.createElement('option');opt.value=it.name;opt.textContent=it.name+(it.loc==='wall'?' [Wall]':'');og.appendChild(opt);});sel.appendChild(og);});})();
-v('addPresetBtn').addEventListener('click',()=>{const name=v('presetSelect').value;if(!name)return;const p=ALL_FLAT.find(i=>i.name===name);if(!p)return;const n={...p,id:nextItemId++,qty:1,circuitNotes:''};if(p.loc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('presetSelect').value='';render();markDirty();});
-v('addCustomBtn').addEventListener('click',()=>{const name=v('customName').value.trim();const w=parseFloat(v('customWatts').value)||0;const u=parseFloat(v('customU').value)||0;const qty=parseInt(v('customQty').value)||1;const vv=parseInt(v('customV').value)||120;const poeC=v('customPoE').checked;if(!name){v('customName').focus();return;}const n={id:nextItemId++,name,w,u,qty,v:vv,loc:customLoc,category:'Custom',poeC,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,circuitNotes:''};if(customLoc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('customName').value='';v('customWatts').value='';v('customU').value='';v('customQty').value='1';v('customPoE').checked=false;render();markDirty();});
+v('addPresetBtn').addEventListener('click',()=>{const name=v('presetSelect').value;if(!name)return;const p=ALL_FLAT.find(i=>i.name===name);if(!p)return;const n={...p,id:nextItemId++,qty:1,circuitNotes:'',level:''};if(p.loc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('presetSelect').value='';render();markDirty();});
+v('addCustomBtn').addEventListener('click',()=>{const name=v('customName').value.trim();const w=parseFloat(v('customWatts').value)||0;const u=parseFloat(v('customU').value)||0;const qty=parseInt(v('customQty').value)||1;const vv=parseInt(v('customV').value)||120;const poeC=v('customPoE').checked;if(!name){v('customName').focus();return;}const n={id:nextItemId++,name,w,u,qty,v:vv,loc:customLoc,category:'Custom',poeC,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,circuitNotes:'',level:''};if(customLoc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('customName').value='';v('customWatts').value='';v('customU').value='';v('customQty').value='1';v('customPoE').checked=false;render();markDirty();});
 document.querySelectorAll('.loc-btn').forEach(btn=>{btn.addEventListener('click',()=>{customLoc=btn.dataset.loc;v('locRack').className='loc-btn'+(customLoc==='rack'?' active-rack':'');v('locWall').className='loc-btn'+(customLoc==='wall'?' active-wall':'');});});
-['name','room','building','floor','designer','date','notes'].forEach(f=>{v('proj-'+f).addEventListener('input',()=>{state.project[f]=v('proj-'+f).value;markDirty();});});
+['name','room','building','floor','designer','date','notes','scheduleTitle'].forEach(f=>{v('proj-'+f).addEventListener('input',()=>{state.project[f]=v('proj-'+f).value;markDirty();});});
 v('powerFactor').addEventListener('input',()=>{state.settings.powerFactor=parseFloat(v('powerFactor').value)||0.9;render();markDirty();});
 v('rack-label').addEventListener('input',()=>{const r=getActiveRack();if(r){r.label=v('rack-label').value;renderRackTabs();markDirty();}});
 v('rack-size').addEventListener('input',()=>{const r=getActiveRack();if(r){r.sizeU=parseInt(v('rack-size').value)||42;render();markDirty();}});
 v('rack-voltage').addEventListener('change',()=>{const r=getActiveRack();if(r){r.voltage=parseInt(v('rack-voltage').value);render();markDirty();}});
 v('rack-notes').addEventListener('input',()=>{const r=getActiveRack();if(r){r.notes=v('rack-notes').value;markDirty();}});
 v('rack-redundant').addEventListener('change',()=>{const r=getActiveRack();if(r){r.redundant=v('rack-redundant').checked;markDirty();}});
+v('rack-level').addEventListener('input',()=>{const r=getActiveRack();if(r){r.level=v('rack-level').value;markDirty();}});
+v('rack-outlet').addEventListener('input',()=>{const r=getActiveRack();if(r){r.outletType=v('rack-outlet').value;markDirty();}});
+v('rack-circuitnum').addEventListener('input',()=>{const r=getActiveRack();if(r){r.circuitNum=v('rack-circuitnum').value;markDirty();}});
 v('deleteRackBtn').addEventListener('click',()=>{if(state.racks.length<=1){alert('At least one rack required.');return;}const r=getActiveRack();if(!confirm(`Delete "${r.label}" and all its devices?`))return;state.items=state.items.filter(i=>!(i.loc==='rack'&&i.rackId===r.id));state.racks=state.racks.filter(x=>x.id!==r.id);state.activeRackId=state.racks[0].id;render();markDirty();});
 v('projToggle').addEventListener('click',()=>{v('projPanel').classList.toggle('collapsed');});
 v('sum-assumptions-panel').classList.add('collapsed');
@@ -709,7 +812,7 @@ v('importFile').addEventListener('change',e=>{
 v('newBtn').addEventListener('click',()=>openModal('newModal'));
 v('newModalClose').addEventListener('click',()=>closeModal('newModal'));
 v('newCancelBtn').addEventListener('click',()=>closeModal('newModal'));
-v('newConfirmBtn').addEventListener('click',()=>{state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false}],items:[],activeRackId:1};nextItemId=1;nextRackId=2;closeModal('newModal');render();markDirty();});
+v('newConfirmBtn').addEventListener('click',()=>{state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:'',scheduleTitle:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''}],items:[],activeRackId:1};nextItemId=1;nextRackId=2;closeModal('newModal');render();markDirty();});
 v('printBtn').addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));document.querySelector('.tab-btn[data-tab="summary"]').classList.add('active');v('pane-summary').classList.add('active');render();setTimeout(()=>window.print(),200);});
 if(loadSaved()){console.log('Loaded saved session');}
 if(!state.project.date)state.project.date=new Date().toISOString().slice(0,10);

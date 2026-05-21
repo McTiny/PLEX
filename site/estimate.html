@@ -266,7 +266,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
 }
 @media print{
   body{background:white !important;color:black !important;font-size:9pt;}
-  #header,#tabs,.tab-btn,.hbtn,.saved-indicator,.header-actions,#pane-build,#pane-method,#intro-block,#credit-line,.intro-badges,.best-viewed,#sum-assumptions-panel,#sum-cat-bars-panel{display:none !important;}
+  #header,#tabs,.tab-btn,.hbtn,.saved-indicator,.header-actions,#pane-build,#pane-method,#intro-block,#credit-line,.intro-badges,.best-viewed,#sum-assumptions-panel,#sum-cat-bars-panel,#sum-section-bars-panel,#sum-labor-panel,#sum-mat-panel,#sum-odc-panel{display:none !important;}
   #pane-summary{display:block !important;}
   .summary-header{margin-bottom:8pt;}
   .summary-header h1{font-size:18pt !important;}
@@ -287,8 +287,9 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   .bar-track{height:7px !important;background:#ddd !important;border-color:#bbb !important;}
   .bar-fill{print-color-adjust:exact;-webkit-print-color-adjust:exact;background:#9E0B23 !important;}
   .bar-fill.materials{background:#3b82f6 !important;}
-  /* 2-column section bars */
-  #sum-section-bars{display:grid !important;grid-template-columns:1fr 1fr !important;column-gap:16pt !important;}
+  /* 2-column Schedule & Crew rows */
+  #sum-sched{display:grid !important;grid-template-columns:1fr 1fr !important;column-gap:16pt !important;}
+  #sum-sched .sum-row{border-bottom:1px solid #eee !important;}
   .chart-stack{border:1px solid #999 !important;print-color-adjust:exact;-webkit-print-color-adjust:exact;}
   .chart-seg{color:white !important;print-color-adjust:exact;-webkit-print-color-adjust:exact;}
   .chart-title{color:#222 !important;}
@@ -318,7 +319,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
     </div>
   </div>
 </div>
-<div style="max-width:1200px;margin:8px auto 0;padding:0 24px;"><a href="https://youtu.be/1KWX2oAvS1o" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,0.15);">&#9658; Watch a quick overview on YouTube</a></div>
+<div class="no-print" style="max-width:1200px;margin:8px auto 0;padding:0 24px;"><a href="https://youtu.be/1KWX2oAvS1o" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,0.15);">&#9658; Watch a quick overview on YouTube</a></div>
 <div class="best-viewed">
   <div class="best-viewed-inner">&#9432; Best viewed on a PC or tablet.</div>
 </div>
@@ -562,6 +563,8 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   </div>
   <div id="internal-watermark" style="display:none;background:rgba(245,158,11,0.12);border:1px solid var(--warn);color:var(--warn);font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;text-align:center;padding:8px 12px;margin-bottom:14px;border-radius:4px;font-weight:700">⚠ INTERNAL BID REPORT &mdash; CONTAINS COST &amp; MARGIN &mdash; DO NOT SHARE WITH CUSTOMER</div>
 
+  <div class="panel"><div class="panel-label">PROJECT INFORMATION</div><div id="sum-project"></div></div>
+
   <div class="headline-card">
     <div class="lbl">FINAL PROPOSAL PRICE</div>
     <div class="price" id="hdl-price">$0</div>
@@ -581,15 +584,14 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
     <div class="chart-legend" id="chart-legend"></div>
   </div>
 
-  <div class="panel"><div class="panel-label">PER-SECTION BARS (BICSI WBS)</div><div id="sum-section-bars"></div></div>
+  <div class="panel" id="sum-section-bars-panel"><div class="panel-label">PER-SECTION BARS (BICSI WBS)</div><div id="sum-section-bars"></div></div>
   <div class="panel" id="sum-cat-bars-panel"><div class="panel-label">PER-CATEGORY BARS (MATERIALS)</div><div id="sum-category-bars"></div></div>
 
-  <div class="panel"><div class="panel-label">PROJECT INFORMATION</div><div id="sum-project"></div></div>
   <div class="panel"><div class="panel-label">SCHEDULE &amp; CREW</div><div id="sum-sched"></div></div>
-  <div class="panel"><div class="panel-label">LABOR ROLL-UP</div><div id="sum-labor"></div></div>
-  <div class="panel"><div class="panel-label">MATERIALS ROLL-UP</div><div id="sum-mat"></div></div>
+  <div class="panel" id="sum-labor-panel"><div class="panel-label">LABOR ROLL-UP</div><div id="sum-labor"></div></div>
+  <div class="panel" id="sum-mat-panel"><div class="panel-label">MATERIALS ROLL-UP</div><div id="sum-mat"></div></div>
   <div class="panel"><div class="panel-label">PER-SECTION BREAKDOWN <span style="font-family:var(--body);color:var(--gray-mid);font-size:11px;letter-spacing:normal;text-transform:none;">BICSI WBS</span></div><div id="sum-sections"></div></div>
-  <div class="panel"><div class="panel-label teal">OTHER DIRECT COSTS</div><div id="sum-odc"></div></div>
+  <div class="panel" id="sum-odc-panel"><div class="panel-label teal">OTHER DIRECT COSTS</div><div id="sum-odc"></div></div>
   <div class="panel" id="sum-financial-panel"><div class="panel-label">FINANCIAL ROLL-UP</div><div id="sum-financial"></div></div>
 
   <div class="panel collapsible assumptions-panel" id="sum-assumptions-panel">
@@ -2050,6 +2052,9 @@ function renderSummary(s){
   v('hdl-breakdown').style.gridTemplateColumns = isInternal ? 'repeat(4,1fr)' : 'repeat(3,1fr)';
   v('cost-chart-card').style.display = isInternal ? '' : 'none';
   v('sum-financial-panel').style.display = isInternal ? '' : 'none';
+  v('sum-labor-panel').style.display = isInternal ? '' : 'none';
+  v('sum-mat-panel').style.display = isInternal ? '' : 'none';
+  v('sum-odc-panel').style.display = isInternal ? '' : 'none';
   v('sum-labor').innerHTML = [
     ['WBS labor sell', fmtMoney(s.wbsLaborSell)],
     ['Materials labor sell', fmtMoney(s.matLaborSell)],

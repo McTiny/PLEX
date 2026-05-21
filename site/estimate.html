@@ -151,6 +151,9 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
 .sum-val.green{color:var(--green);}
 .sum-val.warn{color:var(--warn);}
 .sum-val.big{font-size:18px;}
+.sum-row-block{display:block;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.sum-row-block .sum-key{display:block;margin-bottom:4px;}
+.sum-txt{color:var(--gray-light);font-size:12px;line-height:1.6;white-space:pre-wrap;font-family:var(--body);font-weight:400;}
 .summary-header{margin-bottom:20px;display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:14px;}
 .summary-header h1{font-family:var(--display);font-size:28px;color:var(--white);font-weight:700;letter-spacing:0.02em;}
 .sum-meta{font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-top:6px;}
@@ -287,9 +290,12 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   .bar-track{height:7px !important;background:#ddd !important;border-color:#bbb !important;}
   .bar-fill{print-color-adjust:exact;-webkit-print-color-adjust:exact;background:#9E0B23 !important;}
   .bar-fill.materials{background:#3b82f6 !important;}
-  /* 2-column Schedule & Crew rows */
-  #sum-sched{display:grid !important;grid-template-columns:1fr 1fr !important;column-gap:16pt !important;}
-  #sum-sched .sum-row{border-bottom:1px solid #eee !important;}
+  /* 2-column layouts */
+  #sum-project,#sum-sched,#sum-sections{display:grid !important;grid-template-columns:1fr 1fr !important;column-gap:16pt !important;}
+  #sum-sched .sum-row,#sum-sections .sum-row{border-bottom:1px solid #eee !important;}
+  /* Block rows (Scope/Exclusions/Notes) span full width */
+  .sum-row-block{grid-column:1/-1 !important;border-bottom:1px solid #eee !important;}
+  .sum-txt{font-size:8pt !important;line-height:1.4 !important;color:#333 !important;white-space:pre-wrap !important;}
   .chart-stack{border:1px solid #999 !important;print-color-adjust:exact;-webkit-print-color-adjust:exact;}
   .chart-seg{color:white !important;print-color-adjust:exact;-webkit-print-color-adjust:exact;}
   .chart-title{color:#222 !important;}
@@ -590,7 +596,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   <div class="panel"><div class="panel-label">SCHEDULE &amp; CREW</div><div id="sum-sched"></div></div>
   <div class="panel" id="sum-labor-panel"><div class="panel-label">LABOR ROLL-UP</div><div id="sum-labor"></div></div>
   <div class="panel" id="sum-mat-panel"><div class="panel-label">MATERIALS ROLL-UP</div><div id="sum-mat"></div></div>
-  <div class="panel"><div class="panel-label">PER-SECTION BREAKDOWN <span style="font-family:var(--body);color:var(--gray-mid);font-size:11px;letter-spacing:normal;text-transform:none;">BICSI WBS</span></div><div id="sum-sections"></div></div>
+  <div class="panel"><div class="panel-label">PER-SECTION BREAKDOWN</div><div id="sum-sections"></div></div>
   <div class="panel" id="sum-odc-panel"><div class="panel-label teal">OTHER DIRECT COSTS</div><div id="sum-odc"></div></div>
   <div class="panel" id="sum-financial-panel"><div class="panel-label">FINANCIAL ROLL-UP</div><div id="sum-financial"></div></div>
 
@@ -1678,6 +1684,9 @@ function removeOdc(bucket, id){
 function sumRow(k, val){
   return `<div class="sum-row"><span class="sum-key">${esc(k)}</span><span class="sum-val">${val}</span></div>`;
 }
+function sumRowBlock(k, val){
+  return `<div class="sum-row-block"><span class="sum-key">${esc(k)}</span><div class="sum-txt">${val}</div></div>`;
+}
 
 // =========================================================================
 // MATERIALS PANEL RENDER
@@ -2001,16 +2010,16 @@ function renderSummary(s){
 
   // Project info
   v('sum-project').innerHTML = [
-    ['Project Name', p.name || '—'],
-    ['Client', p.client || '—'],
-    ['Location', p.location || '—'],
-    ['Estimator', p.estimator || '—'],
-    ['Proposal Date', p.proposalDate || '—'],
-    ['Valid Until', p.validUntil || '—'],
-    ['Scope', p.scope || '—'],
-    ['Exclusions', p.exclusions || '—'],
-    ['Notes', p.notes || '—']
-  ].map(r => sumRow(r[0], esc(r[1]))).join('');
+    sumRow('Project Name', esc(p.name || '—')),
+    sumRow('Client', esc(p.client || '—')),
+    sumRow('Location', esc(p.location || '—')),
+    sumRow('Estimator', esc(p.estimator || '—')),
+    sumRow('Proposal Date', esc(p.proposalDate || '—')),
+    sumRow('Valid Until', esc(p.validUntil || '—')),
+    sumRowBlock('Scope', esc(p.scope || '—')),
+    sumRowBlock('Exclusions', esc(p.exclusions || '—')),
+    sumRowBlock('Notes', esc(p.notes || '—'))
+  ].join('');
 
   // Schedule & Crew
   v('sum-sched').innerHTML = [

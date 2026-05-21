@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!--
-  PLEX v2.27 — Power Load EXaminer
+  PLEX v2.28 — Power Load EXaminer
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary engineering and coordination only.
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLEX v2.27 — Power Load EXaminer | Limited Energy eXperts</title>
+<title>PLEX v2.28 — Power Load EXaminer | Limited Energy eXperts</title>
 <meta name="description" content="PLEX — Power Load EXaminer. Telecom room and equipment room power, UPS, generator, PoE, and cooling load sizing. Built by an RCDD for Division 27/28 coordination.">
 <meta property="og:title" content="PLEX — Power Load EXaminer">
 <meta property="og:description" content="TR/ER infrastructure sizing — power, UPS, generator, PoE, cooling. Built by an RCDD for Division 27/28 coordination.">
@@ -267,7 +267,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     <div class="header-brand">
       <div class="header-mark">⚡</div>
       <div>
-        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.27</span></div>
+        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.28</span></div>
         <div class="header-sub">POWER LOAD EXaminer &nbsp;·&nbsp; TR/ER INFRASTRUCTURE SIZING</div>
       </div>
     </div>
@@ -443,10 +443,10 @@ body{background:white !important;color:black !important;font-size:9pt;}
   <div class="panel" id="panel-electrical"><div class="panel-label">ELECTRICAL LOAD SUMMARY</div><div id="sum-electrical"></div></div>
   <div class="panel" id="panel-ups"><div class="panel-label">UPS STATUS &amp; RUNTIME</div><div id="sum-ups"></div></div>
   <div class="panel" id="panel-gen"><div class="panel-label">GENERATOR SIZING</div><div id="sum-gen"></div></div>
-  <div class="panel" id="panel-mech"><div class="panel-label">MECHANICAL / COOLING LOAD</div><div class="panel-sub">For HVAC coordination &mdash; BTU/hr = W &times; 3.412</div><div id="sum-mech"></div></div>
+  <div class="panel" id="panel-mech"><div class="panel-label">MECHANICAL / COOLING LOAD</div><div class="panel-sub">Coordination value only &mdash; room envelope, ventilation, ambient load, and redundancy not included. Verify with MEP.</div><div id="sum-mech"></div></div>
   <div class="panel" id="panel-poe"><div class="panel-label">PoE SUMMARY</div><div id="sum-poe"></div></div>
   <div class="panel" id="panel-wall"><div class="panel-label teal">WALL / FIELD DEVICES</div><div class="panel-sub">Independent circuits &mdash; outside rack PDU</div><div id="sum-wall"></div></div>
-  <div class="panel" id="panel-circuits"><div class="panel-label">CIRCUITS &amp; BREAKER SIZING</div><div class="panel-sub">NEC 125% continuous load factor applied &mdash; verify with AHJ and EOR</div><div id="sum-circuits"></div></div>
+  <div class="panel" id="panel-circuits"><div class="panel-label">CIRCUITS &amp; BREAKER SIZING</div><div class="panel-sub">125% continuous-load factor applied for planning. Circuit amperage at selected PDU voltage and applied power factor. Breaker shown is next standard commercial size above continuous-load current. Verify final circuiting with EOR/AHJ.</div><div id="sum-circuits"></div></div>
   <div class="panel" id="panel-racks"><div class="panel-label">PER-RACK BREAKDOWN</div><div id="sum-racks"></div></div>
   <div class="panel" id="sum-power-schedule">
     <div class="panel-label" id="sum-ps-label">POWER CONSUMPTION &amp; CIRCUIT SCHEDULE</div>
@@ -460,20 +460,20 @@ body{background:white !important;color:black !important;font-size:9pt;}
     <div class="panel-body" style="margin-top:10px">
       <ul>
         <li><strong>Power Factor.</strong> Default 0.90 applied to all loads. Adjust under Global Settings for known equipment behavior.</li>
-        <li><strong>NEC 125% Continuous Load.</strong> Applied to breaker and generator sizing where applicable. Verify with AHJ and EOR.</li>
+        <li><strong>NEC 125% Continuous Load.</strong> Applied for planning &mdash; breaker and generator sizing. Final circuiting to be verified and signed off by EOR/AHJ.</li>
         <li><strong>PoE Budget.</strong> Compared against camera <em>real draw</em> (typical operating watts), not maximum PoE class budget. Headroom is calculated against switch published PoE budget.</li>
         <li><strong>Wall-Mount Device Wattages.</strong> Wattages for wall-mounted devices (ACS controllers, power supplies, locks, intercoms, and field equipment) are reference estimates. Verify actual draw against manufacturer specifications and final hardware selections before design completion.</li>
         <li><strong>Cooling Load.</strong> BTU/h = Watts &times; 3.412. Cooling tons = BTU/h &divide; 12,000. HVAC recommendation includes a 25% buffer.</li>
         <li><strong>Generator Sizing.</strong> Total load &times; 1.25 (continuous). Growth recommendations show +25% and +50% above continuous.</li>
         <li><strong>UPS Runtime.</strong> Linear estimate from nameplate full-load runtime, scaled by load percentage. Actual runtime varies with battery age, temperature, and load profile.</li>
-        <li><strong>Breaker Selection.</strong> Next standard size at or above the 125% continuous current draw, from the NEC commercial breaker series.</li>
+        <li><strong>Breaker Selection.</strong> Breaker shown is the next standard commercial size at or above calculated continuous-load current. Final breaker and conductor sizing by licensed electrical engineer.</li>
         <li><strong>Redundant Power Supplies.</strong> Total system draw is unchanged &mdash; dual PSU equipment shares the load between supplies.</li>
-        <li><strong>Scope.</strong> Preliminary engineering and coordination only. Final electrical design by a licensed electrical engineer.</li>
+        <li><strong>Scope.</strong> Preliminary planning and coordination only. PLEX does not replace stamped electrical design. All outputs require review and sign-off by a licensed electrical engineer.</li>
       </ul>
     </div>
   </div>
   <div id="print-credit">
-    PLEX v2.27 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    PLEX v2.28 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
 </div>
 </div>
@@ -599,8 +599,9 @@ const ALL_FLAT=PRESETS.flatMap(c=>c.items.map(i=>({...i,category:c.cat})));
 const BTU_PER_WATT=3.41214;
 const STORAGE_KEY='plex_session_v2';
 const PLEX_SIG='PLEX-LEX';
-const PLEX_VERSION='2.27';
+const PLEX_VERSION='2.28';
 const STD_BREAKERS=[15,20,25,30,35,40,45,50,60,70,80,90,100,110,125,150,175,200];
+const STD_GENERATORS=[8,10,12.5,15,17.5,20,22,25,30,35,40,45,50,60,75,100,125,150,175,200,250,300,350,400,500];
 let state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:'',scheduleTitle:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''}],items:[],activeRackId:1};
 let nextItemId=1,nextRackId=2,customLoc='rack',dirty=false,lastSaveTime=null;
 const v=id=>document.getElementById(id);
@@ -612,6 +613,7 @@ window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.return
 setInterval(updateSavedIndicator,15000);
 const getActiveRack=()=>state.racks.find(r=>r.id===state.activeRackId)||state.racks[0];
 function standardBreaker(amps){const c=amps*1.25;const f=STD_BREAKERS.find(s=>s>=c);return f||'>200A';}
+function standardGenerator(kw){const f=STD_GENERATORS.find(s=>s>=kw);return f?f+' kW':'>500 kW';}
 function upsRuntime(capW,loadW,fullMin){if(loadW<=0||capW<=0||fullMin<=0)return null;if(loadW>capW)return 0;return fullMin/(loadW/capW);}
 function calc(){
   const pf=state.settings.powerFactor||0.9;
@@ -699,9 +701,29 @@ function renderSummary(s){
   s.perWall.forEach(wd=>{ch+=`<div class="circuit-row"><span class="circuit-name">${esc(wd.item.name)} (×${wd.item.qty||1})</span><span class="circuit-num">${wd.item.v}V</span><span class="circuit-num">${wd.watts.toFixed(0)}W</span><span class="circuit-num">${(wd.amps*1.25).toFixed(1)}A</span><span class="circuit-breaker">${wd.breaker}A</span><span style="color:var(--gray-mid);font-size:11px;">${esc(wd.item.circuitNotes||'')}</span></div>`;});
   if(s.perWall.length===0&&Object.values(s.perRack).every(r=>r.nonUpsWatts===0)&&s.allUpsItems.length===0)ch+='<div style="padding:16px;color:var(--gray-dark);font-style:italic;text-align:center;">No circuits yet.</div>';
   v('sum-circuits').innerHTML=ch;
-  v('sum-ups').innerHTML=[['Protected Load',s.nonUpsW.toFixed(0)+' W'],['UPS Capacity (W)',s.upsW+' W'],['UPS Capacity (VA)',s.upsVA+' VA'],['UPS Load %',s.upsW>0?s.upsP.toFixed(1)+'%':'No UPS configured'],['Estimated Runtime',fmtRuntime(s.upsRuntimeMin)],['UPS Units in Project',s.allUpsItems.length]].map(r=>sRow(r[0],r[1])).join('');
-  v('sum-gen').innerHTML=[['Total Load',s.totalW.toFixed(0)+' W'],['Continuous Load (×1.25)',(s.totalW*1.25/1000).toFixed(2)+' kW'],['Recommended Min Gen Size',s.generatorKW.toFixed(2)+' kW'],['Recommended with 25% Growth',(s.generatorKW*1.25).toFixed(2)+' kW'],['Recommended with 50% Growth',(s.generatorKW*1.50).toFixed(2)+' kW']].map(r=>sRow(r[0],r[1])).join('');
-  v('sum-mech').innerHTML=[['Total Heat Dissipation',s.btu.toFixed(0)+' BTU/hr'],['Cooling Load (tons)',s.tons.toFixed(2)+' tons'],['Cooling Load (kW thermal)',(s.totalW/1000).toFixed(2)+' kW'],['Recommended HVAC (+25%)',(s.tons*1.25).toFixed(2)+' tons']].map(r=>sRow(r[0],r[1])).join('');
+  const upsHasItems=s.allUpsItems.length>0;
+  v('sum-ups').innerHTML=[
+    ['Protected Load',s.nonUpsW.toFixed(0)+' W'],
+    ['UPS Capacity (W)',s.upsW>0?s.upsW+' W':upsHasItems?'—':'None'],
+    ['UPS Capacity (VA)',s.upsVA>0?s.upsVA+' VA':upsHasItems?'—':'None'],
+    ['UPS Load %',s.upsW>0?s.upsP.toFixed(1)+'%':upsHasItems?'UPS present — capacity not configured':'No UPS configured'],
+    ['Estimated Runtime',fmtRuntime(s.upsRuntimeMin)],
+    ['UPS Units in Project',s.allUpsItems.length]
+  ].map(r=>sRow(r[0],r[1])).join('');
+  v('sum-gen').innerHTML=[
+    ['Total Load',s.totalW.toFixed(0)+' W'],
+    ['Continuous Load (×1.25)',(s.totalW*1.25/1000).toFixed(2)+' kW'],
+    ['Calculated minimum',s.generatorKW.toFixed(2)+' kW'],
+    ['Next standard size',standardGenerator(s.generatorKW)],
+    ['With 25% growth',(s.generatorKW*1.25).toFixed(2)+' kW'],
+    ['With 50% growth',(s.generatorKW*1.50).toFixed(2)+' kW']
+  ].map(r=>sRow(r[0],r[1])).join('');
+  v('sum-mech').innerHTML=[
+    ['Total Heat Dissipation',s.btu.toFixed(0)+' BTU/hr'],
+    ['Cooling Load (tons)',s.tons.toFixed(2)+' tons'],
+    ['Cooling Load (kW thermal)',(s.totalW/1000).toFixed(2)+' kW'],
+    ['Coordination value (+25%)',(s.tons*1.25).toFixed(2)+' tons']
+  ].map(r=>sRow(r[0],r[1])).join('');
   v('sum-poe').innerHTML=[['PoE Budget Available',s.poeBW+' W'],['PoE Load (cameras)',s.poeCW+' W'],['PoE Utilization',s.poeBW>0?s.poeP.toFixed(1)+'%':'No PoE switches'],['PoE Headroom',(s.poeBW-s.poeCW)+' W']].map(r=>sRow(r[0],r[1])).join('');
   v('sum-racks').innerHTML=state.racks.map(rk=>{const ri=s.perRack[rk.id];const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===rk.id);let inner=`<div style="margin-bottom:14px;padding:10px;background:var(--navy);border-radius:4px;"><div style="font-family:var(--display);font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">${esc(rk.label)}${rk.redundant?' <span class="pill pill-warn" style="margin-left:8px">N+1</span>':''}</div><div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-bottom:8px;">${rk.sizeU}U · PDU ${rk.voltage}V · Fill ${ri.fillPct.toFixed(0)}% · Load ${ri.watts.toFixed(0)}W · Breaker ${ri.breaker}A</div>`;if(rk.notes)inner+=`<div style="font-size:11px;color:var(--gray-light);margin-bottom:8px;font-style:italic;">Notes: ${esc(rk.notes)}</div>`;if(items.length){inner+=`<div style="font-size:11px;color:var(--gray-light);">`;inner+=items.map(i=>`· ${i.qty}× ${esc(i.name)} (${(i.w*i.qty).toFixed(0)}W)`).join('<br>');inner+=`</div>`;}else inner+=`<div style="font-size:11px;color:var(--gray-dark);font-style:italic;">No devices</div>`;inner+=`</div>`;return inner;}).join('');
   if(s.perWall.length===0)v('sum-wall').innerHTML='<div style="color:var(--gray-dark);font-style:italic;">No wall/field devices.</div>';
@@ -745,7 +767,7 @@ function renderSummary(s){
       <td class="ps-brk-rack">${standardBreaker(a)}A</td>
       <td>${btu}</td>
       <td class="ps-dim">—</td>
-      <td class="ps-dim">UPS input</td>
+      <td class="ps-dim">Mains feed · UPS input</td>
     </tr>`;
   });
   s.perWall.forEach(wd=>{

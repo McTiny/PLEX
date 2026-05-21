@@ -60,8 +60,9 @@ body{background:var(--navy);color:var(--gray-light);font-family:var(--body);min-
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .panel{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:14px;}
-.panel-label{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.2em;margin-bottom:10px;display:flex;align-items:center;gap:8px;text-transform:uppercase;font-weight:700;}
+.panel-label{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.2em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;gap:8px;text-transform:uppercase;font-weight:700;}
 .panel-label.teal{color:var(--teal);}
+.panel-sub{font-family:var(--body);font-size:11px;color:var(--gray-mid);margin:-6px 0 12px;line-height:1.4;}
 .panel-header{background:none;border:none;width:100%;padding:0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--red);}
 .caret{transition:transform 0.2s;font-size:10px;}
 .collapsible.collapsed .caret{transform:rotate(-90deg);}
@@ -140,7 +141,7 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 .sum-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
 .sum-key{color:var(--gray-mid);font-family:var(--label);letter-spacing:0.05em;}
 .sum-val{color:var(--white);font-weight:600;font-family:var(--mono);}
-.summary-header{margin-bottom:20px;display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:14px;}
+.summary-header{margin-bottom:0;grid-column:1/-1;display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:14px;}
 .summary-header h1{font-family:var(--display);font-size:28px;color:var(--white);font-weight:700;letter-spacing:0.02em;}
 .sum-meta{font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-top:6px;}
 .circuit-row{display:grid;grid-template-columns:1fr 80px 80px 80px 80px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;align-items:center;}
@@ -185,6 +186,16 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 .assumptions-panel li::before{content:'▸';position:absolute;left:0;color:var(--red);font-size:10px;}
 .assumptions-panel li:last-child{border-bottom:none;}
 .assumptions-panel li strong{color:var(--white);font-weight:600;}
+#pane-summary{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
+#panel-project{grid-column:1/-1;order:1;}
+#panel-electrical{order:2;}#panel-ups{order:3;}
+#panel-gen{order:4;}#panel-mech{order:5;}
+#panel-poe{order:6;}#panel-wall{order:7;}
+#panel-circuits{grid-column:1/-1;order:8;}
+#panel-racks{grid-column:1/-1;order:9;}
+#sum-power-schedule{grid-column:1/-1;order:10;}
+#sum-assumptions-panel{grid-column:1/-1;order:11;}
+#print-credit{grid-column:1/-1;order:99;}
 .ps-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 .ps-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;min-width:800px;}
 .ps-table th{background:var(--navy-light);color:var(--red);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 8px;text-align:left;white-space:nowrap;border-bottom:2px solid var(--border2);}
@@ -205,8 +216,8 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 #credit-line a:hover{color:var(--red);border-bottom-color:var(--red);}
 .import-status.ok{background:rgba(34,197,94,0.1);border:1px solid var(--green);color:var(--green);}
 .import-status.err{background:rgba(239,68,68,0.1);border:1px solid var(--danger);color:var(--danger);}
-@media(max-width:880px){.two-col{grid-template-columns:1fr;}.grid-4{grid-template-columns:1fr 1fr;}#status-row{grid-template-columns:1fr;}.circuit-row{grid-template-columns:1fr 60px 60px 60px;font-size:11px;}.circuit-row>:nth-child(5),.circuit-row>:nth-child(6){display:none;}}
-@media print{body{background:white !important;color:black !important;font-size:11pt;}#header,#tabs,.tab-btn,.hbtn,.saved-indicator,.header-actions,#pane-build,#intro-block,#credit-line,.intro-badges,.best-viewed{display:none !important;}#pane-summary,#sum-assumptions-panel{display:block !important;}#sum-assumptions-panel.collapsed .panel-body{display:block !important;}.panel{background:white !important;border:1px solid #999 !important;page-break-inside:avoid;margin-bottom:12pt;padding:10pt;}.panel-label{color:#9E0B23 !important;font-weight:700;}.stat-card{background:white !important;border:1px solid #ccc !important;}.stat-value,.sum-val,.circuit-name,.device-name{color:black !important;}.stat-label,.sum-key,.gauge-meta,.status-lbl,.device-tag,.u-val,.sum-meta{color:#555 !important;}.summary-header h1{color:black !important;}.total-w,.wall-w,.circuit-breaker{color:#9E0B23 !important;}#printBtn,.no-print{display:none !important;}.circuit-row,.sum-row{border-bottom:1px solid #ccc !important;}.tbl-row{border-bottom:1px solid #ccc !important;}.assumptions-panel li{color:#222 !important;}.assumptions-panel li strong{color:black !important;}.assumptions-panel li::before{color:#9E0B23 !important;}#sum-power-schedule{page-break-inside:auto !important;}.ps-wrap{overflow-x:visible !important;}.ps-table{width:100% !important;min-width:0 !important;font-size:7.5pt !important;border-collapse:collapse !important;}.ps-table th{background:#f0f0f0 !important;color:#9E0B23 !important;font-size:7pt !important;border:1px solid #ccc !important;padding:3pt 5pt !important;white-space:normal !important;}.ps-table td{border:1px solid #ddd !important;padding:3pt 5pt !important;color:black !important;white-space:normal !important;}.ps-table tr.ps-total td{background:#f5f5f5 !important;font-weight:700 !important;border-top:2px solid #999 !important;}.ps-table .ps-name,.ps-table .ps-loc,.ps-table .ps-dim{color:#333 !important;}.ps-table .ps-w,.ps-table .ps-brk-rack{color:#9E0B23 !important;}.ps-table .ps-wall,.ps-table .ps-brk-wall{color:#0a7a70 !important;}#print-credit{display:block !important;text-align:center;font-family:monospace;font-size:9pt;color:#666 !important;margin-top:16pt;padding-top:8pt;border-top:1px solid #ccc;}@page{margin:0.5in;}}
+@media(max-width:880px){.two-col{grid-template-columns:1fr;}.grid-4{grid-template-columns:1fr 1fr;}#status-row{grid-template-columns:1fr;}.circuit-row{grid-template-columns:1fr 60px 60px 60px;font-size:11px;}.circuit-row>:nth-child(5),.circuit-row>:nth-child(6){display:none;}#pane-summary{grid-template-columns:1fr !important;}#pane-summary .panel,#pane-summary .summary-header{grid-column:1/-1 !important;}}
+@media print{body{background:white !important;color:black !important;font-size:11pt;}#header,#tabs,.tab-btn,.hbtn,.saved-indicator,.header-actions,#pane-build,#intro-block,#credit-line,.intro-badges,.best-viewed{display:none !important;}#pane-summary{display:grid !important;grid-template-columns:1fr 1fr !important;gap:10pt;}#sum-assumptions-panel{display:block !important;}#sum-assumptions-panel.collapsed .panel-body{display:block !important;}.panel{background:white !important;border:1px solid #999 !important;page-break-inside:avoid;margin-bottom:12pt;padding:10pt;}.panel-label{color:#9E0B23 !important;font-weight:700;}.stat-card{background:white !important;border:1px solid #ccc !important;}.stat-value,.sum-val,.circuit-name,.device-name{color:black !important;}.stat-label,.sum-key,.gauge-meta,.status-lbl,.device-tag,.u-val,.sum-meta{color:#555 !important;}.summary-header h1{color:black !important;}.total-w,.wall-w,.circuit-breaker{color:#9E0B23 !important;}#printBtn,.no-print{display:none !important;}.circuit-row,.sum-row{border-bottom:1px solid #ccc !important;}.tbl-row{border-bottom:1px solid #ccc !important;}.assumptions-panel li{color:#222 !important;}.assumptions-panel li strong{color:black !important;}.assumptions-panel li::before{color:#9E0B23 !important;}#sum-power-schedule{page-break-inside:auto !important;}.ps-wrap{overflow-x:visible !important;}.ps-table{width:100% !important;min-width:0 !important;font-size:7.5pt !important;border-collapse:collapse !important;}.ps-table th{background:#f0f0f0 !important;color:#9E0B23 !important;font-size:7pt !important;border:1px solid #ccc !important;padding:3pt 5pt !important;white-space:normal !important;}.ps-table td{border:1px solid #ddd !important;padding:3pt 5pt !important;color:black !important;white-space:normal !important;}.ps-table tr.ps-total td{background:#f5f5f5 !important;font-weight:700 !important;border-top:2px solid #999 !important;}.ps-table .ps-name,.ps-table .ps-loc,.ps-table .ps-dim{color:#333 !important;}.ps-table .ps-w,.ps-table .ps-brk-rack{color:#9E0B23 !important;}.ps-table .ps-wall,.ps-table .ps-brk-wall{color:#0a7a70 !important;}.panel-label{border-bottom:1px solid #ccc !important;padding-bottom:6pt !important;margin-bottom:10pt !important;}.panel-sub{color:#555 !important;font-size:9pt !important;margin-bottom:8pt !important;}#print-credit{display:block !important;grid-column:1/-1 !important;order:99 !important;text-align:center;font-family:monospace;font-size:9pt;color:#666 !important;margin-top:16pt;padding-top:8pt;border-top:1px solid #ccc;}@page{margin:0.5in;}}
 #print-credit{display:none;}
 </style>
 </head>
@@ -388,22 +399,22 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
     <div><h1 id="sum-title">PLEX Project Summary</h1><div class="sum-meta" id="sum-subtitle">No project loaded</div></div>
     <button class="hbtn primary no-print" id="printBtn">🖨 Print / Save PDF</button>
   </div>
-  <div class="panel"><div class="panel-label">PROJECT INFORMATION</div><div id="sum-project"></div></div>
-  <div class="panel"><div class="panel-label">ELECTRICAL LOAD SUMMARY</div><div id="sum-electrical"></div></div>
-  <div class="panel"><div class="panel-label">CIRCUITS &amp; BREAKER SIZING <span style="font-family:var(--body);color:var(--gray-mid);font-size:11px;letter-spacing:normal;text-transform:none;">— NEC 125% continuous load</span></div><div id="sum-circuits"></div></div>
-  <div class="panel"><div class="panel-label">UPS STATUS &amp; RUNTIME</div><div id="sum-ups"></div></div>
-  <div class="panel"><div class="panel-label">GENERATOR SIZING</div><div id="sum-gen"></div></div>
-  <div class="panel"><div class="panel-label">MECHANICAL / COOLING LOAD <span style="font-family:var(--body);color:var(--gray-mid);font-size:11px;letter-spacing:normal;text-transform:none;">— for HVAC sizing</span></div><div id="sum-mech"></div></div>
-  <div class="panel"><div class="panel-label">PoE SUMMARY</div><div id="sum-poe"></div></div>
-  <div class="panel"><div class="panel-label">PER-RACK BREAKDOWN</div><div id="sum-racks"></div></div>
-  <div class="panel"><div class="panel-label teal">WALL / FIELD DEVICES — INDIVIDUAL CIRCUITS</div><div id="sum-wall"></div></div>
+  <div class="panel" id="panel-project"><div class="panel-label">PROJECT INFORMATION</div><div id="sum-project"></div></div>
+  <div class="panel" id="panel-electrical"><div class="panel-label">ELECTRICAL LOAD SUMMARY</div><div id="sum-electrical"></div></div>
+  <div class="panel" id="panel-ups"><div class="panel-label">UPS STATUS &amp; RUNTIME</div><div id="sum-ups"></div></div>
+  <div class="panel" id="panel-gen"><div class="panel-label">GENERATOR SIZING</div><div id="sum-gen"></div></div>
+  <div class="panel" id="panel-mech"><div class="panel-label">MECHANICAL / COOLING LOAD</div><div class="panel-sub">For HVAC coordination &mdash; BTU/hr = W &times; 3.412</div><div id="sum-mech"></div></div>
+  <div class="panel" id="panel-poe"><div class="panel-label">PoE SUMMARY</div><div id="sum-poe"></div></div>
+  <div class="panel" id="panel-wall"><div class="panel-label teal">WALL / FIELD DEVICES</div><div class="panel-sub">Independent circuits &mdash; outside rack PDU</div><div id="sum-wall"></div></div>
+  <div class="panel" id="panel-circuits"><div class="panel-label">CIRCUITS &amp; BREAKER SIZING</div><div class="panel-sub">NEC 125% continuous load factor applied &mdash; verify with AHJ and EOR</div><div id="sum-circuits"></div></div>
+  <div class="panel" id="panel-racks"><div class="panel-label">PER-RACK BREAKDOWN</div><div id="sum-racks"></div></div>
   <div class="panel" id="sum-power-schedule">
     <div class="panel-label" id="sum-ps-label">POWER CONSUMPTION &amp; CIRCUIT SCHEDULE</div>
     <div id="sum-ps-table"></div>
   </div>
   <div class="panel collapsible assumptions-panel" id="sum-assumptions-panel">
     <button class="panel-header" id="assumptionsToggle">
-      <span class="panel-label" style="margin-bottom:0">KNOWN ASSUMPTIONS &amp; METHODOLOGY</span>
+      <span class="panel-label" style="margin-bottom:0;padding-bottom:0;border-bottom:none;">KNOWN ASSUMPTIONS &amp; METHODOLOGY</span>
       <span class="caret">▼</span>
     </button>
     <div class="panel-body" style="margin-top:10px">
@@ -411,7 +422,7 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
         <li><strong>Power Factor.</strong> Default 0.90 applied to all loads. Adjust under Global Settings for known equipment behavior.</li>
         <li><strong>NEC 125% Continuous Load.</strong> Applied to breaker and generator sizing where applicable. Verify with AHJ and EOR.</li>
         <li><strong>PoE Budget.</strong> Compared against camera <em>real draw</em> (typical operating watts), not maximum PoE class budget. Headroom is calculated against switch published PoE budget.</li>
-        <li><strong>Mercury Controller Wattages.</strong> Assume 2 DESFire-class readers per reader port at approximately 1.5W each. Adjust the device wattage in the table if your reader hardware draws differently or port count varies.</li>
+        <li><strong>Wall-Mount Device Wattages.</strong> Wattages for wall-mounted devices (ACS controllers, power supplies, locks, intercoms, and field equipment) are reference estimates. Verify actual draw against manufacturer specifications and final hardware selections before design completion.</li>
         <li><strong>Cooling Load.</strong> BTU/h = Watts &times; 3.412. Cooling tons = BTU/h &divide; 12,000. HVAC recommendation includes a 25% buffer.</li>
         <li><strong>Generator Sizing.</strong> Total load &times; 1.25 (continuous). Growth recommendations show +25% and +50% above continuous.</li>
         <li><strong>UPS Runtime.</strong> Linear estimate from nameplate full-load runtime, scaled by load percentage. Actual runtime varies with battery age, temperature, and load profile.</li>
@@ -424,7 +435,6 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
   <div id="print-credit">
     PLEX v2.26 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
-  <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);text-align:center;margin-top:20px;letter-spacing:0.1em;" class="no-print">Generated by PLEX &mdash; Power Load EXaminer &middot; limitedenergy.net/plex</div>
 </div>
 </div>
 <div id="credit-line">
@@ -635,12 +645,13 @@ function bindRowEvents(el){
 function renderRack(s){const r=getActiveRack();const body=v('rack-body'),ft=v('rack-footer');const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===r.id);if(!items.length){body.innerHTML='<div class="tbl-empty">No devices in this rack yet.</div>';ft.style.display='none';return;}body.innerHTML=items.map(makeRackRow).join('');ft.style.display='grid';const ri=s.perRack[r.id];v('tf-u').textContent=ri.u+'U';v('tf-rw').textContent=ri.watts.toFixed(0)+'W';bindRowEvents(body);}
 function renderWall(s){const body=v('wall-body'),ft=v('wall-footer');const items=state.items.filter(i=>i.loc==='wall');if(!items.length){body.innerHTML='<div class="tbl-empty">No wall/field devices yet. Add ACS power supplies, controllers, locks, or DAS/EERC.</div>';ft.style.display='none';return;}body.innerHTML=items.map(makeWallRow).join('');ft.style.display='grid';v('tf-ww').textContent=s.wallW.toFixed(0)+'W';bindRowEvents(body);}
 function sRow(k,val){return`<div class="sum-row"><span class="sum-key">${esc(k)}</span><span class="sum-val">${val}</span></div>`;}
+function sRowLong(k,val){return`<div class="sum-row" style="flex-direction:column;align-items:flex-start;gap:4px;"><span class="sum-key">${esc(k)}</span><div style="font-size:12px;color:var(--gray-light);line-height:1.6;font-family:var(--body);word-break:break-word;max-width:100%;">${esc(val)}</div></div>`;}
 function renderSummary(s){
   const p=state.project;
   v('sum-title').textContent=p.name||'PLEX Project Summary';
   const sp=[];if(p.room)sp.push(p.room);if(p.building)sp.push(p.building);if(p.floor)sp.push('Floor '+p.floor);if(p.date)sp.push(p.date);
   v('sum-subtitle').textContent=sp.length?sp.join(' · '):'Enter project info in the Builder tab';
-  v('sum-project').innerHTML=[['Project Name',p.name||'—'],['Room / Closet',p.room||'—'],['Building',p.building||'—'],['Floor',p.floor||'—'],['Designer',p.designer||'—'],['Date',p.date||'—'],['Notes',p.notes||'—']].map(r=>sRow(r[0],r[1])).join('');
+  v('sum-project').innerHTML=[['Project Name',p.name||'—'],['Room / Closet',p.room||'—'],['Building',p.building||'—'],['Floor',p.floor||'—'],['Designer',p.designer||'—'],['Date',p.date||'—']].map(r=>sRow(r[0],r[1])).join('')+(p.notes?sRowLong('Notes',p.notes):'');
   v('sum-electrical').innerHTML=[['Total Real Power',s.totalW.toFixed(0)+' W'],['Total Apparent Power',s.totalVA.toFixed(0)+' VA'],['Power Factor Applied',state.settings.powerFactor.toFixed(2)],['Amperage @ 120V',s.a120.toFixed(1)+'A'],['Amperage @ 208V',s.a208.toFixed(1)+'A'],['Amperage @ 240V',s.a240.toFixed(1)+'A'],['Rack Load Subtotal',(s.totalW-s.wallW).toFixed(0)+' W'],['Wall/Field Subtotal',s.wallW.toFixed(0)+' W']].map(r=>sRow(r[0],r[1])).join('');
   let ch=`<div class="circuit-row hdr"><span>Circuit / Source</span><span>Voltage</span><span>Load (W)</span><span>Continuous (A)</span><span>Breaker</span><span>Notes</span></div>`;
   Object.values(s.perRack).forEach(rk=>{if(rk.nonUpsWatts>0)ch+=`<div class="circuit-row"><span class="circuit-name">${esc(rk.rack.label)} (PDU)${rk.rack.redundant?' · N+1':''}</span><span class="circuit-num">${rk.rack.voltage}V</span><span class="circuit-num">${rk.nonUpsWatts.toFixed(0)}W</span><span class="circuit-num">${(rk.amps*1.25).toFixed(1)}A</span><span class="circuit-breaker">${rk.breaker}A</span><span style="color:var(--gray-mid);font-size:11px;">${esc(rk.rack.notes||'')}</span></div>`;});

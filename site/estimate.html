@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!--
-  THE ESTIMATOR v1.23 — Limited Energy Job Estimation
+  THE ESTIMATOR v1.24 — Limited Energy Job Estimation
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary estimation and proposal use only.
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Estimator v1.23 — Limited Energy Job Estimation | Limited Energy eXperts</title>
+<title>The Estimator v1.24 — Limited Energy Job Estimation | Limited Energy eXperts</title>
 <meta name="description" content="The Estimator — limited energy job estimation. Schedule-driven crew sizing, BICSI-coded scope, federal/California overtime, local/remote cost variants. Built by an RCDD for Division 27/28 estimating.">
 <meta property="og:title" content="The Estimator — Limited Energy Job Estimation">
 <meta property="og:description" content="Schedule-driven crew sizing, BICSI-coded scope, OT math, local/remote variants. Client-side JSON save/load.">
@@ -316,7 +316,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
     <div class="header-brand">
       <div class="header-mark">🧮</div>
       <div>
-        <div class="header-title">THE ESTIMATOR <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v1.23</span></div>
+        <div class="header-title">THE ESTIMATOR <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v1.24</span></div>
         <div class="header-sub">LIMITED ENERGY &nbsp;·&nbsp; JOB ESTIMATION</div>
       </div>
     </div>
@@ -576,7 +576,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   <div class="panel"><div class="panel-label">PROJECT INFORMATION</div><div id="sum-project"></div></div>
 
   <div class="headline-card">
-    <div class="lbl">FINAL PROPOSAL PRICE</div>
+    <div class="lbl" id="hdl-price-lbl">FINAL PROPOSAL PRICE</div>
     <div class="price" id="hdl-price">$0</div>
     <div class="breakdown" id="hdl-breakdown">
       <div id="hdl-bd-labor">LABOR<span class="v" id="hdl-labor">$0</span></div>
@@ -607,6 +607,8 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   <div class="panel"><div class="panel-label">PER-SECTION BREAKDOWN</div><div id="sum-sections"></div></div>
   <div class="panel" id="sum-odc-panel"><div class="panel-label teal">OTHER DIRECT COSTS</div><div id="sum-odc"></div></div>
   <div class="panel" id="sum-financial-panel"><div class="panel-label">FINANCIAL ROLL-UP</div><div id="sum-financial"></div></div>
+  <div class="panel" id="sum-bid-health-panel"><div class="panel-label teal">BID HEALTH INDICATORS</div><div id="sum-bid-health"></div></div>
+  <div class="panel" id="sum-risk-flags-panel"><div class="panel-label" style="color:var(--warn)">RISK FLAGS</div><div id="sum-risk-flags"></div></div>
 
   <div class="panel" id="sum-acceptance">
     <div class="panel-label">TESTING &amp; ACCEPTANCE CRITERIA</div>
@@ -624,7 +626,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
       <li><strong>Site access.</strong> Owner shall provide safe, unobstructed access to all work areas, including above-ceiling pathways and equipment rooms. Delays caused by restricted access may result in a schedule and cost change order.</li>
       <li><strong>Concealed conditions.</strong> Pricing assumes accessible pathways per contract documents. Obstructed or undisclosed field conditions will be documented and resolved by written change order.</li>
       <li><strong>Change orders.</strong> All work outside agreed scope requires written authorization prior to performance. Verbal direction does not constitute a change order.</li>
-      <li><strong>Camera scope.</strong> Contractor responsibility is limited to cable installation, installation of Owner-furnished standard camera mounts where backing, structure, pathway, and access are available, termination, and PoE link verification. Final aiming, VMS programming, analytics configuration, and commissioning are by Owner's security integrator unless explicitly included in writing.</li>
+      <li><strong>Camera scope.</strong> Contractor responsibility is limited to cable installation, termination, PoE link verification, and installation of Owner-furnished standard camera mounts where backing, structure, pathway, and access are available. Final aiming, VMS programming, analytics configuration, and commissioning are by Owner's security integrator unless explicitly included in writing.</li>
       <li><strong>Permit &amp; tax.</strong> Proposal price excludes applicable sales tax and permit fees, which will be added as direct pass-through costs if required.</li>
       <li><strong>Proposal validity.</strong> Pricing is valid for 30 days from the proposal date. Material cost volatility may require adjustment after expiration.</li>
       <li><strong>Payment terms.</strong> Net 30 days from invoice date. Progress billing submitted monthly for work-in-place. Final payment due upon punch-list completion and closeout document delivery.</li>
@@ -681,7 +683,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   </div>
 
   <div id="print-credit">
-    The Estimator v1.23 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    The Estimator v1.24 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
   <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);text-align:center;margin-top:20px;letter-spacing:0.1em;" class="no-print">Generated by The Estimator &middot; limitedenergy.net/estimate</div>
 </div>
@@ -915,7 +917,7 @@ const DEFAULT_COST_BURDEN = 0.60; // legacy v1.1 migration: costRate = sellRate 
 
 const STORAGE_KEY = 'lex_est_session_v1';
 const SIG = 'LEX-EST';
-const EST_VERSION = '1.23';
+const EST_VERSION = '1.24';
 
 const WORKWEEK_PATTERNS = {
   '5x8':  {hpd:8,  dpw:5},
@@ -2119,10 +2121,13 @@ function renderSummary(s){
     v(id).style.display = isInternal ? 'none' : '';
   });
   v('hdl-breakdown').style.gridTemplateColumns = isInternal ? 'repeat(4,1fr)' : 'repeat(3,1fr)';
+  v('hdl-price-lbl').textContent = isInternal ? 'TOTAL SELL PRICE' : 'FINAL PROPOSAL PRICE';
   v('hdl-price-note').style.display = isInternal ? 'none' : '';
   v('sum-signature').style.display = isInternal ? 'none' : '';
   v('cost-chart-card').style.display = isInternal ? '' : 'none';
   v('sum-financial-panel').style.display = isInternal ? '' : 'none';
+  v('sum-bid-health-panel').style.display = isInternal ? '' : 'none';
+  v('sum-risk-flags-panel').style.display = isInternal ? '' : 'none';
   v('sum-labor-panel').style.display = isInternal ? '' : 'none';
   v('sum-mat-panel').style.display = isInternal ? '' : 'none';
   v('sum-odc-panel').style.display = isInternal ? '' : 'none';
@@ -2182,31 +2187,82 @@ function renderSummary(s){
   }
   v('sum-odc').innerHTML = odcRows.map(r => sumRow(r[0], r[1])).join('');
 
-  // Financial roll-up — customer view shows sell-side stack to final price.
-  // Internal view stacks cost side underneath with profit & effective margin.
-  const sellRows = [
-    ['Direct labor (sell)', fmtMoney(s.directLaborSell)],
-    ['Direct materials (sell)', fmtMoney(s.directMaterialsSell)],
-    ['Direct ODC (sell)', fmtMoney(s.directODCSell)],
-    ['Direct subtotal (sell)', fmtMoney(s.directSellSubtotal)],
-    [`Overhead @ ${fmtPct(s.overheadPct)} (sell)`, fmtMoney(s.overheadSell)],
-    ['Subtotal with overhead (sell)', fmtMoney(s.sellWithOH)],
-    [`Margin form @ ${fmtPct(s.marginPct)}`, fmtMoney(s.marginAmount)],
-    ['Final proposal price', `<span style="color:var(--red);font-size:18px">${fmtMoney(s.finalPrice)}</span>`]
+  // Financial roll-up — three visually separated sections in internal view
+  const fhdr = txt => `<div style="font-family:var(--mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);padding:10px 0 3px;border-top:1px solid var(--border2);margin-top:4px">${txt}</div>`;
+  const finParts = [
+    fhdr('Customer-Facing Sell Summary'),
+    sumRow('Direct labor (sell)', fmtMoney(s.directLaborSell)),
+    sumRow('Direct materials (sell)', fmtMoney(s.directMaterialsSell)),
+    sumRow('Direct ODC (sell)', fmtMoney(s.directODCSell)),
+    sumRow('Direct subtotal (sell)', fmtMoney(s.directSellSubtotal)),
+    sumRow(`Overhead @ ${fmtPct(s.overheadPct)}`, fmtMoney(s.overheadSell)),
+    sumRow('Subtotal with overhead', fmtMoney(s.sellWithOH)),
+    sumRow(`Margin form @ ${fmtPct(s.marginPct)}`, fmtMoney(s.marginAmount)),
+    sumRow('Total sell price', `<span style="color:var(--red);font-size:18px">${fmtMoney(s.finalPrice)}</span>`),
+    ...(isInternal ? [
+      fhdr('Internal Cost Basis'),
+      sumRow('Direct labor (cost)', fmtMoney(s.directLaborCost)),
+      sumRow('Direct materials (cost)', fmtMoney(s.directMaterialsCost)),
+      sumRow('Direct ODC (cost)', fmtMoney(s.directODCCost)),
+      sumRow('Direct subtotal (cost)', fmtMoney(s.directCostSubtotal)),
+      sumRow(`Overhead @ ${fmtPct(s.overheadPct)} (cost)`, fmtMoney(s.overheadCost)),
+      sumRow('Fully burdened cost', fmtMoney(s.totalCost)),
+      fhdr('Internal Profit Analysis'),
+      sumRow('Total project profit', `<span style="color:var(--green);font-size:16px">${fmtMoney(s.totalProfit)}</span>`),
+      sumRow('Effective margin', `<span style="color:var(--green);font-size:16px">${fmtPct(s.effectiveMargin)}</span>`)
+    ] : [])
   ];
-  const intRows = isInternal ? [
-    ['— Internal: COST side —', ''],
-    ['Direct labor (cost)', fmtMoney(s.directLaborCost)],
-    ['Direct materials (cost)', fmtMoney(s.directMaterialsCost)],
-    ['Direct ODC (cost)', fmtMoney(s.directODCCost)],
-    ['Direct subtotal (cost)', fmtMoney(s.directCostSubtotal)],
-    [`Overhead @ ${fmtPct(s.overheadPct)} (cost)`, fmtMoney(s.overheadCost)],
-    ['Fully burdened cost', fmtMoney(s.totalCost)],
-    ['— Profit —', ''],
-    ['Total project profit', `<span style="color:var(--green);font-size:16px">${fmtMoney(s.totalProfit)}</span>`],
-    ['Effective margin', `<span style="color:var(--green);font-size:16px">${fmtPct(s.effectiveMargin)}</span>`]
-  ] : [];
-  v('sum-financial').innerHTML = [...sellRows, ...intRows].map(r => sumRow(r[0], r[1])).join('');
+  v('sum-financial').innerHTML = finParts.join('');
+
+  // Bid health indicators (internal only)
+  if(isInternal){
+    const dropCount = state.materials.items
+      .filter(m => /jack|connector/i.test(m.category || ''))
+      .reduce((acc, m) => acc + (m.qty || 0), 0);
+    const hrs = s.totalHours;
+    const bhRows = [];
+    if(dropCount > 0){
+      bhRows.push(sumRow('Outlet drop count (jacks / terminations)', String(dropCount)));
+      bhRows.push(sumRow('Labor hours / outlet drop', (hrs / dropCount).toFixed(1) + ' hrs'));
+      bhRows.push(sumRow('Material cost / outlet drop', '$' + (s.directMaterialsCost / dropCount).toFixed(0)));
+      bhRows.push(sumRow('Sell price / outlet drop', '$' + (s.finalPrice / dropCount).toFixed(0)));
+    }
+    if(hrs > 0){
+      bhRows.push(sumRow('Sell price / labor hour', '$' + (s.finalPrice / hrs).toFixed(0) + '/hr'));
+      bhRows.push(sumRow('Profit / labor hour', '$' + (s.totalProfit / hrs).toFixed(0) + '/hr'));
+    }
+    bhRows.push(sumRow('Labor % of sell price', (s.directLaborSell / s.finalPrice * 100).toFixed(1) + '%'));
+    bhRows.push(sumRow('Materials % of sell price', (s.directMaterialsSell / s.finalPrice * 100).toFixed(1) + '%'));
+    const baseCrew = state.schedule.baselineCrew || 1;
+    bhRows.push(sumRow('Required crew vs. baseline', `${s.requiredCrew} required / ${baseCrew} baseline`));
+    bhRows.push(sumRow('OT premium modeled', s.otPremiumSell > 0 ? fmtMoney(s.otPremiumSell) + ' (in budget)' : 'None'));
+    bhRows.push(sumRow('Contingency / ODC', s.directODCSell > 0 ? fmtMoney(s.directODCSell) + ' modeled' : '⚠ Not modeled — recommend 5–10% allowance'));
+    v('sum-bid-health').innerHTML = bhRows.join('');
+
+    // Risk flags (auto-detect + static)
+    const flags = [];
+    const sec400 = state.wbs.sections.find(sec => sec.id === '400');
+    if(sec400 && sec400.items.length){
+      const s400hrs = sec400.items.reduce((sum, it) => sum + (it.labor.qty||0)*(it.labor.hoursEach||0), 0);
+      const pct = hrs > 0 ? s400hrs / hrs : 0;
+      if(pct > 0.45) flags.push(`High horizontal labor dependency — section 400 is ${(pct*100).toFixed(0)}% of total hours`);
+    }
+    const hasCam = state.wbs.sections.some(sec => sec.id === '800' && sec.items && sec.items.length > 0);
+    if(hasCam){
+      flags.push('Camera mounts are Owner-furnished — assumes backing, structure, pathway, and access are available');
+      flags.push('Camera commissioning excluded — final aiming, VMS programming, and analytics by Owner\'s security integrator');
+    }
+    if(s.requiredCrew > baseCrew) flags.push(`Accelerated crew required (${s.requiredCrew} vs. baseline ${baseCrew}) — verify OT budget`);
+    if(s.otPremiumSell > 0) flags.push(`OT premium in budget (${fmtMoney(s.otPremiumSell)} sell) — confirm crew schedule assumptions`);
+    if(s.directODCSell === 0) flags.push('No contingency or ODC modeled — recommend adding 5–10% allowance');
+    if(/conduit/i.test(state.project.exclusions || '')) flags.push('Conduit excluded — confirm GC is providing all raceways per scope boundary');
+    if(state.jobType.mode === 'remote') flags.push('Remote job — verify per diem and hotel rates are current');
+    flags.push('Pathway access assumed unobstructed — concealed conditions handled by written change order');
+    flags.push('Sales tax and permit fees excluded — added as direct pass-through if required');
+    v('sum-risk-flags').innerHTML = flags.length
+      ? `<ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.8;color:var(--warn)">${flags.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>`
+      : `<div style="color:var(--green);font-size:13px;padding:6px 0">No automatic risk flags detected.</div>`;
+  }
 }
 
 // =========================================================================

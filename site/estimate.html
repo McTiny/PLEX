@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
   THE ESTIMATOR v1.2 — Limited Energy Job Estimation
   Compiled by Limited Energy eXperts · limitedenergy.net
@@ -302,6 +302,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
       </div>
     </div>
     <div class="header-actions">
+      <a href="/" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;padding-right:0.75rem;border-right:1px solid var(--border2);margin-right:0.25rem;" onmouseover="this.style.color='#C8102E'" onmouseout="this.style.color='var(--gray-mid)'">← LEX</a>
       <span class="saved-indicator" id="savedInd">Unsaved</span>
       <button class="hbtn" id="newBtn">🗒 New</button>
       <button class="hbtn" id="importBtn">📥 Import</button>
@@ -309,6 +310,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
     </div>
   </div>
 </div>
+<div style="max-width:1200px;margin:8px auto 0;padding:0 24px;"><a href="https://youtu.be/1KWX2oAvS1o" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,0.15);">&#9658; Watch a quick overview on YouTube</a></div>
 <div class="best-viewed">
   <div class="best-viewed-inner">&#9432; Best viewed on a PC or tablet.</div>
 </div>
@@ -555,15 +557,15 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   <div class="headline-card">
     <div class="lbl">FINAL PROPOSAL PRICE</div>
     <div class="price" id="hdl-price">$0</div>
-    <div class="breakdown">
-      <div>DIRECT COSTS<span class="v" id="hdl-direct">$0</span></div>
-      <div>OVERHEAD<span class="v" id="hdl-oh">$0</span></div>
-      <div>MARGIN<span class="v" id="hdl-margin">$0</span></div>
+    <div class="breakdown" id="hdl-breakdown">
+      <div id="hdl-bd-direct">DIRECT COSTS<span class="v" id="hdl-direct">$0</span></div>
+      <div id="hdl-bd-oh">OVERHEAD<span class="v" id="hdl-oh">$0</span></div>
+      <div id="hdl-bd-margin">MARGIN<span class="v" id="hdl-margin">$0</span></div>
       <div>TOTAL HOURS / DAYS<span class="v" id="hdl-hours">0 hrs / 0 days</span></div>
     </div>
   </div>
 
-  <div class="chart-card">
+  <div class="chart-card" id="cost-chart-card">
     <div class="chart-title">COST COMPOSITION &mdash; HOW THE FINAL PRICE BREAKS DOWN</div>
     <div class="chart-stack" id="chart-stack"></div>
     <div class="chart-legend" id="chart-legend"></div>
@@ -578,7 +580,7 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
   <div class="panel"><div class="panel-label">MATERIALS ROLL-UP</div><div id="sum-mat"></div></div>
   <div class="panel"><div class="panel-label">PER-SECTION BREAKDOWN <span style="font-family:var(--body);color:var(--gray-mid);font-size:11px;letter-spacing:normal;text-transform:none;">BICSI WBS</span></div><div id="sum-sections"></div></div>
   <div class="panel"><div class="panel-label teal">OTHER DIRECT COSTS</div><div id="sum-odc"></div></div>
-  <div class="panel"><div class="panel-label">FINANCIAL ROLL-UP</div><div id="sum-financial"></div></div>
+  <div class="panel" id="sum-financial-panel"><div class="panel-label">FINANCIAL ROLL-UP</div><div id="sum-financial"></div></div>
 
   <div class="panel collapsible assumptions-panel" id="sum-assumptions-panel">
     <button class="panel-header" id="assumptionsToggle">
@@ -813,16 +815,15 @@ const BICSI_SECTIONS = [
 ];
 
 const DEFAULT_FIELD_ROLES = [
-  {id:1, role:'Lead Tech',  costRate:54, sellRate:90},
-  {id:2, role:'Tech I',     costRate:45, sellRate:75},
-  {id:3, role:'Tech II',    costRate:36, sellRate:60},
-  {id:4, role:'Helper',     costRate:30, sellRate:50},
-  {id:5, role:'Apprentice', costRate:24, sellRate:40}
+  {id:1, role:'Lead Tech',  costRate:60, sellRate:95},
+  {id:2, role:'Tech II',    costRate:50, sellRate:80},
+  {id:3, role:'Tech I',     costRate:40, sellRate:70},
+  {id:4, role:'Helper',     costRate:35, sellRate:55}
 ];
 const DEFAULT_MGMT_ROLES = [
-  {id:6, role:'Project Manager',  costRate:78, sellRate:130},
-  {id:7, role:'Project Engineer', costRate:69, sellRate:115},
-  {id:8, role:'Foreman',          costRate:57, sellRate:95}
+  {id:6, role:'Project Manager',  costRate:85, sellRate:145},
+  {id:7, role:'Project Engineer', costRate:95, sellRate:175},
+  {id:8, role:'Foreman',          costRate:65, sellRate:105}
 ];
 const DEFAULT_MATERIAL_MARKUP = 1.33;
 const DEFAULT_ODC_MARKUP_RENTALS = 1.20;
@@ -2020,6 +2021,14 @@ function renderSummary(s){
 
   // Labor roll-up — sell side (customer-visible); internal view also surfaces cost & profit
   const isInternal = summaryView === 'internal';
+
+  // Hide cost/margin/overhead details in customer view
+  ['hdl-bd-direct','hdl-bd-oh','hdl-bd-margin'].forEach(id => {
+    v(id).style.display = isInternal ? '' : 'none';
+  });
+  v('hdl-breakdown').style.gridTemplateColumns = isInternal ? 'repeat(4,1fr)' : '1fr';
+  v('cost-chart-card').style.display = isInternal ? '' : 'none';
+  v('sum-financial-panel').style.display = isInternal ? '' : 'none';
   v('sum-labor').innerHTML = [
     ['WBS labor sell', fmtMoney(s.wbsLaborSell)],
     ['Materials labor sell', fmtMoney(s.matLaborSell)],

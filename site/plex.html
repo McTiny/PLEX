@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!--
-  PLEX v2.26 — Power Load EXaminer
+  PLEX v2.27 — Power Load EXaminer
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary engineering and coordination only.
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLEX v2.26 — Power Load EXaminer | Limited Energy eXperts</title>
+<title>PLEX v2.27 — Power Load EXaminer | Limited Energy eXperts</title>
 <meta name="description" content="PLEX — Power Load EXaminer. Telecom room and equipment room power, UPS, generator, PoE, and cooling load sizing. Built by an RCDD for Division 27/28 coordination.">
 <meta property="og:title" content="PLEX — Power Load EXaminer">
 <meta property="og:description" content="TR/ER infrastructure sizing — power, UPS, generator, PoE, cooling. Built by an RCDD for Division 27/28 coordination.">
@@ -267,7 +267,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     <div class="header-brand">
       <div class="header-mark">⚡</div>
       <div>
-        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.26</span></div>
+        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.27</span></div>
         <div class="header-sub">POWER LOAD EXaminer &nbsp;·&nbsp; TR/ER INFRASTRUCTURE SIZING</div>
       </div>
     </div>
@@ -280,7 +280,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     </div>
   </div>
 </div>
-<div style="max-width:1200px;margin:8px auto 0;padding:0 24px;"><a href="https://youtu.be/z-BjVoI20HM" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,0.15);">&#9658; Watch a quick overview on YouTube</a></div>
+<div class="no-print" style="max-width:1200px;margin:8px auto 0;padding:0 24px;"><a href="https://youtu.be/z-BjVoI20HM" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,0.15);">&#9658; Watch a quick overview on YouTube</a></div>
 <div class="best-viewed">
   <div class="best-viewed-inner">&#9432; Best viewed on a PC or tablet.</div>
 </div>
@@ -473,7 +473,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     </div>
   </div>
   <div id="print-credit">
-    PLEX v2.26 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    PLEX v2.27 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
 </div>
 </div>
@@ -599,7 +599,7 @@ const ALL_FLAT=PRESETS.flatMap(c=>c.items.map(i=>({...i,category:c.cat})));
 const BTU_PER_WATT=3.41214;
 const STORAGE_KEY='plex_session_v2';
 const PLEX_SIG='PLEX-LEX';
-const PLEX_VERSION='2.26';
+const PLEX_VERSION='2.27';
 const STD_BREAKERS=[15,20,25,30,35,40,45,50,60,70,80,90,100,110,125,150,175,200];
 let state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:'',scheduleTitle:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''}],items:[],activeRackId:1};
 let nextItemId=1,nextRackId=2,customLoc='rack',dirty=false,lastSaveTime=null;
@@ -693,7 +693,7 @@ function renderSummary(s){
   v('sum-subtitle').textContent=sp.length?sp.join(' · '):'Enter project info in the Builder tab';
   v('sum-project').innerHTML=[['Project Name',p.name||'—'],['Room / Closet',p.room||'—'],['Building',p.building||'—'],['Floor',p.floor||'—'],['Designer',p.designer||'—'],['Date',p.date||'—']].map(r=>sRow(r[0],r[1])).join('')+(p.notes?sRowLong('Notes',p.notes):'');
   v('sum-electrical').innerHTML=[['Total Real Power',s.totalW.toFixed(0)+' W'],['Total Apparent Power',s.totalVA.toFixed(0)+' VA'],['Power Factor Applied',state.settings.powerFactor.toFixed(2)],['Amperage @ 120V',s.a120.toFixed(1)+'A'],['Amperage @ 208V',s.a208.toFixed(1)+'A'],['Amperage @ 240V',s.a240.toFixed(1)+'A'],['Rack Load Subtotal',(s.totalW-s.wallW).toFixed(0)+' W'],['Wall/Field Subtotal',s.wallW.toFixed(0)+' W']].map(r=>sRow(r[0],r[1])).join('');
-  let ch=`<div class="circuit-row hdr"><span>Circuit / Source</span><span>Voltage</span><span>Load (W)</span><span>Continuous (A)</span><span>Breaker</span><span>Notes</span></div>`;
+  let ch=`<div class="circuit-row hdr"><span>Circuit / Source</span><span>Voltage</span><span>Load (W)</span><span>Cont. A</span><span>Breaker</span><span>Notes</span></div>`;
   Object.values(s.perRack).forEach(rk=>{if(rk.nonUpsWatts>0)ch+=`<div class="circuit-row"><span class="circuit-name">${esc(rk.rack.label)} (PDU)${rk.rack.redundant?' · N+1':''}</span><span class="circuit-num">${rk.rack.voltage}V</span><span class="circuit-num">${rk.nonUpsWatts.toFixed(0)}W</span><span class="circuit-num">${(rk.amps*1.25).toFixed(1)}A</span><span class="circuit-breaker">${rk.breaker}A</span><span style="color:var(--gray-mid);font-size:11px;">${esc(rk.rack.notes||'')}</span></div>`;});
   s.allUpsItems.forEach(u=>{const w=u.w*(u.qty||1);const a=u.v>0?w/u.v:0;ch+=`<div class="circuit-row"><span class="circuit-name">${esc(u.name)}</span><span class="circuit-num">${u.v}V</span><span class="circuit-num">${w.toFixed(0)}W</span><span class="circuit-num">${(a*1.25).toFixed(1)}A</span><span class="circuit-breaker">${standardBreaker(a)}A</span><span style="color:var(--gray-mid);font-size:11px;">UPS input circuit</span></div>`;});
   s.perWall.forEach(wd=>{ch+=`<div class="circuit-row"><span class="circuit-name">${esc(wd.item.name)} (×${wd.item.qty||1})</span><span class="circuit-num">${wd.item.v}V</span><span class="circuit-num">${wd.watts.toFixed(0)}W</span><span class="circuit-num">${(wd.amps*1.25).toFixed(1)}A</span><span class="circuit-breaker">${wd.breaker}A</span><span style="color:var(--gray-mid);font-size:11px;">${esc(wd.item.circuitNotes||'')}</span></div>`;});
@@ -711,13 +711,13 @@ function renderSummary(s){
   v('sum-ps-label').textContent=(psTitle||'Power Consumption & Circuit Schedule').toUpperCase();
   let psRows='';
   Object.values(s.perRack).forEach(rk=>{
-    if(rk.nonUpsWatts<=0&&rk.items.length===0)return;
+    if(rk.nonUpsWatts<=0)return;
     const btu=(rk.nonUpsWatts*BTU_PER_WATT).toFixed(0);
     const contA=(rk.amps*1.25).toFixed(1);
     psRows+=`<tr>
       <td class="ps-dim">${esc(rk.rack.level||'—')}</td>
       <td class="ps-loc">${esc(rk.rack.label)}</td>
-      <td class="ps-name">Rack PDU Load${rk.rack.redundant?' <span class="pill pill-warn" style="font-size:8px;vertical-align:middle;margin-left:4px;">N+1</span>':''}</td>
+      <td class="ps-name">Rack PDU Load${rk.rack.redundant?' (N+1)':''}</td>
       <td>${rk.rack.voltage}</td>
       <td>1</td>
       <td>${rk.nonUpsWatts.toFixed(0)}</td>
@@ -736,7 +736,7 @@ function renderSummary(s){
     psRows+=`<tr>
       <td class="ps-dim">${esc(rack?rack.level||'—':'—')}</td>
       <td class="ps-loc">${esc(rack?rack.label:'—')}</td>
-      <td class="ps-name">${esc(u.name)} <span class="pill pill-warn" style="font-size:8px;vertical-align:middle;margin-left:4px;">UPS</span></td>
+      <td class="ps-name">${esc(u.name)}</td>
       <td>${u.v}</td>
       <td>${qty}</td>
       <td>${u.w}</td>
@@ -749,17 +749,21 @@ function renderSummary(s){
     </tr>`;
   });
   s.perWall.forEach(wd=>{
-    const qty=wd.item.qty||1;const btu=(wd.watts*BTU_PER_WATT).toFixed(0);const contA=(wd.amps*1.25).toFixed(1);
+    const isPoeC=wd.item.poeC;
+    const qty=wd.item.qty||1;const btu=(wd.watts*BTU_PER_WATT).toFixed(0);
+    const contA=isPoeC?'—':(wd.amps*1.25).toFixed(1)+'A';
+    const brkr=isPoeC?'—':wd.breaker+'A';
+    const vDisp=isPoeC?'PoE':wd.item.v;
     psRows+=`<tr>
       <td class="ps-dim">${esc(wd.item.level||'—')}</td>
       <td class="ps-loc" style="color:var(--teal);">Field / Wall</td>
       <td class="ps-name">${esc(wd.item.name)}</td>
-      <td>${wd.item.v}</td>
+      <td>${vDisp}</td>
       <td>${qty}</td>
       <td>${wd.item.w}</td>
       <td class="ps-wall">${wd.watts.toFixed(0)}</td>
-      <td>${contA}A</td>
-      <td class="ps-brk-wall">${wd.breaker}A</td>
+      <td>${contA}</td>
+      <td class="${isPoeC?'ps-dim':'ps-brk-wall'}">${brkr}</td>
       <td>${btu}</td>
       <td class="ps-dim">—</td>
       <td class="ps-dim">${esc(wd.item.circuitNotes||'—')}</td>

@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!--
-  PLEX v2.28 — Power Load EXaminer
+  PLEX v2.50 — Power Load EXaminer
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary engineering and coordination only.
@@ -9,15 +9,65 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ECRHM5MP0Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ECRHM5MP0Y');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLEX v2.28 — Power Load EXaminer | Limited Energy eXperts</title>
+<title>PLEX v2.50 — Power Load EXaminer | Limited Energy eXperts</title>
 <meta name="description" content="PLEX — Power Load EXaminer. Telecom room and equipment room power, UPS, generator, PoE, and cooling load sizing. Built by an RCDD for Division 27/28 coordination.">
 <meta property="og:title" content="PLEX — Power Load EXaminer">
 <meta property="og:description" content="TR/ER infrastructure sizing — power, UPS, generator, PoE, cooling. Built by an RCDD for Division 27/28 coordination.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://limitedenergy.net/plex">
+<meta property="og:site_name" content="Limited Energy eXperts">
+<meta property="og:image" content="https://limitedenergy.net/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PLEX — Power Load EXaminer">
+<meta name="twitter:description" content="TR/ER infrastructure sizing — power, UPS, generator, PoE, cooling. Built by an RCDD for Division 27/28 coordination.">
+<meta name="twitter:image" content="https://limitedenergy.net/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PLEX — Power Load EXaminer",
+  "alternateName": "PLEX",
+  "applicationCategory": "EngineeringApplication",
+  "operatingSystem": "Web Browser",
+  "url": "https://limitedenergy.net/plex",
+  "description": "Free web-based tool for sizing telecom room and equipment room power loads — UPS, generator, PoE, and cooling. Built by an RCDD for Division 27/28 coordination.",
+  "version": "2.50",
+  "featureList": [
+    "UPS load sizing", "Generator load sizing", "PoE power budgeting",
+    "Cooling load estimation", "Telecom room sizing", "Equipment room sizing",
+    "Division 27 coordination"
+  ],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": {
+    "@type": "Person",
+    "name": "Shawn C. Tovey",
+    "honorificSuffix": "RCDD",
+    "url": "https://limitedenergy.net"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Limited Energy eXperts",
+    "url": "https://limitedenergy.net"
+  }
+}
+</script>
+<link rel="canonical" href="https://limitedenergy.net/plex">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0A1628">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600&family=Barlow+Condensed:wght@500;600&family=Oswald:wght@300;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -29,7 +79,7 @@
   --white:#FFFFFF; --gray-light:#B8C5D3; --gray-mid:#6B7F95; --gray-dark:#3A4D62;
   --border:rgba(255,255,255,0.08); --border2:rgba(255,255,255,0.15);
   --green:#22c55e; --warn:#f59e0b; --danger:#ef4444;
-  --blue:#3b82f6; --purple:#8b5cf6; --teal:#14b8a6;
+  --blue:#3b82f6; --purple:#8b5cf6; --teal:#14b8a6; --yellow:#f5a623;
   --body:'Barlow',sans-serif; --display:'Oswald',sans-serif;
   --label:'Barlow Condensed',sans-serif; --mono:'Space Mono',monospace;
 }
@@ -41,12 +91,12 @@ body{background:var(--navy);color:var(--gray-light);font-family:var(--body);min-
 .header-title{font-family:var(--display);font-weight:700;font-size:22px;color:var(--white);letter-spacing:0.04em;line-height:1;}
 .header-sub{font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.2em;text-transform:uppercase;margin-top:4px;}
 .header-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.saved-indicator{font-family:var(--mono);font-size:10px;color:var(--gray-mid);letter-spacing:0.1em;padding:6px 12px;border:1px solid var(--border);border-radius:3px;}
+.saved-indicator{font-family:var(--mono);font-size:10px;color:var(--gray-mid);letter-spacing:0.1em;padding:6px 12px;border:1px solid var(--border);border-radius:6px;}
 .saved-indicator.fresh{color:var(--green);border-color:rgba(34,197,94,0.3);}
-.hbtn{background:transparent;border:1px solid var(--border2);color:var(--gray-light);padding:8px 14px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.15s;}
+.hbtn{background:transparent;border:1px solid var(--border2);color:var(--gray-light);padding:8px 14px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;transition:all 0.15s;}
 .hbtn:hover{border-color:var(--red);color:var(--white);background:rgba(200,16,46,0.08);}
-.hbtn.primary{background:var(--red);border-color:var(--red);color:var(--white);}
-.hbtn.primary:hover{background:var(--red-dark);}
+.hbtn.primary{background:linear-gradient(135deg,var(--red),var(--red-dark));border-color:var(--red);color:var(--white);}
+.hbtn.primary:hover{opacity:0.9;}
 #tabs{border-bottom:1px solid var(--border);background:var(--navy);}
 .tabs-inner{display:flex;gap:2px;max-width:1200px;margin:0 auto;padding:0 24px;}
 .tab-btn{background:transparent;border:none;color:var(--gray-mid);padding:12px 22px;font-family:var(--label);font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;}
@@ -59,7 +109,7 @@ body{background:var(--navy);color:var(--gray-light);font-family:var(--body);min-
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px;}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
-.panel{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:14px;}
+.panel{background:var(--navy-mid);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,0.25);}
 .panel-label{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.2em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;gap:8px;text-transform:uppercase;font-weight:700;}
 .panel-label.teal{color:var(--teal);}
 .panel-sub{font-family:var(--body);font-size:11px;color:var(--gray-mid);margin:-6px 0 12px;line-height:1.4;}
@@ -69,44 +119,44 @@ body{background:var(--navy);color:var(--gray-light);font-family:var(--body);min-
 .collapsible.collapsed .panel-body{display:none;}
 .panel-body input,.panel-body select,.panel-body textarea{margin-bottom:8px;}
 .panel-body textarea{resize:vertical;min-height:60px;}
-.stat-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;padding:14px;}
+.stat-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:10px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.20);}
 .stat-label{font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.2em;margin-bottom:6px;text-transform:uppercase;}
 .stat-value{font-family:var(--display);font-size:20px;font-weight:600;color:var(--white);}
 .stat-sub{font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:2px;}
-input[type=text],input[type=number],input[type=date],select,textarea{background:var(--navy);border:1px solid var(--border2);border-radius:3px;color:var(--white);padding:7px 10px;font-size:13px;font-family:var(--body);width:100%;outline:none;transition:border-color 0.15s;}
+input[type=text],input[type=number],input[type=date],select,textarea{background:var(--navy);border:1px solid var(--border2);border-radius:6px;color:var(--white);padding:7px 10px;font-size:13px;font-family:var(--body);width:100%;outline:none;transition:border-color 0.15s,box-shadow 0.15s;}
 input[type=number]{-moz-appearance:textfield;}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;}
-input:focus,select:focus,textarea:focus{border-color:var(--red);}
+input:focus,select:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 2px rgba(200,16,46,0.18);}
 select option{background:var(--navy);}
 .field{margin-bottom:10px;}
 .field label,.field-label{font-family:var(--label);font-size:10px;color:var(--gray-mid);letter-spacing:0.15em;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:4px;font-weight:600;}
-.btn-primary{background:var(--red);border:none;border-radius:3px;color:var(--white);padding:10px 14px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;width:100%;transition:background 0.15s;}
+.btn-primary{background:linear-gradient(135deg,var(--red),var(--red-dark));border:none;border-radius:6px;color:var(--white);padding:10px 14px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;width:100%;transition:all 0.15s;}
 .btn-primary:hover{background:var(--red-dark);}
-.btn-delete{background:transparent;border:1px solid var(--danger);color:var(--danger);padding:6px 12px;font-family:var(--label);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;margin-top:8px;}
+.btn-delete{background:transparent;border:1px solid var(--danger);color:var(--danger);padding:6px 12px;font-family:var(--label);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;margin-top:8px;}
 .btn-delete:hover{background:var(--danger);color:var(--white);}
-.btn-remove{background:transparent;border:1px solid var(--border2);color:var(--danger);border-radius:3px;width:26px;height:26px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.btn-remove{background:transparent;border:1px solid var(--border2);color:var(--danger);border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .btn-remove:hover{border-color:var(--danger);}
 .help-btn{background:transparent;border:1px solid var(--border2);color:var(--gray-mid);border-radius:50%;width:16px;height:16px;font-size:9px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;}
 .help-btn:hover{border-color:var(--red);color:var(--red);}
-.callout{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:4px;padding:9px 11px;font-size:11px;color:var(--gray-light);margin:10px 0;line-height:1.5;}
+.callout{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:6px;padding:9px 11px;font-size:11px;color:var(--gray-light);margin:10px 0;line-height:1.5;}
 .callout strong{color:var(--blue);}
-.pill{border-radius:3px;padding:2px 8px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
+.pill{border-radius:20px;padding:2px 10px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
 .pill-ok{background:rgba(34,197,94,0.15);border:1px solid var(--green);color:var(--green);}
 .pill-warn{background:rgba(245,158,11,0.15);border:1px solid var(--warn);color:var(--warn);}
 .pill-over{background:rgba(239,68,68,0.15);border:1px solid var(--danger);color:var(--danger);}
 .pill-none{background:rgba(107,127,149,0.15);border:1px solid var(--gray-mid);color:var(--gray-mid);}
-#status-row{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+#status-row{background:var(--navy-mid);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;box-shadow:0 2px 12px rgba(0,0,0,0.25);}
 .status-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .status-lbl{font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.15em;}
 .gauge-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-bottom:3px;}
 .gauge-track{background:var(--navy);border-radius:2px;height:8px;overflow:hidden;}
 .gauge-fill{height:100%;border-radius:2px;transition:width 0.4s;}
 .rack-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px;}
-.rack-tab{background:var(--navy-mid);border:1px solid var(--border);color:var(--gray-mid);padding:6px 12px;font-family:var(--label);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.15s;}
+.rack-tab{background:var(--navy-mid);border:1px solid var(--border);color:var(--gray-mid);padding:6px 12px;font-family:var(--label);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;transition:all 0.15s;}
 .rack-tab.active{background:var(--navy-light);border-color:var(--red);color:var(--white);}
 .rack-tab.add{border-style:dashed;color:var(--red);}
 .rack-tab:hover:not(.active){color:var(--white);}
-.device-table{background:var(--navy-mid);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:14px;}
+.device-table{background:var(--navy-mid);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.18);}
 .tbl-hdr{display:grid;gap:8px;padding:9px 12px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.15em;text-transform:uppercase;font-weight:700;}
 .tbl-hdr.wall{color:var(--teal);}
 .tbl-row{display:grid;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border);align-items:center;font-size:12px;}
@@ -125,14 +175,14 @@ select option{background:var(--navy);}
 .section-divider span{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:0.2em;white-space:nowrap;font-weight:700;}
 .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border2);}
 .loc-toggle{display:flex;gap:4px;margin-bottom:10px;}
-.loc-btn{flex:1;background:var(--navy);border:1px solid var(--border2);color:var(--gray-mid);padding:6px;font-family:var(--label);font-size:10px;font-weight:600;letter-spacing:0.1em;cursor:pointer;border-radius:3px;text-transform:uppercase;transition:all 0.15s;}
+.loc-btn{flex:1;background:var(--navy);border:1px solid var(--border2);color:var(--gray-mid);padding:6px;font-family:var(--label);font-size:10px;font-weight:600;letter-spacing:0.1em;cursor:pointer;border-radius:6px;text-transform:uppercase;transition:all 0.15s;}
 .loc-btn.active-rack{background:rgba(200,16,46,0.15);border-color:var(--red);color:var(--red);}
 .loc-btn.active-wall{background:rgba(20,184,166,0.15);border-color:var(--teal);color:var(--teal);}
 .check-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--gray-light);margin-bottom:8px;cursor:pointer;font-family:var(--label);letter-spacing:0.05em;}
 input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{display:flex;}
-.modal-box{background:var(--navy-mid);border:1px solid var(--red);border-radius:8px;padding:24px;max-width:480px;width:100%;position:relative;max-height:90vh;overflow-y:auto;}
+.modal-box{background:var(--navy-mid);border:1px solid var(--red);border-radius:12px;padding:24px;max-width:480px;width:100%;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,0.5);}
 .modal-title{font-family:var(--display);color:var(--red);font-size:15px;font-weight:600;letter-spacing:0.1em;margin-bottom:14px;text-transform:uppercase;}
 .modal-body{font-size:13px;color:var(--gray-light);line-height:1.8;}
 .modal-body strong{color:var(--white);}
@@ -153,9 +203,9 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 #intro-block{max-width:1200px;margin:18px auto 8px;padding:0 24px;font-family:var(--body);font-size:13px;color:var(--gray-light);line-height:1.7;}
 #intro-block .intro-lead{color:var(--white);font-size:14px;margin-bottom:10px;}
 #intro-block .intro-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
-.intro-badge{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:4px 10px;border-radius:2px;background:transparent;cursor:pointer;transition:background 0.15s,color 0.15s;position:relative;}
+.intro-badge{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:4px 10px;border-radius:4px;background:transparent;cursor:pointer;transition:background 0.15s,color 0.15s;position:relative;}
 .intro-badge:hover{background:rgba(200,16,46,0.12);}
-.badge-popover{display:none;position:absolute;top:calc(100% + 8px);left:0;background:var(--navy-mid);border:1px solid var(--border);border-radius:3px;padding:12px 14px;font-size:11px;font-family:var(--body);color:var(--gray-light);line-height:1.6;width:280px;z-index:500;box-shadow:0 4px 20px rgba(0,0,0,0.5);text-transform:none;letter-spacing:0;}
+.badge-popover{display:none;position:absolute;top:calc(100% + 8px);left:0;background:var(--navy-mid);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:11px;font-family:var(--body);color:var(--gray-light);line-height:1.6;width:280px;z-index:500;box-shadow:0 4px 20px rgba(0,0,0,0.5);text-transform:none;letter-spacing:0;}
 .badge-popover.right{left:auto;right:0;}
 .intro-badge.active .badge-popover{display:block;}
 .best-viewed{max-width:1200px;margin:0 auto 4px;padding:0 24px;}
@@ -217,7 +267,44 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 .import-status.ok{background:rgba(34,197,94,0.1);border:1px solid var(--green);color:var(--green);}
 .import-status.err{background:rgba(239,68,68,0.1);border:1px solid var(--danger);color:var(--danger);}
 @media screen and (max-width:880px){.two-col{grid-template-columns:1fr;}.grid-4{grid-template-columns:1fr 1fr;}#status-row{grid-template-columns:1fr;}.circuit-row{grid-template-columns:1fr 60px 60px 60px;font-size:11px;}.circuit-row>:nth-child(5),.circuit-row>:nth-child(6){display:none;}#pane-summary{grid-template-columns:1fr !important;}#pane-summary .panel,#pane-summary .summary-header{grid-column:1/-1 !important;}}
+#view-report{display:none;}
 @media print{
+/* ===== COORDINATION REPORT PRINT PATH ===== */
+body.print-report > *:not(#view-report){display:none!important;}
+body.print-report #view-report{display:block!important;background:white;color:black;font-family:Arial,sans-serif;font-size:10pt;margin:0;padding:0;}
+body.print-report .rpt-header{border-bottom:2pt solid #000;padding-bottom:10pt;margin-bottom:16pt;}
+body.print-report .rpt-logo{font-family:Arial,sans-serif;font-size:16pt;font-weight:700;letter-spacing:0.08em;color:#000;}
+body.print-report .rpt-sub{font-size:9pt;color:#444;margin-top:2pt;}
+body.print-report .rpt-meta{display:grid;grid-template-columns:1fr 1fr;gap:4pt;margin-top:10pt;font-size:9pt;}
+body.print-report .rpt-meta-item{padding:2pt 0;}
+body.print-report .rpt-meta-label{color:#666;font-size:8pt;}
+body.print-report .rpt-section{margin-bottom:18pt;page-break-inside:avoid;}
+body.print-report .rpt-section-title{font-size:10pt;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;border-bottom:0.5pt solid #ccc;padding-bottom:4pt;margin-bottom:8pt;color:#000;}
+body.print-report .rpt-row{display:flex;justify-content:space-between;border-bottom:0.5pt solid #eee;padding:2.5pt 0;font-size:9pt;}
+body.print-report .rpt-key{color:#444;}
+body.print-report .rpt-val{font-weight:600;color:#000;text-align:right;}
+body.print-report .rpt-table{width:100%;border-collapse:collapse;font-size:8pt;margin-top:6pt;}
+body.print-report .rpt-table th{background:#1a2035;color:white;padding:4pt 5pt;text-align:left;font-size:8pt;white-space:nowrap;}
+body.print-report .rpt-table td{padding:3pt 5pt;border-bottom:0.5pt solid #ddd;font-size:8pt;color:#222;}
+body.print-report .rpt-table tr.rpt-total td{background:#f5f5f5;font-weight:700;border-top:1pt solid #aaa;}
+body.print-report .rpt-notes-paragraph{font-size:9.5pt;line-height:1.7;color:#111;margin:8pt 0;}
+body.print-report .rpt-notes-box{border:1pt solid #999;min-height:60pt;margin-top:10pt;padding:6pt;font-size:9pt;color:#888;}
+body.print-report .rpt-disclaimer{font-size:8.5pt;color:#555;border-top:0.5pt solid #ccc;padding-top:8pt;margin-top:8pt;line-height:1.6;}
+body.print-report .rpt-footer{position:fixed;bottom:0;left:0;right:0;font-size:7.5pt;color:#888;border-top:0.5pt solid #ccc;padding:4pt 0;text-align:center;background:white;}
+body.print-report a{color:inherit;text-decoration:none;}
+body.print-report .report-cover{page-break-after:always;}
+body.print-report .cover-title{font-size:20pt;font-weight:700;text-align:center;margin:20pt 0 8pt;color:#000;letter-spacing:0.04em;}
+body.print-report .cover-subtitle{font-size:12pt;text-align:center;color:#333;margin-bottom:20pt;}
+body.print-report .cover-grid{display:grid;grid-template-columns:1fr 1fr;gap:8pt 20pt;margin:16pt 0;}
+body.print-report .cover-grid-item{display:flex;flex-direction:column;gap:2pt;padding:4pt 0;border-bottom:0.5pt solid #eee;}
+body.print-report .cover-grid-label{font-size:7.5pt;color:#666;text-transform:uppercase;letter-spacing:0.08em;}
+body.print-report .cover-grid-val{font-size:10.5pt;font-weight:600;color:#000;}
+body.print-report .cover-tool-block{font-size:8.5pt;color:#444;line-height:1.9;margin:16pt 0 10pt;}
+body.print-report .cover-disclaimer{font-size:8pt;color:#666;line-height:1.6;margin-top:16pt;padding-top:10pt;border-top:0.5pt solid #ccc;}
+body.print-report hr.rpt-hr{border:none;border-top:1.5pt solid #000;margin:16pt 0;}
+body.print-report hr.rpt-hr-light{border:none;border-top:0.5pt solid #ccc;margin:10pt 0;}
+@page{margin:0.6in 0.65in 0.75in;}
+/* ===== SUMMARY PRINT PATH (existing) ===== */
 body{background:white !important;color:black !important;font-size:9pt;}
 #header,#tabs,.tab-btn,.hbtn,.saved-indicator,.header-actions,#pane-build,#intro-block,#credit-line,.intro-badges,.best-viewed{display:none !important;}
 #pane-summary{display:grid !important;grid-template-columns:1fr 1fr !important;gap:8pt;}
@@ -259,34 +346,171 @@ body{background:white !important;color:black !important;font-size:9pt;}
 @page{margin:0.5in;}
 }
 #print-credit{display:none;}
+
+/* ===== LANDING ===== */
+#view-landing{min-height:calc(100vh - 38px);display:flex;align-items:center;justify-content:center;padding:48px 24px;background:var(--navy);}
+.landing-inner{max-width:600px;width:100%;display:flex;flex-direction:column;align-items:center;gap:28px;}
+.landing-hero{display:flex;flex-direction:row;align-items:center;gap:36px;flex-wrap:wrap;justify-content:center;}
+.landing-text{text-align:left;}
+.landing-title{font-family:var(--display);font-size:52px;font-weight:700;color:var(--white);letter-spacing:0.02em;line-height:1;}
+.landing-ver{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:0.15em;text-transform:uppercase;margin-top:8px;}
+.landing-body{font-size:14px;color:var(--gray-light);line-height:1.8;max-width:460px;text-align:center;}
+.landing-ctas{display:flex;flex-direction:column;gap:10px;width:100%;max-width:300px;}
+.cta-primary{background:linear-gradient(135deg,var(--red),var(--red-dark));border:none;border-radius:6px;color:var(--white);padding:14px 20px;font-family:var(--label);font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;width:100%;transition:all 0.15s;}
+.cta-primary:hover{background:var(--red-dark);}
+.cta-secondary{background:transparent;border:1.5px solid var(--border2);color:var(--gray-light);padding:11px 20px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;width:100%;border-radius:6px;transition:all 0.15s;}
+.cta-secondary:hover{border-color:var(--white);color:var(--white);}
+.cta-link-btn{background:transparent;border:none;color:var(--gray-mid);font-family:var(--mono);font-size:10px;letter-spacing:0.1em;cursor:pointer;text-transform:uppercase;padding:6px;width:100%;}
+.cta-link-btn:hover{color:var(--teal);}
+/* ===== WIZARD ===== */
+#view-wizard{min-height:calc(100vh - 38px);display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;background:var(--navy);}
+.wizard-wrap{width:100%;max-width:540px;}
+.wizard-progress-bar{height:3px;background:var(--border);border-radius:2px;margin-bottom:24px;overflow:hidden;}
+.wizard-progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width 0.3s;}
+.wizard-step-lbl{font-family:var(--mono);font-size:10px;color:var(--gray-mid);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;}
+.wizard-question{font-family:var(--display);font-size:22px;font-weight:600;color:var(--white);margin-bottom:20px;letter-spacing:0.02em;line-height:1.3;}
+.wizard-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
+.wpill{min-height:44px;padding:10px 18px;border:1.5px solid var(--border2);border-radius:24px;font-family:var(--label);font-size:12px;letter-spacing:0.08em;cursor:pointer;background:transparent;color:var(--gray-light);transition:all 0.2s;text-align:left;}
+.wpill:hover{border-color:var(--gray-light);color:var(--white);}
+.wpill.selected{border-color:var(--teal);background:rgba(20,184,166,0.12);color:var(--white);box-shadow:0 2px 10px rgba(20,184,166,0.2);}
+.wizard-next-btn{background:var(--teal);border:none;border-radius:4px;color:var(--navy);padding:12px 28px;font-family:var(--label);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;}
+.wizard-next-btn:hover{opacity:0.9;}
+.wizard-back-btn{background:transparent;border:none;color:var(--gray-mid);font-family:var(--mono);font-size:10px;cursor:pointer;padding:0;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;}
+.wizard-back-btn:hover{color:var(--white);}
+.wizard-summary-card{background:var(--navy-mid);border:1px solid var(--teal);border-radius:10px;padding:20px;margin-bottom:24px;font-size:13px;color:var(--gray-light);line-height:1.8;box-shadow:0 2px 12px rgba(0,0,0,0.25);}
+.wizard-summary-card strong{color:var(--white);}
+/* ===== ASSISTANT PANEL ===== */
+#view-calculator{display:none;flex-direction:row;}
+#calc-main-col{flex:1;min-width:0;overflow-x:hidden;}
+#plex-assistant{width:240px;background:var(--navy-mid);border-left:1px solid var(--border);padding:12px;position:sticky;top:38px;max-height:calc(100vh - 38px);overflow-y:auto;flex-shrink:0;transition:all 0.2s;border-radius:12px 0 0 12px;}
+#plex-assistant.asst-collapsed{width:0;padding:0;overflow:hidden;border-left:none;}
+.assist-msg{background:var(--navy-light);border-radius:4px;padding:8px 10px;margin-bottom:8px;display:flex;gap:8px;align-items:flex-start;font-size:11px;color:var(--gray-light);line-height:1.5;}
+.assist-warn{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);}
+.assist-icon{flex-shrink:0;font-size:13px;line-height:1.5;}
+.assist-footer{font-size:10px;color:var(--gray-dark);margin-top:12px;padding-top:8px;border-top:1px solid var(--border);line-height:1.4;}
+#assistant-toggle{position:fixed;right:240px;top:50%;transform:translateY(-50%);background:var(--navy-mid);border:1px solid var(--border2);color:var(--gray-mid);padding:6px 3px;cursor:pointer;border-radius:3px 0 0 3px;font-size:9px;z-index:200;writing-mode:vertical-rl;font-family:var(--mono);letter-spacing:0.08em;transition:right 0.2s;}
+#assistant-toggle.asst-collapsed{right:0;}
+/* ===== UPS BACKING SELECT IN ROWS ===== */
+.ups-sel{font-size:10px;padding:2px 4px;margin-top:3px;width:100%;background:var(--navy);border:1px solid var(--border);border-radius:2px;color:var(--gray-light);font-family:var(--body);}
+/* ===== UPS SETTINGS ===== */
+#ups-settings-body{display:none;}
+#ups-settings-body.open{display:block;}
+/* ===== MEP SUB-PANEL ===== */
+.mep-subpanel{background:var(--navy-light);border:1px solid var(--border2);border-radius:8px;padding:14px;margin-top:14px;}
+.mep-title{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:0.15em;text-transform:uppercase;font-weight:700;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.mep-disclaimer{font-size:10px;color:var(--gray-mid);margin-top:10px;font-style:italic;line-height:1.6;}
+@media(max-width:880px){#plex-assistant{display:none;}#assistant-toggle{display:none;}}
+.ups-critical-warning{background:rgba(200,16,46,0.12);border-left:3px solid var(--red);padding:12px 16px;border-radius:0 6px 6px 0;margin-top:10px;}
+.ups-critical-warning .ucw-title{font-family:var(--label);font-weight:700;font-size:12px;letter-spacing:0.1em;color:var(--red);text-transform:uppercase;margin-bottom:8px;}
+.ups-critical-warning .ucw-row{font-family:var(--mono);font-size:11px;color:var(--gray-light);margin:2px 0;}
+.ups-critical-warning .ucw-list{font-size:11px;color:var(--gray-light);list-style:none;margin:8px 0 4px 0;padding:0;}
+.ups-critical-warning .ucw-list li{padding:2px 0 2px 12px;position:relative;}
+.ups-critical-warning .ucw-list li::before{content:"·";color:var(--warn);position:absolute;left:0;}
+.ups-critical-warning .ucw-footer{font-size:10px;color:var(--gray-mid);font-style:italic;margin-top:8px;padding-top:6px;border-top:1px solid rgba(200,16,46,0.25);}
 </style>
 </head>
 <body>
 <style>
 #lex-sitenav{background:var(--navy);border-bottom:1px solid rgba(200,16,46,0.2);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:38px;position:sticky;top:0;z-index:9999;}
 #lex-sitenav .lsn-brand{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:0.2em;color:var(--red);text-decoration:none;}
-#lex-sitenav .lsn-links{display:flex;gap:1.5rem;align-items:center;}
-#lex-sitenav .lsn-links a{font-family:var(--label);font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;transition:color 0.15s;}
-#lex-sitenav .lsn-links a:hover{color:var(--white);}
-#lex-sitenav .lsn-links a.lsn-active{color:var(--red);}
-@media(max-width:640px){#lex-sitenav .lsn-links a.lsn-hide{display:none;}}
+#lex-sitenav .lsn-right{display:flex;align-items:center;gap:0.75rem;}
+.lsn-nav-cta{font-family:var(--label);font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);text-decoration:none;border:1px solid var(--red);padding:0.3rem 0.75rem;border-radius:4px;transition:background 0.15s,color 0.15s;white-space:nowrap;}
+.lsn-nav-cta:hover{background:var(--red);color:var(--white);}
+.lsn-ham{display:flex;flex-direction:column;justify-content:center;gap:4px;background:none;border:none;cursor:pointer;padding:3px;width:28px;height:28px;}
+.lsn-ham span{display:block;width:18px;height:2px;background:var(--gray-mid);border-radius:2px;transition:all 0.25s;}
+.lsn-ham.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.lsn-ham.open span:nth-child(2){opacity:0;}
+.lsn-ham.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.lsn-mob{display:none;position:fixed;top:38px;left:0;right:0;background:var(--navy-mid);border-bottom:1px solid rgba(200,16,46,0.2);z-index:9998;padding:1.25rem 1.5rem;flex-direction:column;}
+.lsn-mob.open{display:flex;}
+.lsn-mob a{font-family:var(--label);font-weight:600;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;padding:0.7rem 0;border-bottom:1px solid var(--border);transition:color 0.15s;}
+.lsn-mob a:last-child{border-bottom:none;}
+.lsn-mob a:hover{color:var(--white);}
 </style>
 <div id="lex-sitenav">
   <a href="/" class="lsn-brand">LEX</a>
-  <div class="lsn-links">
-    <a href="/" class="lsn-hide">Home</a>
-    <a href="/plex" class="lsn-active">PLEX</a>
-    <a href="/estimate">Estimator</a>
-    <a href="/home-automation" class="lsn-hide">Home Automation</a>
-    <a href="/#contact" class="lsn-hide">Contact</a>
+  <div class="lsn-right">
+    <a href="/estimate" class="lsn-nav-cta">The Estimator &nbsp;→</a>
+    <button class="lsn-ham" id="lsn-ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </div>
+<div class="lsn-mob" id="lsn-mob">
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/plex">PLEX</a>
+  <a href="/estimate">The Estimator</a>
+  <a href="/home-automation">Home Automation</a>
+  <a href="/#contact">Contact</a>
+</div>
+<div id="view-landing" style="min-height:calc(100vh - 38px);display:flex;align-items:center;justify-content:center;padding:48px 24px;background:var(--navy);">
+  <div class="landing-inner">
+    <div class="landing-hero">
+      <svg width="120" height="148" viewBox="0 0 120 148" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="60" y1="2" x2="60" y2="14" stroke="#14b8a6" stroke-width="2"/>
+        <circle cx="60" cy="2" r="4" fill="#14b8a6"/>
+        <rect x="22" y="14" width="76" height="50" rx="8" fill="#122040" stroke="#14b8a6" stroke-width="1.5"/>
+        <circle cx="42" cy="39" r="12" fill="#0A1628" stroke="#14b8a6" stroke-width="1"/>
+        <path d="M33 39 Q36 33 39 39 Q42 45 45 39 Q48 33 51 39" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+        <circle cx="78" cy="39" r="12" fill="#0A1628" stroke="#14b8a6" stroke-width="1"/>
+        <path d="M82 29 L74 39 L78 39 L73 49 L81 37 L77 37 Z" fill="#14b8a6"/>
+        <rect x="46" y="56" width="28" height="4" rx="2" fill="rgba(20,184,166,0.3)"/>
+        <rect x="54" y="64" width="12" height="8" fill="#122040" stroke="#14b8a6" stroke-width="1"/>
+        <rect x="16" y="72" width="88" height="56" rx="6" fill="#122040" stroke="#14b8a6" stroke-width="1.5"/>
+        <line x1="28" y1="88" x2="56" y2="88" stroke="#14b8a6" stroke-width="0.75" opacity="0.5"/>
+        <line x1="56" y1="88" x2="56" y2="96" stroke="#14b8a6" stroke-width="0.75" opacity="0.5"/>
+        <line x1="56" y1="96" x2="90" y2="96" stroke="#14b8a6" stroke-width="0.75" opacity="0.5"/>
+        <circle cx="56" cy="88" r="2.5" fill="#14b8a6" opacity="0.7"/>
+        <circle cx="56" cy="96" r="2.5" fill="#14b8a6" opacity="0.7"/>
+        <circle cx="60" cy="109" r="8" stroke="#14b8a6" stroke-width="1.5" fill="none"/>
+        <line x1="60" y1="101" x2="60" y2="107" stroke="#14b8a6" stroke-width="2"/>
+        <rect x="0" y="78" width="14" height="8" rx="4" fill="#122040" stroke="#14b8a6" stroke-width="1"/>
+        <circle cx="4" cy="82" r="3" fill="#14b8a6" opacity="0.5"/>
+        <rect x="106" y="78" width="14" height="8" rx="4" fill="#122040" stroke="#14b8a6" stroke-width="1"/>
+        <circle cx="116" cy="82" r="3" fill="#14b8a6" opacity="0.5"/>
+        <rect x="102" y="86" width="18" height="24" rx="2" fill="#1C3058" stroke="#14b8a6" stroke-width="1"/>
+        <rect x="107" y="84" width="8" height="4" rx="1" fill="#14b8a6"/>
+        <line x1="105" y1="93" x2="117" y2="93" stroke="#FFFFFF" stroke-width="0.75" opacity="0.6"/>
+        <line x1="105" y1="97" x2="117" y2="97" stroke="#FFFFFF" stroke-width="0.75" opacity="0.6"/>
+        <line x1="105" y1="101" x2="114" y2="101" stroke="#FFFFFF" stroke-width="0.75" opacity="0.4"/>
+        <rect x="32" y="128" width="20" height="20" rx="4" fill="#122040" stroke="#14b8a6" stroke-width="1"/>
+        <rect x="68" y="128" width="20" height="20" rx="4" fill="#122040" stroke="#14b8a6" stroke-width="1"/>
+        <rect x="28" y="144" width="28" height="4" rx="2" fill="#14b8a6" opacity="0.5"/>
+        <rect x="64" y="144" width="28" height="4" rx="2" fill="#14b8a6" opacity="0.5"/>
+      </svg>
+      <div class="landing-text">
+        <div class="landing-title">PLEX</div>
+        <div class="landing-ver">v2.50 &mdash; Power Load EXaminer</div>
+      </div>
+    </div>
+    <p class="landing-body">Power, UPS &amp; Cooling Planning for ICT and Security Systems. Tell me what you&rsquo;re building and I&rsquo;ll help estimate power, UPS, generator, PoE, and cooling requirements.</p>
+    <div class="landing-ctas">
+      <button class="cta-primary" id="landingWizardBtn">&#9654; Start Guided Design</button>
+      <button class="cta-secondary" id="landingCalcBtn">Open Advanced Calculator</button>
+      <button class="cta-link-btn" id="landingImportBtn">Load Existing .plex File &rarr;</button>
+    </div>
+  </div>
+</div>
+<div id="view-wizard" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 38px);padding:48px 24px;background:var(--navy);">
+  <div class="wizard-wrap">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <span id="wizard-step-lbl" class="wizard-step-lbl">STEP 1 OF 4</span>
+      <button class="cta-link-btn" style="width:auto;font-size:10px;" onclick="setView('landing')">&larr; Home</button>
+    </div>
+    <div class="wizard-progress-bar"><div class="wizard-progress-fill" id="wizard-progress" style="width:25%"></div></div>
+    <div id="wizard-content"></div>
+  </div>
+</div>
+<div id="view-calculator">
+<div id="calc-main-col">
+
 <div id="header">
   <div class="header-inner">
     <div class="header-brand">
       <div class="header-mark">⚡</div>
       <div>
-        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.28</span></div>
+        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.50</span></div>
         <div class="header-sub">POWER LOAD EXaminer &nbsp;·&nbsp; TR/ER INFRASTRUCTURE SIZING</div>
       </div>
     </div>
@@ -294,8 +518,12 @@ body{background:white !important;color:black !important;font-size:9pt;}
       <a href="/" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;padding-right:0.75rem;border-right:1px solid var(--border2);margin-right:0.25rem;" onmouseover="this.style.color='#C8102E'" onmouseout="this.style.color='var(--gray-mid)'">← LEX</a>
       <span class="saved-indicator" id="savedInd">Unsaved</span>
       <button class="hbtn" id="newBtn">🗒 New</button>
+      <button class="hbtn" id="templatesBtn">📋 Templates</button>
       <button class="hbtn" id="importBtn">📥 Import</button>
       <button class="hbtn primary" id="exportBtn">📤 Export</button>
+      <button class="hbtn" id="reportBtn" style="background:linear-gradient(135deg,var(--teal),#00a896);border-color:var(--teal);color:var(--navy);font-weight:700;">📄 Design Report</button>
+      <button class="hbtn" id="eorPromptBtn" style="border:1px solid var(--teal);color:var(--teal);background:transparent;">🤖 EOR AI Prompt</button>
+      <button class="hbtn" id="jsonExportBtn" style="border:none;color:var(--gray-mid);background:transparent;font-size:11px;text-decoration:underline;text-decoration-style:dotted;">Export Project Data (.json)</button>
     </div>
   </div>
 </div>
@@ -344,9 +572,43 @@ body{background:white !important;color:black !important;font-size:9pt;}
           <input type="text" id="proj-floor" placeholder="Floor">
           <input type="text" id="proj-designer" placeholder="Designer (your name)">
           <input type="date" id="proj-date">
+          <div class="field-label" style="margin-top:4px">PROJECT MATURITY</div>
+          <select id="proj-maturity">
+            <option value="conceptual">Conceptual</option>
+            <option value="schematic" selected>Schematic</option>
+            <option value="dd">Design Development</option>
+            <option value="cd">Construction Documents</option>
+          </select>
           <textarea id="proj-notes" placeholder="Project notes" rows="3"></textarea>
           <div class="field-label" style="margin-top:4px">POWER SCHEDULE TITLE</div>
           <input type="text" id="proj-scheduleTitle" placeholder="Power Consumption &amp; Circuit Schedule">
+          <!-- Design Intent collapsible -->
+          <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:8px;">
+            <button id="intentToggle" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;width:100%;padding:0;font-family:var(--label);font-size:9px;font-weight:700;letter-spacing:0.12em;color:var(--gray-mid);text-transform:uppercase;">
+              DESIGN INTENT <span id="intentCaret" style="margin-left:auto;font-size:9px;">&#9658;</span>
+            </button>
+            <div id="intentBody" style="display:none;margin-top:8px;">
+              <div class="field-label" style="margin-top:4px">AVAILABILITY OBJECTIVE</div>
+              <select id="intent-availability">
+                <option value="standard">Standard</option>
+                <option value="enhanced">Enhanced</option>
+                <option value="highavailability">High Availability</option>
+                <option value="missioncritical">Mission Critical</option>
+              </select>
+              <div class="field-label" style="margin-top:6px">RECOVERY OBJECTIVE</div>
+              <select id="intent-recovery">
+                <option value="orderly">Orderly Shutdown — UPS provides controlled shutdown time</option>
+                <option value="ridethrough">Generator Ride-Through — UPS bridges until generator transfer</option>
+                <option value="continuous">Continuous Operations — No service interruption acceptable</option>
+              </select>
+              <div class="field-label" style="margin-top:6px">GROWTH PHILOSOPHY</div>
+              <input type="text" id="intent-growth" placeholder="e.g., 25% future capacity allowance">
+              <div class="field-label" style="margin-top:6px">REDUNDANCY PHILOSOPHY</div>
+              <input type="text" id="intent-redundancy" placeholder="e.g., N+1 for all critical systems">
+              <div class="field-label" style="margin-top:6px">OPERATIONAL ASSUMPTIONS</div>
+              <textarea id="intent-assumptions" rows="3" placeholder="e.g., 24/7 occupied, NFPA 99 applicable, tenant IT managed separately"></textarea>
+            </div>
+          </div>
         </div>
       </div>
       <div class="panel">
@@ -355,12 +617,60 @@ body{background:white !important;color:black !important;font-size:9pt;}
           <div class="field-label">POWER FACTOR <button class="help-btn" id="pfHelpBtn">?</button></div>
           <input type="number" id="powerFactor" value="0.90" min="0.5" max="1.0" step="0.05">
         </div>
-      </div>
-      <div class="panel">
-        <div class="panel-label">ADD FROM LIBRARY</div>
-        <div class="field"><select id="presetSelect"><option value="">-- Select device --</option></select></div>
-        <div class="callout"><strong>Dual PSU:</strong> Redundant power supplies share the load — total draw is unchanged.</div>
-        <button class="btn-primary" id="addPresetBtn">+ ADD TO CURRENT</button>
+        <div class="field">
+          <div class="field-label">AMBIENT HEAT GAIN <button class="help-btn" id="agHelpBtn">?</button></div>
+          <input type="number" id="ambientGain" value="10" min="0" max="50" step="5">
+        </div>
+        <div style="margin-top:12px;">
+          <div class="panel-label" style="font-size:9px;padding-bottom:6px;margin-bottom:0;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:6px;" id="upsSettingsToggle">
+            UPS PLANNING SETTINGS
+            <button class="help-btn" id="upsHelpBtn">?</button>
+            <span id="upsSettingsCaret" style="margin-left:auto;font-size:9px;transition:transform 0.2s;">&#9660;</span>
+          </div>
+          <div id="ups-settings-body">
+            <div style="height:10px;"></div>
+            <div class="grid-2" style="margin-bottom:8px;">
+              <div><div class="field-label">DEMAND FACTOR</div><input type="number" id="demandFactor" value="1.00" min="0.5" max="1.0" step="0.05"></div>
+              <div><div class="field-label">GROWTH FACTOR</div><input type="number" id="growthFactor" value="1.25" min="1.0" max="2.0" step="0.05"></div>
+            </div>
+            <div class="grid-2" style="margin-bottom:8px;">
+              <div><div class="field-label">MAX LOAD % TARGET</div><input type="number" id="upsLoadTarget" value="80" min="50" max="100" step="5"></div>
+              <div><div class="field-label">INVERTER EFF. %</div><input type="number" id="inverterEfficiency" value="90" min="80" max="99" step="1"></div>
+            </div>
+            <div class="field">
+              <div class="field-label">UPS MODEL PRESET</div>
+              <select id="upsModelPreset">
+                <option value="">— Select manufacturer model —</option>
+              </select>
+              <div id="upsPresetRef" style="display:none;font-family:var(--mono);font-size:10px;color:var(--teal);margin-top:4px;line-height:1.5;"></div>
+              <div style="font-size:10px;color:var(--gray-mid);margin-top:4px;font-style:italic;line-height:1.5;">Battery Wh is manufacturer-published at full load. Actual runtime varies with load, temperature, and battery age. Verify with manufacturer runtime chart.</div>
+            </div>
+            <div class="field">
+              <div class="field-label">UPS TYPE</div>
+              <select id="upsType">
+                <option value="rackmount">Rack-mounted UPS</option>
+                <option value="centralized">Centralized UPS System</option>
+                <option value="distributed">Distributed Rack UPS</option>
+                <option value="security">Security Equipment UPS</option>
+                <option value="telecom">Telecom Room UPS</option>
+              </select>
+            </div>
+            <div class="field">
+              <div class="field-label">RUNTIME TARGET (MIN)</div>
+              <div class="grid-2" style="gap:6px;">
+                <select id="runtimePreset">
+                  <option value="5">5 min</option>
+                  <option value="10">10 min</option>
+                  <option value="15" selected>15 min</option>
+                  <option value="30">30 min</option>
+                  <option value="60">60 min</option>
+                  <option value="custom">Custom</option>
+                </select>
+                <input type="number" id="runtimeCustom" value="15" min="1" max="480" style="display:none;" placeholder="min">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="panel">
         <div class="panel-label">ADD CUSTOM DEVICE</div>
@@ -382,11 +692,17 @@ body{background:white !important;color:black !important;font-size:9pt;}
         </div>
         <button class="btn-primary" id="addCustomBtn">+ ADD CUSTOM</button>
       </div>
+      <div class="panel">
+        <div class="panel-label">ADD FROM LIBRARY</div>
+        <div class="field"><select id="presetSelect"><option value="">-- Select device --</option></select></div>
+        <div class="callout"><strong>Dual PSU:</strong> Redundant power supplies share the load — total draw is unchanged.</div>
+        <button class="btn-primary" id="addPresetBtn">+ ADD TO CURRENT</button>
+      </div>
     </div>
     <div>
       <div class="grid-4">
         <div class="stat-card"><div class="stat-label">TOTAL WATTS</div><div class="stat-value" id="sc-watts">0 W</div><div class="stat-sub" id="sc-va">0 VA</div></div>
-        <div class="stat-card"><div class="stat-label">HEAT LOAD</div><div class="stat-value" id="sc-btu">0 BTU/h</div><div class="stat-sub" id="sc-tons">0.00 tons</div></div>
+        <div class="stat-card"><div class="stat-label">HEAT LOAD</div><div class="stat-value" id="sc-btu">0 BTU/hr</div><div class="stat-sub" id="sc-tons">0.00 tons</div></div>
         <div class="stat-card"><div class="stat-label">GENERATOR</div><div class="stat-value" id="sc-gen">0.0 kW</div><div class="stat-sub">@ 1.25× continuous</div></div>
         <div class="stat-card"><div class="stat-label">RACK USED</div><div class="stat-value" id="sc-u">0U / 42U</div><div class="stat-sub" id="sc-ufree">— free</div></div>
       </div>
@@ -457,10 +773,11 @@ body{background:white !important;color:black !important;font-size:9pt;}
   <div class="summary-header">
     <div><h1 id="sum-title">PLEX Project Summary</h1><div class="sum-meta" id="sum-subtitle">No project loaded</div></div>
     <button class="hbtn primary no-print" id="printBtn">🖨 Print / Save PDF</button>
+    <a href="/estimate" class="no-print" style="display:block;margin-top:8px;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8102E'" onmouseout="this.style.color='var(--gray-mid)'">→ Price this job with The Estimator</a>
   </div>
   <div class="panel" id="panel-project"><div class="panel-label">PROJECT INFORMATION</div><div id="sum-project"></div></div>
   <div class="panel" id="panel-electrical"><div class="panel-label">ELECTRICAL LOAD SUMMARY</div><div id="sum-electrical"></div></div>
-  <div class="panel" id="panel-ups"><div class="panel-label">UPS STATUS &amp; RUNTIME</div><div id="sum-ups"></div></div>
+  <div class="panel" id="panel-ups"><div class="panel-label">UPS SIZING &amp; RUNTIME</div><div id="sum-ups"></div></div>
   <div class="panel" id="panel-gen"><div class="panel-label">GENERATOR SIZING</div><div id="sum-gen"></div></div>
   <div class="panel" id="panel-mech"><div class="panel-label">MECHANICAL / COOLING LOAD</div><div class="panel-sub">Coordination value only &mdash; room envelope, ventilation, ambient load, and redundancy not included. Verify with MEP.</div><div id="sum-mech"></div></div>
   <div class="panel" id="panel-poe"><div class="panel-label">PoE SUMMARY</div><div id="sum-poe"></div></div>
@@ -482,7 +799,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
         <li><strong>NEC 125% Continuous Load.</strong> Applied for planning &mdash; breaker and generator sizing. Final circuiting to be verified and signed off by EOR/AHJ.</li>
         <li><strong>PoE Budget.</strong> Compared against camera <em>real draw</em> (typical operating watts), not maximum PoE class budget. Headroom is calculated against switch published PoE budget.</li>
         <li><strong>Wall-Mount Device Wattages.</strong> Wattages for wall-mounted devices (ACS controllers, power supplies, locks, intercoms, and field equipment) are reference estimates. Verify actual draw against manufacturer specifications and final hardware selections before design completion.</li>
-        <li><strong>Cooling Load.</strong> BTU/h = Watts &times; 3.412. Cooling tons = BTU/h &divide; 12,000. HVAC recommendation includes a 25% buffer.</li>
+        <li><strong>Cooling Load.</strong> BTU/hr = Watts &times; 3.412. Cooling tons = BTU/hr &divide; 12,000. HVAC recommendation includes a 25% buffer.</li>
         <li><strong>Generator Sizing.</strong> Total load &times; 1.25 (continuous). Growth recommendations show +25% and +50% above continuous.</li>
         <li><strong>UPS Runtime.</strong> Linear estimate from nameplate full-load runtime, scaled by load percentage. Actual runtime varies with battery age, temperature, and load profile.</li>
         <li><strong>Breaker Selection.</strong> Breaker shown is the next standard commercial size at or above calculated continuous-load current. Final breaker and conductor sizing by licensed electrical engineer.</li>
@@ -492,10 +809,22 @@ body{background:white !important;color:black !important;font-size:9pt;}
     </div>
   </div>
   <div id="print-credit">
-    PLEX v2.28 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    PLEX v2.50 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
 </div>
 </div>
+</div><!-- /calc-main-col -->
+<button id="assistant-toggle" onclick="toggleAssistant()">TIPS</button>
+<div id="plex-assistant">
+  <div class="panel-label teal" style="margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:8px;">PLEX ASSISTANT</div>
+  <div id="assistant-messages"><div class="assist-msg"><span class="assist-icon">&#9654;</span><span>Add equipment to see planning guidance.</span></div></div>
+  <div class="assist-footer">Preliminary estimates only. Verify with manufacturer data and engineer of record.</div>
+</div>
+</div><!-- /view-calculator -->
+
+<!-- Design Report print target — hidden; shown only during body.print-report print path -->
+<div id="view-report"></div>
+
 <div id="credit-line">
   <strong>PLEX</strong> is free to use. Please credit <a href="https://limitedenergy.net" target="_blank" rel="noopener">Limited Energy eXperts &middot; limitedenergy.net</a>
 </div>
@@ -534,27 +863,74 @@ body{background:white !important;color:black !important;font-size:9pt;}
     </div>
   </div>
 </div>
+<div class="modal-overlay" id="agModal">
+  <div class="modal-box">
+    <button class="modal-close" id="agModalClose">×</button>
+    <div class="modal-title">AMBIENT HEAT GAIN</div>
+    <div class="modal-body">
+      <p>Additional heat load added to the cooling calculation to account for <strong>lighting, room envelope, and occasional personnel</strong>. This is applied on top of the IT equipment BTU load before the BICSI/ASHRAE 1.25× planning buffer.</p><br>
+      <p><strong>Typical values:</strong><br>· Minimal interior TR with no exterior walls: <strong>5%</strong><br>· Standard interior TR/ER: <strong>10%</strong> (default)<br>· ER with exterior exposure or lighting load: <strong>15%</strong><br>· Worst-case / conservative planning: <strong>20%</strong></p><br>
+      <p>This field affects the <strong>cooling calculation only</strong> — it does not change electrical load, breaker sizing, or generator output.</p>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="templatesModal">
+  <div class="modal-box" style="max-width:820px;width:100%;">
+    <button class="modal-close" id="templatesModalClose">×</button>
+    <div class="modal-title">STARTER TEMPLATES</div>
+    <div class="modal-body">
+      <p style="font-size:12px;color:var(--gray-mid);">Pre-populated projects for common Division 27/28 scenarios. Loading a template replaces the current project.</p>
+      <div id="template-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;"></div>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="upsHelpModal">
+  <div class="modal-box">
+    <button class="modal-close" id="upsHelpModalClose">&times;</button>
+    <div class="modal-title">UPS PLANNING SETTINGS</div>
+    <div class="modal-body">
+      <p><strong>Demand Factor</strong> &mdash; ratio of actual operating load to connected nameplate load. Use 1.00 for conservative design; lower for known partial loads.</p><br>
+      <p><strong>Growth Factor</strong> &mdash; multiplier for future load expansion. Default 1.25 = 25% growth. Recommended for 5&ndash;10 year planning horizon.</p><br>
+      <p><strong>Max Load % Target</strong> &mdash; maximum UPS loading at planning load. 80% is standard; 75% for mission-critical. UPS will be sized so planning load does not exceed this threshold.</p><br>
+      <p><strong>Inverter Efficiency</strong> &mdash; UPS inverter efficiency for runtime calculation. Typical: 90&ndash;96% for double-conversion. Check manufacturer specs.</p><br>
+      <p><strong>Runtime Target</strong> &mdash; minimum desired runtime in minutes at planning load. Used to verify battery capacity and flag shortfalls.</p>
+    </div>
+  </div>
+</div>
+<!-- EOR AI Prompt Modal -->
+<div class="modal-overlay" id="eorModal">
+  <div class="modal-box" style="max-width:760px;width:100%;">
+    <button class="modal-close" id="eorModalClose">×</button>
+    <div class="modal-title">EOR AI PROMPT</div>
+    <div class="modal-body">
+      <p style="font-size:11px;color:var(--gray-mid);margin-bottom:10px;">Paste this into your AI assistant as project context for Division 27/28 specification language or EOR coordination.</p>
+      <textarea id="eorPromptText" rows="18" style="width:100%;font-family:var(--mono);font-size:10px;background:var(--navy);color:var(--gray-light);border:1px solid var(--border);border-radius:4px;padding:10px;resize:vertical;white-space:pre;line-height:1.6;" readonly></textarea>
+      <div style="display:flex;gap:10px;margin-top:10px;align-items:center;">
+        <button class="hbtn primary" id="eorCopyBtn">📋 Copy to Clipboard</button>
+        <button class="hbtn" id="eorDownloadBtn">⬇ Download .txt</button>
+        <span id="eorCopyConf" style="font-size:11px;color:var(--teal);opacity:0;transition:opacity 0.4s;">Copied!</span>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 const PRESETS=[
 {cat:"NVR / VMS Servers",items:[
-{name:"Milestone Husky IVO 1800R",w:450,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Milestone Husky IVO 800R",w:350,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Milestone Husky IVO 500R",w:250,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Genetec Streamvault SV-100",w:120,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Genetec Streamvault SV-110",w:200,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Genetec Streamvault SV-500",w:350,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Genetec Streamvault SV-1100",w:450,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Dell PowerEdge R350",w:350,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Milestone Husky IVO 1800R",w:990,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Milestone Husky IVO 700R",w:315,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Milestone Husky IVO 350R",w:495,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Genetec Streamvault SV-100",w:58,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Dell PowerEdge R350",w:540,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Generic 1U Server",w:300,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
 {cat:"PoE Switches",items:[
-{name:"Cisco CBS350 24P (185W PoE)",w:60,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:24,poeB:185,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Cisco CBS350 48P (370W PoE)",w:80,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:48,poeB:370,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Cisco CBS350 24FP (370W PoE)",w:80,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:24,poeB:370,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Axis D8004 PoE (60W)",w:20,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:4,poeB:60,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Cisco CBS350 24P (185W PoE)",w:31,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:24,poeB:185,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Cisco CBS350 48P (370W PoE)",w:55,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:48,poeB:370,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Cisco CBS350 24FP (370W PoE)",w:42,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:24,poeB:370,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Axis D8004 PoE (60W)",w:2,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:4,poeB:60,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Hanwha SPOEx-200P8 (240W PoE)",w:55,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:8,poeB:240,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Generic Unmanaged 8P PoE (120W)",w:30,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:8,poeB:120,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Juniper EX4300-48P (900W PoE+)",w:150,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:48,poeB:900,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Juniper EX4300-48MP (1100W PoE++)",w:180,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:48,poeB:1100,cW:0,cVA:0,rtMin:0,ups:false}]},
+{name:"Juniper EX4300-48P (900W PoE+)",w:157,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:48,poeB:900,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Juniper EX4300-48MP (1100W PoE++)",w:270,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:48,poeB:1100,cW:0,cVA:0,rtMin:0,ups:false}]},
 {cat:"Cameras (PoE)",items:[
 {name:"Axis P32 Series (Indoor Dome)",w:8,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Axis Q61 Series (PTZ)",w:60,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
@@ -564,29 +940,24 @@ const PRESETS=[
 {name:"Generic IP Camera (PoE)",w:12,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Generic IP PTZ (HiPoE/PoE+)",w:25,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
 {cat:"UPS",items:[
-{name:"APC Smart-UPS 1500VA LCD (980W)",w:25,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:980,cVA:1500,rtMin:6,ups:true},
+{name:"APC Smart-UPS 1500VA LCD (980W)",w:18,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:980,cVA:1500,rtMin:6,ups:true},
 {name:"APC Smart-UPS 2200VA LCD (1980W)",w:35,u:2,v:208,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:1980,cVA:2200,rtMin:7,ups:true},
 {name:"APC Smart-UPS 3000VA LCD (2700W)",w:45,u:2,v:208,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:9,ups:true},
-{name:"Eaton 9PX 1500VA (1350W)",w:25,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:1350,cVA:1500,rtMin:5,ups:true},
-{name:"Eaton 9PX 3000VA (2700W)",w:40,u:2,v:208,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:5,ups:true}]},
+{name:"Eaton 9PX 1500VA (1350W)",w:85,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:1350,cVA:1500,rtMin:5,ups:true},
+{name:"Eaton 9PX 3000VA (2700W)",w:170,u:2,v:208,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:5,ups:true}]},
 {cat:"Networking / Other (Rack)",items:[
-{name:"Cisco C9300 24-Port (non-PoE)",w:40,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Cisco Catalyst 9300-24S (24p SFP, non-PoE)",w:90,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Cisco C9300 24-Port (non-PoE)",w:64,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Cisco Catalyst 9300-24S (24p SFP, non-PoE)",w:113,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Cisco Meraki MX95 (SD-WAN / Firewall)",w:100,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"5G / LTE Cellular Gateway (1U)",w:30,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"1U Cable Management — Brush Guard",w:0,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"1U Patch Panel (passive)",w:0,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"2U Patch Panel (passive)",w:0,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Fiber Distribution Unit (FDU 1U)",w:0,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"KVM Over IP (1U)",w:15,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Console Server (1U)",w:15,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"PDU (Rack, metered)",w:10,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"1U Blank Panel",w:0,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
+{name:"PDU (Rack, metered)",w:10,u:1,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
 {cat:"ACS Power Supplies (Wall)",items:[
 {name:"LifeSafety Power FlexPower e2 (2A)",w:30,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"LifeSafety Power FlexPower e4 (4A)",w:55,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"LifeSafety Power FlexPower e4 (4A)",w:74,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"LifeSafety Power FlexPower e8 (8A)",w:110,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"LifeSafety Power FlexPower e12 (12A)",w:170,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"LifeSafety Power FlexPower e12 (12A)",w:153,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Altronix AL600ULX (6A 12/24V)",w:100,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Altronix AL1012ULACM (10A 12V)",w:150,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
 {cat:"ACS Door Controllers (Wall)",items:[
@@ -604,6 +975,7 @@ const PRESETS=[
 {name:"Electric Strike, Fail Secure (24VDC)",w:6,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Mortise Lock, Fail Secure (12VDC)",w:8,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Mortise Lock, Fail Secure (24VDC)",w:8,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
+{name:"Schlage L9092EU Electrified Mortise Lockset (24VDC)",w:8,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Electromagnetic Lock, Fail Safe",w:5,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Electric Latch Retraction (ELR)",w:18,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Request-to-Exit (REX) Sensor",w:2,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
@@ -618,10 +990,165 @@ const ALL_FLAT=PRESETS.flatMap(c=>c.items.map(i=>({...i,category:c.cat})));
 const BTU_PER_WATT=3.41214;
 const STORAGE_KEY='plex_session_v2';
 const PLEX_SIG='PLEX-LEX';
-const PLEX_VERSION='2.28';
+const PLEX_VERSION='2.50';
+const MATURITY_LABELS={
+  conceptual:'Conceptual',
+  schematic:'Schematic Design',
+  dd:'Design Development',
+  cd:'Construction Documents'
+};
+const MATURITY_NOTES={
+  conceptual:'Conceptual-phase estimates. Equipment lists are notional; values should not be used for procurement, permit, or construction.',
+  schematic:'Schematic Design-phase estimates. Equipment selection is preliminary; verify quantities and wattages at Design Development.',
+  dd:'Design Development-phase values. Equipment list reflects current design intent; minor adjustments expected through Construction Documents.',
+  cd:'Construction Documents-phase schedule. Values reflect final design intent and should be coordinated with all trade drawings.'
+};
+function maturityDisclaimer(m){return MATURITY_NOTES[m]||MATURITY_NOTES['schematic'];}
+const UPS_PRESETS=[
+  {mfr:'APC',model:'Smart-UPS 750 (SMT750RM2UC)',va:750,w:500,batteryWh:338},
+  {mfr:'APC',model:'Smart-UPS 1000 (SMT1000RM2UC)',va:1000,w:700,batteryWh:432},
+  {mfr:'APC',model:'Smart-UPS 1500 (SMT1500RM2UC)',va:1500,w:1000,batteryWh:648},
+  {mfr:'APC',model:'Smart-UPS 2200 (SMT2200RM2UC)',va:2200,w:1980,batteryWh:1512},
+  {mfr:'APC',model:'Smart-UPS 3000 (SMT3000RM2UC)',va:3000,w:2700,batteryWh:1944},
+  {mfr:'APC',model:'Smart-UPS RT 5kVA (SRTL5KRM4UXLI)',va:5000,w:4500,batteryWh:3060},
+  {mfr:'APC',model:'Smart-UPS RT 10kVA (SRTL10KXLI)',va:10000,w:8000,batteryWh:5760},
+  {mfr:'APC',model:'Symmetra LX 8kVA',va:8000,w:6400,batteryWh:4608},
+  {mfr:'APC',model:'Symmetra PX 10kVA',va:10000,w:9000,batteryWh:6480},
+  {mfr:'Eaton',model:'9PX 1500RT (9PX1500RT)',va:1500,w:1350,batteryWh:720},
+  {mfr:'Eaton',model:'9PX 2200RT (9PX2200RT)',va:2200,w:1980,batteryWh:1260},
+  {mfr:'Eaton',model:'9PX 3000RT (9PX3000RT)',va:3000,w:2700,batteryWh:1620},
+  {mfr:'Eaton',model:'9PX 5kVA (9PX5KRTN)',va:5000,w:4500,batteryWh:2700},
+  {mfr:'Eaton',model:'9SX 5kVA (9SX5KRTN)',va:5000,w:4500,batteryWh:2700},
+  {mfr:'Eaton',model:'9SX 8kVA (9SX8KRTN)',va:8000,w:7200,batteryWh:4320},
+  {mfr:'Eaton',model:'93PM 10kVA (base module)',va:10000,w:9000,batteryWh:5400},
+  {mfr:'Vertiv',model:'Liebert PSI5 1500VA (PS1500RT3)',va:1500,w:1350,batteryWh:810},
+  {mfr:'Vertiv',model:'Liebert PSI5 3000VA (PS3000RT3)',va:3000,w:2700,batteryWh:1620},
+  {mfr:'Vertiv',model:'Liebert GXT5 6kVA (GXT5-6000MVX)',va:6000,w:5400,batteryWh:3240},
+  {mfr:'Vertiv',model:'Liebert EXL S1 10kVA',va:10000,w:9000,batteryWh:5400},
+  {mfr:'CyberPower',model:'OL1500RTXL2U (1500VA)',va:1500,w:1350,batteryWh:648},
+  {mfr:'CyberPower',model:'OL3000RTXL2U (3000VA)',va:3000,w:2700,batteryWh:1944},
+  {mfr:'CyberPower',model:'OL6000RT3UT (6kVA)',va:6000,w:5400,batteryWh:3888},
+  {mfr:'CyberPower',model:'OL10000RT3U (10kVA)',va:10000,w:9000,batteryWh:6480}
+];
+const FACILITY_PROFILES={
+  missioncritical:{label:'Mission Critical / Data Center',upsLoadTarget:75,growthFactor:1.50,runtimeTarget:30,upsType:'centralized',redundancyNote:'N+1 minimum recommended; N+2 for mission-critical spaces.',coolingNote:'Precision cooling with N+1 redundancy recommended.',generatorNote:'Standby generator required. Dual-source utility preferred.',basisNote:'Mission-critical facilities require no single point of failure across power, cooling, and communications infrastructure.'},
+  healthcare:{label:'Healthcare / Medical',upsLoadTarget:80,growthFactor:1.30,runtimeTarget:15,upsType:'centralized',redundancyNote:'Life safety loads should be identified and isolated on dedicated UPS circuits.',coolingNote:'24/7 cooling availability required. N+1 minimum.',generatorNote:'Emergency generator required per NFPA 99. Coordinate with facility electrical engineer for Type 1/2/3 classification.',basisNote:'Healthcare facilities are subject to NFPA 99 healthcare technology management requirements. Life safety and critical branch loads must be coordinated with the electrical engineer and facility management.'},
+  publicsafety:{label:'Public Safety / Emergency Services',upsLoadTarget:75,growthFactor:1.25,runtimeTarget:240,upsType:'centralized',redundancyNote:'Primary PSAP facilities: 4-hour minimum UPS runtime per TIA-1221. Verify with AHJ.',coolingNote:'No single point of failure. N+1 minimum cooling.',generatorNote:'Standby generator required. Automatic transfer switch with <10 second transfer time typical.',basisNote:'Public safety answering points (PSAPs) and emergency services facilities are subject to NENA, TIA-1221, and applicable state/local emergency communications standards. Coordinate with AHJ.'},
+  correctional:{label:'Correctional / Detention',upsLoadTarget:80,growthFactor:1.20,runtimeTarget:240,upsType:'security',redundancyNote:'Access control and security systems should maintain 4-hour minimum battery backup.',coolingNote:'Vandal-resistant and tamper-evident equipment enclosures required. Coordinate with facility security.',generatorNote:'Standby generator required for life safety and security systems.',basisNote:'Correctional facilities require continuous access control and surveillance system availability. Security system UPS and generator design should be coordinated with the security consultant and facility management.'},
+  education:{label:'Education',upsLoadTarget:80,growthFactor:1.25,runtimeTarget:15,upsType:'telecom',redundancyNote:'Standard N+1 UPS for TR/ER. Generator typically owner preference.',coolingNote:'Standard HVAC coordination. Confirm cooling availability during unoccupied hours.',generatorNote:'Standby generator optional; confirm with owner program requirements.',basisNote:'Educational facilities should plan for technology refresh cycles and accommodate growth in device density. Confirm BYOD and 1:1 device programs with owner for PoE planning.'},
+  enterprise:{label:'Enterprise / Commercial Office',upsLoadTarget:80,growthFactor:1.25,runtimeTarget:15,upsType:'rackmount',redundancyNote:'Standard UPS for orderly shutdown and short outage ride-through.',coolingNote:'Dedicated cooling for TR/ER recommended; confirm with mechanical engineer.',generatorNote:'Standby generator optional; confirm with owner program requirements.',basisNote:'Commercial office ICT infrastructure should be planned for technology refresh and tenant flexibility.'},
+  government:{label:'Government / Federal',upsLoadTarget:75,growthFactor:1.25,runtimeTarget:30,upsType:'centralized',redundancyNote:'Federal facilities: coordinate with facility security and IT requirements. FISMA/FedRAMP implications may apply.',coolingNote:'N+1 cooling minimum for government data spaces.',generatorNote:'Standby generator typically required. Coordinate with facility master plan.',basisNote:'Government and federal facilities may be subject to additional cybersecurity, physical security, and continuity of operations (COOP) requirements. Coordinate with facility security officer and program manager.'},
+  hospitality:{label:'Hospitality / Retail',upsLoadTarget:80,growthFactor:1.25,runtimeTarget:15,upsType:'distributed',redundancyNote:'Standard UPS for TR equipment protection.',coolingNote:'Standard HVAC coordination.',generatorNote:'Generator typically for life safety only; ICT on generator is owner preference.',basisNote:'Hospitality and retail ICT infrastructure should accommodate high device density and guest/customer network access.'},
+  unknown:{label:'Not specified',upsLoadTarget:80,growthFactor:1.25,runtimeTarget:15,upsType:'rackmount',redundancyNote:'',coolingNote:'',generatorNote:'',basisNote:''}
+};
 const STD_BREAKERS=[15,20,25,30,35,40,45,50,60,70,80,90,100,110,125,150,175,200];
 const STD_GENERATORS=[8,10,12.5,15,17.5,20,22,25,30,35,40,45,50,60,75,100,125,150,175,200,250,300,350,400,500];
-let state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:'',scheduleTitle:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''}],items:[],activeRackId:1};
+const COOLING_BUFFER=1.25;
+const CATEGORY_DIVERSITY={
+  'NVR / VMS Servers':0.90,
+  'PoE Switches':0.75,
+  'Cameras (PoE)':0.95,
+  'UPS':1.00,
+  'Networking / Other (Rack)':0.75,
+  'ACS Power Supplies (Wall)':0.90,
+  'ACS Door Controllers (Wall)':0.90,
+  'Door Hardware / Locks (Wall)':0.90,
+  'Field / Wall Equipment':0.90,
+  'Default':0.90
+};
+const STD_PANELS=[100,125,150,200,225,400,600,800,1200];
+const STD_UPS_VA=[750,1000,1500,2200,3000,5000,6000,8000,10000,15000,20000,30000,40000,60000];
+const TEMPLATES=[
+{name:"Small TR — Single Closet",desc:"Access layer, no servers, one rack",facilityType:'enterprise',
+ project:{name:'',room:'TR-1',building:'',floor:'',designer:'',date:'',notes:'Single-floor or small building telecom closet.',scheduleTitle:'TR-1 Power Consumption & Circuit Schedule'},
+ settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'telecom',runtimeTarget:15,inverterEfficiency:90},
+ racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''}],
+ items:[
+  {id:1,name:"Cisco Catalyst 2960-L 24P PoE",w:60,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:24,poeB:185,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:2,name:"Cisco Catalyst 2960-L 48P PoE",w:60,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:370,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:3,name:"24-Port Patch Panel",w:0,u:1,qty:2,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:"",level:""},
+  {id:4,name:"APC Smart-UPS 750VA (500W)",w:35,u:2,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:500,cVA:750,rtMin:12,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:5,name:"Generic IP Camera (PoE)",w:12,u:0,qty:32,v:120,loc:"rack",rackId:1,category:"Cameras (PoE)",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:6,name:"LifeSafety Power FlexPower e4 (4A)",w:74,u:0,qty:1,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'critical',circuitNotes:"",level:""}
+]},
+{name:"Medium TR — Multi-Floor",desc:"2–3 floors, ACS and camera infrastructure, 2 racks",facilityType:'enterprise',
+ project:{name:'',room:'TR-2',building:'',floor:'',designer:'',date:'',notes:'Multi-floor TR serving access layer and security head-end.',scheduleTitle:'TR-2 Power Consumption & Circuit Schedule'},
+ settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'telecom',runtimeTarget:15,inverterEfficiency:90},
+ racks:[
+  {id:1,label:'Rack 1 — Network',sizeU:42,voltage:120,notes:'Access layer switching',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''},
+  {id:2,label:'Rack 2 — Security',sizeU:42,voltage:120,notes:'NVR, ACS head-end',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''}
+ ],
+ items:[
+  {id:1,name:"Cisco Catalyst 9300-24P PoE+",w:160,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:24,poeB:445,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:2,name:"Cisco Catalyst 9300-48P PoE+",w:160,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:890,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:3,name:"24-Port Patch Panel",w:0,u:1,qty:2,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"none",circuitNotes:"",level:""},
+  {id:4,name:"APC Smart-UPS 1500VA (1050W)",w:55,u:2,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:1050,cVA:1500,rtMin:8,ups:true,upsBacking:"none",circuitNotes:"",level:""},
+  {id:5,name:"NVR 16-Channel",w:120,u:2,qty:1,v:120,loc:"rack",rackId:2,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:6,name:"Cisco IE-4000 Industrial Switch",w:30,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:7,name:"24-Port Patch Panel",w:0,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"none",circuitNotes:"",level:""},
+  {id:8,name:"LifeSafety Power FlexPower e8 (8A)",w:110,u:0,qty:2,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"critical",circuitNotes:"",level:""},
+  {id:9,name:"Lenel LNL-2220 Door Controller",w:18,u:0,qty:1,v:120,loc:"wall",category:"ACS Door Controllers (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"critical",circuitNotes:"",level:""},
+  {id:10,name:"Generic IP Camera (PoE)",w:12,u:0,qty:32,v:120,loc:"rack",rackId:1,category:"Cameras (PoE)",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""}
+]},
+{name:"Standard ER — Building Core",desc:"Primary ER, mixed IT and security, 4 racks, 208V",facilityType:'enterprise',
+ project:{name:'',room:'ER-1',building:'',floor:'',designer:'',date:'',notes:'Primary equipment room for commercial building. Division 27/28 submittal.',scheduleTitle:'ER-1 Power Consumption & Circuit Schedule'},
+ settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'rackmount',runtimeTarget:10,inverterEfficiency:90},
+ racks:[
+  {id:1,label:'Rack 1 — Network Core',sizeU:42,voltage:208,notes:'Core switching and routing',redundant:false,level:'',outletType:'NEMA L6-20R',circuitNum:''},
+  {id:2,label:'Rack 2 — Access/Distribution',sizeU:42,voltage:208,notes:'Access layer PoE switching',redundant:false,level:'',outletType:'NEMA L6-20R',circuitNum:''},
+  {id:3,label:'Rack 3 — Servers',sizeU:42,voltage:208,notes:'Application and storage servers',redundant:false,level:'',outletType:'NEMA L6-20R',circuitNum:''},
+  {id:4,label:'Rack 4 — Security Head-End',sizeU:42,voltage:208,notes:'NVR, ACS server, management',redundant:false,level:'',outletType:'NEMA L6-20R',circuitNum:''}
+ ],
+ items:[
+  {id:1,name:"Cisco Catalyst 9500-24Q",w:350,u:1,qty:1,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:2,name:"Cisco ASR 1001-X Router",w:250,u:2,qty:1,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:3,name:"48-Port Patch Panel",w:0,u:2,qty:1,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"none",circuitNotes:"",level:""},
+  {id:4,name:"APC Smart-UPS 3000VA (2400W)",w:80,u:3,qty:1,v:208,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:2400,cVA:3000,rtMin:10,ups:true,upsBacking:"none",circuitNotes:"",level:""},
+  {id:5,name:"Cisco Catalyst 9300-48P PoE+",w:160,u:1,qty:2,v:208,loc:"rack",rackId:2,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:890,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:6,name:"48-Port Patch Panel",w:0,u:2,qty:1,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"none",circuitNotes:"",level:""},
+  {id:7,name:"Generic IP Camera (PoE)",w:12,u:0,qty:32,v:120,loc:"rack",rackId:2,category:"Cameras (PoE)",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:8,name:"Dell PowerEdge R350",w:540,u:1,qty:2,v:208,loc:"rack",rackId:3,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:9,name:"Synology RS1221+ NAS",w:100,u:2,qty:1,v:208,loc:"rack",rackId:3,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:10,name:"24-Port Patch Panel",w:0,u:1,qty:1,v:208,loc:"rack",rackId:3,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"none",circuitNotes:"",level:""},
+  {id:11,name:"NVR 24-Channel",w:200,u:2,qty:1,v:208,loc:"rack",rackId:4,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:12,name:"Access Control Server",w:150,u:2,qty:1,v:208,loc:"rack",rackId:4,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:13,name:"Axis S3008 Recorder",w:20,u:1,qty:1,v:208,loc:"rack",rackId:4,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:14,name:"KVM Switch (1U)",w:30,u:1,qty:1,v:208,loc:"rack",rackId:4,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:15,name:"APC Smart-UPS 1500VA (1050W)",w:55,u:2,qty:1,v:208,loc:"rack",rackId:4,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:1050,cVA:1500,rtMin:8,ups:true,upsBacking:"none",circuitNotes:"",level:""},
+  {id:16,name:"LifeSafety Power FlexPower e12 (12A)",w:153,u:0,qty:1,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"critical",circuitNotes:"",level:""},
+  {id:17,name:"LifeSafety Power FlexPower e8 (8A)",w:110,u:0,qty:1,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"critical",circuitNotes:"",level:""}
+]},
+{name:"High-Density ER — Campus / Mission-Critical",desc:"Campus data room, 6 racks, 208V, N+1 power and cooling",facilityType:'missioncritical',
+ project:{name:'',room:'ER-1',building:'',floor:'',designer:'',date:'',notes:'Campus ER with significant compute infrastructure. N+1 power and cooling expected.',scheduleTitle:'ER-1 Power Consumption & Circuit Schedule'},
+ settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:75,upsType:'centralized',runtimeTarget:15,inverterEfficiency:92},
+ racks:[
+  {id:1,label:'Rack 1 — Core Network',sizeU:42,voltage:208,notes:'Core switching, N+1',redundant:true,level:'',outletType:'NEMA L6-30R',circuitNum:''},
+  {id:2,label:'Rack 2 — Distribution',sizeU:42,voltage:208,notes:'Distribution layer, N+1',redundant:true,level:'',outletType:'NEMA L6-30R',circuitNum:''},
+  {id:3,label:'Rack 3 — Compute A',sizeU:42,voltage:208,notes:'Compute cluster A',redundant:false,level:'',outletType:'NEMA L6-30R',circuitNum:''},
+  {id:4,label:'Rack 4 — Compute B',sizeU:42,voltage:208,notes:'Compute cluster B',redundant:false,level:'',outletType:'NEMA L6-30R',circuitNum:''},
+  {id:5,label:'Rack 5 — Storage',sizeU:42,voltage:208,notes:'Storage and NAS',redundant:false,level:'',outletType:'NEMA L6-30R',circuitNum:''},
+  {id:6,label:'Rack 6 — Security / Mgmt',sizeU:42,voltage:208,notes:'Security head-end and OOB management',redundant:false,level:'',outletType:'NEMA L6-20R',circuitNum:''}
+ ],
+ items:[
+  {id:1,name:"Cisco Catalyst 9500-48Y4C",w:400,u:2,qty:2,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:2,name:"48-Port Patch Panel",w:0,u:2,qty:1,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"none",circuitNotes:"",level:""},
+  {id:3,name:"Cisco Catalyst 9300-48P PoE+",w:160,u:1,qty:4,v:208,loc:"rack",rackId:2,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:890,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:4,name:"48-Port Patch Panel",w:0,u:2,qty:2,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"none",circuitNotes:"",level:""},
+  {id:5,name:"Dell PowerEdge R550",w:750,u:2,qty:6,v:208,loc:"rack",rackId:3,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:6,name:"APC Smart-UPS 5000VA (4000W)",w:120,u:3,qty:1,v:208,loc:"rack",rackId:3,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:4000,cVA:5000,rtMin:8,ups:true,upsBacking:"none",circuitNotes:"",level:""},
+  {id:7,name:"Dell PowerEdge R550",w:750,u:2,qty:6,v:208,loc:"rack",rackId:4,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:8,name:"APC Smart-UPS 5000VA (4000W)",w:120,u:3,qty:1,v:208,loc:"rack",rackId:4,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:4000,cVA:5000,rtMin:8,ups:true,upsBacking:"none",circuitNotes:"",level:""},
+  {id:9,name:"Dell PowerEdge R750xs",w:600,u:2,qty:2,v:208,loc:"rack",rackId:5,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:10,name:"Synology RS3621xs+ NAS",w:150,u:4,qty:1,v:208,loc:"rack",rackId:5,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:11,name:"NVR 64-Channel",w:350,u:4,qty:1,v:208,loc:"rack",rackId:6,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:12,name:"Access Control Server",w:200,u:2,qty:1,v:208,loc:"rack",rackId:6,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:13,name:"Out-of-Band Management Switch",w:40,u:1,qty:1,v:208,loc:"rack",rackId:6,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"ups",circuitNotes:"",level:""},
+  {id:14,name:"24-Port Patch Panel",w:0,u:1,qty:1,v:208,loc:"rack",rackId:6,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"none",circuitNotes:"",level:""},
+  {id:15,name:"LifeSafety Power FlexPower e12 (12A)",w:153,u:0,qty:2,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:"critical",circuitNotes:"",level:""}
+]}
+];
+let state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:'',scheduleTitle:'',maturity:'schematic',intent:{availabilityObjective:'standard',recoveryObjective:'orderly',growthPhilosophy:'',redundancyPhilosophy:'',operationalAssumptions:''}},settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'rackmount',runtimeTarget:15,inverterEfficiency:90,batteryWh:0,upsModelPreset:''},wizard:{facilityType:'unknown'},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''}],items:[],activeRackId:1};
+let wizardState={facilityType:null,roomType:null,goals:[],equipmentKnowledge:null,startMode:null};
 let nextItemId=1,nextRackId=2,customLoc='rack',dirty=false,lastSaveTime=null;
 const v=id=>document.getElementById(id);
 function autoSave(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({state,nextItemId,nextRackId,savedAt:Date.now()}));lastSaveTime=Date.now();dirty=false;updateSavedIndicator();}catch(e){console.error('Save failed:',e);}}
@@ -634,30 +1161,135 @@ const getActiveRack=()=>state.racks.find(r=>r.id===state.activeRackId)||state.ra
 function standardBreaker(amps){const c=amps*1.25;const f=STD_BREAKERS.find(s=>s>=c);return f||'>200A';}
 function standardGenerator(kw){const f=STD_GENERATORS.find(s=>s>=kw);return f?f+' kW':'>500 kW';}
 function upsRuntime(capW,loadW,fullMin){if(loadW<=0||capW<=0||fullMin<=0)return null;if(loadW>capW)return 0;return fullMin/(loadW/capW);}
+
+function recommendedUps(planningVA,targetLoadPct){
+  if(planningVA<=0)return null;
+  const minVA=planningVA/(targetLoadPct/100);
+  return STD_UPS_VA.find(s=>s>=minVA)||null;
+}
+function upsStatus(loadPct){
+  if(loadPct<=70)return{label:'Good',color:'var(--green)'};
+  if(loadPct<=80)return{label:'Acceptable',color:'var(--teal)'};
+  if(loadPct<=90)return{label:'Caution',color:'var(--yellow)'};
+  return{label:'Overloaded',color:'var(--danger)'};
+}
+function upsTypeName(t){const m={rackmount:'Rack-mounted UPS',centralized:'Centralized UPS System',distributed:'Distributed Rack UPS',security:'Security Equipment UPS',telecom:'Telecom Room UPS'};return m[t]||t;}
+function getDiversityFactor(category){
+  return CATEGORY_DIVERSITY[category]||CATEGORY_DIVERSITY['Default'];
+}
 function calc(){
   const pf=state.settings.powerFactor||0.9;
-  let totalW=0,wallW=0,poeCW=0,poeBW=0,upsW=0,upsVA=0,upsRuntimeMin=null;
-  const perRack={},perWall=[],rackW={};
-  state.racks.forEach(r=>{perRack[r.id]={rack:r,watts:0,u:0,items:[],upsItems:[]};rackW[r.id]=0;});
+  const ag=(state.settings.ambientGain!=null?state.settings.ambientGain:10)/100;
+  // Two running totals per rack:
+  //   rackRawW  = nameplate×qty  → used for per-rack circuit/breaker sizing (NEC 215.2)
+  //   rackDivW  = nameplate×qty×diversity → used for system totals, BTU, cooling, generator
+  let totalRawW=0,totalDivW=0,wallRawW=0,poeCW=0,poeBW=0,upsW=0,upsVA=0,upsRuntimeMin=null;
+  const perRack={},perWall=[],rackRawW={},rackDivW={};
+  state.racks.forEach(r=>{
+    perRack[r.id]={rack:r,rawWatts:0,divWatts:0,u:0,items:[],upsItems:[]};
+    rackRawW[r.id]=0;rackDivW[r.id]=0;
+  });
   for(const it of state.items){
-    const q=it.qty||1,w=it.w*q;totalW+=w;
-    if(it.loc==='wall'){wallW+=w;const a=it.v>0?w/it.v:0;perWall.push({item:it,watts:w,amps:a,breaker:standardBreaker(a)});}
-    else{const t=perRack[it.rackId]||perRack[state.racks[0].id];if(t){t.watts+=w;t.u+=(it.u||0)*q;t.items.push(it);if(it.ups)t.upsItems.push(it);if(!it.ups)rackW[t.rack.id]=(rackW[t.rack.id]||0)+w;}}
+    const q=it.qty||1;
+    const rawW=it.w*q;
+    const df=getDiversityFactor(it.category);
+    const divW=rawW*df;
+    totalRawW+=rawW;totalDivW+=divW;
+    if(it.loc==='wall'){
+      wallRawW+=rawW;
+      const a=it.v>0?rawW/it.v:0;
+      perWall.push({item:it,watts:rawW,divWatts:divW,df,amps:a,breaker:standardBreaker(a)});
+    } else {
+      const t=perRack[it.rackId]||perRack[state.racks[0].id];
+      if(t){
+        t.rawWatts+=rawW;t.divWatts+=divW;
+        t.u+=(it.u||0)*q;t.items.push(it);
+        if(it.ups)t.upsItems.push(it);
+        if(!it.ups){rackRawW[t.rack.id]=(rackRawW[t.rack.id]||0)+rawW;rackDivW[t.rack.id]=(rackDivW[t.rack.id]||0)+divW;}
+      }
+    }
     if(it.poeS)poeBW+=(it.poeB||0)*q;
-    if(it.poeC)poeCW+=it.w*q;
+    if(it.poeC)poeCW+=rawW;
     if(it.ups){upsW+=(it.cW||0)*q;upsVA+=(it.cVA||0)*q;}
   }
   const allUpsItems=state.items.filter(i=>i.ups);
-  if(allUpsItems.length>0){const f=allUpsItems[0];const pl=state.items.filter(i=>!i.ups).reduce((s,i)=>s+i.w*(i.qty||1),0);upsRuntimeMin=upsRuntime(f.cW||0,pl,f.rtMin||5);}
-  const nonUpsW=state.items.filter(i=>!i.ups).reduce((s,i)=>s+i.w*(i.qty||1),0);
-  const totalVA=pf>0?totalW/pf:0;
-  const btu=totalW*BTU_PER_WATT;
-  const tons=btu/12000;
-  const upsP=upsW>0?(nonUpsW/upsW)*100:0;
+  if(allUpsItems.length>0){
+    const f=allUpsItems[0];
+    const pl=state.items.filter(i=>!i.ups).reduce((s,i)=>s+i.w*(i.qty||1),0);
+    upsRuntimeMin=upsRuntime(f.cW||0,pl,f.rtMin||5);
+  }
+  const nonUpsRawW=state.items.filter(i=>!i.ups).reduce((s,i)=>s+i.w*(i.qty||1),0);
+  const nonUpsVA=pf>0?nonUpsRawW/pf:0;
+  // UPS Backing groupings (new v2.50)
+  const df_set=state.settings.demandFactor||1.00;
+  const gf_set=state.settings.growthFactor||1.25;
+  const upsLT=state.settings.upsLoadTarget||80;
+  const invEff=(state.settings.inverterEfficiency||90)/100;
+  const rtTarget=state.settings.runtimeTarget||15;
+  let upsBackedW=0,genOnlyW=0,criticalW=0,nonUpsBackedW=0;
+  state.items.forEach(it=>{
+    if(it.ups)return; // UPS hardware excluded from backed load
+    const w=it.w*(it.qty||1);
+    const bk=it.upsBacking||'none';
+    if(bk==='ups')upsBackedW+=w;
+    else if(bk==='gen')genOnlyW+=w;
+    else if(bk==='critical'){criticalW+=w;upsBackedW+=w;}
+    else nonUpsBackedW+=w;
+  });
+  const upsBackedVA=pf>0?upsBackedW/pf:0;
+  const upsPlanningW=upsBackedW*df_set*gf_set;
+  const upsPlanningVA=pf>0?upsPlanningW/pf:0;
+  const recUpsVA=recommendedUps(upsPlanningVA,upsLT);
+  const upsLoadPct=recUpsVA>0?(upsPlanningVA/recUpsVA)*100:0;
+  const upsHeadroomVA=recUpsVA>0?recUpsVA-upsPlanningVA:0;
+  const upsHeadroomPct=100-upsLoadPct;
+  // Runtime calc
+  const totalBatteryWh=allUpsItems.reduce((s,it)=>{
+    const q=it.qty||1;
+    return s+(it.cW||0)*(it.rtMin||0)/60*q;
+  },0);
+  // If a UPS model preset is selected, its batteryWh overrides item-based totalBatteryWh
+  const effectiveBatteryWh=state.settings.batteryWh>0?state.settings.batteryWh:totalBatteryWh;
+  let runtimeMin=null,runtimeAtGrowthMin=null;
+  if(effectiveBatteryWh>0&&upsBackedW>0){
+    runtimeMin=(effectiveBatteryWh*invEff)/upsBackedW*60;
+    runtimeAtGrowthMin=(effectiveBatteryWh*invEff)/(upsBackedW*gf_set)*60;
+  }
+  const requiredWh=upsBackedW>0?(upsBackedW*(rtTarget/60))/invEff:0;
+  const batteryDeltaWh=effectiveBatteryWh-requiredWh;
+  // Electrical sizing uses diversity-adjusted totals (VA)
+  const totalVA=pf>0?totalDivW/pf:0;
+  // BTU/cooling uses diversity-adjusted watts + ambient gain
+  const itBtu=totalDivW*BTU_PER_WATT;
+  const recBtu=itBtu*COOLING_BUFFER*(1+ag);
+  const recTons=recBtu/12000;
+  const btu=itBtu; // kept for backward compat display
+  const tons=recTons;
+  const upsP=upsW>0?(nonUpsRawW/upsW)*100:0;
   const poeP=poeBW>0?(poeCW/poeBW)*100:0;
-  const generatorKW=(totalW*1.25)/1000;
-  Object.values(perRack).forEach(r=>{const n=rackW[r.rack.id]||0;r.nonUpsWatts=n;r.va=pf>0?n/pf:0;r.amps=r.rack.voltage>0?r.va/r.rack.voltage:0;r.breaker=standardBreaker(r.amps);r.fillPct=r.rack.sizeU>0?(r.u/r.rack.sizeU)*100:0;r.remU=r.rack.sizeU-r.u;});
-  return{totalW,totalVA,btu,tons,wallW,nonUpsW,poeBW,poeCW,poeP,upsW,upsVA,upsP,upsRuntimeMin,allUpsItems,generatorKW,perRack,perWall,a120:totalVA/120,a208:totalVA/208,a240:totalVA/240};
+  const generatorKW=(totalDivW*1.25)/1000;
+  const hasRedundant=state.racks.some(r=>r.redundant);
+  // Total rack U for density calc
+  const totalRackU=state.racks.reduce((s,r)=>s+r.sizeU,0);
+  const roomWperU=totalRackU>0?totalDivW/totalRackU:0;
+  let maxRackBtu=0;
+  Object.values(perRack).forEach(r=>{
+    const rawN=rackRawW[r.rack.id]||0;
+    const divN=rackDivW[r.rack.id]||0;
+    // Breaker sizing uses raw nameplate per NEC 215.2
+    r.nonUpsWatts=rawN;
+    r.nonUpsDivWatts=divN;
+    r.watts=rawN; // backward-compat alias for renderRack
+    r.va=pf>0?rawN/pf:0;
+    r.amps=r.rack.voltage>0?r.va/r.rack.voltage:0;
+    r.breaker=standardBreaker(r.amps);
+    r.fillPct=r.rack.sizeU>0?(r.u/r.rack.sizeU)*100:0;
+    r.remU=r.rack.sizeU-r.u;
+    r.btu=divN*BTU_PER_WATT;
+    r.wPerU=r.u>0?divN/r.u:0;
+    if(r.btu>maxRackBtu)maxRackBtu=r.btu;
+  });
+  return{totalW:totalRawW,totalDivW,totalVA,btu,tons:recTons,itBtu,recBtu,recTons,ambientGainFrac:ag,wallW:wallRawW,nonUpsW:nonUpsRawW,poeBW,poeCW,poeP,upsW,upsVA,upsP,upsRuntimeMin,allUpsItems,generatorKW,perRack,perWall,a120:totalVA/120,a208:totalVA/(208*Math.sqrt(3)),a240:totalVA/240,roomWperU,hasRedundant,maxRackBtu,upsBackedW,upsBackedVA,genOnlyW,criticalW,nonUpsBackedW,upsPlanningW,upsPlanningVA,recUpsVA,upsLoadPct,upsHeadroomVA,upsHeadroomPct,totalBatteryWh,effectiveBatteryWh,runtimeMin,requiredWh,batteryDeltaWh,runtimeAtGrowthMin};
 }
 const pillCls=s=>({ok:'pill-ok',warn:'pill-warn',over:'pill-over',none:'pill-none'}[s]);
 const pillTxt=s=>({ok:'OK',warn:'MARGINAL',over:'OVER',none:'N/A'}[s]);
@@ -670,9 +1302,31 @@ function render(){
   const s=calc();const r=getActiveRack();
   ['name','room','building','floor','designer','date','notes','scheduleTitle'].forEach(f=>{const el=v('proj-'+f);if(el&&el.value!==(state.project[f]||''))el.value=state.project[f]||'';});
   if(v('powerFactor').value!==String(state.settings.powerFactor))v('powerFactor').value=state.settings.powerFactor;
+  const _ag=state.settings.ambientGain!=null?state.settings.ambientGain:10;if(v('ambientGain').value!==String(_ag))v('ambientGain').value=_ag;
+  const _df=state.settings.demandFactor!=null?state.settings.demandFactor:1.00;if(v('demandFactor')&&v('demandFactor').value!==String(_df))v('demandFactor').value=_df;
+  const _gf=state.settings.growthFactor!=null?state.settings.growthFactor:1.25;if(v('growthFactor')&&v('growthFactor').value!==String(_gf))v('growthFactor').value=_gf;
+  const _ult=state.settings.upsLoadTarget!=null?state.settings.upsLoadTarget:80;if(v('upsLoadTarget')&&v('upsLoadTarget').value!==String(_ult))v('upsLoadTarget').value=_ult;
+  const _inv=state.settings.inverterEfficiency!=null?state.settings.inverterEfficiency:90;if(v('inverterEfficiency')&&v('inverterEfficiency').value!==String(_inv))v('inverterEfficiency').value=_inv;
+  const _ut=state.settings.upsType||'rackmount';if(v('upsType')&&v('upsType').value!==_ut)v('upsType').value=_ut;
+  const _rt=state.settings.runtimeTarget!=null?state.settings.runtimeTarget:15;
+  if(v('runtimePreset')){const stdVals=['5','10','15','30','60'];const rtStr=String(_rt);if(stdVals.includes(rtStr)){v('runtimePreset').value=rtStr;v('runtimeCustom').style.display='none';}else{v('runtimePreset').value='custom';v('runtimeCustom').style.display='';v('runtimeCustom').value=_rt;}}
   if(r){if(v('rack-label').value!==r.label)v('rack-label').value=r.label;if(parseInt(v('rack-size').value)!==r.sizeU)v('rack-size').value=r.sizeU;if(v('rack-voltage').value!==String(r.voltage))v('rack-voltage').value=r.voltage;if(v('rack-notes').value!==r.notes)v('rack-notes').value=r.notes;v('rack-redundant').checked=!!r.redundant;if(v('rack-level').value!==(r.level||''))v('rack-level').value=r.level||'';if(v('rack-outlet').value!==(r.outletType||''))v('rack-outlet').value=r.outletType||'';if(v('rack-circuitnum').value!==(r.circuitNum||''))v('rack-circuitnum').value=r.circuitNum||'';}
+  // Sync maturity and UPS preset
+  const _m=state.project.maturity||'schematic';
+  if(v('proj-maturity')&&v('proj-maturity').value!==_m)v('proj-maturity').value=_m;
+  const _upm=state.settings.upsModelPreset||'';
+  if(v('upsModelPreset')&&v('upsModelPreset').value!==_upm)v('upsModelPreset').value=_upm;
+  // Sync Design Intent fields
+  const _int=state.project.intent||{};
+  if(v('intent-availability')&&v('intent-availability').value!==(_int.availabilityObjective||'standard'))v('intent-availability').value=_int.availabilityObjective||'standard';
+  if(v('intent-recovery')&&v('intent-recovery').value!==(_int.recoveryObjective||'orderly'))v('intent-recovery').value=_int.recoveryObjective||'orderly';
+  if(v('intent-growth')&&v('intent-growth').value!==(_int.growthPhilosophy||''))v('intent-growth').value=_int.growthPhilosophy||'';
+  if(v('intent-redundancy')&&v('intent-redundancy').value!==(_int.redundancyPhilosophy||''))v('intent-redundancy').value=_int.redundancyPhilosophy||'';
+  if(v('intent-assumptions')&&v('intent-assumptions').value!==(_int.operationalAssumptions||''))v('intent-assumptions').value=_int.operationalAssumptions||'';
+  const _upmRef=v('upsPresetRef');
+  if(_upmRef){if(_upm){const _upd=UPS_PRESETS.find(pp=>pp.model===_upm);if(_upd){_upmRef.style.display='';_upmRef.textContent=`Rated: ${_upd.va.toLocaleString()} VA / ${_upd.w.toLocaleString()} W · Battery: ${_upd.batteryWh.toLocaleString()} Wh`;}else _upmRef.style.display='none';}else _upmRef.style.display='none';}
   v('sc-watts').textContent=s.totalW.toFixed(0)+' W';v('sc-va').textContent=s.totalVA.toFixed(0)+' VA';
-  v('sc-btu').textContent=s.btu.toFixed(0)+' BTU/h';v('sc-tons').textContent=s.tons.toFixed(2)+' tons';
+  v('sc-btu').textContent=s.btu.toFixed(0)+' BTU/hr';v('sc-tons').textContent=s.tons.toFixed(2)+' tons';
   v('sc-gen').textContent=s.generatorKW.toFixed(2)+' kW';
   const ri=r?s.perRack[r.id]:null;
   if(ri){v('sc-u').textContent=ri.u+'U / '+r.sizeU+'U';v('sc-ufree').textContent=ri.remU+'U free';}
@@ -689,7 +1343,7 @@ function render(){
   setGauge('g-poe-fill',s.poeP,'var(--purple)');
   v('poe-headroom-line').textContent=s.poeBW>0?`Headroom: ${s.poeBW-s.poeCW}W`:'No PoE switches';
   if(ri){const rSt=ri.remU<=0?'over':ri.remU<4?'warn':'ok';setPill('pill-rack',rSt);v('g-rack-lbl').textContent=ri.u+'U / '+r.sizeU+'U';v('g-rack-pct').textContent=ri.fillPct.toFixed(1)+'%';setGauge('g-rack-fill',ri.fillPct,'var(--green)');v('rack-breaker-line').textContent=`Breaker: ${ri.breaker}A @ ${r.voltage}V (${ri.amps.toFixed(1)}A continuous)`;}
-  renderRackTabs();renderRack(s);renderWall(s);renderSummary(s);
+  renderRackTabs();renderRack(s);renderWall(s);renderSummary(s);renderAssistant(s);
 }
 function renderRackTabs(){
   const c=v('rackTabs');
@@ -697,57 +1351,151 @@ function renderRackTabs(){
   c.querySelectorAll('.rack-tab[data-rack-id]').forEach(btn=>{btn.addEventListener('click',()=>{state.activeRackId=parseInt(btn.dataset.rackId);render();markDirty();});});
   v('addRackBtn').addEventListener('click',()=>{const nr={id:nextRackId++,label:'Rack '+(state.racks.length+1),sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''};state.racks.push(nr);state.activeRackId=nr.id;render();markDirty();});
 }
-function makeRackRow(it){const q=it.qty||1;return`<div class="tbl-row rack-cols"><div><div class="device-name">${esc(it.name)}</div><div class="device-tag">${esc(dtag(it))}</div></div><input type="number" class="ri" style="width:46px;text-align:center" value="${q}" min="1" data-id="${it.id}" data-f="qty"><input type="number" class="ri" style="width:60px" value="${it.w}" min="0" data-id="${it.id}" data-f="w"><select class="ri" style="width:48px" data-id="${it.id}" data-f="v"><option value="120"${it.v==120?' selected':''}>120</option><option value="208"${it.v==208?' selected':''}>208</option><option value="240"${it.v==240?' selected':''}>240</option></select><span class="u-val">${it.u>0?it.u+'U':'--'}</span><span class="total-w">${(it.w*q).toFixed(0)}W</span><button class="btn-remove" data-id="${it.id}">×</button></div>`;}
-function makeWallRow(it){const q=it.qty||1;const w=it.w*q;const a=it.v>0?w/it.v:0;const b=standardBreaker(a);return`<div class="tbl-row wall-cols"><div><div class="device-name">${esc(it.name)}</div><div class="device-tag">${esc(it.category||'')}</div><input type="text" class="ri" placeholder="Level" value="${esc(it.level||'')}" data-id="${it.id}" data-f="level" style="font-size:10px;padding:2px 5px;margin-top:3px;width:100%;"></div><input type="number" class="ri" style="width:46px;text-align:center" value="${q}" min="1" data-id="${it.id}" data-f="qty"><input type="number" class="ri" style="width:60px" value="${it.w}" min="0" data-id="${it.id}" data-f="w"><select class="ri" style="width:48px" data-id="${it.id}" data-f="v"><option value="120"${it.v==120?' selected':''}>120</option><option value="208"${it.v==208?' selected':''}>208</option><option value="240"${it.v==240?' selected':''}>240</option></select><span class="wall-w">${w.toFixed(0)}W</span><span style="font-family:var(--mono);color:var(--gray-light);font-size:11px;">${a.toFixed(1)}A</span><span style="font-family:var(--mono);color:var(--teal);font-weight:700;font-size:11px;">${b}A</span><input type="text" class="ri" placeholder="Circuit notes" value="${esc(it.circuitNotes||'')}" data-id="${it.id}" data-f="circuitNotes" style="font-size:11px;"><button class="btn-remove" data-id="${it.id}">×</button></div>`;}
+function makeRackRow(it){const q=it.qty||1;const bk=it.upsBacking||'none';return`<div class="tbl-row rack-cols"><div><div class="device-name">${esc(it.name)}</div><div class="device-tag">${esc(dtag(it))}</div><select class="ups-sel" data-id="${it.id}" data-f="upsBacking"><option value="ups"${bk==='ups'?' selected':''}>⚡ UPS Backed</option><option value="gen"${bk==='gen'?' selected':''}>🔌 Generator</option><option value="critical"${bk==='critical'?' selected':''}>🔒 Critical</option><option value="none"${bk==='none'?' selected':''}>— Not Backed</option></select></div><input type="number" class="ri" style="width:46px;text-align:center" value="${q}" min="1" data-id="${it.id}" data-f="qty"><input type="number" class="ri" style="width:60px" value="${it.w}" min="0" data-id="${it.id}" data-f="w"><select class="ri" style="width:48px" data-id="${it.id}" data-f="v"><option value="120"${it.v==120?' selected':''}>120</option><option value="208"${it.v==208?' selected':''}>208</option><option value="240"${it.v==240?' selected':''}>240</option></select><span class="u-val">${it.u>0?it.u+'U':'--'}</span><span class="total-w">${(it.w*q).toFixed(0)}W</span><button class="btn-remove" data-id="${it.id}">×</button></div>`;}
+function makeWallRow(it){const q=it.qty||1;const w=it.w*q;const a=it.v>0?w/it.v:0;const b=standardBreaker(a);return`<div class="tbl-row wall-cols"><div><div class="device-name">${esc(it.name)}</div><div class="device-tag">${esc(it.category||'')}</div><input type="text" class="ri" placeholder="Level" value="${esc(it.level||'')}" data-id="${it.id}" data-f="level" style="font-size:10px;padding:2px 5px;margin-top:3px;width:100%;"><select class="ups-sel" data-id="${it.id}" data-f="upsBacking"><option value="ups"${(it.upsBacking||'none')==='ups'?' selected':''}>⚡ UPS</option><option value="gen"${(it.upsBacking||'none')==='gen'?' selected':''}>🔌 Gen</option><option value="critical"${(it.upsBacking||'none')==='critical'?' selected':''}>🔒 Critical</option><option value="none"${(it.upsBacking||'none')==='none'?' selected':''}>— Not Backed</option></select></div><input type="number" class="ri" style="width:46px;text-align:center" value="${q}" min="1" data-id="${it.id}" data-f="qty"><input type="number" class="ri" style="width:60px" value="${it.w}" min="0" data-id="${it.id}" data-f="w"><select class="ri" style="width:48px" data-id="${it.id}" data-f="v"><option value="120"${it.v==120?' selected':''}>120</option><option value="208"${it.v==208?' selected':''}>208</option><option value="240"${it.v==240?' selected':''}>240</option></select><span class="wall-w">${w.toFixed(0)}W</span><span style="font-family:var(--mono);color:var(--gray-light);font-size:11px;">${a.toFixed(1)}A</span><span style="font-family:var(--mono);color:var(--teal);font-weight:700;font-size:11px;">${b}A</span><input type="text" class="ri" placeholder="Circuit notes" value="${esc(it.circuitNotes||'')}" data-id="${it.id}" data-f="circuitNotes" style="font-size:11px;"><button class="btn-remove" data-id="${it.id}">×</button></div>`;}
 function bindRowEvents(el){
-  el.querySelectorAll('[data-f]').forEach(inp=>{inp.addEventListener('change',()=>{const it=state.items.find(i=>i.id===parseInt(inp.dataset.id));if(!it)return;const f=inp.dataset.f;if(f==='qty')it.qty=Math.max(1,parseInt(inp.value)||1);else if(f==='w')it.w=parseFloat(inp.value)||0;else if(f==='v')it.v=parseInt(inp.value);else if(f==='circuitNotes')it.circuitNotes=inp.value;else if(f==='level')it.level=inp.value;render();markDirty();});});
+  el.querySelectorAll('[data-f]').forEach(inp=>{inp.addEventListener('change',()=>{const it=state.items.find(i=>i.id===parseInt(inp.dataset.id));if(!it)return;const f=inp.dataset.f;if(f==='qty')it.qty=Math.max(1,parseInt(inp.value)||1);else if(f==='w')it.w=parseFloat(inp.value)||0;else if(f==='v')it.v=parseInt(inp.value);else if(f==='circuitNotes')it.circuitNotes=inp.value;else if(f==='level')it.level=inp.value;else if(f==='upsBacking')it.upsBacking=inp.value;render();markDirty();});});
   el.querySelectorAll('.btn-remove').forEach(btn=>{btn.addEventListener('click',()=>{state.items=state.items.filter(i=>i.id!==parseInt(btn.dataset.id));render();markDirty();});});
 }
 function renderRack(s){const r=getActiveRack();const body=v('rack-body'),ft=v('rack-footer');const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===r.id);if(!items.length){body.innerHTML='<div class="tbl-empty">No devices in this rack yet.</div>';ft.style.display='none';return;}body.innerHTML=items.map(makeRackRow).join('');ft.style.display='grid';const ri=s.perRack[r.id];v('tf-u').textContent=ri.u+'U';v('tf-rw').textContent=ri.watts.toFixed(0)+'W';bindRowEvents(body);}
 function renderWall(s){const body=v('wall-body'),ft=v('wall-footer');const items=state.items.filter(i=>i.loc==='wall');if(!items.length){body.innerHTML='<div class="tbl-empty">No wall/field devices yet. Add ACS power supplies, controllers, locks, or DAS/EERC.</div>';ft.style.display='none';return;}body.innerHTML=items.map(makeWallRow).join('');ft.style.display='grid';v('tf-ww').textContent=s.wallW.toFixed(0)+'W';bindRowEvents(body);}
 function sRow(k,val){return`<div class="sum-row"><span class="sum-key">${esc(k)}</span><span class="sum-val">${val}</span></div>`;}
 function sRowLong(k,val){return`<div class="sum-row" style="flex-direction:column;align-items:flex-start;gap:4px;"><span class="sum-key">${esc(k)}</span><div style="font-size:12px;color:var(--gray-light);line-height:1.6;font-family:var(--body);word-break:break-word;max-width:100%;">${esc(val)}</div></div>`;}
+function suggestedService(va,voltage,phases){
+  if(va<=0)return'—';
+  const amps=(phases===3?va/(voltage*Math.sqrt(3)):va/voltage)*1.25;
+  const panel=STD_PANELS.find(p=>p>=amps);
+  return panel?panel+'A':`>${STD_PANELS[STD_PANELS.length-1]}A (consult EE)`;
+}
 function renderSummary(s){
   const p=state.project;
-  v('sum-title').textContent=p.name||'PLEX Project Summary';
+  const ag=state.settings.ambientGain!=null?state.settings.ambientGain:10;
+  const _mLbl=MATURITY_LABELS[p.maturity||'schematic']||'Schematic Design';
+  v('sum-title').innerHTML=(p.name?esc(p.name):'PLEX Project Summary')+`<span style="display:inline-block;font-family:var(--label);font-size:10px;font-weight:700;letter-spacing:0.08em;padding:2px 10px;border-radius:20px;background:rgba(0,188,188,0.13);color:var(--teal);vertical-align:middle;margin-left:10px;">${esc(_mLbl)}</span>`;
   const sp=[];if(p.room)sp.push(p.room);if(p.building)sp.push(p.building);if(p.floor)sp.push('Floor '+p.floor);if(p.date)sp.push(p.date);
   v('sum-subtitle').textContent=sp.length?sp.join(' · '):'Enter project info in the Builder tab';
   v('sum-project').innerHTML=[['Project Name',p.name||'—'],['Room / Closet',p.room||'—'],['Building',p.building||'—'],['Floor',p.floor||'—'],['Designer',p.designer||'—'],['Date',p.date||'—']].map(r=>sRow(r[0],r[1])).join('')+(p.notes?sRowLong('Notes',p.notes):'');
-  v('sum-electrical').innerHTML=[['Total Real Power',s.totalW.toFixed(0)+' W'],['Total Apparent Power',s.totalVA.toFixed(0)+' VA'],['Power Factor Applied',state.settings.powerFactor.toFixed(2)],['Amperage @ 120V',s.a120.toFixed(1)+'A'],['Amperage @ 208V',s.a208.toFixed(1)+'A'],['Amperage @ 240V',s.a240.toFixed(1)+'A'],['Rack Load Subtotal',(s.totalW-s.wallW).toFixed(0)+' W'],['Wall/Field Subtotal',s.wallW.toFixed(0)+' W']].map(r=>sRow(r[0],r[1])).join('');
+  // Electrical — service sizing and load density
+  const svc208=suggestedService(s.totalVA,208,3);
+  const svc240=suggestedService(s.totalVA,240,1);
+  const densLbl=s.roomWperU<50?'Low — ventilation adequate':s.roomWperU<100?'Moderate — dedicated cooling recommended':s.roomWperU<150?'High — precision cooling required':'Very High — verify with MEP';
+  v('sum-electrical').innerHTML=[
+    ['Total Real Power (nameplate)',s.totalW.toFixed(0)+' W'],
+    ['Total Real Power (diversity-adj.)',s.totalDivW.toFixed(0)+' W'],
+    ['Total Apparent Power',s.totalVA.toFixed(0)+' VA'],
+    ['Power Factor Applied',state.settings.powerFactor.toFixed(2)],
+    ['Amperage @ 120V 1Ø',(s.totalVA/120).toFixed(1)+'A'],
+    ['Service Size — 120/208V 3Ø',svc208+'  (NEC 215.2 / 125% continuous)'],
+    ['Service Size — 120/240V 1Ø',svc240+'  (NEC 215.2 / 125% continuous)'],
+    ['Rack Load Subtotal',(s.totalDivW-s.wallW).toFixed(0)+' W'],
+    ['Wall / Field Subtotal',s.wallW.toFixed(0)+' W'],
+    ['Room Density (W/U)',s.roomWperU.toFixed(1)+' W/U — '+densLbl]
+  ].map(r=>sRow(r[0],r[1])).join('');
   let ch=`<div class="circuit-row hdr"><span>Circuit / Source</span><span>Voltage</span><span>Load (W)</span><span>Cont. A</span><span>Breaker</span><span>Notes</span></div>`;
   Object.values(s.perRack).forEach(rk=>{if(rk.nonUpsWatts>0)ch+=`<div class="circuit-row"><span class="circuit-name">${esc(rk.rack.label)} (PDU)${rk.rack.redundant?' · N+1':''}</span><span class="circuit-num">${rk.rack.voltage}V</span><span class="circuit-num">${rk.nonUpsWatts.toFixed(0)}W</span><span class="circuit-num">${(rk.amps*1.25).toFixed(1)}A</span><span class="circuit-breaker">${rk.breaker}A</span><span style="color:var(--gray-mid);font-size:11px;">${esc(rk.rack.notes||'')}</span></div>`;});
   s.allUpsItems.forEach(u=>{const w=u.w*(u.qty||1);const a=u.v>0?w/u.v:0;ch+=`<div class="circuit-row"><span class="circuit-name">${esc(u.name)}</span><span class="circuit-num">${u.v}V</span><span class="circuit-num">${w.toFixed(0)}W</span><span class="circuit-num">${(a*1.25).toFixed(1)}A</span><span class="circuit-breaker">${standardBreaker(a)}A</span><span style="color:var(--gray-mid);font-size:11px;">UPS input circuit</span></div>`;});
   s.perWall.forEach(wd=>{ch+=`<div class="circuit-row"><span class="circuit-name">${esc(wd.item.name)} (×${wd.item.qty||1})</span><span class="circuit-num">${wd.item.v}V</span><span class="circuit-num">${wd.watts.toFixed(0)}W</span><span class="circuit-num">${(wd.amps*1.25).toFixed(1)}A</span><span class="circuit-breaker">${wd.breaker}A</span><span style="color:var(--gray-mid);font-size:11px;">${esc(wd.item.circuitNotes||'')}</span></div>`;});
   if(s.perWall.length===0&&Object.values(s.perRack).every(r=>r.nonUpsWatts===0)&&s.allUpsItems.length===0)ch+='<div style="padding:16px;color:var(--gray-dark);font-style:italic;text-align:center;">No circuits yet.</div>';
   v('sum-circuits').innerHTML=ch;
-  const upsHasItems=s.allUpsItems.length>0;
-  v('sum-ups').innerHTML=[
-    ['Protected Load',s.nonUpsW.toFixed(0)+' W'],
-    ['UPS Capacity (W)',s.upsW>0?s.upsW+' W':upsHasItems?'—':'None'],
-    ['UPS Capacity (VA)',s.upsVA>0?s.upsVA+' VA':upsHasItems?'—':'None'],
-    ['UPS Load %',s.upsW>0?s.upsP.toFixed(1)+'%':upsHasItems?'UPS present — capacity not configured':'No UPS configured'],
-    ['Estimated Runtime',fmtRuntime(s.upsRuntimeMin)],
-    ['UPS Units in Project',s.allUpsItems.length]
-  ].map(r=>sRow(r[0],r[1])).join('');
+  {
+    const sets=state.settings;
+    const utn=upsTypeName(sets.upsType||'rackmount');
+    const pf=sets.powerFactor||0.9;
+    let html='';
+    if(s.upsBackedW===0&&s.allUpsItems.length===0){
+      html='<div style="padding:14px;color:var(--gray-mid);font-size:12px;font-style:italic;">Tag devices with backup status (in the device rows) to see UPS sizing.</div>';
+    } else {
+      html+='<div class="panel-sub" style="margin-top:-4px;margin-bottom:10px;">'+esc(utn)+' — preliminary ICT/ESS planning. Coordination value only.</div>';
+      html+='<div style="font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.15em;text-transform:uppercase;margin:10px 0 6px;font-weight:700;">LOAD SUMMARY</div>';
+      html+=sRow('UPS-Backed Connected Load',s.upsBackedW.toFixed(0)+' W / '+s.upsBackedVA.toFixed(0)+' VA');
+      html+=sRow('Generator-Only Load',s.genOnlyW.toFixed(0)+' W');
+      html+=sRow('Life Safety / Critical Load',s.criticalW.toFixed(0)+' W');
+      html+=sRow('Non-Backed Load',s.nonUpsBackedW.toFixed(0)+' W');
+      html+='<div style="font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.15em;text-transform:uppercase;margin:10px 0 6px;font-weight:700;">PLANNING LOAD</div>';
+      html+=sRow('Demand Factor Applied',(sets.demandFactor||1.00).toFixed(2));
+      html+=sRow('Growth Factor Applied',(sets.growthFactor||1.25).toFixed(2));
+      html+=sRow('UPS Planning Load',s.upsPlanningW.toFixed(0)+' W / '+s.upsPlanningVA.toFixed(0)+' VA');
+      html+=sRow('Power Factor Used',pf.toFixed(2));
+      html+='<div style="font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.15em;text-transform:uppercase;margin:10px 0 6px;font-weight:700;">UPS SIZING</div>';
+      html+=sRow('Target Max Loading',(sets.upsLoadTarget||80)+'%');
+      html+=sRow('Minimum Calculated UPS',s.upsPlanningVA.toFixed(0)+' VA');
+      if(s.recUpsVA){
+        const st=upsStatus(s.upsLoadPct);
+        html+=`<div class="sum-row" style="padding:10px 0;border-bottom:1px solid var(--border);"><span class="sum-key">RECOMMENDED UPS SIZE</span><span style="font-family:var(--mono);font-size:18px;font-weight:700;color:var(--teal);">${s.recUpsVA.toLocaleString()} VA</span></div>`;
+        html+=`<div class="sum-row"><span class="sum-key">UPS Loading at Recommended</span><span class="sum-val">${s.upsLoadPct.toFixed(1)}% <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${st.color};margin-left:6px;background:rgba(0,0,0,0.2);padding:2px 6px;border-radius:3px;">${st.label}</span></span></div>`;
+        html+=sRow('UPS Headroom',s.upsHeadroomVA.toFixed(0)+' VA ('+s.upsHeadroomPct.toFixed(1)+'%)');
+      } else {
+        html+=sRow('Recommended UPS Size','No standard size found — consult UPS vendor');
+      }
+      html+='<div style="font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.15em;text-transform:uppercase;margin:10px 0 6px;font-weight:700;">RUNTIME</div>';
+      html+=sRow('Runtime Target',(sets.runtimeTarget||15)+' min');
+      const _bwhLabel=s.effectiveBatteryWh>0?(s.effectiveBatteryWh.toFixed(1)+' Wh'+(state.settings.batteryWh>0?' (preset override)':' (from UPS items)')):'No UPS items — add from library';
+      html+=sRow('Battery Capacity',_bwhLabel);
+      let _critMis=false;
+      if(s.runtimeMin!=null){
+        const rtColor=s.runtimeMin<(sets.runtimeTarget||15)?'var(--danger)':'var(--green)';
+        html+=`<div class="sum-row"><span class="sum-key">Est. Runtime at Planning Load</span><span style="font-family:var(--mono);font-weight:700;color:${rtColor};">${s.runtimeMin.toFixed(0)} min</span></div>`;
+        html+=sRow('Est. Runtime After Growth',s.runtimeAtGrowthMin!=null?s.runtimeAtGrowthMin.toFixed(0)+' min':'—');
+        html+=sRow('Required Battery for Target',s.requiredWh.toFixed(1)+' Wh');
+        const deltaColor=s.batteryDeltaWh>=0?'var(--green)':'var(--danger)';
+        const deltaSign=s.batteryDeltaWh>=0?'+':'';
+        html+=`<div class="sum-row"><span class="sum-key">Battery Surplus / Shortfall</span><span style="font-family:var(--mono);font-weight:700;color:${deltaColor};">${deltaSign}${s.batteryDeltaWh.toFixed(1)} Wh</span></div>`;
+        const _rtTgt=sets.runtimeTarget||15;
+        _critMis=(_rtTgt>=60||(state.project.intent?.recoveryObjective==='continuous'))&&s.runtimeMin<(_rtTgt*0.5);
+        if(_critMis){const _sfMin=Math.round(_rtTgt-s.runtimeMin);const _sfPct=Math.round((_sfMin/_rtTgt)*100);html+=`<div class="ups-critical-warning"><div class="ucw-title">⚠ Runtime Objective Cannot Be Met With Selected Equipment</div><div class="ucw-row">Estimated runtime at planning load: ${Math.round(s.runtimeMin)} min</div><div class="ucw-row">Runtime objective: ${_rtTgt} min</div><div class="ucw-row">Shortfall: ${_sfMin} min (${_sfPct}% of objective)</div><ul class="ucw-list"><li>Increase UPS capacity or add external battery modules</li><li>Reduce UPS-backed load to lower battery draw</li><li>Coordinate centralized UPS/generator strategy with electrical engineer</li><li>Confirm generator automatic transfer time and accept shorter ride-through</li></ul><div class="ucw-footer">Final UPS selection and battery runtime must be verified using manufacturer runtime charts and confirmed with the Engineer of Record.</div></div>`;}
+      } else {
+        html+='<div style="padding:8px 0;font-size:11px;color:var(--gray-mid);">Add UPS units from the device library to calculate runtime.</div>';
+      }
+      // Warnings
+      let warns='';
+      if(s.upsLoadPct>(sets.upsLoadTarget||80))warns+='<div style="color:var(--warn);font-size:11px;margin-top:8px;">&#9888; UPS is above recommended planning load target.</div>';
+      if(s.runtimeMin!=null&&s.runtimeMin<(sets.runtimeTarget||15)&&!_critMis)warns+='<div style="color:var(--warn);font-size:11px;margin-top:4px;">&#9888; Runtime target not met. Additional battery capacity required.</div>';
+      warns+='<div style="color:var(--gray-mid);font-size:10px;margin-top:8px;font-style:italic;">Final UPS model and battery runtime must be verified using manufacturer data and the UPS vendor sizing tool.</div>';
+      html+=warns;
+    }
+    v('sum-ups').innerHTML=html;
+  }
   v('sum-gen').innerHTML=[
-    ['Total Load',s.totalW.toFixed(0)+' W'],
-    ['Continuous Load (×1.25)',(s.totalW*1.25/1000).toFixed(2)+' kW'],
+    ['Total Load (diversity-adj.)',s.totalDivW.toFixed(0)+' W'],
+    ['Continuous Load (×1.25)',(s.totalDivW*1.25/1000).toFixed(2)+' kW'],
     ['Calculated minimum',s.generatorKW.toFixed(2)+' kW'],
     ['Next standard size',standardGenerator(s.generatorKW)],
     ['With 25% growth',(s.generatorKW*1.25).toFixed(2)+' kW'],
     ['With 50% growth',(s.generatorKW*1.50).toFixed(2)+' kW']
   ].map(r=>sRow(r[0],r[1])).join('');
-  v('sum-mech').innerHTML=[
-    ['Total Heat Dissipation',s.btu.toFixed(0)+' BTU/hr'],
-    ['Cooling Load (tons)',s.tons.toFixed(2)+' tons'],
-    ['Cooling Load (kW thermal)',(s.totalW/1000).toFixed(2)+' kW'],
-    ['Coordination value (+25%)',(s.tons*1.25).toFixed(2)+' tons']
-  ].map(r=>sRow(r[0],r[1])).join('');
+  // Cooling — two-line prominent display with buffer and ambient gain
+  const agPct=Math.round(ag);
+  const n1Note=s.hasRedundant?' N+1 applies — each unit must handle full IT load independently.':'';
+  v('sum-mech').innerHTML=
+    `<div class="sum-row" style="flex-direction:column;align-items:flex-start;gap:6px;padding-bottom:10px;border-bottom:1px solid var(--border);">
+      <span class="sum-key">IT HEAT LOAD (DIVERSITY-ADJUSTED)</span>
+      <span style="font-family:var(--mono);font-size:20px;font-weight:700;color:var(--white);">${s.itBtu.toFixed(0)} BTU/hr</span>
+      <span style="font-size:11px;color:var(--gray-mid);">${(s.totalDivW/1000).toFixed(2)} kW thermal</span>
+    </div>
+    <div class="sum-row" style="flex-direction:column;align-items:flex-start;gap:6px;padding:10px 0 10px;border-bottom:1px solid var(--border);">
+      <span class="sum-key">RECOMMENDED CAPACITY (BICSI / ASHRAE)</span>
+      <span style="font-family:var(--mono);font-size:20px;font-weight:700;color:var(--teal);">${s.recBtu.toFixed(0)} BTU/hr &nbsp;·&nbsp; ${s.recTons.toFixed(2)} tons</span>
+      <span style="font-size:11px;color:var(--gray-mid);">IT load × ${COOLING_BUFFER} buffer × ${(1+agPct/100).toFixed(2)} ambient gain (+${agPct}%)</span>
+      ${n1Note?`<span style="font-size:11px;color:var(--warn);margin-top:2px;">⚠${n1Note}</span>`:''}
+    </div>
+    ${sRow('Largest Single-Rack Heat Load',s.maxRackBtu.toFixed(0)+' BTU/hr')}`;
   v('sum-poe').innerHTML=[['PoE Budget Available',s.poeBW+' W'],['PoE Load (cameras)',s.poeCW+' W'],['PoE Utilization',s.poeBW>0?s.poeP.toFixed(1)+'%':'No PoE switches'],['PoE Headroom',(s.poeBW-s.poeCW)+' W']].map(r=>sRow(r[0],r[1])).join('');
-  v('sum-racks').innerHTML=state.racks.map(rk=>{const ri=s.perRack[rk.id];const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===rk.id);let inner=`<div style="margin-bottom:14px;padding:10px;background:var(--navy);border-radius:4px;"><div style="font-family:var(--display);font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">${esc(rk.label)}${rk.redundant?' <span class="pill pill-warn" style="margin-left:8px">N+1</span>':''}</div><div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-bottom:8px;">${rk.sizeU}U · PDU ${rk.voltage}V · Fill ${ri.fillPct.toFixed(0)}% · Load ${ri.watts.toFixed(0)}W · Breaker ${ri.breaker}A</div>`;if(rk.notes)inner+=`<div style="font-size:11px;color:var(--gray-light);margin-bottom:8px;font-style:italic;">Notes: ${esc(rk.notes)}</div>`;if(items.length){inner+=`<div style="font-size:11px;color:var(--gray-light);">`;inner+=items.map(i=>`· ${i.qty}× ${esc(i.name)} (${(i.w*i.qty).toFixed(0)}W)`).join('<br>');inner+=`</div>`;}else inner+=`<div style="font-size:11px;color:var(--gray-dark);font-style:italic;">No devices</div>`;inner+=`</div>`;return inner;}).join('');
+  // Rack summary cards — with BTU/hr and W/U density
+  v('sum-racks').innerHTML=state.racks.map(rk=>{
+    const ri=s.perRack[rk.id];
+    const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===rk.id);
+    let inner=`<div style="margin-bottom:14px;padding:10px;background:var(--navy);border-radius:4px;">
+      <div style="font-family:var(--display);font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">${esc(rk.label)}${rk.redundant?' <span class="pill pill-warn" style="margin-left:8px">N+1</span>':''}</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-bottom:3px;">${rk.sizeU}U · PDU ${rk.voltage}V · Fill ${ri.fillPct.toFixed(0)}% · Load ${ri.nonUpsWatts.toFixed(0)}W · Breaker ${ri.breaker}A</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--teal);margin-bottom:8px;">${ri.btu.toFixed(0)} BTU/hr · ${ri.wPerU.toFixed(1)} W/U density</div>`;
+    if(rk.notes)inner+=`<div style="font-size:11px;color:var(--gray-light);margin-bottom:8px;font-style:italic;">Notes: ${esc(rk.notes)}</div>`;
+    if(items.length){inner+=`<div style="font-size:11px;color:var(--gray-light);">`;inner+=items.map(i=>`· ${i.qty}× ${esc(i.name)} (${(i.w*i.qty).toFixed(0)}W)`).join('<br>');inner+=`</div>`;}
+    else inner+=`<div style="font-size:11px;color:var(--gray-dark);font-style:italic;">No devices</div>`;
+    inner+=`</div>`;return inner;
+  }).join('');
   if(s.perWall.length===0)v('sum-wall').innerHTML='<div style="color:var(--gray-dark);font-style:italic;">No wall/field devices.</div>';
   else v('sum-wall').innerHTML=s.perWall.map(wd=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);"><div style="color:var(--white);font-weight:500;">${esc(wd.item.name)} <span style="color:var(--gray-mid);font-size:11px;">× ${wd.item.qty||1}</span></div><div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-top:2px;">${wd.watts.toFixed(0)}W @ ${wd.item.v}V · ${wd.amps.toFixed(1)}A continuous (×1.25 = ${(wd.amps*1.25).toFixed(1)}A) · <span style="color:var(--teal);font-weight:700;">${wd.breaker}A breaker</span></div>${wd.item.circuitNotes?`<div style="font-size:11px;color:var(--gray-light);margin-top:2px;font-style:italic;">${esc(wd.item.circuitNotes)}</div>`:''}</div>`).join('');
-  // Power Schedule Table
+  // Power Schedule Table — with Diversity column (ASHRAE TC 9.9)
   const psTitle=(state.project.scheduleTitle||'').trim();
   v('sum-ps-label').textContent=(psTitle||'Power Consumption & Circuit Schedule').toUpperCase();
   let psRows='';
@@ -763,6 +1511,7 @@ function renderSummary(s){
       <td>1</td>
       <td>${rk.nonUpsWatts.toFixed(0)}</td>
       <td class="ps-w">${rk.nonUpsWatts.toFixed(0)}</td>
+      <td style="color:var(--gray-mid);font-size:10px;">Mixed</td>
       <td>${contA}A</td>
       <td class="ps-brk-rack">${rk.breaker}A</td>
       <td>${btu}</td>
@@ -774,6 +1523,7 @@ function renderSummary(s){
     const rack=state.racks.find(r=>r.id===u.rackId);
     const qty=u.qty||1;const totalW=u.w*qty;const a=u.v>0?totalW/u.v:0;
     const btu=(totalW*BTU_PER_WATT).toFixed(0);const contA=(a*1.25).toFixed(1);
+    const df=getDiversityFactor(u.category);
     psRows+=`<tr>
       <td class="ps-dim">${esc(rack?rack.level||'—':'—')}</td>
       <td class="ps-loc">${esc(rack?rack.label:'—')}</td>
@@ -782,6 +1532,7 @@ function renderSummary(s){
       <td>${qty}</td>
       <td>${u.w}</td>
       <td class="ps-w">${totalW}</td>
+      <td style="color:var(--gray-mid);font-size:10px;">${(df*100).toFixed(0)}%</td>
       <td>${contA}A</td>
       <td class="ps-brk-rack">${standardBreaker(a)}A</td>
       <td>${btu}</td>
@@ -795,6 +1546,7 @@ function renderSummary(s){
     const contA=isPoeC?'—':(wd.amps*1.25).toFixed(1)+'A';
     const brkr=isPoeC?'—':wd.breaker+'A';
     const vDisp=isPoeC?'PoE':wd.item.v;
+    const df=getDiversityFactor(wd.item.category);
     psRows+=`<tr>
       <td class="ps-dim">${esc(wd.item.level||'—')}</td>
       <td class="ps-loc" style="color:var(--teal);">Field / Wall</td>
@@ -803,6 +1555,7 @@ function renderSummary(s){
       <td>${qty}</td>
       <td>${wd.item.w}</td>
       <td class="ps-wall">${wd.watts.toFixed(0)}</td>
+      <td style="color:var(--gray-mid);font-size:10px;">${(df*100).toFixed(0)}%</td>
       <td>${contA}</td>
       <td class="${isPoeC?'ps-dim':'ps-brk-wall'}">${brkr}</td>
       <td>${btu}</td>
@@ -813,25 +1566,74 @@ function renderSummary(s){
   if(psRows){psRows+=`<tr class="ps-total">
     <td colspan="4" style="font-family:var(--label);letter-spacing:0.1em;text-transform:uppercase;color:var(--white);">TOTAL</td>
     <td></td><td></td>
-    <td class="ps-w">${s.totalW.toFixed(0)} W</td>
+    <td class="ps-w">${s.totalDivW.toFixed(0)} W</td>
+    <td style="color:var(--gray-mid);font-size:10px;">Div.</td>
     <td></td><td></td>
-    <td style="color:var(--white);">${s.btu.toFixed(0)}</td>
+    <td style="color:var(--white);">${s.itBtu.toFixed(0)}</td>
     <td></td><td></td>
+  </tr>
+  <tr>
+    <td colspan="13" style="font-size:10px;color:var(--gray-mid);font-style:italic;padding:6px 8px;">
+      Diversity factors per ASHRAE TC 9.9: PoE Switches 75%, Networking 75%, Servers 90%, Cameras 95%, UPS 100%. Circuit breaker sizing uses nameplate × 125% per NEC 215.2 — do not apply diversity to individual circuit protection.
+    </td>
   </tr>`;}
-  v('sum-ps-table').innerHTML=psRows
+  // MEP Coordination section
+  let mepHtml='';
+  if(s.upsBackedW>0){
+    const sets=state.settings;
+    const utn=upsTypeName(sets.upsType||'rackmount');
+    const pf2=sets.powerFactor||0.9;
+    mepHtml=`<div class="mep-subpanel">
+      <div class="mep-title">UPS COORDINATION SUMMARY &mdash; ${esc(utn)}</div>
+      ${sRow('Connected Load (UPS-Backed)',s.upsBackedW.toFixed(0)+' W / '+s.upsBackedVA.toFixed(0)+' VA')}
+      ${sRow('Operating Load (UPS Planning)',s.upsPlanningW.toFixed(0)+' W / '+s.upsPlanningVA.toFixed(0)+' VA')}
+      ${sRow('Power Factor',pf2.toFixed(2))}
+      ${sRow('Demand Factor',(sets.demandFactor||1.00).toFixed(2))}
+      ${sRow('Growth Factor',(sets.growthFactor||1.25).toFixed(2))}
+      ${sRow('Target Max UPS Loading',(sets.upsLoadTarget||80)+'%')}
+      ${s.recUpsVA?sRow('Recommended UPS Size',s.recUpsVA.toLocaleString()+' VA'):sRow('Recommended UPS Size','See UPS sizing panel')}
+      ${sRow('UPS Loading at Recommended',s.upsLoadPct.toFixed(1)+'%')}
+      ${sRow('Runtime Target',(sets.runtimeTarget||15)+' minutes')}
+      ${s.runtimeMin!=null?sRow('Est. Runtime at Planning Load',s.runtimeMin.toFixed(0)+' minutes'):sRow('Est. Runtime','Add UPS units to calculate')}
+      ${s.requiredWh>0?sRow('Required Battery Capacity',s.requiredWh.toFixed(1)+' Wh ('+((s.requiredWh/1000)).toFixed(2)+' kWh)'):sRow('Required Battery Capacity','—')}
+      <div class="mep-disclaimer">${maturityDisclaimer(state.project.maturity||'schematic')} PLEX provides preliminary ICT/ESS UPS planning values for coordination only. Final UPS selection, circuiting, battery runtime, available fault current, grounding, code compliance, and manufacturer verification remain the responsibility of the electrical engineer, UPS vendor, and Engineer of Record.</div>
+    </div>`;
+  }
+  v('sum-ps-table').innerHTML=(psRows
     ?`<div class="ps-wrap"><table class="ps-table"><thead><tr>
         <th>Level</th><th>Location</th><th>Equipment / Description</th>
         <th>V</th><th>Qty</th><th>W/Unit</th><th>Total W</th>
-        <th>A (Cont.)</th><th>Breaker</th><th>BTU/hr</th>
+        <th>Diversity</th><th>A (Cont.)</th><th>Breaker</th><th>BTU/hr</th>
         <th>Outlet Type</th><th>Circuit #</th>
       </tr></thead><tbody>${psRows}</tbody></table></div>`
-    :'<div style="color:var(--gray-dark);font-style:italic;padding:10px 0;">No devices added yet.</div>';
+    :'<div style="color:var(--gray-dark);font-style:italic;padding:10px 0;">No devices added yet.</div>')+mepHtml;
 }
 (function buildPresets(){const sel=v('presetSelect');PRESETS.forEach(cat=>{const og=document.createElement('optgroup');og.label='── '+cat.cat+' ──';cat.items.forEach(it=>{const opt=document.createElement('option');opt.value=it.name;opt.textContent=it.name+(it.loc==='wall'?' [Wall]':'');og.appendChild(opt);});sel.appendChild(og);});})();
-v('addPresetBtn').addEventListener('click',()=>{const name=v('presetSelect').value;if(!name)return;const p=ALL_FLAT.find(i=>i.name===name);if(!p)return;const n={...p,id:nextItemId++,qty:1,circuitNotes:'',level:''};if(p.loc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('presetSelect').value='';render();markDirty();});
-v('addCustomBtn').addEventListener('click',()=>{const name=v('customName').value.trim();const w=parseFloat(v('customWatts').value)||0;const u=parseFloat(v('customU').value)||0;const qty=parseInt(v('customQty').value)||1;const vv=parseInt(v('customV').value)||120;const poeC=v('customPoE').checked;if(!name){v('customName').focus();return;}const n={id:nextItemId++,name,w,u,qty,v:vv,loc:customLoc,category:'Custom',poeC,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,circuitNotes:'',level:''};if(customLoc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('customName').value='';v('customWatts').value='';v('customU').value='';v('customQty').value='1';v('customPoE').checked=false;render();markDirty();});
+// Build UPS model preset optgroups
+(function buildUpsPresets(){
+  const sel=v('upsModelPreset');if(!sel)return;
+  const groups={};
+  UPS_PRESETS.forEach(p=>{if(!groups[p.mfr])groups[p.mfr]=[];groups[p.mfr].push(p);});
+  Object.entries(groups).forEach(([mfr,models])=>{
+    const og=document.createElement('optgroup');og.label=mfr;
+    models.forEach(p=>{const opt=document.createElement('option');opt.value=p.model;opt.textContent=p.model;og.appendChild(opt);});
+    sel.appendChild(og);
+  });
+})();
+v('addPresetBtn').addEventListener('click',()=>{const name=v('presetSelect').value;if(!name)return;const p=ALL_FLAT.find(i=>i.name===name);if(!p)return;const n={...p,id:nextItemId++,qty:1,upsBacking:'none',circuitNotes:'',level:''};if(p.loc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('presetSelect').value='';render();markDirty();});
+v('addCustomBtn').addEventListener('click',()=>{const name=v('customName').value.trim();const w=parseFloat(v('customWatts').value)||0;const u=parseFloat(v('customU').value)||0;const qty=parseInt(v('customQty').value)||1;const vv=parseInt(v('customV').value)||120;const poeC=v('customPoE').checked;if(!name){v('customName').focus();return;}const n={id:nextItemId++,name,w,u,qty,v:vv,loc:customLoc,category:'Custom',poeC,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:'',level:''};if(customLoc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('customName').value='';v('customWatts').value='';v('customU').value='';v('customQty').value='1';v('customPoE').checked=false;render();markDirty();});
 document.querySelectorAll('.loc-btn').forEach(btn=>{btn.addEventListener('click',()=>{customLoc=btn.dataset.loc;v('locRack').className='loc-btn'+(customLoc==='rack'?' active-rack':'');v('locWall').className='loc-btn'+(customLoc==='wall'?' active-wall':'');});});
 ['name','room','building','floor','designer','date','notes','scheduleTitle'].forEach(f=>{v('proj-'+f).addEventListener('input',()=>{state.project[f]=v('proj-'+f).value;markDirty();});});
+v('proj-maturity').addEventListener('change',()=>{state.project.maturity=v('proj-maturity').value;render();markDirty();});
+v('upsModelPreset').addEventListener('change',()=>{
+  const val=v('upsModelPreset').value;
+  state.settings.upsModelPreset=val;
+  if(val){
+    const p=UPS_PRESETS.find(u=>u.model===val);
+    if(p){state.settings.batteryWh=p.batteryWh;v('upsPresetRef').style.display='';v('upsPresetRef').textContent=`Rated: ${p.va.toLocaleString()} VA / ${p.w.toLocaleString()} W · Battery: ${p.batteryWh.toLocaleString()} Wh`;}
+  } else {state.settings.batteryWh=0;v('upsPresetRef').style.display='none';}
+  render();markDirty();
+});
 v('powerFactor').addEventListener('input',()=>{state.settings.powerFactor=parseFloat(v('powerFactor').value)||0.9;render();markDirty();});
 v('rack-label').addEventListener('input',()=>{const r=getActiveRack();if(r){r.label=v('rack-label').value;renderRackTabs();markDirty();}});
 v('rack-size').addEventListener('input',()=>{const r=getActiveRack();if(r){r.sizeU=parseInt(v('rack-size').value)||42;render();markDirty();}});
@@ -845,18 +1647,8 @@ v('deleteRackBtn').addEventListener('click',()=>{if(state.racks.length<=1){alert
 v('projToggle').addEventListener('click',()=>{v('projPanel').classList.toggle('collapsed');});
 v('sum-assumptions-panel').classList.add('collapsed');
 v('assumptionsToggle').addEventListener('click',()=>{v('sum-assumptions-panel').classList.toggle('collapsed');});
-
-function toggleBadge(id){
-  const badge=document.getElementById(id);
-  const isActive=badge.classList.contains('active');
-  document.querySelectorAll('.intro-badge').forEach(b=>b.classList.remove('active'));
-  if(!isActive) badge.classList.add('active');
-}
-document.addEventListener('click',function(e){
-  if(!e.target.closest('.intro-badge')){
-    document.querySelectorAll('.intro-badge').forEach(b=>b.classList.remove('active'));
-  }
-});
+function toggleBadge(id){const badge=document.getElementById(id);const isActive=badge.classList.contains('active');document.querySelectorAll('.intro-badge').forEach(b=>b.classList.remove('active'));if(!isActive)badge.classList.add('active');}
+document.addEventListener('click',function(e){if(!e.target.closest('.intro-badge')){document.querySelectorAll('.intro-badge').forEach(b=>b.classList.remove('active'));}});
 document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));btn.classList.add('active');v('pane-'+btn.dataset.tab).classList.add('active');render();});});
 function openModal(id){v(id).classList.add('open');}
 function closeModal(id){v(id).classList.remove('open');}
@@ -867,7 +1659,7 @@ v('exportBtn').addEventListener('click',()=>{
   const s=calc();
   const payload={
     _plex:{signature:PLEX_SIG,version:PLEX_VERSION,exported:new Date().toISOString()},
-    _credit:"Compiled by Limited Energy eXperts · limitedenergy.net · Open reuse permitted with credit.",
+    _credit:'Compiled by Limited Energy eXperts · limitedenergy.net · Open reuse permitted with credit.',
     project:state.project,settings:state.settings,racks:state.racks,items:state.items,
     summary:{
       totalWatts:Math.round(s.totalW),totalVA:Math.round(s.totalVA),
@@ -879,10 +1671,9 @@ v('exportBtn').addEventListener('click',()=>{
       perWallDevice:s.perWall.map(wd=>({name:wd.item.name,qty:wd.item.qty||1,voltage:wd.item.v,watts:Math.round(wd.watts),amperage:parseFloat(wd.amps.toFixed(2)),continuousAmps:parseFloat((wd.amps*1.25).toFixed(2)),breaker:wd.breaker,circuitNotes:wd.item.circuitNotes||''}))
     }
   };
-  const fn=((state.project.room||state.project.name||'project').replace(/[^a-z0-9-_]+/gi,'_'))+'.plex';
+  const fn=((state.project.room||state.project.name||'project').replace(/[^a-z0-9\-_]+/gi,'_'))+'.plex';
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 });
 v('importBtn').addEventListener('click',()=>{v('importStatus').innerHTML='';v('importFile').value='';openModal('importModal');});
 v('importModalClose').addEventListener('click',()=>closeModal('importModal'));
@@ -893,27 +1684,471 @@ v('importFile').addEventListener('change',e=>{
   reader.onload=ev=>{
     try{
       const data=JSON.parse(ev.target.result);
-      if(!data._plex||data._plex.signature!==PLEX_SIG){v('importStatus').innerHTML='<div class="import-status err">✗ Not a valid PLEX file. Missing or wrong signature.</div>';return;}
-      if(!data.project||!data.settings||!Array.isArray(data.racks)||!Array.isArray(data.items)){v('importStatus').innerHTML='<div class="import-status err">✗ File structure is invalid.</div>';return;}
+      if(!data._plex||data._plex.signature!==PLEX_SIG){v('importStatus').innerHTML='<div class="import-status err">&#x2717; Not a valid PLEX file. Missing or wrong signature.</div>';return;}
+      if(!data.project||!data.settings||!Array.isArray(data.racks)||!Array.isArray(data.items)){v('importStatus').innerHTML='<div class="import-status err">&#x2717; File structure is invalid.</div>';return;}
       state.project=data.project;state.settings=data.settings;state.racks=data.racks;state.items=data.items;state.activeRackId=data.racks[0]?.id||1;
+      if(!state.wizard)state.wizard={facilityType:'unknown'};
+      if(!state.wizard.facilityType)state.wizard.facilityType='unknown';
+      if(!state.project.intent)state.project.intent={availabilityObjective:'standard',recoveryObjective:'orderly',growthPhilosophy:'',redundancyPhilosophy:'',operationalAssumptions:''};
+      if(state.settings.ambientGain==null)state.settings.ambientGain=10;
+      if(state.settings.demandFactor==null)state.settings.demandFactor=1.00;
+      if(state.settings.growthFactor==null)state.settings.growthFactor=1.25;
+      if(state.settings.upsLoadTarget==null)state.settings.upsLoadTarget=80;
+      if(state.settings.upsType==null)state.settings.upsType='rackmount';
+      if(state.settings.runtimeTarget==null)state.settings.runtimeTarget=15;
+      if(state.settings.inverterEfficiency==null)state.settings.inverterEfficiency=90;
+      if(state.settings.batteryWh==null)state.settings.batteryWh=0;
+      state.items.forEach(it=>{if(it.upsBacking==null)it.upsBacking='none';});
       nextRackId=Math.max(...data.racks.map(r=>r.id),0)+1;
       nextItemId=Math.max(...data.items.map(i=>i.id),0)+1;
-      v('importStatus').innerHTML=`<div class="import-status ok">✓ Imported successfully. ${data.racks.length} rack(s), ${data.items.length} device(s).</div>`;
+      v('importStatus').innerHTML=`<div class="import-status ok">&#x2713; Imported successfully. ${data.racks.length} rack(s), ${data.items.length} device(s).</div>`;
       render();markDirty();
       setTimeout(()=>closeModal('importModal'),1200);
-    }catch(err){v('importStatus').innerHTML='<div class="import-status err">✗ Could not parse file: '+esc(err.message)+'</div>';}
+    }catch(err){v('importStatus').innerHTML='<div class="import-status err">&#x2717; Could not parse file: '+esc(err.message)+'</div>';}
   };
   reader.readAsText(file);
 });
 v('newBtn').addEventListener('click',()=>openModal('newModal'));
 v('newModalClose').addEventListener('click',()=>closeModal('newModal'));
 v('newCancelBtn').addEventListener('click',()=>closeModal('newModal'));
-v('newConfirmBtn').addEventListener('click',()=>{state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:'',scheduleTitle:''},settings:{powerFactor:0.9},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''}],items:[],activeRackId:1};nextItemId=1;nextRackId=2;closeModal('newModal');render();markDirty();});
-v('printBtn').addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));document.querySelector('.tab-btn[data-tab="summary"]').classList.add('active');v('pane-summary').classList.add('active');render();setTimeout(()=>window.print(),200);});
+v('newConfirmBtn').addEventListener('click',()=>{
+  state={project:{name:'',room:'',building:'',floor:'',designer:'',date:'',notes:'',scheduleTitle:'',maturity:'schematic',intent:{availabilityObjective:'standard',recoveryObjective:'orderly',growthPhilosophy:'',redundancyPhilosophy:'',operationalAssumptions:''}},settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'rackmount',runtimeTarget:15,inverterEfficiency:90,batteryWh:0,upsModelPreset:''},wizard:{facilityType:'unknown'},racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'',redundant:false,level:'',outletType:'',circuitNum:''}],items:[],activeRackId:1};
+  nextItemId=1;nextRackId=2;closeModal('newModal');render();markDirty();
+});
+v('printBtn').addEventListener('click',()=>{
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelector('.tab-btn[data-tab="summary"]').classList.add('active');
+  v('pane-summary').classList.add('active');
+  render();setTimeout(()=>window.print(),200);
+});
+v('upsHelpBtn').addEventListener('click',e=>{e.stopPropagation();openModal('upsHelpModal');});
+v('upsHelpModalClose').addEventListener('click',()=>closeModal('upsHelpModal'));
+v('upsHelpModal').addEventListener('click',e=>{if(e.target===v('upsHelpModal'))closeModal('upsHelpModal');});
+v('upsSettingsToggle').addEventListener('click',()=>{const b=v('ups-settings-body');const c=v('upsSettingsCaret');const open=b.classList.toggle('open');if(c)c.textContent=open?'\u25b2':'\u25bc';});
+v('demandFactor').addEventListener('input',()=>{state.settings.demandFactor=parseFloat(v('demandFactor').value)||1.00;render();markDirty();});
+v('growthFactor').addEventListener('input',()=>{state.settings.growthFactor=parseFloat(v('growthFactor').value)||1.25;render();markDirty();});
+v('upsLoadTarget').addEventListener('input',()=>{state.settings.upsLoadTarget=parseFloat(v('upsLoadTarget').value)||80;render();markDirty();});
+v('inverterEfficiency').addEventListener('input',()=>{state.settings.inverterEfficiency=parseFloat(v('inverterEfficiency').value)||90;render();markDirty();});
+v('upsType').addEventListener('change',()=>{state.settings.upsType=v('upsType').value;render();markDirty();});
+v('runtimePreset').addEventListener('change',()=>{const val=v('runtimePreset').value;if(val==='custom'){v('runtimeCustom').style.display='';}else{v('runtimeCustom').style.display='none';state.settings.runtimeTarget=parseInt(val)||15;render();markDirty();}});
+v('runtimeCustom').addEventListener('input',()=>{state.settings.runtimeTarget=parseInt(v('runtimeCustom').value)||15;render();markDirty();});
+v('landingWizardBtn').addEventListener('click',()=>{wizardStep=1;wizardState={facilityType:null,roomType:null,goals:[],equipmentKnowledge:null,startMode:null};setView('wizard');});
+v('landingCalcBtn').addEventListener('click',()=>setView('calculator'));
+v('landingImportBtn').addEventListener('click',()=>{setView('calculator');v('importBtn').click();});
+setView('landing');
 if(loadSaved()){console.log('Loaded saved session');}
 if(!state.project.date)state.project.date=new Date().toISOString().slice(0,10);
-render();
 updateSavedIndicator();
+document.addEventListener('click',function(e){var a=e.target.closest('a[href^="mailto:"]');if(a)gtag('event','email_click',{link_url:a.href});});
+v('agHelpBtn').addEventListener('click',()=>openModal('agModal'));
+v('agModalClose').addEventListener('click',()=>closeModal('agModal'));
+v('agModal').addEventListener('click',e=>{if(e.target===v('agModal'))closeModal('agModal');});
+v('ambientGain').addEventListener('input',()=>{state.settings.ambientGain=parseFloat(v('ambientGain').value)||0;render();markDirty();});
+// ===== TEMPLATES MODAL =====
+function buildTemplateGrid(){
+  const grid=v('template-grid');grid.innerHTML='';
+  TEMPLATES.forEach((t,idx)=>{
+    const totalItems=t.items.reduce((s,i)=>s+(i.qty||1),0);
+    const divW=t.items.reduce((s,i)=>s+i.w*(i.qty||1)*getDiversityFactor(i.category),0);
+    const recBtu=divW*BTU_PER_WATT*COOLING_BUFFER*(1+(t.settings.ambientGain||10)/100);
+    const spec=`${t.racks.length} rack${t.racks.length>1?'s':''} \u00b7 ${totalItems} devices \u00b7 ~${Math.round(divW)}W \u00b7 ${(recBtu/12000).toFixed(1)} tons cooling`;
+    const card=document.createElement('div');
+    card.style.cssText='background:var(--navy);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:8px;';
+    card.innerHTML=`<div style="font-family:var(--display);font-size:14px;font-weight:700;color:var(--white);">${esc(t.name)}</div><div style="font-size:12px;color:var(--gray-light);">${esc(t.desc)}</div><div style="font-family:var(--mono);font-size:11px;color:var(--teal);">${esc(spec)}</div><button class="hbtn" style="margin-top:4px;width:100%;" data-tidx="${idx}">Load Template</button>`;
+    grid.appendChild(card);
+  });
+  grid.querySelectorAll('[data-tidx]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const t=TEMPLATES[parseInt(btn.dataset.tidx)];
+      if(!confirm(`Load "${t.name}"?\n\nThis will replace your current project.`))return;
+      const _mft=t.facilityType||state.wizard?.facilityType||'unknown';const _mfp=FACILITY_PROFILES[_mft]||FACILITY_PROFILES.unknown;const _mgfp=Math.round((_mfp.growthFactor-1)*100);const _mgwp=`Plan for ${_mgfp}% load growth over design life. Provision spare conduit fill and panel capacity for future expansion.`;
+      state={project:{...t.project,maturity:t.project.maturity||'schematic',intent:{availabilityObjective:'standard',recoveryObjective:'orderly',growthPhilosophy:_mgwp,redundancyPhilosophy:_mfp.redundancyNote||'',operationalAssumptions:_mfp.basisNote||''}},settings:{...t.settings},wizard:{facilityType:_mft},racks:t.racks.map(r=>({...r})),items:t.items.map(i=>({...i})),activeRackId:t.racks[0]?.id||1};
+      nextRackId=Math.max(...t.racks.map(r=>r.id),0)+1;nextItemId=Math.max(...t.items.map(i=>i.id),0)+1;
+      closeModal('templatesModal');render();markDirty();
+    });
+  });
+}
+v('templatesBtn').addEventListener('click',()=>{buildTemplateGrid();openModal('templatesModal');});
+v('templatesModalClose').addEventListener('click',()=>closeModal('templatesModal'));
+v('templatesModal').addEventListener('click',e=>{if(e.target===v('templatesModal'))closeModal('templatesModal');});
+// ===== VIEW MANAGEMENT =====
+function setView(name){
+  v('view-landing').style.display=name==='landing'?'flex':'none';
+  v('view-wizard').style.display=name==='wizard'?'flex':'none';
+  v('view-calculator').style.display=name==='calculator'?'flex':'none';
+  if(name==='calculator'){render();updateSavedIndicator();}
+  if(name==='wizard'){renderWizardStep();}
+}
+// ===== TEMPLATE LOADER =====
+function loadTemplate(idx){
+  const t=TEMPLATES[idx];if(!t)return;
+  const _tft=t.facilityType||state.wizard?.facilityType||'unknown';
+  const _tfp=FACILITY_PROFILES[_tft]||FACILITY_PROFILES.unknown;
+  const _gfPct=Math.round((_tfp.growthFactor-1)*100);
+  const _tgwp=`Plan for ${_gfPct}% load growth over design life. Provision spare conduit fill and panel capacity for future expansion.`;
+  state={
+    project:{...t.project,maturity:t.project.maturity||'schematic',intent:{availabilityObjective:'standard',recoveryObjective:'orderly',growthPhilosophy:_tgwp,redundancyPhilosophy:_tfp.redundancyNote||'',operationalAssumptions:_tfp.basisNote||''}},
+    settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'rackmount',runtimeTarget:15,inverterEfficiency:90,batteryWh:0,upsModelPreset:'',...t.settings},
+    wizard:{facilityType:_tft},
+    racks:t.racks.map(r=>({...r})),
+    items:t.items.map(i=>({...i,upsBacking:i.upsBacking||'none'})),
+    activeRackId:t.racks[0]?.id||1
+  };
+  nextRackId=Math.max(...t.racks.map(r=>r.id),0)+1;
+  nextItemId=Math.max(...t.items.map(i=>i.id),0)+1;
+  markDirty();
+}
+// ===== WIZARD (6-STEP) =====
+let wizardStep=1;
+function renderWizardStep(){
+  v('wizard-step-lbl').textContent='STEP '+wizardStep+' OF 6';
+  v('wizard-progress').style.width=(wizardStep/6*100)+'%';
+  let html='';
+  if(wizardStep===1){
+    const fp=wizardState.facilityType;
+    const opts=[['Mission Critical / Data Center','missioncritical'],['Healthcare / Medical','healthcare'],['Public Safety / Emergency Services','publicsafety'],['Correctional / Detention','correctional'],['Education','education'],['Enterprise / Commercial Office','enterprise'],['Government / Federal','government'],['Hospitality / Retail','hospitality'],['Not specified / General','unknown']];
+    html=`<div class="wizard-question">What type of facility is this?</div><div class="wizard-pills">${opts.map(([lbl,val])=>`<button class="wpill${fp===val?' selected':''}" onclick="wizardSelectFacility('${val}')">${lbl}</button>`).join('')}</div>`;
+  }else if(wizardStep===2){
+    const opts=[['Telecom Room (TR)','tr'],['Equipment Room (ER)','er'],['Security Equipment Room (SER)','ser'],['Data Center Space','dc'],['Outdoor Cabinet','cabinet'],['Not Sure','unknown']];
+    html=`<button class="wizard-back-btn" onclick="wizardBack()">&#8592; Back</button><div class="wizard-question">What are you designing?</div><div class="wizard-pills">${opts.map(([lbl,val])=>`<button class="wpill${wizardState.roomType===val?' selected':''}" onclick="wizardSelectRoom('${val}')">${lbl}</button>`).join('')}</div>`;
+  }else if(wizardStep===3){
+    const opts=[['UPS sizing','ups'],['Backup runtime','runtime'],['Power planning','power'],['Generator planning','generator'],['Cooling estimates','cooling'],['PoE budgeting','poe'],['Complete room design','complete']];
+    html=`<button class="wizard-back-btn" onclick="wizardBack()">&#8592; Back</button><div class="wizard-question">What would you like help with? <span style="font-size:10px;color:var(--gray-mid);">(select all that apply)</span></div><div class="wizard-pills">${opts.map(([lbl,val])=>`<button class="wpill${wizardState.goals.includes(val)?' selected':''}" onclick="wizardToggleGoal('${val}')">${lbl}</button>`).join('')}</div><button class="wizard-next-btn" onclick="wizardNext()">Next &#8594;</button>`;
+  }else if(wizardStep===4){
+    const opts=[['I know my exact equipment','specific'],['I know my rack count','racks'],['I know device quantities','quantities'],["I'm estimating",'estimating']];
+    html=`<button class="wizard-back-btn" onclick="wizardBack()">&#8592; Back</button><div class="wizard-question">How much do you know about your equipment?</div><div class="wizard-pills">${opts.map(([lbl,val])=>`<button class="wpill${wizardState.equipmentKnowledge===val?' selected':''}" onclick="wizardSelectEquipment('${val}')">${lbl}</button>`).join('')}</div>`;
+  }else if(wizardStep===5){
+    const opts=[['Guided recommendations','guided'],['Start with common assumptions','assumptions'],['Start with a blank calculator','blank']];
+    html=`<button class="wizard-back-btn" onclick="wizardBack()">&#8592; Back</button><div class="wizard-question">How would you like to start?</div><div class="wizard-pills">${opts.map(([lbl,val])=>`<button class="wpill${wizardState.startMode===val?' selected':''}" onclick="wizardSelectStart('${val}')">${lbl}</button>`).join('')}</div>`;
+  }else if(wizardStep===6){
+    const fp=FACILITY_PROFILES[wizardState.facilityType||'unknown']||FACILITY_PROFILES.unknown;
+    const rTypeLabels={tr:'Telecom Room (TR)',er:'Equipment Room (ER)',ser:'Security Equipment Room (SER)',dc:'Data Center Space',cabinet:'Outdoor Cabinet',unknown:'Room'};
+    const rt=rTypeLabels[wizardState.roomType]||'Room';
+    const goalLabels={ups:'UPS sizing',runtime:'backup runtime',power:'power planning',generator:'generator sizing',cooling:'cooling estimates',poe:'PoE budgeting',complete:'complete room design'};
+    const goalStr=wizardState.goals.length?wizardState.goals.map(g=>goalLabels[g]||g).join(', '):'general planning';
+    const rtDisplay=fp.runtimeTarget>=60?`${Math.round(fp.runtimeTarget/60)}-hr (${fp.runtimeTarget} min)`:fp.runtimeTarget+'-min';
+    const upsTypeDisplay=upsTypeName(fp.upsType||state.settings.upsType||'rackmount');
+    const _isLifeSafety=wizardState.facilityType==='publicsafety'||wizardState.facilityType==='correctional';
+    const _cardIntro=_isLifeSafety?(wizardState.facilityType==='publicsafety'?`<strong>Life Safety Infrastructure — Review Carefully.</strong> Planning model configured for a <strong>${rt}</strong> in a <strong>${esc(fp.label)}</strong> facility. TIA-1221, NENA, and applicable state emergency communications standards apply. These defaults reflect minimum requirements — coordinate all values with the AHJ, Engineer of Record, and facility management before design use.`:`<strong>Security-Critical Infrastructure — Review Carefully.</strong> Planning model configured for a <strong>${rt}</strong> in a <strong>${esc(fp.label)}</strong> facility. Continuous operation of access control and life safety systems is required. Verify all values with the facility security consultant and Engineer of Record before design use.`):`<strong>Ready to go.</strong> Prepared a planning model for a <strong>${rt}</strong> in a <strong>${esc(fp.label)}</strong> facility, focused on <strong>${esc(goalStr)}</strong>.`;
+    html=`<div class="wizard-summary-card">${_cardIntro}<br><br>Defaults applied: ${rtDisplay} UPS runtime &nbsp;&#183; ${Math.round((fp.growthFactor-1)*100)}% growth factor &nbsp;&#183; ${fp.upsLoadTarget}% max UPS loading &nbsp;&#183; ${esc(upsTypeDisplay)} &nbsp;&#183; 10% ambient heat gain</div><button class="wizard-next-btn" onclick="finishWizard()">Open Calculator &#8594;</button>`;
+  }
+  v('wizard-content').innerHTML=html;
+}
+function wizardSelectFacility(val){
+  wizardState.facilityType=val;state.wizard.facilityType=val;
+  const p=FACILITY_PROFILES[val]||FACILITY_PROFILES.unknown;
+  state.settings.upsLoadTarget=p.upsLoadTarget;
+  state.settings.growthFactor=p.growthFactor;
+  state.settings.runtimeTarget=p.runtimeTarget;
+  state.settings.upsType=p.upsType;
+  if(!state.project.intent)state.project.intent={};
+  if(!state.project.intent.redundancyPhilosophy)state.project.intent.redundancyPhilosophy=p.redundancyNote||'';
+  wizardStep=2;renderWizardStep();
+}
+function wizardSelectRoom(val){wizardState.roomType=val;wizardStep=3;renderWizardStep();}
+function wizardToggleGoal(val){const i=wizardState.goals.indexOf(val);if(i>=0)wizardState.goals.splice(i,1);else wizardState.goals.push(val);renderWizardStep();}
+function wizardNext(){if(wizardStep===3){wizardStep=4;renderWizardStep();}}
+function wizardSelectEquipment(val){wizardState.equipmentKnowledge=val;wizardStep=5;renderWizardStep();}
+function wizardSelectStart(val){wizardState.startMode=val;wizardStep=6;renderWizardStep();}
+function wizardBack(){wizardStep=Math.max(1,wizardStep-1);renderWizardStep();}
+function finishWizard(){applyWizardDefaults();wizardStep=1;setView('calculator');}
+function applyWizardDefaults(){
+  const fp=FACILITY_PROFILES[wizardState.facilityType||'unknown']||FACILITY_PROFILES.unknown;
+  const roomLabels={tr:'TR-1',er:'ER-1',ser:'SER-1',dc:'DC-1',cabinet:'CAB-1',unknown:'Room-1'};
+  state.project.room=roomLabels[wizardState.roomType]||'Room-1';
+  state.wizard.facilityType=wizardState.facilityType||'unknown';
+  if(wizardState.roomType==='ser')state.settings.upsType='security';
+  else if(wizardState.roomType==='dc'&&state.settings.upsType!=='centralized')state.settings.upsType='centralized';
+  else if(wizardState.roomType==='tr'&&fp.upsType!=='centralized')state.settings.upsType='telecom';
+  if(wizardState.startMode==='assumptions'||wizardState.equipmentKnowledge==='estimating'){
+    const tMap={tr:0,er:2,ser:1,dc:3};
+    const tIdx=tMap[wizardState.roomType];
+    if(tIdx!==undefined)loadTemplate(tIdx);
+  }
+}
+// ===== ASSISTANT =====
+let assistantOpen=true;
+function toggleAssistant(){
+  assistantOpen=!assistantOpen;
+  const panel=v('plex-assistant');const btn=v('assistant-toggle');
+  if(assistantOpen){panel.classList.remove('asst-collapsed');btn.classList.remove('asst-collapsed');btn.style.right='240px';}
+  else{panel.classList.add('asst-collapsed');btn.classList.add('asst-collapsed');btn.style.right='0';}
+}
+function getAssistantMessages(s){
+  const msgs=[];const sets=state.settings;
+  if(s.totalW===0){msgs.push({icon:'&#9654;',text:'Add equipment to your rack or wall schedule to see planning estimates.',warn:false});return msgs;}
+  if(s.upsBackedW>0){
+    msgs.push({icon:'&#9889;',text:(s.recUpsVA?s.recUpsVA.toLocaleString()+' VA':s.upsPlanningVA.toFixed(0)+' VA')+' UPS recommended at '+(s.recUpsVA?s.upsLoadPct.toFixed(0)+'%':'TBD')+' loading.',warn:false});
+    if(s.runtimeMin!=null&&s.runtimeMin<(sets.runtimeTarget||15)){const _rtA=sets.runtimeTarget||15;const _isCrit=(_rtA>=60||(state.project.intent?.recoveryObjective==='continuous'))&&s.runtimeMin<(_rtA*0.5);msgs.push({icon:'&#9888;',text:_isCrit?'Runtime objective cannot be met: '+Math.round(s.runtimeMin)+' min estimated vs. '+_rtA+' min target. Increase battery capacity, reduce backed load, or coordinate generator strategy.':'UPS runtime '+Math.round(s.runtimeMin)+' min — '+_rtA+' min target not met. Battery shortfall '+Math.abs(s.batteryDeltaWh).toFixed(0)+' Wh.',warn:true});}
+    else if(s.runtimeMin!=null){msgs.push({icon:'&#10003;',text:'Runtime ~'+Math.round(s.runtimeMin)+'min. Target of '+(sets.runtimeTarget||15)+'min met.',warn:false});}
+  }else{msgs.push({icon:'&#9889;',text:'Tag devices with backup status (UPS Backed or Critical) to enable UPS sizing.',warn:false});}
+  msgs.push({icon:'&#10052;',text:'Cooling: ~'+s.recTons.toFixed(1)+' tons / '+s.recBtu.toFixed(0)+' BTU/hr (incl. 1.25&#215; buffer + ambient).',warn:false});
+  if(s.roomWperU>100)msgs.push({icon:'&#9888;',text:'High density: '+s.roomWperU.toFixed(0)+' W/U. Confirm precision cooling with MEP.',warn:true});
+  if(s.generatorKW>0)msgs.push({icon:'&#128267;',text:'Generator: '+s.generatorKW.toFixed(1)+' kW continuous. Next standard: '+standardGenerator(s.generatorKW)+'.',warn:false});
+  return msgs;
+}
+function renderAssistant(s){
+  const msgs=getAssistantMessages(s);
+  const body=v('assistant-messages');
+  if(!body)return;
+  if(!msgs.length){body.innerHTML='<div class="assist-msg"><span class="assist-icon">&#9654;</span><span>Add equipment to see planning guidance.</span></div>';return;}
+  body.innerHTML=msgs.map(m=>`<div class="assist-msg${m.warn?' assist-warn':''}"><span class="assist-icon">${m.icon}</span><span>${m.text}</span></div>`).join('');
+}
+// ===== DESIGN INTENT LISTENERS =====
+v('intentToggle').addEventListener('click',()=>{
+  const body=v('intentBody');const open=body.style.display==='none'||!body.style.display;
+  body.style.display=open?'':'none';
+  const ic=v('intentCaret');if(ic)ic.textContent=open?'\u25b2':'\u25b6';
+});
+v('intent-availability').addEventListener('change',()=>{if(!state.project.intent)state.project.intent={};state.project.intent.availabilityObjective=v('intent-availability').value;markDirty();});
+v('intent-recovery').addEventListener('change',()=>{if(!state.project.intent)state.project.intent={};state.project.intent.recoveryObjective=v('intent-recovery').value;markDirty();});
+v('intent-growth').addEventListener('input',()=>{if(!state.project.intent)state.project.intent={};state.project.intent.growthPhilosophy=v('intent-growth').value;markDirty();});
+v('intent-redundancy').addEventListener('input',()=>{if(!state.project.intent)state.project.intent={};state.project.intent.redundancyPhilosophy=v('intent-redundancy').value;markDirty();});
+v('intent-assumptions').addEventListener('input',()=>{if(!state.project.intent)state.project.intent={};state.project.intent.operationalAssumptions=v('intent-assumptions').value;markDirty();});
+// ===== EOR AI PROMPT =====
+const AVAIL_LABELS={standard:'Standard (99.9%+ availability)',enhanced:'Enhanced (99.99%+ availability)',highavailability:'High Availability (99.99%+)',missioncritical:'Mission Critical (99.999%+)'};
+const RECOV_LABELS={orderly:'Orderly Shutdown — UPS provides controlled shutdown time',ridethrough:'Generator Ride-Through — UPS bridges until generator transfer',continuous:'Continuous Operations — No service interruption acceptable'};
+function buildEorPrompt(){
+  const s=calc();const p=state.project;const sets=state.settings;
+  const fp=FACILITY_PROFILES[state.wizard?.facilityType||'unknown']||FACILITY_PROFILES.unknown;
+  const int=p.intent||{};
+  const roomDate=p.date||(new Date().toISOString().slice(0,10));
+  const matLabel={conceptual:'Conceptual',schematic:'Schematic Design',dd:'Design Development',cd:'Construction Documents',record:'Record / As-Built'}[p.maturity]||'Schematic Design';
+  const lines=[];
+  lines.push('PLEX PROJECT CONTEXT — EOR REVIEW REQUEST');
+  lines.push('Generated by PLEX v2.50 · Limited Energy eXperts · limitedenergy.net');
+  lines.push('');
+  lines.push('PROJECT INFORMATION');
+  lines.push(`Project Name    : ${p.name||'(not set)'}`);
+  lines.push(`Room / Space    : ${p.room||'(not set)'}`);
+  lines.push(`Building        : ${p.building||'(not set)'}`);
+  lines.push(`Floor / Level   : ${p.floor||'(not set)'}`);
+  lines.push(`Designer        : ${p.designer||'(not set)'}`);
+  lines.push(`Project Date    : ${roomDate}`);
+  lines.push(`Design Phase    : ${matLabel}`);
+  lines.push('');
+  lines.push('FACILITY CLASSIFICATION');
+  lines.push(`Facility Type   : ${fp.label}`);
+  lines.push(`Basis Note      : ${fp.basisNote||'General ICT infrastructure design.'}`);
+  lines.push('');
+  lines.push('DESIGN INTENT');
+  lines.push(`Availability    : ${AVAIL_LABELS[int.availabilityObjective]||int.availabilityObjective||'Standard'}`);
+  lines.push(`Recovery        : ${RECOV_LABELS[int.recoveryObjective]||int.recoveryObjective||'Orderly Shutdown'}`);
+  lines.push(`Growth Philosophy        : ${int.growthPhilosophy||'(not specified)'}`);
+  lines.push(`Redundancy Philosophy    : ${int.redundancyPhilosophy||'(not specified)'}`);
+  lines.push(`Operational Assumptions  : ${int.operationalAssumptions||'(not specified)'}`);
+  lines.push('');
+  lines.push('TECHNICAL SUMMARY (PRELIMINARY — unverified estimates)');
+  lines.push(`Total Design Load        : ${Math.round(s.totalW)} W / ${Math.round(s.totalVA)} VA`);
+  lines.push(`UPS-Backed Load          : ${Math.round(s.upsBackedW)} W`);
+  lines.push(`Recommended UPS          : ${s.recUpsVA?s.recUpsVA.toLocaleString()+' VA':'Not yet sized'} at ${sets.upsLoadTarget}% max load`);
+  lines.push(`Target Runtime           : ${sets.runtimeTarget} minutes`);
+  lines.push(`Estimated Runtime        : ${s.runtimeMin!=null?Math.round(s.runtimeMin)+' minutes':'N/A (no UPS load)'}`);
+  lines.push(`Cooling (IT load)        : ${Math.round(s.itBtu)} BTU/hr`);
+  lines.push(`Cooling (design, 1.25x)  : ${Math.round(s.recBtu)} BTU/hr / ${s.recTons.toFixed(2)} tons`);
+  lines.push(`Generator Sizing         : ${s.generatorKW>0?s.generatorKW.toFixed(1)+' kW continuous (next std: '+standardGenerator(s.generatorKW)+')':'Not required / not calculated'}`);
+  lines.push(`Racks in Scope           : ${state.racks.length}`);
+  lines.push(`Devices in Scope         : ${state.items.length}`);
+  lines.push('');
+  lines.push('SETTINGS USED');
+  lines.push(`Power Factor    : ${sets.powerFactor}`);
+  lines.push(`Demand Factor   : ${sets.demandFactor}`);
+  lines.push(`Growth Factor   : ${sets.growthFactor}`);
+  lines.push(`Ambient Gain    : ${sets.ambientGain}%`);
+  lines.push(`UPS Type        : ${sets.upsType}`);
+  if(p.notes){lines.push('');lines.push('PROJECT NOTES');lines.push(p.notes);}
+  lines.push('');
+  lines.push('─'.repeat(60));
+  lines.push('EOR REVIEW REQUEST');
+  lines.push('');
+  lines.push('As the Engineer of Record reviewing this preliminary ICT infrastructure design, please provide:');
+  lines.push('');
+  lines.push('1. POWER VALIDATION — Are the calculated loads and UPS sizing reasonable for this facility type and room classification? Flag any assumptions that require field verification or manufacturer data.');
+  lines.push('');
+  lines.push('2. COOLING REVIEW — Does the cooling estimate (including 1.25x buffer and ambient gain) align with the HVAC coordination requirements for this facility? Identify any precision cooling or supplemental unit considerations.');
+  lines.push('');
+  lines.push('3. GENERATOR SIZING — Is the generator recommendation consistent with the facility\'s redundancy intent and applicable codes (NFPA 110, local AHJ requirements)?');
+  lines.push('');
+  lines.push('4. CODE AND STANDARD COMPLIANCE — Identify any applicable BICSI, TIA, NFPA, NEC (Article 645, 708, or 725), or facility-specific standards that should govern this design.');
+  lines.push('');
+  lines.push('5. DESIGN INTENT ALIGNMENT — Based on the stated availability objective and recovery posture, are the proposed infrastructure tiers and redundancy approach appropriate?');
+  lines.push('');
+  lines.push('6. OPEN ITEMS / RED FLAGS — List any assumptions, gaps, or items that must be resolved before advancing to the next design phase.');
+  lines.push('');
+  lines.push('Note: These estimates are preliminary planning values generated by PLEX, a Limited Energy design tool. All values require verification against manufacturer specifications, coordinated engineering drawings, and AHJ review before construction documents are issued.');
+  return lines.join('\n');
+}
+v('eorPromptBtn').addEventListener('click',()=>{v('eorPromptText').value=buildEorPrompt();openModal('eorModal');});
+v('eorModalClose').addEventListener('click',()=>closeModal('eorModal'));
+v('eorModal').addEventListener('click',e=>{if(e.target===v('eorModal'))closeModal('eorModal');});
+v('eorCopyBtn').addEventListener('click',()=>{
+  navigator.clipboard.writeText(v('eorPromptText').value).then(()=>{
+    const conf=v('eorCopyConf');conf.style.opacity='1';setTimeout(()=>{conf.style.opacity='0';},1800);
+  });
+});
+v('eorDownloadBtn').addEventListener('click',()=>{
+  const roomSlug=(state.project.room||'project').replace(/[^a-z0-9\-_]+/gi,'_');
+  const dateSlug=state.project.date||(new Date().toISOString().slice(0,10));
+  const fn=`PLEX-EORPrompt-${roomSlug}-${dateSlug}.txt`;
+  const blob=new Blob([v('eorPromptText').value],{type:'text/plain'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+});
+// ===== JSON PROJECT DATA EXPORT (rooms[] schema) =====
+function exportProjectJson(){
+  const s=calc();const p=state.project;const sets=state.settings;
+  const fp=FACILITY_PROFILES[state.wizard?.facilityType||'unknown']||FACILITY_PROFILES.unknown;
+  const int=p.intent||{};
+  const roomType=state.racks.length>0?'tr':'unknown';
+  const roomTypeLabel={tr:'Telecom Room (TR)',er:'Equipment Room (ER)',ser:'Security Equipment Room (SER)',dc:'Data Center Space',cabinet:'Outdoor Cabinet',unknown:'Room'}[state.wizard?.roomType||'unknown']||'Room';
+  const payload={
+    plexProjectModel:'PLEX-LEX/2.50',
+    schemaNote:'rooms[] is populated with one entry per room. Multi-room projects will contain multiple entries. Consuming tools should iterate rooms[], not assume a single room.',
+    project:{name:p.name,room:p.room,building:p.building,floor:p.floor,designer:p.designer,date:p.date,notes:p.notes,scheduleTitle:p.scheduleTitle,maturity:p.maturity||'schematic'},
+    facility:{facilityType:state.wizard?.facilityType||'unknown',facilityLabel:fp.label,basisNote:fp.basisNote||'',redundancyNote:fp.redundancyNote||'',coolingNote:fp.coolingNote||'',generatorNote:fp.generatorNote||''},
+    designIntent:{availabilityObjective:int.availabilityObjective||'standard',availabilityLabel:AVAIL_LABELS[int.availabilityObjective]||'Standard',recoveryObjective:int.recoveryObjective||'orderly',recoveryLabel:RECOV_LABELS[int.recoveryObjective]||'Orderly Shutdown',growthPhilosophy:int.growthPhilosophy||'',redundancyPhilosophy:int.redundancyPhilosophy||'',operationalAssumptions:int.operationalAssumptions||''},
+    settings:{powerFactor:sets.powerFactor,ambientGain:sets.ambientGain,demandFactor:sets.demandFactor,growthFactor:sets.growthFactor,upsLoadTargetPct:sets.upsLoadTarget,upsType:sets.upsType,runtimeTarget:sets.runtimeTarget,inverterEfficiency:sets.inverterEfficiency,batteryWh:sets.batteryWh,upsModelPreset:sets.upsModelPreset||''},
+    rooms:[{
+      roomId:'room-1',
+      roomType:state.wizard?.roomType||'unknown',
+      roomTypeLabel:roomTypeLabel,
+      summary:{totalWatts:Math.round(s.totalW),totalVA:Math.round(s.totalVA),designWatts:Math.round(s.totalW*sets.growthFactor),btuPerHour:Math.round(s.btu),coolingTons:parseFloat(s.tons.toFixed(2)),coolingDesignTons:parseFloat(s.recTons.toFixed(2)),generatorKW:parseFloat(s.generatorKW.toFixed(2)),generatorNextStdKW:s.generatorKW>0?parseFloat(standardGenerator(s.generatorKW)):null,amperage120:parseFloat(s.a120.toFixed(2)),amperage208:parseFloat(s.a208.toFixed(2)),amperage240:parseFloat(s.a240.toFixed(2)),rackCount:state.racks.length,deviceCount:state.items.length},
+      ups:{upsBackedWatts:Math.round(s.upsBackedW),recommendedVA:s.recUpsVA||null,planningVA:parseFloat(s.upsPlanningVA.toFixed(0)),loadPct:s.recUpsVA?parseFloat(s.upsLoadPct.toFixed(1)):null,targetLoadPct:sets.upsLoadTarget,upsType:sets.upsType,selectedModel:sets.upsModelPreset||null},
+      cooling:{itBtuPerHour:Math.round(s.itBtu),ambientBtuPerHour:Math.round(s.btu-s.itBtu),totalDesignBtuPerHour:Math.round(s.recBtu),designTons:parseFloat(s.recTons.toFixed(2)),coolingBuffer:COOLING_BUFFER,ambientGainPct:sets.ambientGain},
+      generator:{required:s.generatorKW>0,continuousKW:parseFloat(s.generatorKW.toFixed(2)),nextStandardKW:s.generatorKW>0?parseFloat(standardGenerator(s.generatorKW)):null,note:fp.generatorNote||''},
+      poe:{totalPoEBudgetWatts:Math.round(s.poeBW||0),totalPoEConsumedWatts:Math.round(s.poeCW||0),poeSwitchCount:state.items.filter(i=>i.poeS).length,poeDeviceCount:state.items.filter(i=>i.poeC).length},
+      electrical:{racks:Object.values(s.perRack).map(r=>({label:r.rack.label,sizeU:r.rack.sizeU,voltage:r.rack.voltage,redundant:r.rack.redundant,loadWatts:Math.round(r.watts),nonUpsWatts:Math.round(r.nonUpsWatts),amperage:parseFloat(r.amps.toFixed(2)),continuousAmps:parseFloat((r.amps*1.25).toFixed(2)),breaker:r.breaker,fillPct:parseFloat(r.fillPct.toFixed(1))})),wallDevices:s.perWall.map(wd=>({name:wd.item.name,qty:wd.item.qty||1,voltage:wd.item.v,watts:Math.round(wd.watts),amperage:parseFloat(wd.amps.toFixed(2)),continuousAmps:parseFloat((wd.amps*1.25).toFixed(2)),breaker:wd.breaker,circuitNotes:wd.item.circuitNotes||''}))}
+    }],
+    _meta:{signature:PLEX_SIG,version:PLEX_VERSION,exported:new Date().toISOString(),credit:'Compiled by Limited Energy eXperts · limitedenergy.net'}
+  };
+  const roomSlug=(p.room||p.name||'project').replace(/[^a-z0-9\-_]+/gi,'_');
+  const dateSlug=p.date||(new Date().toISOString().slice(0,10));
+  const fn=`PLEX-ProjectData-${roomSlug}-${dateSlug}.json`;
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+v('jsonExportBtn').addEventListener('click',()=>exportProjectJson());
+// ===== DESIGN REPORT (PRINT / PDF) =====
+function exportDesignReport(){
+  const s=calc();const p=state.project;const sets=state.settings;
+  const fp=FACILITY_PROFILES[state.wizard?.facilityType||'unknown']||FACILITY_PROFILES.unknown;
+  const int=p.intent||{};
+  const matLabel={conceptual:'Conceptual',schematic:'Schematic Design',dd:'Design Development',cd:'Construction Documents',record:'Record / As-Built'}[p.maturity]||'Schematic Design';
+  const matD=maturityDisclaimer(p.maturity||'schematic');
+  const today=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const row=(k,v)=>`<div class="rpt-row"><span class="rpt-key">${k}</span><span class="rpt-val">${v}</span></div>`;
+  const sec=(title,content)=>`<div class="rpt-section"><div class="rpt-section-title">${title}</div>${content}</div>`;
+  // Cover page
+  const cover=`<div class="report-cover">
+    <div class="rpt-header"><div class="rpt-logo">PLEX<span style="font-weight:300;opacity:0.5;margin-left:6pt;">v2.50</span></div><div class="rpt-sub">Power &amp; Cooling Planning Tool &mdash; Limited Energy eXperts &middot; limitedenergy.net</div></div>
+    <div class="cover-title">ICT Infrastructure Design Report</div>
+    <div class="cover-subtitle">${esc(p.room||'Unnamed Room')}${p.building?' &mdash; '+esc(p.building):''}${p.name?' &mdash; '+esc(p.name):''}</div>
+    <hr class="rpt-hr">
+    <div class="cover-grid">
+      <div class="cover-grid-item"><div class="cover-grid-label">Designer</div><div class="cover-grid-val">${esc(p.designer||'—')}</div></div>
+      <div class="cover-grid-item"><div class="cover-grid-label">Project Date</div><div class="cover-grid-val">${esc(p.date||today)}</div></div>
+      <div class="cover-grid-item"><div class="cover-grid-label">Building / Site</div><div class="cover-grid-val">${esc(p.building||'—')}</div></div>
+      <div class="cover-grid-item"><div class="cover-grid-label">Floor / Level</div><div class="cover-grid-val">${esc(p.floor||'—')}</div></div>
+      <div class="cover-grid-item"><div class="cover-grid-label">Room / Space</div><div class="cover-grid-val">${esc(p.room||'—')}</div></div>
+      <div class="cover-grid-item"><div class="cover-grid-label">Design Phase</div><div class="cover-grid-val">${matLabel}</div></div>
+      <div class="cover-grid-item"><div class="cover-grid-label">Facility Classification</div><div class="cover-grid-val">${esc(fp.label)}</div></div>
+      <div class="cover-grid-item"><div class="cover-grid-label">Schedule Title</div><div class="cover-grid-val">${esc(p.scheduleTitle||'ICT Equipment Schedule')}</div></div>
+    </div>
+    <hr class="rpt-hr-light">
+    <div class="cover-tool-block">Report generated ${today} using PLEX v2.50, a preliminary planning tool developed by<br>Limited Energy eXperts &mdash; ICT Design and Consulting Practice<br>Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer</div>
+    <div class="cover-disclaimer">${esc(matD)}</div>
+  </div>`;
+  // Section 1 — Basis of Design
+  const s1=sec('Section 1 &mdash; Basis of Design',
+    row('Facility Classification',esc(fp.label))+
+    row('Basis of Design Note',esc(fp.basisNote||'General ICT infrastructure design.'))+
+    row('Redundancy Posture',esc(fp.redundancyNote||'—'))+
+    row('Cooling Strategy',esc(fp.coolingNote||'—'))+
+    row('Generator / Emergency Power',esc(fp.generatorNote||'—'))+
+    `<div style="margin-top:8pt;font-size:9pt;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#444;padding-top:6pt;border-top:0.5pt solid #eee;">Design Intent</div>`+
+    row('Availability Objective',esc(AVAIL_LABELS[int.availabilityObjective]||int.availabilityObjective||'Standard (99.9%+)'))+
+    row('Recovery Posture',esc(RECOV_LABELS[int.recoveryObjective]||int.recoveryObjective||'Orderly Shutdown'))+
+    row('Growth Philosophy',esc(int.growthPhilosophy||'(not specified)'))+
+    row('Redundancy Philosophy',esc(int.redundancyPhilosophy||'(not specified)'))+
+    (int.operationalAssumptions?`<div class="rpt-row" style="flex-direction:column;gap:2pt;"><span class="rpt-key">Operational Assumptions</span><span style="font-size:8.5pt;color:#333;line-height:1.5;padding-top:2pt;">${esc(int.operationalAssumptions)}</span></div>`:'')
+  );
+  // Section 2 — Power Summary
+  const s2=sec('Section 2 &mdash; Power Summary',
+    row('Connected Load',Math.round(s.totalW).toLocaleString()+' W / '+Math.round(s.totalVA).toLocaleString()+' VA')+
+    row('Demand Factor Applied',sets.demandFactor.toFixed(2)+'&#215;')+
+    row('Growth Factor Applied',sets.growthFactor.toFixed(2)+'&#215; ('+Math.round((sets.growthFactor-1)*100)+'% future capacity)')+
+    row('Design Load (with growth)',Math.round(s.totalW*sets.growthFactor).toLocaleString()+' W')+
+    row('Power Factor',sets.powerFactor.toFixed(2))+
+    row('120V Amperage',s.a120.toFixed(1)+' A')+
+    row('208V Amperage',s.a208.toFixed(1)+' A')+
+    row('240V Amperage',s.a240.toFixed(1)+' A')+
+    row('Racks in Scope',state.racks.length.toString())+
+    row('Devices in Scope',state.items.length.toString())
+  );
+  // Section 3 — UPS Sizing
+  const s3=sec('Section 3 &mdash; UPS Sizing',
+    row('UPS-Backed Load',Math.round(s.upsBackedW).toLocaleString()+' W')+
+    row('Planning VA (UPS backed &divide; PF)',s.upsPlanningVA.toFixed(0)+' VA')+
+    row('Recommended UPS',s.recUpsVA?s.recUpsVA.toLocaleString()+' VA':'Insufficient data to size')+
+    row('Load at Recommended UPS',s.recUpsVA?s.upsLoadPct.toFixed(1)+'%':'—')+
+    row('Target Max Load %',sets.upsLoadTarget+'%')+
+    row('UPS Type / Topology',upsTypeName(sets.upsType||'rackmount'))+
+    row('Selected Model / Preset',sets.upsModelPreset||'(none selected)')+
+    (s.upsBackedW===0?`<div class="rpt-notes-paragraph" style="font-size:8.5pt;color:#888;">No devices are tagged as UPS-backed. Tag devices in the Builder to enable UPS sizing.</div>`:'')
+  );
+  // Section 4 — Battery Runtime
+  const effPct=(sets.inverterEfficiency||90)/100;
+  const s4=sec('Section 4 &mdash; Battery Runtime',
+    row('Battery Capacity Available',s.effectiveBatteryWh>0?s.effectiveBatteryWh.toFixed(0)+' Wh':'(not configured)' )+
+    row('UPS Inverter Efficiency',sets.inverterEfficiency+'%')+
+    row('Estimated Runtime',s.runtimeMin!=null?Math.round(s.runtimeMin)+' minutes':'N/A')+
+    row('Target Runtime',sets.runtimeTarget+' minutes')+
+    row('Runtime Status',s.runtimeMin!=null?(s.runtimeMin>=(sets.runtimeTarget||15)?'&#10003; Target met':'&#9888; Shortfall: '+Math.abs(s.batteryDeltaWh||0).toFixed(0)+' Wh'):'No UPS load')+
+    (()=>{const _rtR=sets.runtimeTarget||15;const _critR=s.runtimeMin!=null&&(_rtR>=60||(state.project.intent?.recoveryObjective==='continuous'))&&s.runtimeMin<(_rtR*0.5);if(_critR)return`<div style="border-left:3pt solid #C8102E;background:#fff5f5;padding:8pt 12pt;margin:6pt 0;font-size:8.5pt;"><strong style="color:#C8102E;">&#9888; RUNTIME OBJECTIVE CANNOT BE MET WITH SELECTED EQUIPMENT</strong><br>Battery capacity (${s.effectiveBatteryWh!=null?s.effectiveBatteryWh.toFixed(0):'—'} Wh) is insufficient for the ${_rtR}-minute runtime objective. Estimated runtime: ${s.runtimeMin!=null?Math.round(s.runtimeMin):0} min (${s.runtimeMin!=null?Math.round((s.runtimeMin/_rtR)*100):0}% of objective).<br>Options: increase UPS capacity or add external battery modules; reduce UPS-backed load; coordinate centralized UPS/generator strategy with electrical engineer. Final selection must be verified with manufacturer runtime data and confirmed with the Engineer of Record.</div>`;if(s.batteryDeltaWh&&s.batteryDeltaWh<0)return`<div class="rpt-notes-paragraph" style="font-size:8.5pt;color:#c00;">Battery shortfall detected. Additional battery capacity or reduced load required to meet runtime target. Verify with manufacturer battery sizing tool.</div>`;return'';})()
+  );
+  // Section 5 — Cooling
+  const s5=sec('Section 5 &mdash; Cooling Estimates',
+    row('IT Equipment Heat (BTU/hr)',Math.round(s.itBtu).toLocaleString()+' BTU/hr')+
+    row('Design Load (1.25&#215; buffer + '+sets.ambientGain+'% ambient)',Math.round(s.recBtu).toLocaleString()+' BTU/hr')+
+    row('Design Cooling Capacity',s.recTons.toFixed(2)+' tons')+
+    row('Room W/U (density indicator)',s.roomWperU!=null?s.roomWperU.toFixed(1)+' W/U':'N/A')+
+    (fp.coolingNote?row('Cooling Strategy Note',esc(fp.coolingNote)):'')+
+    (s.roomWperU>100?`<div class="rpt-notes-paragraph" style="font-size:8.5pt;color:#c00;">High-density environment detected (${s.roomWperU.toFixed(0)} W/U). Precision cooling, supplemental in-row or in-rack cooling, and MEP coordination are recommended.</div>`:'')
+  );
+  // Section 6 — Generator / Emergency Power
+  const s6=sec('Section 6 &mdash; Generator &amp; Emergency Power',
+    s.generatorKW>0?(
+      row('Continuous Load',s.generatorKW.toFixed(2)+' kW')+
+      row('Next Standard Generator Size',standardGenerator(s.generatorKW))+
+      row('Generator Note',esc(fp.generatorNote||'—'))
+    ):`<div class="rpt-notes-paragraph">Generator sizing was not triggered. Confirm generator applicability based on facility type and applicable codes (NFPA 110, local AHJ).</div>`
+  );
+  // Section 7 — Equipment Schedule
+  const rackRows=Object.values(s.perRack).map(r=>`<tr><td>${esc(r.rack.label)}</td><td>${r.rack.sizeU}U</td><td>${r.rack.voltage}V</td><td>${Math.round(r.watts).toLocaleString()}</td><td>${r.amps.toFixed(1)}</td><td>${r.breaker}</td><td>${r.fillPct.toFixed(0)}%</td><td>${r.rack.redundant?'Yes':'No'}</td></tr>`).join('');
+  const wallRows=s.perWall.map(wd=>`<tr><td>${esc(wd.item.name)}</td><td>${wd.item.qty||1}</td><td>${wd.item.v}V</td><td>${Math.round(wd.watts).toLocaleString()}</td><td>${wd.amps.toFixed(1)}</td><td>${wd.breaker}</td><td>${esc(wd.item.circuitNotes||'')}</td></tr>`).join('');
+  const s7=sec('Section 7 &mdash; Equipment Schedule',
+    `<table class="rpt-table"><thead><tr><th>Rack</th><th>Size</th><th>Voltage</th><th>Load (W)</th><th>Amps</th><th>Breaker</th><th>Fill</th><th>Redundant</th></tr></thead><tbody>${rackRows||'<tr><td colspan="8" style="color:#888;font-style:italic;">No racks configured</td></tr>'}</tbody></table>`+
+    (wallRows?`<div style="margin-top:8pt;font-size:8.5pt;font-weight:700;text-transform:uppercase;color:#444;padding-top:6pt;">Wall / Non-Rack Devices</div><table class="rpt-table"><thead><tr><th>Device</th><th>Qty</th><th>Voltage</th><th>Watts</th><th>Amps</th><th>Breaker</th><th>Circuit Notes</th></tr></thead><tbody>${wallRows}</tbody></table>`:'')
+  );
+  // Section 8 — Consultant Notes
+  const autoNotes=[];
+  if(s.totalW===0)autoNotes.push('No equipment has been entered. All values are zero or default.');
+  if(s.upsBackedW===0&&s.totalW>0)autoNotes.push('No devices are tagged as UPS-backed. UPS sizing is not possible until devices are assigned backup status.');
+  if(s.roomWperU>100)autoNotes.push(`High rack density (${s.roomWperU.toFixed(0)} W/U) requires coordination with MEP engineer for supplemental cooling.`);
+  if(s.runtimeMin!=null&&s.runtimeMin<(sets.runtimeTarget||15)){const _rtN=sets.runtimeTarget||15;const _critN=(_rtN>=60||(state.project.intent?.recoveryObjective==='continuous'))&&s.runtimeMin<(_rtN*0.5);if(_critN){autoNotes.push(`Selected UPS battery capacity (${s.effectiveBatteryWh!=null?s.effectiveBatteryWh.toFixed(0):'—'} Wh) is insufficient to meet the ${_rtN}-minute runtime objective (estimated ${Math.round(s.runtimeMin)} min at planning load). Coordination with the electrical engineer and UPS vendor is required before design completion.`);}else{autoNotes.push(`Battery runtime shortfall of ${Math.abs(s.batteryDeltaWh||0).toFixed(0)} Wh. Additional battery capacity is required to meet the ${_rtN}-minute runtime target.`);}}
+  const noteHtml=p.notes?`<div class="rpt-notes-paragraph">${esc(p.notes).replace(/\n/g,'<br>')}</div>`:'';
+  const autoHtml=autoNotes.length?`<ul style="font-size:8.5pt;color:#444;line-height:1.8;padding-left:14pt;">${autoNotes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`:'';
+  const s8=sec('Section 8 &mdash; Consultant Notes &amp; Assumptions',
+    noteHtml+autoHtml+
+    `<div style="margin-top:10pt;"><div style="font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#666;margin-bottom:4pt;">Designer Notes (handwritten):</div><div class="rpt-notes-box"></div></div>`+
+    `<div class="rpt-disclaimer">This report was prepared using PLEX v2.50, a preliminary planning tool. All values are estimates based on entered equipment data and planning factors. Results must be verified against manufacturer specifications, coordinated MEP drawings, and applicable codes prior to construction document issuance. This document does not constitute an engineered design and shall not be used as a basis for construction without review and stamp from the Engineer of Record.<br><br>Prepared by: Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer &mdash; Limited Energy eXperts (limitedenergy.net)</div>`
+  );
+  v('view-report').innerHTML=cover+s1+s2+s3+s4+s5+s6+s7+s8+`<div class="rpt-footer">PLEX v2.50 &mdash; Limited Energy eXperts &mdash; limitedenergy.net &mdash; Preliminary Planning Document &mdash; ${today}</div>`;
+  document.body.classList.add('print-report');
+  window.addEventListener('afterprint',()=>{document.body.classList.remove('print-report');v('view-report').innerHTML='';},{once:true});
+  setTimeout(()=>window.print(),200);
+}
+v('reportBtn').addEventListener('click',()=>exportDesignReport());
 </script>
 </body>
 </html>

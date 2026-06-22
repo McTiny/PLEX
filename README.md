@@ -1,205 +1,115 @@
-# LEX — Limited Energy eXperts · Project Repository
+# PLEX — Power Load EXaminer
 
-> **Storage:** D:\\DEV\\LEX — RAID 1 redundant volume (Jarvis workstation)
-> **Live site:** [limitedenergy.net](https://limitedenergy.net) — deployed via Netlify
+**A free, browser-based power load estimation tool for ICT and physical security systems.**
+
+PLEX helps you size telecom room and equipment room infrastructure — power, UPS, generator, PoE budget, and cooling load — from a list of devices you actually plan to install. No account required. No data leaves your browser.
+
+[![Live Tool](https://img.shields.io/badge/Live%20Tool-limitedenergy.net%2Fplex-red?style=flat-square)](https://limitedenergy.net/plex)
+[![License: MIT](https://img.shields.io/badge/License-MIT-teal?style=flat-square)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-2.51-gray?style=flat-square)](site/plex.html)
 
 ---
 
-## Project Overview
+## What It Does
 
-**LEX** is the public-facing website for Limited Energy eXperts (limitedenergy.net), an independent consulting practice for AI-enabled design and smart automation — ICT design consulting, Division 27/28 design support, and AI tooling for engineering workflows.
+- **Guided Design mode** — answer a few questions and PLEX builds a starting load list for you
+- **Advanced Calculator** — add rack and wall devices from a curated preset library, or enter custom equipment
+- **Power summary** — total watts, VA, BTU/hr, cooling tons, recommended breaker sizes, generator kW
+- **PoE budget tracking** — per-switch port and wattage budget
+- **UPS sizing** — runtime estimates per rack based on UPS capacity and load
+- **Export** — save your project as a portable `.plex` file, reload it anytime, or print to PDF
 
-**Positioning:** Not a licensed engineering firm. No PE services offered or implied. Shawn C. Tovey holds the RCDD credential from BICSI. All work is ICT design consulting and AI tooling.
+Designed for Division 27/28 coordination — structured cabling, access control, video surveillance, intercom, and related ICT systems.
 
-Tools hosted on the site:
-- **PLEX v2.32** — Power Load EXaminer. TR/ER infrastructure sizing: power, UPS, generator, PoE, cooling. Single HTML file, client-side. Library power values at 90% of nameplate max.
-- **The Estimator v1.25** — Limited energy job costing, BICSI WBS, sell-side proposal + internal bid report. Single HTML file, client-side.
+---
+
+## Who Built This
+
+Hi. I'm Shawn Tovey — a [BICSI RCDD](https://www.bicsi.org) (Registered Communications Distribution Designer) and ICT design consultant based in Texas. I built PLEX to solve a real problem: there's no lightweight, free tool for preliminary power load estimation in the limited energy space.
+
+This is the **first version I've ever released publicly.** I'm not a professional software developer — I'm a systems designer who writes code. PLEX is a single HTML file with no build process, no framework, and no backend. It just works.
+
+I built it with help from AI tools (Claude, primarily) and a lot of iteration on real project data.
+
+---
+
+## Honest Disclaimers
+
+PLEX produces **preliminary estimates for coordination purposes only.**
+
+- Values are based on typical nameplate wattages and standard assumptions — not measured loads
+- Always verify against manufacturer datasheets before final design
+- Final electrical design must be performed by a licensed electrical engineer (PE/EE)
+- PLEX does not replace the Engineer of Record — it helps you get organized before you get there
+- NEC 125% continuous load factor is applied to breaker and generator sizing — verify with your AHJ
+
+---
+
+## Self-Hosting
+
+PLEX is a single file. Drop it anywhere.
+
+```
+site/
+└── plex.html       ← this is the whole tool
+```
+
+To run locally, just open `plex.html` in a browser. No server required. No npm install. No build step.
+
+To host it yourself, copy `plex.html` (and optionally `dude.png` and `dude-guide.png` for the assistant avatar) to any static host — Netlify, GitHub Pages, S3, whatever you have.
+
+---
+
+## Sample Files
+
+| File | Description |
+|---|---|
+| `Sample-ER-TR-Security.plex` | Multi-rack ER/TR security closet example — 5 racks, 208V, NVRs, switches, servers |
+| `Sample-Office-Limited-Energy.json` | Sample office building estimating file (for The Estimator tool) |
+| `PLEX_Library_v2.32.xlsx` | Excel export of the PLEX device preset library |
+
+Load `.plex` files directly into PLEX via the "Load Existing .plex File" button on the landing screen.
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
+| | |
 |---|---|
 | Language | HTML5 / CSS3 / Vanilla JavaScript (ES6+) |
-| Fonts | Google Fonts — Oswald, Barlow, Space Mono |
-| Build | None — single-file deploy, no bundler or transpiler |
-| Hosting | Netlify (static) |
-| Analytics | Google Analytics 4 — G-ECRHM5MP0Y |
-| Deploy | Netlify CLI — `netlify deploy --dir site --prod` (from D:\\DEV\\LEX) |
-| Version control | Git (local repo · D:\\DEV\\LEX) |
-| Persistence | Browser `localStorage` (`.plex` JSON export/import) |
+| Build | None — single file, no bundler, no transpiler |
+| Dependencies | None — no npm, no CDN, no external calls |
+| Storage | Browser `localStorage` + `.plex` file export/import |
+| Hosting | Any static host |
 
 ---
 
-## Repository Structure
+## Feedback & Collaboration
+
+This is my first public release of anything. I'd genuinely love to hear from you.
+
+If something is wrong, confusing, or missing — open an issue. If you work in ICT design, physical security, or limited energy systems and want to contribute device presets, wattage corrections, or workflow improvements, I'm all for it.
+
+I'm not precious about this. If you have a better way to do something, show me.
+
+**Ways to connect:**
+- GitHub Issues — bug reports, feature ideas, preset corrections
+- [limitedenergy.net](https://limitedenergy.net) — contact form
+- LinkedIn — [Shawn C. Tovey, RCDD](https://www.linkedin.com/in/shawntovey)
+
+---
+
+## License
+
+MIT — free to use, modify, and distribute with credit.
 
 ```
-D:\DEV\LEX\
-├── site\                              # Deployable web root (Netlify target)
-│   ├── index.html                     # LEX main site (home)
-│   ├── about.html                     # About — Shawn C. Tovey, RCDD
-│   ├── home-automation.html           # Smart home design subpage
-│   ├── plex.html                      # PLEX Power Load EXaminer v2.32
-│   ├── estimate.html                  # The Estimator v1.25
-│   ├── 404.html                       # Custom 404
-│   ├── 410.html                       # Custom 410
-│   ├── space-knight.html              # Space Knight tool (private)
-│   ├── analytics.bak.2026-05-21.html  # Analytics dashboard (backup, not served)
-│   ├── linkedin.bak.2026-05-21.html   # LinkedIn dashboard (backup, not served)
-│   ├── manifest.json                  # PWA manifest (linked from plex + estimate)
-│   ├── sitemap.xml                    # 5 URLs: / /plex /estimate /home-automation /about
-│   ├── llms.txt                       # LLM-readable site description
-│   ├── robots.txt
-│   ├── netlify.toml
-│   ├── favicon.svg / .ico / favicon-32.png
-│   ├── apple-touch-icon.png
-│   ├── og-image.png                   # OG/Twitter share image
-│   ├── portrait.webp                  # Hero portrait
-│   ├── ha-workstation.jpg             # Home automation stack photo
-│   ├── ha-energy.jpg                  # Grafana energy dashboard screenshot
-│   ├── ha-grafana.jpg                 # Grafana 3-panel screenshot
-│   └── data\                          # Private data files (not linked publicly)
-├── scripts\                           # Utility scripts (not deployed)
-│   └── plex-excel-import\             # Rack-elevation XLSX → .plex converter
-├── PLEX_Library_v2.32.xlsx            # Excel export of PLEX device library
-├── .claude\                           # Claude Code project config
-├── .netlify\                          # Netlify CLI site binding (state.json)
-├── .gitignore
-└── README.md                          # This file
+Copyright (c) 2026 Shawn C. Tovey, RCDD — Limited Energy eXperts
 ```
 
-> **Deploy boundary:** Only `site\` is published. Repo root, `.claude\`, `scripts\`, and scratch files are NOT deployed.
+See [LICENSE](LICENSE) for full text.
 
 ---
 
-## Nav Architecture
-
-All 5 public pages share a unified hamburger navigation. No desktop nav-links list — hamburger only.
-
-| Page | Desktop CTA | Mobile drawer |
-|---|---|---|
-| index.html | Launch PLEX → | About / PLEX / The Estimator / Home Automation / Contact |
-| about.html | Launch PLEX → | Home / About / PLEX / The Estimator / Home Automation / Contact |
-| home-automation.html | Launch PLEX → | Home / About / PLEX / The Estimator / Home Automation / Contact |
-| plex.html (tool nav) | The Estimator → | Home / About / PLEX / The Estimator / Home Automation / Contact |
-| estimate.html (tool nav) | Launch PLEX → | Home / About / PLEX / The Estimator / Home Automation / Contact |
-
-Tool pages (plex, estimate) use a compact 38px `#lex-sitenav` with `lsn-*` CSS classes. Content pages use a 64px full nav.
-
----
-
-## Google Analytics 4
-
-**Property:** G-ECRHM5MP0Y
-
-Custom events tracked:
-- `email_click` — delegated listener on `a[href^="mailto:"]` (all pages)
-- `tool_run` — fired on print/export actions in PLEX and The Estimator
-- `contact_form_submit` — fired on successful Netlify form submission
-
-Key events to star in GA after first fire: `email_click`, `tool_run`, `contact_form_submit`
-
----
-
-## PLEX — Power Load EXaminer
-
-Current version: **v2.32**
-
-Single-file client-side tool. All logic, styles, and markup in `site/plex.html`.
-
-### Version discipline
-- Version format: `2.xx` (two-digit minor, e.g. 2.28 … 2.32)
-- Bump on each compile when PLEX functionality or library data changes
-- Non-functional changes (metadata only) do not require a bump
-- Five version string locations in `plex.html`: comment header, `<title>`, header span, print credit, `PLEX_VERSION` constant
-
-### Library — power values
-- All `w:` values = `floor(nameplate_max_W × 0.90)`
-- PoE switch `w:` = chassis overhead only; PoE budget tracked in `poeB:`
-- UPS `w:` = self-consumption (inverter losses), not load capacity
-- Access control board `w:` includes board + reader port loads
-- Door hardware `w:` = peak actuating draw at design voltage
-
-### Data model
-- State persisted in `localStorage` as JSON
-- Export/import via `.plex` files (JSON with `PLEX-LEX` signature header)
-- Wall devices and rack items handled separately; UPS items have capacity fields (`cW`, `cVA`, `rtMin`)
-
-### Library — pending verification
-The following entries remain unverified pending confirmed datasheets:
-- Genetec Streamvault SV-110, SV-500, SV-1100 (removed — model names unconfirmed)
-- LifeSafety Power FlexPower e2, e8 (first-principles estimates)
-- Altronix AL600ULX, AL1012ULACM (first-principles estimates)
-- Milestone Husky IVO 800R/500R (renamed to 700R/350R — confirmed datasheets)
-
-### Key editorial rules (NEC 2026 / TIA alignment)
-- **"Limited energy"** — never "low voltage" in public-facing copy
-- **TR / ER / EF** (TIA) — never MDF / IDF in new copy
-- No client identifiers in deliverables, scripts, notes, or memory (site codes are OK)
-
----
-
-## The Estimator
-
-Current version: **v1.25** (`site/estimate.html`, URL: `/estimate`)
-
-Single-file client-side job costing tool. BICSI WBS section codes, configurable crew roles, federal/California OT rules, sell-side margin form, customer proposal, internal bid report. No account required. No data leaves the browser.
-
----
-
-## Texas Law Compliance (Engineering Titles)
-
-Per Texas Occupations Code Chapter 1001 (Texas Engineering Practice Act):
-- Shawn is never described as an "engineer" — title is **ICT Design Consultant & Physical Security Systems Designer**
-- LEX is never described as an "engineering firm" — it is an **ICT design and consulting practice**
-- "AI-Enabled Design" (not "Engineering") throughout
-- "Division 27/28 design support" (not "engineering support")
-- PE disclaimer present on index.html and about.html footers
-
-**Keep as-is (correct usage):**
-- "engineer of record" / EOR — references to the licensed PE reviewing output
-- "licensed electrical engineer" — correct disclaimers in PLEX/Estimator
-- "Milestone Certified Design Engineer" — third-party credential name
-
----
-
-## Deploy Procedure
-
-**Always use PowerShell. Never Bash for Windows paths.**
-
-```powershell
-# From D:\DEV\LEX — explicit directory, every time
-Set-Location D:\DEV\LEX
-netlify deploy --prod --dir=site
-```
-
-The Netlify site ID is stored in `.netlify/state.json`. The production publish lock can be managed at app.netlify.com → limitedenergy → Deploys.
-
-**Deploy rule: only deploy when explicitly instructed. Never auto-deploy after edits.**
-
----
-
-## Development Workflow
-
-1. **Scope changes** — discuss and confirm scope before editing
-2. **Edit** — make targeted, surgical changes only
-3. **Verify** — grep/read to confirm changes before deploying
-4. **Deploy on instruction** — wait for explicit "deploy" command
-5. **Version bump** — update all 5 PLEX version strings on each functional compile
-6. **llms.txt + about.html** — keep PLEX version number in sync across these files
-
----
-
-## Development Machine
-
-| Item | Detail |
-|---|---|
-| Host | Jarvis (RDPJarvis) |
-| Project drive | D:\\ — RAID 1 mirrored volume ("Jurrano") |
-| Shell | PowerShell 7 (primary for deploys) + Git Bash |
-| Claude Code | Anthropic Claude — project memory at `%USERPROFILE%\.claude\projects\D--DEV-LEX\` |
-
----
-
-*Limited Energy eXperts · limitedenergy.net · Open reuse of PLEX and The Estimator permitted with credit.*
+*Built with care for the people doing real work in the field.*
+*Limited Energy eXperts · [limitedenergy.net](https://limitedenergy.net)*

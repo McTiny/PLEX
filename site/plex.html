@@ -237,9 +237,8 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 .assumptions-panel li strong{color:var(--white);font-weight:600;}
 #pane-summary{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
 #panel-project{grid-column:1/-1;order:1;}
-#panel-electrical{order:2;}#panel-ups{order:3;}
-#panel-gen{order:4;}#panel-wall{order:5;}
-#panel-mech{order:6;}
+#sum-col-left{order:2;display:flex;flex-direction:column;}
+#sum-col-right{order:3;display:flex;flex-direction:column;}
 #sum-power-schedule{grid-column:1/-1;order:8;}
 #panel-circuits{grid-column:1/-1;order:9;}
 #panel-racks{grid-column:1/-1;order:10;}
@@ -718,11 +717,15 @@ body{background:white !important;color:black !important;font-size:9pt;}
     <a href="/estimate" class="no-print" style="display:block;margin-top:8px;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8102E'" onmouseout="this.style.color='var(--gray-mid)'">→ Price this job with The Estimator</a>
   </div>
   <div class="panel" id="panel-project"><div class="panel-label">PROJECT INFORMATION</div><div id="sum-project"></div></div>
-  <div class="panel" id="panel-electrical"><div class="panel-label">ELECTRICAL LOAD SUMMARY</div><div id="sum-electrical"></div></div>
-  <div class="panel" id="panel-ups"><div class="panel-label">UPS SIZING &amp; RUNTIME</div><div id="sum-ups"></div></div>
-  <div class="panel" id="panel-gen"><div class="panel-label">GENERATOR SIZING</div><div id="sum-gen"></div></div>
-  <div class="panel" id="panel-wall"><div class="panel-label teal">WALL / FIELD DEVICES</div><div class="panel-sub">Independent circuits &mdash; outside rack PDU</div><div id="sum-wall"></div></div>
-  <div class="panel" id="panel-mech"><div class="panel-label">MECHANICAL / COOLING LOAD</div><div class="panel-sub">Coordination value only &mdash; room envelope, ventilation, ambient load, and redundancy not included. Verify with MEP.</div><div id="sum-mech"></div></div>
+  <div id="sum-col-left">
+    <div class="panel" id="panel-electrical"><div class="panel-label">ELECTRICAL LOAD SUMMARY</div><div id="sum-electrical"></div></div>
+    <div class="panel" id="panel-gen"><div class="panel-label">GENERATOR SIZING</div><div id="sum-gen"></div></div>
+    <div class="panel" id="panel-mech"><div class="panel-label">MECHANICAL / COOLING LOAD</div><div class="panel-sub">Coordination value only &mdash; room envelope, ventilation, ambient load, and redundancy not included. Verify with MEP.</div><div id="sum-mech"></div></div>
+    <div class="panel" id="panel-wall"><div class="panel-label teal">WALL / FIELD DEVICES</div><div class="panel-sub">Independent circuits &mdash; outside rack PDU</div><div id="sum-wall"></div></div>
+  </div>
+  <div id="sum-col-right">
+    <div class="panel" id="panel-ups"><div class="panel-label">UPS SIZING &amp; RUNTIME</div><div id="sum-ups"></div></div>
+  </div>
   <div class="panel" id="panel-circuits"><div class="panel-label">CIRCUITS &amp; BREAKER SIZING</div><div class="panel-sub">125% continuous-load factor applied for planning. Circuit amperage at selected PDU voltage and applied power factor. Breaker shown is next standard commercial size above continuous-load current. Verify final circuiting with EOR/AHJ.</div><div id="sum-circuits"></div></div>
   <div class="panel" id="panel-racks"><div class="panel-label">PER-RACK BREAKDOWN</div><div id="sum-racks"></div></div>
   <div class="panel" id="sum-power-schedule">

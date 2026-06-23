@@ -132,7 +132,7 @@ select option{background:var(--navy);}
 .btn-primary{background:linear-gradient(135deg,var(--red),var(--red-dark));border:none;border-radius:10px;color:var(--white);padding:10px 14px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;width:100%;transition:all 0.15s;}
 .btn-primary:hover{background:var(--red-dark);}
 .btn-delete{background:transparent;border:1px solid var(--danger);color:var(--danger);padding:6px 12px;font-family:var(--label);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;margin-top:8px;}
-.btn-delete:hover{background:var(--danger);color:var(--white);}
+.btn-delete:hover{background:var(--danger);color:var(--white);}.btn-lib-action{background:transparent;border:1px solid var(--border2);color:var(--gray-mid);padding:4px 8px;font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;flex:1;transition:border-color 0.15s,color 0.15s;}.btn-lib-action:hover{border-color:var(--teal);color:var(--teal);}
 .btn-remove{background:transparent;border:1px solid var(--border2);color:var(--danger);border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .btn-remove:hover{border-color:var(--danger);}
 .help-btn{background:transparent;border:1px solid var(--border2);color:var(--gray-mid);border-radius:50%;width:16px;height:16px;font-size:9px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;}
@@ -632,6 +632,12 @@ body{background:white !important;color:black !important;font-size:9pt;}
         <div class="field"><select id="presetSelect"><option value="">-- Select device --</option></select></div>
         <div class="callout"><strong>Dual PSU:</strong> Redundant power supplies share the load — total draw is unchanged.</div>
         <button class="btn-primary" id="addPresetBtn">+ ADD TO CURRENT</button>
+        <div style="display:flex;gap:6px;margin-top:8px;">
+          <button class="btn-lib-action" id="exportLibBtn">&#8595; Export CSV</button>
+          <label class="btn-lib-action" for="importLibInput" style="cursor:pointer;text-align:center;">&#8593; Import CSV</label>
+          <input type="file" id="importLibInput" accept=".csv" style="display:none;">
+          <button class="btn-lib-action" id="resetLibBtn">&#8635; Reset</button>
+        </div>
       </div>
       <div class="panel">
         <div class="panel-label">ADD CUSTOM DEVICE</div>
@@ -952,6 +958,8 @@ const PRESETS=[
 {name:"Generic Wall-Mount Enclosure",w:30,u:0,v:120,loc:"wall",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]}
 ];
 const ALL_FLAT=PRESETS.flatMap(c=>c.items.map(i=>({...i,category:c.cat})));
+let userLibrary=null;
+try{const _cl=localStorage.getItem('plex_custom_library');if(_cl)userLibrary=JSON.parse(_cl);}catch(e){}
 const BTU_PER_WATT=3.41214;
 const STORAGE_KEY='plex_session_v2';
 const PLEX_SIG='PLEX-LEX';
@@ -1678,7 +1686,8 @@ function renderSummary(s){
       </tr></thead><tbody>${psRows}</tbody></table></div>`
     :'<div style="color:var(--gray-dark);font-style:italic;padding:10px 0;">No devices added yet.</div>')+mepHtml;
 }
-(function buildPresets(){const sel=v('presetSelect');PRESETS.forEach(cat=>{const og=document.createElement('optgroup');og.label='── '+cat.cat+' ──';cat.items.forEach(it=>{const opt=document.createElement('option');opt.value=it.name;opt.textContent=it.name+(it.loc==='wall'?' [Wall]':'');og.appendChild(opt);});sel.appendChild(og);});})();
+function buildLibrarySelect(){const sel=v('presetSelect');sel.innerHTML='<option value="">-- Select device --</option>';const lib=userLibrary||PRESETS;lib.forEach(cat=>{const og=document.createElement('optgroup');og.label='── '+cat.cat+' ──';cat.items.forEach(it=>{const opt=document.createElement('option');opt.value=it.name;opt.textContent=it.name+(it.loc==='wall'?' [Wall]':'');og.appendChild(opt);});sel.appendChild(og);});}
+buildLibrarySelect();
 // Build UPS model preset optgroups
 (function buildUpsPresets(){
   const sel=v('upsModelPreset');if(!sel)return;
@@ -1690,7 +1699,11 @@ function renderSummary(s){
     sel.appendChild(og);
   });
 })();
-v('addPresetBtn').addEventListener('click',()=>{const name=v('presetSelect').value;if(!name)return;const p=ALL_FLAT.find(i=>i.name===name);if(!p)return;const n={...p,id:nextItemId++,qty:1,upsBacking:'none',circuitNotes:'',level:''};if(p.loc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('presetSelect').value='';render();markDirty();});
+v('addPresetBtn').addEventListener('click',()=>{const name=v('presetSelect').value;if(!name)return;const _lib=(userLibrary||PRESETS).flatMap(cat=>cat.items.map(i=>({...i,category:cat.cat})));const p=_lib.find(i=>i.name===name);if(!p)return;const n={...p,id:nextItemId++,qty:1,upsBacking:'none',circuitNotes:'',level:''};if(p.loc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('presetSelect').value='';render();markDirty();});
+function exportLibraryCSV(){const lib=userLibrary||PRESETS;const hdr=['Category','Name','Watts','Volts','Location','U (Rack Units)','Is UPS','UPS Cap W','UPS Cap VA','UPS Runtime Min','Is PoE Switch','PoE Ports','PoE Budget W'];const rows=lib.flatMap(cat=>cat.items.map(it=>[cat.cat,it.name,it.w,it.v,it.loc,it.u,it.ups?'true':'false',it.cW||0,it.cVA||0,it.rtMin||0,it.poeS?'true':'false',it.poeP||0,it.poeB||0]));const csv=[hdr,...rows].map(r=>r.map(x=>'\"'+String(x).replace(/\"/g,'\"\"')+'\"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));a.download='plex-library.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);}
+function importLibraryCSV(file){const reader=new FileReader();reader.onload=e=>{try{const lines=e.target.result.replace(/\r/g,'').split('\n').filter(l=>l.trim());function parseRow(l){const r=[];let cur='',inQ=false;for(const ch of l){if(ch=='"'){inQ=!inQ;}else if(ch==','&&!inQ){r.push(cur.trim());cur='';}else cur+=ch;}r.push(cur.trim());return r;}const rows=lines.slice(1).map(parseRow).filter(r=>r.length>=6&&r[0]);const cats={};rows.forEach(r=>{const[cat,name,w,vv,loc,u,ups,cW,cVA,rtMin,poeS,poeP,poeB]=r;if(!cats[cat])cats[cat]={cat,items:[]};cats[cat].items.push({name,w:+w||0,v:+vv||120,loc:loc||'rack',u:+u||0,ups:ups==='true',cW:+cW||0,cVA:+cVA||0,rtMin:+rtMin||0,poeS:poeS==='true',poeP:+poeP||0,poeB:+poeB||0,poeC:false});});userLibrary=Object.values(cats);localStorage.setItem('plex_custom_library',JSON.stringify(userLibrary));buildLibrarySelect();alert('Library imported: '+userLibrary.length+' categories, '+rows.length+' devices.');}catch(err){alert('Import failed: '+err.message);}};reader.readAsText(file);}
+function resetLibrary(){if(!confirm('Reset to built-in device library?'))return;userLibrary=null;localStorage.removeItem('plex_custom_library');buildLibrarySelect();}
+v('exportLibBtn').addEventListener('click',exportLibraryCSV);v('importLibInput').addEventListener('change',e=>{if(e.target.files[0])importLibraryCSV(e.target.files[0]);e.target.value='';}); v('resetLibBtn').addEventListener('click',resetLibrary);
 v('addCustomBtn').addEventListener('click',()=>{const name=v('customName').value.trim();const w=parseFloat(v('customWatts').value)||0;const u=parseFloat(v('customU').value)||0;const qty=parseInt(v('customQty').value)||1;const vv=parseInt(v('customV').value)||120;if(!name){v('customName').focus();return;}const n={id:nextItemId++,name,w,u,qty,v:vv,loc:customLoc,category:'Custom',poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:'',level:''};if(customLoc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('customName').value='';v('customWatts').value='';v('customU').value='';v('customQty').value='1';render();markDirty();});
 document.querySelectorAll('.loc-btn').forEach(btn=>{btn.addEventListener('click',()=>{customLoc=btn.dataset.loc;v('locRack').className='loc-btn'+(customLoc==='rack'?' active-rack':'');v('locWall').className='loc-btn'+(customLoc==='wall'?' active-wall':'');});});
 ['name','room','building','floor','designer','date','notes','scheduleTitle'].forEach(f=>{v('proj-'+f).addEventListener('input',()=>{state.project[f]=v('proj-'+f).value;markDirty();});});

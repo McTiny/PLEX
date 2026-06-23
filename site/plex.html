@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!--
-  PLEX v2.51 — Power Load EXaminer
+  PLEX v2.60 — Power Load EXaminer
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary engineering and coordination only.
@@ -42,7 +42,7 @@
   "operatingSystem": "Web Browser",
   "url": "https://limitedenergy.net/plex",
   "description": "Free web-based tool for sizing telecom room and equipment room power loads — UPS, generator, PoE, and cooling. Built by an RCDD for Division 27/28 coordination.",
-  "version": "2.50",
+  "version": "2.60",
   "featureList": [
     "UPS load sizing", "Generator load sizing", "PoE power budgeting",
     "Cooling load estimation", "Telecom room sizing", "Equipment room sizing",
@@ -429,7 +429,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
       <img src="/dude.png" style="width:130px;height:130px;object-fit:cover;border-radius:50%;border:2px solid var(--teal);display:block;box-shadow:0 4px 24px rgba(20,184,166,0.25);" alt="PLEX — Power Load EXaminer">
       <div class="landing-text">
         <div class="landing-title" style="font-size:42px;">PLEX</div>
-        <div class="landing-ver">v2.51 &mdash; Power Load EXaminer</div>
+        <div class="landing-ver">v2.60 &mdash; Power Load EXaminer</div>
       </div>
     </div>
     <p class="landing-body">Power, UPS &amp; Cooling Planning for ICT and Security Systems. Tell me what you&rsquo;re building and I&rsquo;ll help estimate power, UPS, generator, PoE, and cooling requirements.</p>
@@ -468,7 +468,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     <div class="header-brand">
       <div class="header-mark">⚡</div>
       <div>
-        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.51</span></div>
+        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.60</span></div>
         <div class="header-sub">POWER LOAD EXaminer &nbsp;·&nbsp; TR/ER INFRASTRUCTURE SIZING</div>
       </div>
     </div>
@@ -480,7 +480,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
       <button class="hbtn" id="importBtn">📥 Import</button>
       <button class="hbtn primary" id="exportBtn">📤 Export</button>
       <button class="hbtn" id="reportBtn" style="background:linear-gradient(135deg,var(--teal),#00a896);border-color:var(--teal);color:var(--navy);font-weight:700;">📄 Design Report</button>
-      <button class="hbtn" id="eorPromptBtn" style="border:1px solid var(--teal);color:var(--teal);background:transparent;">🤖 EOR AI Prompt</button>
+      <button class="hbtn" id="eorPromptBtn" style="border:1px solid var(--teal);color:var(--teal);background:transparent;" title="Generate a Claude-ready prompt — upload your 27 11 00 spec alongside it and Claude will inject your project data into the appropriate spec sections.">📐 SpecGen Prompt</button>
       <button class="hbtn" id="jsonExportBtn" style="border:none;color:var(--gray-mid);background:transparent;font-size:11px;text-decoration:underline;text-decoration-style:dotted;">Export Project Data (.json)</button>
     </div>
   </div>
@@ -677,12 +677,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
           <div class="gauge-track"><div class="gauge-fill" id="g-poe-fill" style="width:0%;background:var(--purple)"></div></div>
           <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:4px;" id="poe-headroom-line">Headroom: —</div>
         </div>
-        <div>
-          <div class="status-hdr"><span class="status-lbl">RACK FILL</span><span id="pill-rack" class="pill pill-ok">OK</span></div>
-          <div class="gauge-meta"><span id="g-rack-lbl">0U / 42U</span><span id="g-rack-pct">0%</span></div>
-          <div class="gauge-track"><div class="gauge-fill" id="g-rack-fill" style="width:0%;background:var(--green)"></div></div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:4px;" id="rack-breaker-line">Breaker: —</div>
-        </div>
+
       </div>
       <div class="rack-tabs" id="rackTabs"></div>
       <div class="panel" id="rackSettings">
@@ -767,7 +762,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     </div>
   </div>
   <div id="print-credit">
-    PLEX v2.51 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    PLEX v2.60 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
 </div>
 </div>
@@ -862,9 +857,9 @@ body{background:white !important;color:black !important;font-size:9pt;}
 <div class="modal-overlay" id="eorModal">
   <div class="modal-box" style="max-width:760px;width:100%;">
     <button class="modal-close" id="eorModalClose">×</button>
-    <div class="modal-title">EOR AI PROMPT</div>
+    <div class="modal-title">SPECGEN PROMPT — 27 11 00</div>
     <div class="modal-body">
-      <p style="font-size:11px;color:var(--gray-mid);margin-bottom:10px;">Paste this into your AI assistant as project context for Division 27/28 specification language or EOR coordination.</p>
+      <div style="background:var(--surface2);border-left:3px solid var(--teal);padding:10px 14px;border-radius:4px;margin-bottom:12px;font-size:11px;color:var(--gray-light);line-height:1.7;"><strong style="color:var(--teal);letter-spacing:0.06em;font-size:10px;">HOW TO USE</strong><br>1. Click <strong>Copy to Clipboard</strong> below<br>2. Open Claude (claude.ai) in a new conversation<br>3. Upload your Section 27 11 00 spec document<br>4. Paste this prompt<br>5. Claude returns your spec with project data injected — each change marked with ⟦ ⟧ for your review</div>
       <textarea id="eorPromptText" rows="18" style="width:100%;font-family:var(--mono);font-size:10px;background:var(--navy);color:var(--gray-light);border:1px solid var(--border);border-radius:4px;padding:10px;resize:vertical;white-space:pre;line-height:1.6;" readonly></textarea>
       <div style="display:flex;gap:10px;margin-top:10px;align-items:center;">
         <button class="hbtn primary" id="eorCopyBtn">📋 Copy to Clipboard</button>
@@ -1059,7 +1054,7 @@ const TEMPLATES=[
   {id:3,name:"FortiGate 200F Firewall",w:150,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:4,name:"Opengear IM7208 Console Server",w:50,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:5,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:6,name:"APC Smart-UPS SRT 6kVA (5400W)",w:120,u:3,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:5400,cVA:6000,rtMin:10,ups:true,upsBacking:'none',circuitNotes:"",level:""}
+  {id:6,name:"APC Smart-UPS SRT 8kVA (7200W)",w:160,u:3,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:7200,cVA:8000,rtMin:9,ups:true,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 {name:"Medium TR",desc:"8 PoE switches · 2 aggregation · firewall pair · net mgmt · UPS — 5–10 kW",facilityType:'enterprise',
  project:{name:'',room:'TR-1',building:'',floor:'',designer:'',date:'',notes:'Multi-floor or mid-rise TR. PoE budget modeled at 90% of switch maximum.',scheduleTitle:'TR Power Consumption & Circuit Schedule',rooms:[{type:'tr'}]},
@@ -1070,12 +1065,13 @@ const TEMPLATES=[
  ],
  items:[
   {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:8,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:2,name:"APC Smart-UPS SRT 12kVA (10800W)",w:300,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:10800,cVA:12000,rtMin:8,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:2,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:9,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:3,name:"Cisco Catalyst 9500-24Y4C Aggregation",w:250,u:1,qty:2,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:4,name:"FortiGate 600E Firewall",w:175,u:1,qty:2,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:5,name:"Opengear IM7208 Console Server",w:50,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:6,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:7,name:"Cisco DNA Center Appliance",w:250,u:2,qty:1,v:120,loc:"rack",rackId:2,category:"Servers (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""}
+  {id:7,name:"Cisco DNA Center Appliance",w:250,u:2,qty:1,v:120,loc:"rack",rackId:2,category:"Servers (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:8,name:"APC Smart-UPS 3kVA (2700W)",w:75,u:2,qty:1,v:120,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:8,ups:true,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 {name:"Large TR",desc:"16 PoE switches · dual aggregation · firewall pair · dual UPS — 10–18 kW",facilityType:'enterprise',
  project:{name:'',room:'TR-1',building:'',floor:'',designer:'',date:'',notes:'Large campus or hospital wing TR. N+1 power. PoE budget at 90% of switch maximum.',scheduleTitle:'TR Power Consumption & Circuit Schedule',rooms:[{type:'tr'}]},
@@ -1087,14 +1083,14 @@ const TEMPLATES=[
  items:[
   {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:8,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:2,name:"Cisco Catalyst 9500-16X Aggregation",w:250,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:3,name:"APC Smart-UPS SRT 10kVA (9000W)",w:250,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:8,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:3,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:9,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:4,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:8,v:120,loc:"rack",rackId:2,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:5,name:"Cisco Catalyst 9500-16X Aggregation",w:250,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:6,name:"Palo Alto PA-850 Firewall",w:175,u:1,qty:2,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:7,name:"Opengear IM7208 Console Server",w:50,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:8,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:9,name:"Cisco DNA Center Appliance",w:250,u:2,qty:1,v:120,loc:"rack",rackId:2,category:"Servers (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:10,name:"APC Smart-UPS SRT 10kVA (9000W)",w:250,u:6,qty:1,v:120,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:8,ups:true,upsBacking:'none',circuitNotes:"",level:""}
+  {id:10,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:6,qty:1,v:120,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:10,ups:true,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 // ─── ER: Equipment Rooms ──────────────────────────────────────────────────────
 {name:"Small ER",desc:"8 PoE switches · core switching · 2 servers · storage · dual UPS — 8–15 kW",facilityType:'enterprise',
@@ -1109,12 +1105,12 @@ const TEMPLATES=[
   {id:2,name:"Cisco Catalyst 9500-24Y4C Aggregation",w:250,u:1,qty:2,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:3,name:"Cisco Catalyst 9500-48Y4C Core Switch",w:400,u:2,qty:2,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:4,name:"Palo Alto PA-850 Firewall",w:175,u:1,qty:2,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:5,name:"APC Smart-UPS SRT 8kVA (7200W)",w:200,u:6,qty:1,v:208,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:7200,cVA:8000,rtMin:9,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:5,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:11,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:6,name:"Dell PowerEdge R650 Virtualization Server",w:500,u:2,qty:2,v:208,loc:"rack",rackId:2,category:"Servers (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:7,name:"Dell PowerVault ME5024 Storage",w:400,u:2,qty:1,v:208,loc:"rack",rackId:2,category:"Storage (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:8,name:"Opengear IM7208 Console Server",w:50,u:1,qty:1,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:9,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:10,name:"APC Smart-UPS SRT 8kVA (7200W)",w:200,u:6,qty:1,v:208,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:7200,cVA:8000,rtMin:9,ups:true,upsBacking:'none',circuitNotes:"",level:""}
+  {id:10,name:"APC Smart-UPS 3kVA (2700W)",w:75,u:2,qty:1,v:208,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:10,ups:true,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 {name:"Medium ER",desc:"16 PoE switches · 4 aggregation · 2 core · 4 servers · storage · dual UPS — 15–30 kW",facilityType:'enterprise',
  project:{name:'',room:'ER-1',building:'',floor:'',designer:'',date:'',notes:'Medium ER for large campus or enterprise facility. Redundant UPS, 208V distribution.',scheduleTitle:'ER Power Consumption & Circuit Schedule',rooms:[{type:'er'}]},
@@ -1127,17 +1123,19 @@ const TEMPLATES=[
  items:[
   {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:8,v:208,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:2,name:"Cisco Catalyst 9500-24Y4C Aggregation",w:250,u:1,qty:2,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:3,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:7,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:3,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:9,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:4,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:8,v:208,loc:"rack",rackId:2,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:5,name:"Cisco Catalyst 9500-24Y4C Aggregation",w:250,u:1,qty:2,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:6,name:"Cisco Catalyst 9500-48Y4C Core Switch",w:400,u:2,qty:2,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:16,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:10,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:7,name:"Palo Alto PA-850 Firewall",w:175,u:1,qty:2,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:14,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:11,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:8,name:"Dell PowerEdge R650 Virtualization Server",w:500,u:2,qty:4,v:208,loc:"rack",rackId:3,category:"Servers (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:9,name:"Dell PowerVault ME5024 Storage",w:400,u:2,qty:2,v:208,loc:"rack",rackId:3,category:"Storage (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:10,name:"Veeam VBR Backup Appliance",w:350,u:2,qty:1,v:208,loc:"rack",rackId:3,category:"Servers (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:11,name:"Opengear IM7208 Console Server",w:50,u:1,qty:1,v:208,loc:"rack",rackId:3,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:12,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:208,loc:"rack",rackId:3,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:13,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:3,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:7,ups:true,upsBacking:'none',circuitNotes:"",level:""}
+  {id:13,name:"APC Smart-UPS SRT 6kVA (5400W)",w:120,u:3,qty:1,v:208,loc:"rack",rackId:3,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:5400,cVA:6000,rtMin:10,ups:true,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 {name:"Large ER",desc:"24 PoE switches · 4 core switches · 8 servers · 4 storage · dual UPS — 30–60+ kW",facilityType:'enterprise',
  project:{name:'',room:'ER-1',building:'',floor:'',designer:'',date:'',notes:'Large ER for major enterprise campus or mission-critical facility. N+1 UPS. 208V.',scheduleTitle:'ER Power Consumption & Circuit Schedule',rooms:[{type:'er'}]},
@@ -1151,7 +1149,7 @@ const TEMPLATES=[
  items:[
   {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:8,v:208,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:2,name:"Cisco Catalyst 9500-24Y4C Aggregation",w:250,u:1,qty:2,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:3,name:"APC Smart-UPS 20kVA (18000W)",w:500,u:8,qty:1,v:208,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:18000,cVA:20000,rtMin:6,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:3,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:9,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:4,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:8,v:208,loc:"rack",rackId:2,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:5,name:"Cisco Catalyst 9500-24Y4C Aggregation",w:250,u:1,qty:2,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:6,name:"Cisco Catalyst 9500-48Y4C Core Switch",w:400,u:2,qty:2,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
@@ -1160,10 +1158,11 @@ const TEMPLATES=[
   {id:9,name:"Palo Alto PA-850 Firewall",w:175,u:1,qty:2,v:208,loc:"rack",rackId:3,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:10,name:"Opengear IM7208 Console Server",w:50,u:1,qty:2,v:208,loc:"rack",rackId:3,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:11,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:2,v:208,loc:"rack",rackId:3,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:17,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:3,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:10,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:12,name:"Dell PowerEdge R650 Virtualization Server",w:500,u:2,qty:8,v:208,loc:"rack",rackId:4,category:"Servers (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:13,name:"Dell PowerVault ME5024 Storage",w:400,u:2,qty:4,v:208,loc:"rack",rackId:4,category:"Storage (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:14,name:"Veeam VBR Backup Appliance",w:350,u:2,qty:2,v:208,loc:"rack",rackId:4,category:"Servers (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:15,name:"APC Smart-UPS 20kVA (18000W)",w:500,u:8,qty:1,v:208,loc:"rack",rackId:4,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:18000,cVA:20000,rtMin:6,ups:true,upsBacking:'none',circuitNotes:"",level:""}
+  {id:15,name:"APC Smart-UPS SRT 15kVA (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:4,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:8,ups:true,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 // ─── SER: Security Equipment Rooms ───────────────────────────────────────────
 {name:"Small SER",desc:"2 PoE switches · ACS + VMS servers · UPS · ACS power supplies — 3–8 kW",facilityType:'unknown',
@@ -1175,7 +1174,7 @@ const TEMPLATES=[
   {id:2,name:"Genetec Security Center Server",w:400,u:2,qty:1,v:120,loc:"rack",rackId:1,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:3,name:"Milestone XProtect Recording Server",w:500,u:2,qty:1,v:120,loc:"rack",rackId:1,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:4,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:5,name:"APC Smart-UPS SRT 5kVA (4500W)",w:100,u:2,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:4500,cVA:5000,rtMin:12,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:5,name:"APC Smart-UPS SRT 5kVA + Ext Battery (4500W)",w:100,u:4,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:4500,cVA:5000,rtMin:39,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:6,name:"LifeSafety Power FPO75-2 (4A)",w:150,u:0,qty:2,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'critical',circuitNotes:"",level:""},
   {id:7,name:"Operator Workstation",w:300,u:0,qty:1,v:120,loc:"wall",category:"Workstations (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""}
 ]},
@@ -1189,11 +1188,12 @@ const TEMPLATES=[
  items:[
   {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:6,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:2,name:"Genetec Security Center Server",w:400,u:2,qty:2,v:120,loc:"rack",rackId:1,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:3,name:"APC Smart-UPS SRT 12kVA (10800W)",w:300,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:10800,cVA:12000,rtMin:8,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:3,name:"APC Smart-UPS 10kVA + Ext Battery (9000W)",w:250,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:43,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:4,name:"Milestone XProtect Recording Server",w:500,u:2,qty:2,v:120,loc:"rack",rackId:2,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:5,name:"Dell PowerVault ME5024 Storage",w:400,u:2,qty:1,v:120,loc:"rack",rackId:2,category:"Storage (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:6,name:"Aiphone IX-DVF-P2 Intercom Controller",w:75,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:7,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:10,name:"APC Smart-UPS 3kVA + Ext Battery (2700W)",w:75,u:4,qty:1,v:120,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:38,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:8,name:"LifeSafety Power FPO75-2 (4A)",w:150,u:0,qty:4,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'critical',circuitNotes:"",level:""},
   {id:9,name:"Operator Workstation",w:300,u:0,qty:2,v:120,loc:"wall",category:"Workstations (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""}
 ]},
@@ -1209,14 +1209,15 @@ const TEMPLATES=[
   {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:4,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:2,name:"Genetec Security Center Server",w:600,u:2,qty:2,v:120,loc:"rack",rackId:1,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:3,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:4,name:"APC Smart-UPS SRT 12kVA (10800W)",w:300,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:10800,cVA:12000,rtMin:8,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:4,name:"APC Smart-UPS 10kVA + Ext Battery (9000W)",w:250,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:34,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:5,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:4,v:120,loc:"rack",rackId:2,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:6,name:"Milestone XProtect Recording Server",w:750,u:2,qty:4,v:120,loc:"rack",rackId:2,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:7,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:8,name:"APC Smart-UPS SRT 12kVA (10800W)",w:300,u:6,qty:1,v:120,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:10800,cVA:12000,rtMin:8,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:8,name:"APC Smart-UPS SRT 15kVA + Ext Battery (13500W)",w:400,u:7,qty:1,v:120,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:32,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:9,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:4,v:120,loc:"rack",rackId:3,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:10,name:"Dell PowerVault ME5024 Storage",w:500,u:2,qty:2,v:120,loc:"rack",rackId:3,category:"Storage (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:11,name:"Aiphone IX-DVF-P2 Intercom Controller",w:75,u:1,qty:1,v:120,loc:"rack",rackId:3,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:14,name:"APC Smart-UPS 10kVA + Ext Battery (9000W)",w:250,u:6,qty:1,v:120,loc:"rack",rackId:3,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:33,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:12,name:"LifeSafety Power FPO150-2 (8A)",w:150,u:0,qty:8,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'critical',circuitNotes:"",level:""},
   {id:13,name:"Operator Workstation",w:300,u:0,qty:4,v:120,loc:"wall",category:"Workstations (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""}
 ]}
@@ -1366,6 +1367,20 @@ function calc(){
     r.wPerU=r.u>0?divN/r.u:0;
     if(r.btu>maxRackBtu)maxRackBtu=r.btu;
   });
+  // Per-rack UPS metrics
+  Object.values(perRack).forEach(rk=>{
+    const rBackedW=rk.items.filter(i=>!i.ups&&(i.upsBacking==='ups'||i.upsBacking==='critical')).reduce((s,i)=>s+i.w*(i.qty||1),0);
+    const rBattWh=rk.upsItems.reduce((s,i)=>s+(i.cW||0)*(i.rtMin||0)/60*(i.qty||1),0);
+    const rUpsCapW=rk.upsItems.reduce((s,i)=>s+(i.cW||0)*(i.qty||1),0);
+    const rUpsCapVA=rk.upsItems.reduce((s,i)=>s+(i.cVA||0)*(i.qty||1),0);
+    const rRuntime=(rBattWh>0&&rBackedW>0)?(rBattWh*invEff/rBackedW*60):null;
+    rk.upsBackedW=rBackedW;
+    rk.upsBattWh=rBattWh;
+    rk.upsCapW=rUpsCapW;
+    rk.upsCapVA=rUpsCapVA;
+    rk.upsRuntime=rRuntime;
+    rk.upsOk=rBackedW===0||(rRuntime!==null&&rRuntime>=rtTarget);
+  });
   return{totalW:totalRawW,totalDivW,totalVA,btu,tons:recTons,itBtu,recBtu,recTons,ambientGainFrac:ag,wallW:wallRawW,nonUpsW:nonUpsRawW,poeBW,poeCW,poeP,upsW,upsVA,upsP,upsRuntimeMin,allUpsItems,generatorKW,perRack,perWall,a120:totalVA/120,a208:totalVA/(208*Math.sqrt(3)),a240:totalVA/240,roomWperU,hasRedundant,maxRackBtu,upsBackedW,upsBackedVA,genOnlyW,criticalW,nonUpsBackedW,upsPlanningW,upsPlanningVA,recUpsVA,upsLoadPct,upsHeadroomVA,upsHeadroomPct,totalBatteryWh,effectiveBatteryWh,runtimeMin,requiredWh,batteryDeltaWh,runtimeAtGrowthMin};
 }
 const pillCls=s=>({ok:'pill-ok',warn:'pill-warn',over:'pill-over',none:'pill-none'}[s]);
@@ -1412,15 +1427,14 @@ function render(){
   v('g-ups-lbl').textContent=s.nonUpsW+'W / '+s.upsW+'W';
   v('g-ups-pct').textContent=(s.upsW>0?s.upsP.toFixed(1):'0')+'%';
   setGauge('g-ups-fill',s.upsW>0?s.upsP:0,'var(--blue)');
-  v('ups-runtime-line').textContent='Runtime: '+fmtRuntime(s.upsRuntimeMin);
+  v('ups-runtime-line').textContent='Runtime: '+fmtRuntime(s.runtimeMin);
   const pSt=s.poeBW===0?'none':s.poeP>90?'over':s.poeP>75?'warn':'ok';
   setPill('pill-poe',pSt);
   v('g-poe-lbl').textContent=s.poeCW+'W / '+s.poeBW+'W';
   v('g-poe-pct').textContent=(s.poeBW>0?s.poeP.toFixed(1):'0')+'%';
   setGauge('g-poe-fill',s.poeP,'var(--purple)');
   v('poe-headroom-line').textContent=s.poeBW>0?`Headroom: ${s.poeBW-s.poeCW}W`:'No PoE switches';
-  if(ri){const rSt=ri.remU<=0?'over':ri.remU<4?'warn':'ok';setPill('pill-rack',rSt);v('g-rack-lbl').textContent=ri.u+'U / '+r.sizeU+'U';v('g-rack-pct').textContent=ri.fillPct.toFixed(1)+'%';setGauge('g-rack-fill',ri.fillPct,'var(--green)');v('rack-breaker-line').textContent=`Breaker: ${ri.breaker}A @ ${r.voltage}V (${ri.amps.toFixed(1)}A continuous)`;}
-  renderRackTabs();renderRack(s);renderWall(s);renderSummary(s);renderAssistant(s);
+    renderRackTabs();renderRack(s);renderWall(s);renderSummary(s);renderAssistant(s);
 }
 function renderRackTabs(){
   const c=v('rackTabs');
@@ -1529,6 +1543,21 @@ function renderSummary(s){
       if(s.runtimeMin!=null&&s.runtimeMin<(sets.runtimeTarget||15)&&!_critMis)warns+='<div style="color:var(--warn);font-size:11px;margin-top:4px;">&#9888; Runtime target not met. Additional battery capacity required.</div>';
       warns+='<div style="color:var(--gray-mid);font-size:10px;margin-top:8px;font-style:italic;">Final UPS model and battery runtime must be verified using manufacturer data and the UPS vendor sizing tool.</div>';
       html+=warns;
+      // Per-rack UPS status table
+      {
+        const rks=Object.values(s.perRack).filter(rk=>rk.upsBackedW>0||rk.upsItems.length>0);
+        if(rks.length>0){
+          html+='<div style="font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.15em;text-transform:uppercase;margin:12px 0 6px;font-weight:700;">PER-RACK UPS STATUS</div>';
+          rks.forEach(rk=>{
+            let rtLabel,rtColor;
+            if(rk.upsItems.length===0){rtLabel='No UPS in rack';rtColor='var(--danger)';}
+            else if(rk.upsRuntime===null){rtLabel='No backed load';rtColor='var(--gray-mid)';}
+            else if(rk.upsOk){rtLabel='~'+Math.round(rk.upsRuntime)+' min ✓';rtColor='var(--green)';}
+            else{rtLabel='~'+Math.round(rk.upsRuntime)+' min ⚠ SHORT';rtColor='var(--danger)';}
+            html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);"><span style="font-size:11px;color:var(--gray-mid);max-width:58%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(rk.rack.label)}</span><span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${rtColor};">${rtLabel}</span></div>`;
+          });
+        }
+      }
     }
     v('sum-ups').innerHTML=html;
   }
@@ -1563,7 +1592,7 @@ function renderSummary(s){
     const items=state.items.filter(i=>i.loc==='rack'&&i.rackId===rk.id);
     let inner=`<div style="margin-bottom:14px;padding:10px;background:var(--navy);border-radius:4px;">
       <div style="font-family:var(--display);font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">${esc(rk.label)}${rk.redundant?' <span class="pill pill-warn" style="margin-left:8px">N+1</span>':''}</div>
-      <div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-bottom:3px;">${rk.sizeU}U · PDU ${rk.voltage}V · Fill ${ri.fillPct.toFixed(0)}% · Load ${ri.nonUpsWatts.toFixed(0)}W · Breaker ${ri.breaker}A</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);margin-bottom:3px;">${rk.sizeU}U · PDU ${rk.voltage}V · Load ${ri.nonUpsWatts.toFixed(0)}W · Breaker ${ri.breaker}A</div>
       <div style="font-family:var(--mono);font-size:11px;color:var(--teal);margin-bottom:8px;">${ri.btu.toFixed(0)} BTU/hr · ${ri.wPerU.toFixed(1)} W/U density</div>`;
     if(rk.notes)inner+=`<div style="font-size:11px;color:var(--gray-light);margin-bottom:8px;font-style:italic;">Notes: ${esc(rk.notes)}</div>`;
     if(items.length){inner+=`<div style="font-size:11px;color:var(--gray-light);">`;inner+=items.map(i=>`· ${i.qty}× ${esc(i.name)} (${(i.w*i.qty).toFixed(0)}W)`).join('<br>');inner+=`</div>`;}
@@ -2040,6 +2069,17 @@ function getAssistantMessages(s){
     if(s.runtimeMin!=null&&s.runtimeMin<(sets.runtimeTarget||15)){const _rtA=sets.runtimeTarget||15;const _isCrit=(_rtA>=60||(state.project.intent?.recoveryObjective==='continuous'))&&s.runtimeMin<(_rtA*0.5);msgs.push({icon:'&#9888;',text:_isCrit?'Runtime objective cannot be met: '+Math.round(s.runtimeMin)+' min estimated vs. '+_rtA+' min target. Increase battery capacity, reduce backed load, or coordinate generator strategy.':'UPS runtime '+Math.round(s.runtimeMin)+' min — '+_rtA+' min target not met. Battery shortfall '+Math.abs(s.batteryDeltaWh).toFixed(0)+' Wh.',warn:true});}
     else if(s.runtimeMin!=null){msgs.push({icon:'&#10003;',text:'Runtime ~'+Math.round(s.runtimeMin)+'min. Target of '+(sets.runtimeTarget||15)+'min met.',warn:false});}
   }else{msgs.push({icon:'&#9889;',text:'Tag devices with backup status (UPS Backed or Critical) to enable UPS sizing.',warn:false});}
+  // Per-rack UPS alerts — which rack is undersized or missing UPS
+  Object.values(s.perRack).forEach(rk=>{
+    if(rk.upsBackedW===0)return;
+    if(rk.upsItems.length===0){
+      msgs.push({warn:true,icon:'&#9888;',text:esc(rk.rack.label)+': no UPS — '+Math.round(rk.upsBackedW).toLocaleString()+' W backed load unprotected.'});
+    } else if(!rk.upsOk&&rk.upsRuntime!==null){
+      const _rt=state.settings.runtimeTarget||15;
+      msgs.push({warn:true,icon:'&#9888;',text:esc(rk.rack.label)+': UPS runtime ~'+Math.round(rk.upsRuntime)+' min — '+_rt+' min target not met.'});
+    }
+  });
+
   msgs.push({icon:'&#10052;',text:'Cooling: ~'+s.recTons.toFixed(1)+' tons / '+s.recBtu.toFixed(0)+' BTU/hr (incl. 1.25&#215; buffer + ambient).',warn:false});
   if(s.roomWperU>100)msgs.push({icon:'&#9888;',text:'High density: '+s.roomWperU.toFixed(0)+' W/U. Confirm precision cooling with MEP.',warn:true});
   if(s.generatorKW>0)msgs.push({icon:'&#128267;',text:'Generator: '+s.generatorKW.toFixed(1)+' kW continuous. Next standard: '+standardGenerator(s.generatorKW)+'.',warn:false});
@@ -2130,81 +2170,129 @@ v('intent-recovery').addEventListener('change',()=>{if(!state.project.intent)sta
 v('intent-growth').addEventListener('input',()=>{if(!state.project.intent)state.project.intent={};state.project.intent.growthPhilosophy=v('intent-growth').value;markDirty();});
 v('intent-redundancy').addEventListener('input',()=>{if(!state.project.intent)state.project.intent={};state.project.intent.redundancyPhilosophy=v('intent-redundancy').value;markDirty();});
 v('intent-assumptions').addEventListener('input',()=>{if(!state.project.intent)state.project.intent={};state.project.intent.operationalAssumptions=v('intent-assumptions').value;markDirty();});
-// ===== EOR AI PROMPT =====
+// ===== SPECGEN PROMPT =====
 const AVAIL_LABELS={standard:'Standard (99.9%+ availability)',enhanced:'Enhanced (99.99%+ availability)',highavailability:'High Availability (99.99%+)',missioncritical:'Mission Critical (99.999%+)'};
 const RECOV_LABELS={orderly:'Orderly Shutdown — UPS provides controlled shutdown time',ridethrough:'Generator Ride-Through — UPS bridges until generator transfer',continuous:'Continuous Operations — No service interruption acceptable'};
-function buildEorPrompt(){
+function buildSpecGenPrompt(){
   const s=calc();const p=state.project;const sets=state.settings;
   const fp=FACILITY_PROFILES[state.wizard?.facilityType||'unknown']||FACILITY_PROFILES.unknown;
-  const int=p.intent||{};
   const roomDate=p.date||(new Date().toISOString().slice(0,10));
   const matLabel={conceptual:'Conceptual',schematic:'Schematic Design',dd:'Design Development',cd:'Construction Documents',record:'Record / As-Built'}[p.maturity]||'Schematic Design';
+  const hr='─'.repeat(64);
   const lines=[];
-  lines.push('PLEX PROJECT CONTEXT — EOR REVIEW REQUEST');
-  lines.push('Generated by PLEX v2.51 · Limited Energy eXperts · limitedenergy.net');
+  lines.push(hr);
+  lines.push('PLEX SPECGEN — SECTION 27 11 00 INJECTION PROMPT');
+  lines.push('Generated by PLEX v2.60 · Limited Energy eXperts · limitedenergy.net');
+  lines.push(hr);
   lines.push('');
-  lines.push('PROJECT INFORMATION');
-  lines.push(`Project Name    : ${p.name||'(not set)'}`);
-  lines.push(`Room / Space    : ${p.room||'(not set)'}`);
+  lines.push('HOW TO USE THIS PROMPT:');
+  lines.push('  1. Copy this entire block (use the Copy button)');
+  lines.push('  2. Open Claude (claude.ai) in a new conversation');
+  lines.push('  3. Upload your Section 27 11 00 specification document');
+  lines.push('  4. Paste this prompt and send');
+  lines.push('  5. Claude returns your spec with data injected — each change marked with ⟦ ⟧');
+  lines.push('  6. Review every ⟦ ⟧ item before issuing the document');
+  lines.push('');
+  lines.push(hr);
+  lines.push('INSTRUCTION TO AI:');
+  lines.push(hr);
+  lines.push('');
+  lines.push('You are a specification editor working with a licensed ICT designer.');
+  lines.push('The uploaded document is Section 27 11 00 — Telecommunications Equipment,');
+  lines.push('Pathways and Spaces. Using ONLY the PLEX project data below:');
+  lines.push('');
+  lines.push('  1. Fill in all [**Define**] placeholders where the data below is sufficient.');
+  lines.push('  2. Where data is partial, insert ⟦ NOTE: [what additional info is needed] ⟧');
+  lines.push('  3. Where data is insufficient, leave the placeholder and append');
+  lines.push('     ⟦ NEEDS: [what information is required] ⟧ after it.');
+  lines.push('  4. Insert project room labels wherever the spec uses generic terms like');
+  lines.push('     "Equipment Rooms" or "Telecommunications Rooms" — format as "Telecom Room (TR-1)".');
+  lines.push('  5. Mark EVERY change with ⟦ ⟧ so the designer can review each injection.');
+  lines.push('  6. Do NOT change any spec language, standards, or requirements.');
+  lines.push('  7. Return the COMPLETE edited specification — do not summarize or truncate.');
+  lines.push('');
+  lines.push(hr);
+  lines.push('PROJECT DATA');
+  lines.push(hr);
+  lines.push('');
+  lines.push(`Project Name     : ${p.name||'(not set)'}`);
+  lines.push(`Room Label       : ${p.room||'(not set)'}`);
   if(p.rooms&&p.rooms.length)lines.push(`Room Scope       : ${formatRoomScope(p.rooms)}`);
-  lines.push(`Building        : ${p.building||'(not set)'}`);
-  lines.push(`Floor / Level   : ${p.floor||'(not set)'}`);
-  lines.push(`Designer        : ${p.designer||'(not set)'}`);
-  lines.push(`Project Date    : ${roomDate}`);
-  lines.push(`Design Phase    : ${matLabel}`);
+  lines.push(`Building         : ${p.building||'(not set)'}`);
+  lines.push(`Floor / Level    : ${p.floor||'(not set)'}`);
+  lines.push(`Designer         : ${p.designer||'Shawn Tovey, ICT Design Consultant & Physical Security Systems Designer'}`);
+  lines.push(`Project Date     : ${roomDate}`);
+  lines.push(`Design Phase     : ${matLabel}`);
+  lines.push(`Facility Type    : ${fp.label}`);
   lines.push('');
-  lines.push('FACILITY CLASSIFICATION');
-  lines.push(`Facility Type   : ${fp.label}`);
-  lines.push(`Basis Note      : ${fp.basisNote||'General ICT infrastructure design.'}`);
+  lines.push('SPACE SCOPE:');
+  const roomTypes=(p.rooms||[]).map(r=>r.type);
+  if(p.rooms&&p.rooms.length){p.rooms.forEach(r=>{lines.push(`  • ${ROOM_TYPE_LABELS[r.type]||r.type}`);});}
+  else{lines.push(`  • ${fp.label}`);}
+  const hasOCE=roomTypes.includes('cabinet');
+  lines.push(`  Outdoor Enclosures (OCEs): ${hasOCE?'YES — outdoor cabinet in scope':'Not in scope'}`);
   lines.push('');
-  lines.push('DESIGN INTENT');
-  lines.push(`Availability    : ${AVAIL_LABELS[int.availabilityObjective]||int.availabilityObjective||'Standard'}`);
-  lines.push(`Recovery        : ${RECOV_LABELS[int.recoveryObjective]||int.recoveryObjective||'Orderly Shutdown'}`);
-  lines.push(`Growth Philosophy        : ${int.growthPhilosophy||'(not specified)'}`);
-  lines.push(`Redundancy Philosophy    : ${int.redundancyPhilosophy||'(not specified)'}`);
-  lines.push(`Operational Assumptions  : ${int.operationalAssumptions||'(not specified)'}`);
+  lines.push('RACK SCHEDULE:');
+  if(state.racks.length){
+    const ps=s.perRack||{};
+    state.racks.forEach(rk=>{
+      const pr=ps[rk.id];
+      if(pr){lines.push(`  • ${rk.label} | ${rk.sizeU}U | ${rk.voltage}V | ${Math.round(pr.watts)}W connected | ${pr.fillPct.toFixed(0)}% fill | ${pr.breaker}A breaker`);}
+      else{lines.push(`  • ${rk.label} | ${rk.sizeU}U | ${rk.voltage}V | 0W (empty)`);}
+    });
+  }else{lines.push('  No racks configured — add equipment to generate rack data.');}
   lines.push('');
-  lines.push('TECHNICAL SUMMARY (PRELIMINARY — unverified estimates)');
-  lines.push(`Total Design Load        : ${Math.round(s.totalW)} W / ${Math.round(s.totalVA)} VA`);
-  lines.push(`UPS-Backed Load          : ${Math.round(s.upsBackedW)} W`);
-  lines.push(`Recommended UPS          : ${s.recUpsVA?s.recUpsVA.toLocaleString()+' VA':'Not yet sized'} at ${sets.upsLoadTarget}% max load`);
-  lines.push(`Target Runtime           : ${sets.runtimeTarget} minutes`);
-  lines.push(`Estimated Runtime        : ${s.runtimeMin!=null?Math.round(s.runtimeMin)+' minutes':'N/A (no UPS load)'}`);
-  lines.push(`Cooling (IT load)        : ${Math.round(s.itBtu)} BTU/hr`);
-  lines.push(`Cooling (design, 1.25x)  : ${Math.round(s.recBtu)} BTU/hr / ${s.recTons.toFixed(2)} tons`);
-  lines.push(`Generator Sizing         : ${s.generatorKW>0?s.generatorKW.toFixed(1)+' kW continuous (next std: '+standardGenerator(s.generatorKW)+')':'Not required / not calculated'}`);
-  lines.push(`Racks in Scope           : ${state.racks.length}`);
-  lines.push(`Devices in Scope         : ${state.items.length}`);
+  lines.push('UPS CONFIGURATION:');
+  const upsTypeLabel={rackmount:'Rackmount (distributed, per-rack)',centralized:'Centralized (room-level)',security:'Security / Life-Safety UPS',telecom:'Telecom UPS (48V DC)',none:'No UPS'}[sets.upsType]||sets.upsType;
+  lines.push(`  Type             : ${upsTypeLabel}`);
+  lines.push(`  UPS-Backed Load  : ${Math.round(s.upsBackedW)} W`);
+  lines.push(`  Recommended VA   : ${s.recUpsVA?s.recUpsVA.toLocaleString()+' VA':'Not yet sized — add UPS-backed devices'}`);
+  lines.push(`  UPS Load         : ${s.recUpsVA?s.upsLoadPct.toFixed(1)+'% of rated (target: ≤'+sets.upsLoadTarget+'%)':'N/A'}`);
+  lines.push(`  Runtime Target   : ${sets.runtimeTarget} minutes`);
+  lines.push(`  Est. Runtime     : ${s.runtimeMin!=null?Math.round(s.runtimeMin)+' min at design load':'N/A'}`);
+  lines.push(`  OCE UPS Required : ${hasOCE?'YES — provide UPS backup per §27 11 00 §2.6.D.8':'Not applicable — no outdoor enclosures in scope'}`);
   lines.push('');
-  lines.push('SETTINGS USED');
-  lines.push(`Power Factor    : ${sets.powerFactor}`);
-  lines.push(`Demand Factor   : ${sets.demandFactor}`);
-  lines.push(`Growth Factor   : ${sets.growthFactor}`);
-  lines.push(`Ambient Gain    : ${sets.ambientGain}%`);
-  lines.push(`UPS Type        : ${sets.upsType}`);
-  if(p.notes){lines.push('');lines.push('PROJECT NOTES');lines.push(p.notes);}
+  lines.push('POWER SUMMARY (PRELIMINARY — verify with EOR before issuing):');
+  lines.push(`  Connected Load   : ${Math.round(s.totalW).toLocaleString()} W / ${Math.round(s.totalVA).toLocaleString()} VA`);
+  lines.push(`  Design Load      : ${Math.round(s.totalW*sets.growthFactor).toLocaleString()} W (${Math.round((sets.growthFactor-1)*100)}% growth applied)`);
+  const ampParts=[];
+  if(s.a120>0)ampParts.push(s.a120.toFixed(1)+'A @ 120V');
+  if(s.a208>0)ampParts.push(s.a208.toFixed(1)+'A @ 208V');
+  if(s.a240>0)ampParts.push(s.a240.toFixed(1)+'A @ 240V');
+  lines.push(`  Total Amperage   : ${ampParts.length?ampParts.join('  '):'See rack schedule'}`);
+  lines.push(`  Circuit Count    : ${state.racks.length} rack circuit(s) — see rack schedule above`);
   lines.push('');
-  lines.push('─'.repeat(60));
-  lines.push('EOR REVIEW REQUEST');
+  lines.push('PoE SUMMARY:');
+  const poeSwitches=state.items.filter(i=>i.poeS);
+  const poeDevices=state.items.filter(i=>i.poeC);
+  lines.push(`  PoE Switches     : ${poeSwitches.length}`);
+  lines.push(`  PoE Budget       : ${Math.round(s.poeBW||0)} W total`);
+  lines.push(`  PoE Devices      : ${poeDevices.length} connected`);
+  lines.push(`  PoE Consumed     : ${Math.round(s.poeCW||0)} W`);
   lines.push('');
-  lines.push('As the Engineer of Record reviewing this preliminary ICT infrastructure design, please provide:');
+  lines.push('COOLING (PRELIMINARY — coordinate with MEP/HVAC EOR):');
+  lines.push(`  IT Equipment Heat Load   : ${Math.round(s.itBtu).toLocaleString()} BTU/hr`);
+  lines.push(`  Design Heat Load (1.25x) : ${Math.round(s.recBtu).toLocaleString()} BTU/hr / ${s.recTons.toFixed(2)} tons`);
+  lines.push(`  Rack Density             : ${s.roomWperU>0?s.roomWperU.toFixed(1)+' W/U average':'N/A — no equipment entered'}`);
+  if(s.generatorKW>0){
+    lines.push('');
+    lines.push('GENERATOR:');
+    lines.push(`  Continuous kW    : ${s.generatorKW.toFixed(1)} kW`);
+    lines.push(`  Next Std. Size   : ${standardGenerator(s.generatorKW)} kW`);
+  }
+  if(p.notes){lines.push('');lines.push('DESIGNER NOTES:');lines.push(p.notes);}
   lines.push('');
-  lines.push('1. POWER VALIDATION — Are the calculated loads and UPS sizing reasonable for this facility type and room classification? Flag any assumptions that require field verification or manufacturer data.');
-  lines.push('');
-  lines.push('2. COOLING REVIEW — Does the cooling estimate (including 1.25x buffer and ambient gain) align with the HVAC coordination requirements for this facility? Identify any precision cooling or supplemental unit considerations.');
-  lines.push('');
-  lines.push('3. GENERATOR SIZING — Is the generator recommendation consistent with the facility\'s redundancy intent and applicable codes (NFPA 110, local AHJ requirements)?');
-  lines.push('');
-  lines.push('4. CODE AND STANDARD COMPLIANCE — Identify any applicable BICSI, TIA, NFPA, NEC (Article 645, 708, or 725), or facility-specific standards that should govern this design.');
-  lines.push('');
-  lines.push('5. DESIGN INTENT ALIGNMENT — Based on the stated availability objective and recovery posture, are the proposed infrastructure tiers and redundancy approach appropriate?');
-  lines.push('');
-  lines.push('6. OPEN ITEMS / RED FLAGS — List any assumptions, gaps, or items that must be resolved before advancing to the next design phase.');
-  lines.push('');
-  lines.push('Note: These estimates are preliminary planning values generated by PLEX, a Limited Energy design tool. All values require verification against manufacturer specifications, coordinated engineering drawings, and AHJ review before construction documents are issued.');
+  lines.push(hr);
+  lines.push('All values are preliminary planning estimates generated by PLEX.');
+  lines.push('Verify against manufacturer data, coordinated drawings, and AHJ requirements');
+  lines.push('before Construction Documents are issued.');
+  lines.push('Shawn Tovey · ICT Design Consultant & Physical Security Systems Designer');
+  lines.push('Limited Energy eXperts · limitedenergy.net');
+  lines.push(hr);
   return lines.join('\n');
 }
-v('eorPromptBtn').addEventListener('click',()=>{v('eorPromptText').value=buildEorPrompt();openModal('eorModal');});
+
+v('eorPromptBtn').addEventListener('click',()=>{v('eorPromptText').value=buildSpecGenPrompt();openModal('eorModal');});
 v('eorModalClose').addEventListener('click',()=>closeModal('eorModal'));
 v('eorModal').addEventListener('click',e=>{if(e.target===v('eorModal'))closeModal('eorModal');});
 v('eorCopyBtn').addEventListener('click',()=>{
@@ -2215,7 +2303,7 @@ v('eorCopyBtn').addEventListener('click',()=>{
 v('eorDownloadBtn').addEventListener('click',()=>{
   const roomSlug=(state.project.room||'project').replace(/[^a-z0-9\-_]+/gi,'_');
   const dateSlug=state.project.date||(new Date().toISOString().slice(0,10));
-  const fn=`PLEX-EORPrompt-${roomSlug}-${dateSlug}.txt`;
+  const fn=`PLEX-SpecGen-2711-${roomSlug}-${dateSlug}.txt`;
   const blob=new Blob([v('eorPromptText').value],{type:'text/plain'});
   const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 });
@@ -2265,7 +2353,7 @@ function exportDesignReport(){
   const sec=(title,content)=>`<div class="rpt-section"><div class="rpt-section-title">${title}</div>${content}</div>`;
   // Cover page
   const cover=`<div class="report-cover">
-    <div class="rpt-header"><div class="rpt-logo">PLEX<span style="font-weight:300;opacity:0.5;margin-left:6pt;">v2.51</span></div><div class="rpt-sub">Power &amp; Cooling Planning Tool &mdash; Limited Energy eXperts &middot; limitedenergy.net</div></div>
+    <div class="rpt-header"><div class="rpt-logo">PLEX<span style="font-weight:300;opacity:0.5;margin-left:6pt;">v2.60</span></div><div class="rpt-sub">Power &amp; Cooling Planning Tool &mdash; Limited Energy eXperts &middot; limitedenergy.net</div></div>
     <div class="cover-title">ICT Infrastructure Design Report</div>
     <div class="cover-subtitle">${esc(p.room||'Unnamed Room')}${p.building?' &mdash; '+esc(p.building):''}${p.name?' &mdash; '+esc(p.name):''}</div>
     <hr class="rpt-hr">
@@ -2281,7 +2369,7 @@ function exportDesignReport(){
       <div class="cover-grid-item"><div class="cover-grid-label">Schedule Title</div><div class="cover-grid-val">${esc(p.scheduleTitle||'ICT Equipment Schedule')}</div></div>
     </div>
     <hr class="rpt-hr-light">
-    <div class="cover-tool-block">Report generated ${today} using PLEX v2.51, a preliminary planning tool developed by<br>Limited Energy eXperts &mdash; ICT Design and Consulting Practice<br>Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer</div>
+    <div class="cover-tool-block">Report generated ${today} using PLEX v2.60, a preliminary planning tool developed by<br>Limited Energy eXperts &mdash; ICT Design and Consulting Practice<br>Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer</div>
     <div class="cover-disclaimer">${esc(matD)}</div>
   </div>`;
   // Section 1 — Basis of Design
@@ -2367,9 +2455,9 @@ function exportDesignReport(){
   const s8=sec('Section 8 &mdash; Consultant Notes &amp; Assumptions',
     noteHtml+autoHtml+
     `<div style="margin-top:10pt;"><div style="font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#666;margin-bottom:4pt;">Designer Notes (handwritten):</div><div class="rpt-notes-box"></div></div>`+
-    `<div class="rpt-disclaimer">This report was prepared using PLEX v2.51, a preliminary planning tool. All values are estimates based on entered equipment data and planning factors. Results must be verified against manufacturer specifications, coordinated MEP drawings, and applicable codes prior to construction document issuance. This document does not constitute an engineered design and shall not be used as a basis for construction without review and stamp from the Engineer of Record.<br><br>Prepared by: Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer &mdash; Limited Energy eXperts (limitedenergy.net)</div>`
+    `<div class="rpt-disclaimer">This report was prepared using PLEX v2.60, a preliminary planning tool. All values are estimates based on entered equipment data and planning factors. Results must be verified against manufacturer specifications, coordinated MEP drawings, and applicable codes prior to construction document issuance. This document does not constitute an engineered design and shall not be used as a basis for construction without review and stamp from the Engineer of Record.<br><br>Prepared by: Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer &mdash; Limited Energy eXperts (limitedenergy.net)</div>`
   );
-  v('view-report').innerHTML=cover+s1+s2+s3+s4+s5+s6+s7+s8+`<div class="rpt-footer">PLEX v2.51 &mdash; Limited Energy eXperts &mdash; limitedenergy.net &mdash; Preliminary Planning Document &mdash; ${today}</div>`;
+  v('view-report').innerHTML=cover+s1+s2+s3+s4+s5+s6+s7+s8+`<div class="rpt-footer">PLEX v2.60 &mdash; Limited Energy eXperts &mdash; limitedenergy.net &mdash; Preliminary Planning Document &mdash; ${today}</div>`;
   document.body.classList.add('print-report');
   window.addEventListener('afterprint',()=>{document.body.classList.remove('print-report');v('view-report').innerHTML='';},{once:true});
   setTimeout(()=>window.print(),200);

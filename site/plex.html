@@ -1025,7 +1025,7 @@ const STD_UPS_VA=[750,1000,1500,2200,3000,5000,6000,8000,10000,15000,20000,30000
 const TEMPLATES=[
 // ─── TR: Telecom Rooms ────────────────────────────────────────────────────────
 {name:"Small TR",desc:"4 PoE switches · 1 aggregation · firewall · UPS — 2–5 kW",facilityType:'enterprise',
- project:{name:'',room:'TR-1',building:'',floor:'',designer:'',date:'',notes:'Single-floor or small building TR. PoE budget modeled at 90% of switch maximum.',scheduleTitle:'TR Power Consumption & Circuit Schedule',rooms:[{type:'tr'}]},
+ project:{name:'',room:'TR-1',building:'',floor:'',designer:'',date:'',notes:'Single-floor or small building TR. Assumes max PoE switch load.',scheduleTitle:'TR Power Consumption & Circuit Schedule',rooms:[{type:'tr'}]},
  settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'telecom',runtimeTarget:15,inverterEfficiency:90},
  racks:[{id:1,label:'Rack 1',sizeU:42,voltage:120,notes:'Access layer and UPS',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''}],
  items:[
@@ -1037,7 +1037,7 @@ const TEMPLATES=[
   {id:6,name:"APC Smart-UPS SRT 8kVA (7200W)",w:160,u:3,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:7200,cVA:8000,rtMin:9,ups:true,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 {name:"Medium TR",desc:"8 PoE switches · 2 aggregation · firewall pair · net mgmt · UPS — 5–10 kW",facilityType:'enterprise',
- project:{name:'',room:'TR-1',building:'',floor:'',designer:'',date:'',notes:'Multi-floor or mid-rise TR. PoE budget modeled at 90% of switch maximum.',scheduleTitle:'TR Power Consumption & Circuit Schedule',rooms:[{type:'tr'}]},
+ project:{name:'',room:'TR-1',building:'',floor:'',designer:'',date:'',notes:'Multi-floor or mid-rise TR. Assumes max PoE switch load.',scheduleTitle:'TR Power Consumption & Circuit Schedule',rooms:[{type:'tr'}]},
  settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'telecom',runtimeTarget:15,inverterEfficiency:90},
  racks:[
   {id:1,label:'Rack 1 — Access Layer',sizeU:42,voltage:120,notes:'PoE switches and UPS',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''},
@@ -1054,7 +1054,7 @@ const TEMPLATES=[
   {id:8,name:"APC Smart-UPS 3kVA (2700W)",w:75,u:2,qty:1,v:120,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:8,ups:true,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 {name:"Large TR",desc:"16 PoE switches · dual aggregation · firewall pair · dual UPS — 10–18 kW",facilityType:'enterprise',
- project:{name:'',room:'TR-1',building:'',floor:'',designer:'',date:'',notes:'Large campus or hospital wing TR. N+1 power. PoE budget at 90% of switch maximum.',scheduleTitle:'TR Power Consumption & Circuit Schedule',rooms:[{type:'tr'}]},
+ project:{name:'',room:'TR-1',building:'',floor:'',designer:'',date:'',notes:'Large campus or hospital wing TR. N+1 power. Assumes max PoE switch load.',scheduleTitle:'TR Power Consumption & Circuit Schedule',rooms:[{type:'tr'}]},
  settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'telecom',runtimeTarget:15,inverterEfficiency:90},
  racks:[
   {id:1,label:'Rack 1 — Access A',sizeU:42,voltage:120,notes:'8 PoE switches, UPS A',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''},

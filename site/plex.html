@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!--
-  PLEX v2.62 — Power Load EXaminer
+  PLEX v2.63 — Power Load EXaminer
   Compiled by Limited Energy eXperts · limitedenergy.net
   Open reuse permitted with credit.
   For preliminary engineering and coordination only.
@@ -19,7 +19,7 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PLEX — Power Load EXaminer | Limited Energy eXperts</title>
-<meta name="description" content="PLEX — Power Load EXaminer. Telecom room and equipment room power, UPS, generator, PoE, and cooling load sizing. Built by an RCDD for Division 27/28 coordination.">
+<meta name="description" content="PLEX — Power Load EXaminer. Telecom room and equipment room power, UPS, generator, and cooling load sizing. Built by an RCDD for Division 27/28 coordination.">
 <meta property="og:title" content="PLEX — Power Load EXaminer">
 <meta property="og:description" content="TR/ER infrastructure sizing — power, UPS, generator, PoE, cooling. Built by an RCDD for Division 27/28 coordination.">
 <meta property="og:type" content="website">
@@ -42,10 +42,9 @@
   "operatingSystem": "Web Browser",
   "url": "https://limitedenergy.net/plex",
   "description": "Free web-based tool for sizing telecom room and equipment room power loads — UPS, generator, PoE, and cooling. Built by an RCDD for Division 27/28 coordination.",
-  "version": "2.62",
+  "version": "2.63",
   "featureList": [
-    "UPS load sizing", "Generator load sizing", "PoE power budgeting",
-    "Cooling load estimation", "Telecom room sizing", "Equipment room sizing",
+    "UPS load sizing", "Generator load sizing",    "Cooling load estimation", "Telecom room sizing", "Equipment room sizing",
     "Division 27 coordination"
   ],
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -147,7 +146,7 @@ select option{background:var(--navy);}
 .pill-none{background:rgba(107,127,149,0.15);border:1px solid var(--gray-mid);color:var(--gray-mid);}
 #status-row{background:var(--navy-mid);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;box-shadow:0 2px 12px rgba(0,0,0,0.25);}
 .status-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.status-lbl{font-family:var(--mono);font-size:9px;color:var(--gray-mid);letter-spacing:0.15em;}
+.status-lbl{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.2em;font-weight:700;}
 .gauge-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-bottom:3px;}
 .gauge-track{background:var(--navy);border-radius:2px;height:8px;overflow:hidden;}
 .gauge-fill{height:100%;border-radius:2px;transition:width 0.4s;}
@@ -240,7 +239,7 @@ input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--red);}
 #panel-project{grid-column:1/-1;order:1;}
 #panel-electrical{order:2;}#panel-ups{order:3;}
 #panel-gen{order:4;}#panel-mech{order:5;}
-#panel-poe{order:6;}#panel-wall{order:7;}
+#panel-wall{order:6;}
 #sum-power-schedule{grid-column:1/-1;order:8;}
 #panel-circuits{grid-column:1/-1;order:9;}
 #panel-racks{grid-column:1/-1;order:10;}
@@ -429,7 +428,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
       <img src="/dude.png" style="width:130px;height:130px;object-fit:cover;border-radius:50%;border:2px solid var(--teal);display:block;box-shadow:0 4px 24px rgba(20,184,166,0.25);" alt="PLEX — Power Load EXaminer">
       <div class="landing-text">
         <div class="landing-title" style="font-size:42px;">PLEX</div>
-        <div class="landing-ver">v2.62 &mdash; Power Load EXaminer</div>
+        <div class="landing-ver">v2.63 &mdash; Power Load EXaminer</div>
       </div>
     </div>
     <p class="landing-body">Power, UPS &amp; Cooling Planning for ICT and Security Systems. Tell me what you&rsquo;re building and I&rsquo;ll help estimate power, UPS, generator, PoE, and cooling requirements.</p>
@@ -468,7 +467,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     <div class="header-brand">
       <div class="header-mark">⚡</div>
       <div>
-        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.62</span></div>
+        <div class="header-title">PLEX <span style="font-family:var(--mono);font-size:11px;color:var(--gray-mid);font-weight:400;margin-left:6px;letter-spacing:0.1em;">v2.63</span></div>
         <div class="header-sub">POWER LOAD EXaminer &nbsp;·&nbsp; TR/ER INFRASTRUCTURE SIZING</div>
       </div>
     </div>
@@ -491,7 +490,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
 </div>
 <div id="intro-block">
   <div class="intro-lead">
-    PLEX sizes telecom room and equipment room infrastructure &mdash; power, UPS, generator, PoE budget, and cooling load &mdash; from a list of devices you actually plan to install. Add presets, edit quantities, review the summary, export a portable <code>.plex</code> file or print to PDF.
+    PLEX sizes telecom room and equipment room infrastructure &mdash; power, UPS, generator, and cooling load &mdash; from a list of devices you actually plan to install. Add presets, edit quantities, review the summary, export a portable <code>.plex</code> file or print to PDF.
   </div>
   <div class="intro-badges">
     <button class="intro-badge" id="badge-scope" onclick="toggleBadge('badge-scope')">
@@ -631,6 +630,12 @@ body{background:white !important;color:black !important;font-size:9pt;}
         </div>
       </div>
       <div class="panel">
+        <div class="panel-label">ADD FROM LIBRARY</div>
+        <div class="field"><select id="presetSelect"><option value="">-- Select device --</option></select></div>
+        <div class="callout"><strong>Dual PSU:</strong> Redundant power supplies share the load — total draw is unchanged.</div>
+        <button class="btn-primary" id="addPresetBtn">+ ADD TO CURRENT</button>
+      </div>
+      <div class="panel">
         <div class="panel-label">ADD CUSTOM DEVICE</div>
         <div class="field"><input type="text" id="customName" placeholder="Device name"></div>
         <div class="grid-3">
@@ -641,7 +646,6 @@ body{background:white !important;color:black !important;font-size:9pt;}
         <div class="field"><div class="field-label">VOLTAGE</div>
           <select id="customV"><option value="120">120V</option><option value="208">208V</option><option value="240">240V</option></select>
         </div>
-        <label class="check-row"><input type="checkbox" id="customPoE"> PoE Consumer (camera/device)</label>
         <div class="field"><div class="field-label">PLACEMENT</div>
           <div class="loc-toggle">
             <button class="loc-btn active-rack" id="locRack" data-loc="rack">🗄 Active Rack</button>
@@ -649,12 +653,6 @@ body{background:white !important;color:black !important;font-size:9pt;}
           </div>
         </div>
         <button class="btn-primary" id="addCustomBtn">+ ADD CUSTOM</button>
-      </div>
-      <div class="panel">
-        <div class="panel-label">ADD FROM LIBRARY</div>
-        <div class="field"><select id="presetSelect"><option value="">-- Select device --</option></select></div>
-        <div class="callout"><strong>Dual PSU:</strong> Redundant power supplies share the load — total draw is unchanged.</div>
-        <button class="btn-primary" id="addPresetBtn">+ ADD TO CURRENT</button>
       </div>
     </div>
     <div>
@@ -667,12 +665,6 @@ body{background:white !important;color:black !important;font-size:9pt;}
         <div>
           <div class="status-hdr"><span class="status-lbl">UPS LOAD</span><span id="pill-ups" class="pill pill-none">N/A</span></div>
           <div id="ups-per-rack" style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:6px;"></div>
-        </div>
-        <div>
-          <div class="status-hdr"><span class="status-lbl">PoE BUDGET</span><span id="pill-poe" class="pill pill-none">N/A</span></div>
-          <div class="gauge-meta"><span id="g-poe-lbl">0W / 0W</span><span id="g-poe-pct">0%</span></div>
-          <div class="gauge-track"><div class="gauge-fill" id="g-poe-fill" style="width:0%;background:var(--purple)"></div></div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--gray-mid);margin-top:4px;" id="poe-headroom-line">Headroom: —</div>
         </div>
 
       </div>
@@ -730,7 +722,6 @@ body{background:white !important;color:black !important;font-size:9pt;}
   <div class="panel" id="panel-ups"><div class="panel-label">UPS SIZING &amp; RUNTIME</div><div id="sum-ups"></div></div>
   <div class="panel" id="panel-gen"><div class="panel-label">GENERATOR SIZING</div><div id="sum-gen"></div></div>
   <div class="panel" id="panel-mech"><div class="panel-label">MECHANICAL / COOLING LOAD</div><div class="panel-sub">Coordination value only &mdash; room envelope, ventilation, ambient load, and redundancy not included. Verify with MEP.</div><div id="sum-mech"></div></div>
-  <div class="panel" id="panel-poe"><div class="panel-label">PoE SUMMARY</div><div id="sum-poe"></div></div>
   <div class="panel" id="panel-wall"><div class="panel-label teal">WALL / FIELD DEVICES</div><div class="panel-sub">Independent circuits &mdash; outside rack PDU</div><div id="sum-wall"></div></div>
   <div class="panel" id="panel-circuits"><div class="panel-label">CIRCUITS &amp; BREAKER SIZING</div><div class="panel-sub">125% continuous-load factor applied for planning. Circuit amperage at selected PDU voltage and applied power factor. Breaker shown is next standard commercial size above continuous-load current. Verify final circuiting with EOR/AHJ.</div><div id="sum-circuits"></div></div>
   <div class="panel" id="panel-racks"><div class="panel-label">PER-RACK BREAKDOWN</div><div id="sum-racks"></div></div>
@@ -747,7 +738,6 @@ body{background:white !important;color:black !important;font-size:9pt;}
       <ul>
         <li><strong>Power Factor.</strong> Default 0.90 applied to all loads. Adjust under Global Settings for known equipment behavior.</li>
         <li><strong>NEC 125% Continuous Load.</strong> Applied for planning &mdash; breaker and generator sizing. Final circuiting to be verified and signed off by EOR/AHJ.</li>
-        <li><strong>PoE Budget.</strong> Compared against camera <em>real draw</em> (typical operating watts), not maximum PoE class budget. Headroom is calculated against switch published PoE budget.</li>
         <li><strong>Wall-Mount Device Wattages.</strong> Wattages for wall-mounted devices (ACS controllers, power supplies, locks, intercoms, and field equipment) are reference estimates. Verify actual draw against manufacturer specifications and final hardware selections before design completion.</li>
         <li><strong>Cooling Load.</strong> BTU/hr = Watts &times; 3.412. Cooling tons = BTU/hr &divide; 12,000. HVAC recommendation includes a 25% buffer.</li>
         <li><strong>Generator Sizing.</strong> Total load &times; 1.25 (continuous). Growth recommendations show +25% and +50% above continuous.</li>
@@ -759,7 +749,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     </div>
   </div>
   <div id="print-credit">
-    PLEX v2.62 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
+    PLEX v2.63 &mdash; Compiled by Limited Energy eXperts &middot; limitedenergy.net &middot; Open reuse permitted with credit.
   </div>
 </div>
 </div>
@@ -912,14 +902,6 @@ const PRESETS=[
 {name:"Generic Unmanaged 8P PoE (120W)",w:30,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:8,poeB:120,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Juniper EX4300-48P (900W PoE+)",w:157,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:48,poeB:900,cW:0,cVA:0,rtMin:0,ups:false},
 {name:"Juniper EX4300-48MP (1100W PoE++)",w:270,u:1,v:120,loc:"rack",poeC:false,poeS:true,poeP:48,poeB:1100,cW:0,cVA:0,rtMin:0,ups:false}]},
-{cat:"Cameras (PoE)",items:[
-{name:"Axis P32 Series (Indoor Dome)",w:8,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Axis Q61 Series (PTZ)",w:60,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Axis P14 Series (Bullet)",w:13,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Hanwha QNV Series (Vandal Dome)",w:11,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Hanwha XNV Series (Outdoor)",w:13,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Generic IP Camera (PoE)",w:12,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false},
-{name:"Generic IP PTZ (HiPoE/PoE+)",w:25,u:0,v:120,loc:"rack",poeC:true,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false}]},
 {cat:"UPS",items:[
 {name:"APC Smart-UPS 1500VA LCD (980W)",w:18,u:2,v:120,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:980,cVA:1500,rtMin:6,ups:true},
 {name:"APC Smart-UPS 2200VA LCD (1980W)",w:35,u:2,v:208,loc:"rack",poeC:false,poeS:false,poeP:0,poeB:0,cW:1980,cVA:2200,rtMin:7,ups:true},
@@ -1027,8 +1009,7 @@ const STD_GENERATORS=[8,10,12.5,15,17.5,20,22,25,30,35,40,45,50,60,75,100,125,15
 const COOLING_BUFFER=1.25;
 const CATEGORY_DIVERSITY={
   'NVR / VMS Servers':0.90,
-  'PoE Switches':0.75,
-  'Cameras (PoE)':0.95,
+  'PoE Switches':1.0,
   'UPS':1.00,
   'Networking / Other (Rack)':0.75,
   'ACS Power Supplies (Wall)':0.90,
@@ -1257,7 +1238,7 @@ function calc(){
   // Two running totals per rack:
   //   rackRawW  = nameplate×qty  → used for per-rack circuit/breaker sizing (NEC 215.2)
   //   rackDivW  = nameplate×qty×diversity → used for system totals, BTU, cooling, generator
-  let totalRawW=0,totalDivW=0,wallRawW=0,poeCW=0,poeBW=0,upsW=0,upsVA=0,upsRuntimeMin=null;
+  let totalRawW=0,totalDivW=0,wallRawW=0,upsW=0,upsVA=0,upsRuntimeMin=null;
   const perRack={},perWall=[],rackRawW={},rackDivW={};
   state.racks.forEach(r=>{
     perRack[r.id]={rack:r,rawWatts:0,divWatts:0,u:0,items:[],upsItems:[]};
@@ -1282,8 +1263,6 @@ function calc(){
         if(!it.ups){rackRawW[t.rack.id]=(rackRawW[t.rack.id]||0)+rawW;rackDivW[t.rack.id]=(rackDivW[t.rack.id]||0)+divW;}
       }
     }
-    if(it.poeS)poeBW+=(it.poeB||0)*q;
-    if(it.poeC)poeCW+=rawW;
     if(it.ups){upsW+=(it.cW||0)*q;upsVA+=(it.cVA||0)*q;}
   }
   const allUpsItems=state.items.filter(i=>i.ups);
@@ -1341,7 +1320,6 @@ function calc(){
   const btu=itBtu; // kept for backward compat display
   const tons=recTons;
   const upsP=upsW>0?(nonUpsRawW/upsW)*100:0;
-  const poeP=poeBW>0?(poeCW/poeBW)*100:0;
   const generatorKW=(totalDivW*1.25)/1000;
   const hasRedundant=state.racks.some(r=>r.redundant);
   // Total rack U for density calc
@@ -1378,14 +1356,14 @@ function calc(){
     rk.upsRuntime=rRuntime;
     rk.upsOk=rBackedW===0||(rRuntime!==null&&rRuntime>=rtTarget);
   });
-  return{totalW:totalRawW,totalDivW,totalVA,btu,tons:recTons,itBtu,recBtu,recTons,ambientGainFrac:ag,wallW:wallRawW,nonUpsW:nonUpsRawW,poeBW,poeCW,poeP,upsW,upsVA,upsP,upsRuntimeMin,allUpsItems,generatorKW,perRack,perWall,a120:totalVA/120,a208:totalVA/(208*Math.sqrt(3)),a240:totalVA/240,roomWperU,hasRedundant,maxRackBtu,upsBackedW,upsBackedVA,genOnlyW,criticalW,nonUpsBackedW,upsPlanningW,upsPlanningVA,recUpsVA,upsLoadPct,upsHeadroomVA,upsHeadroomPct,totalBatteryWh,effectiveBatteryWh,runtimeMin,requiredWh,batteryDeltaWh,runtimeAtGrowthMin};
+  return{totalW:totalRawW,totalDivW,totalVA,btu,tons:recTons,itBtu,recBtu,recTons,ambientGainFrac:ag,wallW:wallRawW,nonUpsW:nonUpsRawW,upsW,upsVA,upsP,upsRuntimeMin,allUpsItems,generatorKW,perRack,perWall,a120:totalVA/120,a208:totalVA/(208*Math.sqrt(3)),a240:totalVA/240,roomWperU,hasRedundant,maxRackBtu,upsBackedW,upsBackedVA,genOnlyW,criticalW,nonUpsBackedW,upsPlanningW,upsPlanningVA,recUpsVA,upsLoadPct,upsHeadroomVA,upsHeadroomPct,totalBatteryWh,effectiveBatteryWh,runtimeMin,requiredWh,batteryDeltaWh,runtimeAtGrowthMin};
 }
 const pillCls=s=>({ok:'pill-ok',warn:'pill-warn',over:'pill-over',none:'pill-none'}[s]);
 const pillTxt=s=>({ok:'OK',warn:'MARGINAL',over:'OVER',none:'N/A'}[s]);
 function setPill(id,st){const e=v(id);e.className='pill '+pillCls(st);e.textContent=pillTxt(st);}
 function setGauge(id,pct,col){const e=v(id);e.style.width=Math.min(pct,100)+'%';e.style.background=pct>90?'var(--danger)':pct>75?'var(--warn)':col;}
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-function dtag(it){if(it.poeS)return`PoE Switch · ${it.poeB}W budget · ${it.poeP}p`;if(it.poeC)return'PoE Device';if(it.ups)return`UPS · ${it.cW}W / ${it.cVA}VA · ${it.rtMin}min @ full`;return it.category||'';}
+function dtag(it){if(it.poeS)return'PoE Switch';if(it.ups)return`UPS · ${it.cW}W / ${it.cVA}VA · ${it.rtMin}min @ full`;return it.category||'';}
 function fmtRuntime(m){if(m===null||m===undefined)return'—';if(m<=0)return'OVERLOADED';if(m>=60)return`~${(m/60).toFixed(1)} hrs`;return`~${Math.round(m)} min`;}
 function render(){
   const s=calc();const r=getActiveRack();
@@ -1417,13 +1395,8 @@ function render(){
   v('sc-watts').textContent=s.totalW.toFixed(0)+' W';v('sc-va').textContent=s.totalVA.toFixed(0)+' VA';
   v('sc-btu').textContent=s.btu.toFixed(0)+' BTU/hr';v('sc-tons').textContent=s.tons.toFixed(2)+' tons';
   v('sc-gen').textContent=s.generatorKW.toFixed(2)+' kW';
-  {const rks=Object.values(s.perRack);let wSt='none';const html=rks.map(rk=>{const hU=rk.upsItems.length>0;const hB=rk.upsBackedW>0;if(!hU&&!hB)return '';const pct=rk.upsCapW>0?(rk.upsBackedW/rk.upsCapW*100):0;let st=(!hU&&hB)?'over':(!hB)?'ok':(!rk.upsOk)?'warn':(pct>90)?'over':(pct>75)?'warn':'ok';const sR={none:0,ok:1,warn:2,over:3};if(sR[st]>sR[wSt])wSt=st;const lbl=esc(rk.rack.label||('Rack '+rk.rack.id));if(!hU)return '<div style="padding:3px 0;border-bottom:1px solid var(--border)"><span style="color:var(--danger)">⚠ '+lbl+' — No UPS: '+Math.round(rk.upsBackedW)+'W unprotected</span></div>';const col=st==='ok'?'var(--teal)':st==='warn'?'var(--warn)':'var(--danger)';return '<div style="padding:3px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span style="color:var(--gray-light)">'+lbl+'</span><span style="color:'+col+'">'+Math.round(rk.upsBackedW)+'W/'+rk.upsCapW+'W · '+fmtRuntime(rk.upsRuntime)+'</span></div>';}).join('');v('ups-per-rack').innerHTML=html||'<span style="color:var(--gray-dark)">No UPS-backed loads</span>';setPill('pill-ups',wSt);}
-  const pSt=s.poeBW===0?'none':s.poeP>90?'over':s.poeP>75?'warn':'ok';
-  setPill('pill-poe',pSt);
-  v('g-poe-lbl').textContent=s.poeCW+'W / '+s.poeBW+'W';
-  v('g-poe-pct').textContent=(s.poeBW>0?s.poeP.toFixed(1):'0')+'%';
-  setGauge('g-poe-fill',s.poeP,'var(--purple)');
-  v('poe-headroom-line').textContent=s.poeBW>0?`Headroom: ${s.poeBW-s.poeCW}W`:'No PoE switches';
+  {const rks=Object.values(s.perRack);let wSt='none';const html=rks.map(rk=>{const hU=rk.upsItems.length>0;const hB=rk.upsBackedW>0;if(!hU&&!hB)return '';const pct=rk.upsCapW>0?(rk.upsBackedW/rk.upsCapW*100):0;let st=(!hU&&hB)?'over':(!hB)?'ok':(!rk.upsOk)?'warn':(pct>90)?'over':(pct>75)?'warn':'ok';const sR={none:0,ok:1,warn:2,over:3};if(sR[st]>sR[wSt])wSt=st;const lbl=esc(rk.rack.label||('Rack '+rk.rack.id));const col=st==='ok'?'var(--teal)':st==='warn'?'var(--warn)':'var(--danger)';if(!hU)return '<div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;color:var(--gray-light)">'+lbl+'</span><span style="font-size:10px;color:var(--danger)">No UPS &mdash; '+Math.round(rk.upsBackedW)+'W unprotected</span></div></div>';const rt=fmtRuntime(rk.upsRuntime);const bw=Math.min(pct,100).toFixed(1);return '<div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><span style="font-size:10px;color:var(--gray-light)">'+lbl+'</span><span style="font-size:10px;color:'+col+'">'+pct.toFixed(0)+'% &middot; '+rt+'</span></div><div class="gauge-track"><div class="gauge-fill" style="width:'+bw+'%;background:'+col+'"></div></div></div>';}).join('');v('ups-per-rack').innerHTML=html||'<span style="color:var(--gray-dark)">No UPS-backed loads</span>';setPill('pill-ups',wSt);}
+
     renderRackTabs();renderRack(s);renderWall(s);renderSummary(s);renderAssistant(s);
 }
 function renderRackTabs(){
@@ -1575,7 +1548,7 @@ function renderSummary(s){
       ${n1Note?`<span style="font-size:11px;color:var(--warn);margin-top:2px;">⚠${n1Note}</span>`:''}
     </div>
     ${sRow('Largest Single-Rack Heat Load',s.maxRackBtu.toFixed(0)+' BTU/hr')}`;
-  v('sum-poe').innerHTML=[['PoE Budget Available',s.poeBW+' W'],['PoE Load (cameras)',s.poeCW+' W'],['PoE Utilization',s.poeBW>0?s.poeP.toFixed(1)+'%':'No PoE switches'],['PoE Headroom',(s.poeBW-s.poeCW)+' W']].map(r=>sRow(r[0],r[1])).join('');
+
   // Rack summary cards — with BTU/hr and W/U density
   v('sum-racks').innerHTML=state.racks.map(rk=>{
     const ri=s.perRack[rk.id];
@@ -1637,11 +1610,10 @@ function renderSummary(s){
     </tr>`;
   });
   s.perWall.forEach(wd=>{
-    const isPoeC=wd.item.poeC;
     const qty=wd.item.qty||1;const btu=(wd.watts*BTU_PER_WATT).toFixed(0);
-    const contA=isPoeC?'—':(wd.amps*1.25).toFixed(1)+'A';
-    const brkr=isPoeC?'—':wd.breaker+'A';
-    const vDisp=isPoeC?'PoE':wd.item.v;
+    const contA=(wd.amps*1.25).toFixed(1)+'A';
+    const brkr=wd.breaker+'A';
+    const vDisp=wd.item.v;
     const df=getDiversityFactor(wd.item.category);
     psRows+=`<tr>
       <td class="ps-dim">${esc(wd.item.level||'—')}</td>
@@ -1653,7 +1625,7 @@ function renderSummary(s){
       <td class="ps-wall">${wd.watts.toFixed(0)}</td>
       <td style="color:var(--gray-mid);font-size:10px;">${(df*100).toFixed(0)}%</td>
       <td>${contA}</td>
-      <td class="${isPoeC?'ps-dim':'ps-brk-wall'}">${brkr}</td>
+      <td class="ps-brk-wall">${brkr}</td>
       <td>${btu}</td>
       <td class="ps-dim">—</td>
       <td class="ps-dim">${esc(wd.item.circuitNotes||'—')}</td>
@@ -1670,7 +1642,7 @@ function renderSummary(s){
   </tr>
   <tr>
     <td colspan="13" style="font-size:10px;color:var(--gray-mid);font-style:italic;padding:6px 8px;">
-      Diversity factors per ASHRAE TC 9.9: PoE Switches 75%, Networking 75%, Servers 90%, Cameras 95%, UPS 100%. Circuit breaker sizing uses nameplate × 125% per NEC 215.2 — do not apply diversity to individual circuit protection.
+      Diversity factors per ASHRAE TC 9.9: PoE Switches 100% (max load), Networking 75%, Servers 90%, UPS 100%. Circuit breaker sizing uses nameplate × 125% per NEC 215.2 — do not apply diversity to individual circuit protection.
     </td>
   </tr>`;}
   // MEP Coordination section
@@ -1717,7 +1689,7 @@ function renderSummary(s){
   });
 })();
 v('addPresetBtn').addEventListener('click',()=>{const name=v('presetSelect').value;if(!name)return;const p=ALL_FLAT.find(i=>i.name===name);if(!p)return;const n={...p,id:nextItemId++,qty:1,upsBacking:'none',circuitNotes:'',level:''};if(p.loc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('presetSelect').value='';render();markDirty();});
-v('addCustomBtn').addEventListener('click',()=>{const name=v('customName').value.trim();const w=parseFloat(v('customWatts').value)||0;const u=parseFloat(v('customU').value)||0;const qty=parseInt(v('customQty').value)||1;const vv=parseInt(v('customV').value)||120;const poeC=v('customPoE').checked;if(!name){v('customName').focus();return;}const n={id:nextItemId++,name,w,u,qty,v:vv,loc:customLoc,category:'Custom',poeC,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:'',level:''};if(customLoc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('customName').value='';v('customWatts').value='';v('customU').value='';v('customQty').value='1';v('customPoE').checked=false;render();markDirty();});
+v('addCustomBtn').addEventListener('click',()=>{const name=v('customName').value.trim();const w=parseFloat(v('customWatts').value)||0;const u=parseFloat(v('customU').value)||0;const qty=parseInt(v('customQty').value)||1;const vv=parseInt(v('customV').value)||120;if(!name){v('customName').focus();return;}const n={id:nextItemId++,name,w,u,qty,v:vv,loc:customLoc,category:'Custom',poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:'',level:''};if(customLoc==='rack')n.rackId=state.activeRackId;state.items.push(n);v('customName').value='';v('customWatts').value='';v('customU').value='';v('customQty').value='1';render();markDirty();});
 document.querySelectorAll('.loc-btn').forEach(btn=>{btn.addEventListener('click',()=>{customLoc=btn.dataset.loc;v('locRack').className='loc-btn'+(customLoc==='rack'?' active-rack':'');v('locWall').className='loc-btn'+(customLoc==='wall'?' active-wall':'');});});
 ['name','room','building','floor','designer','date','notes','scheduleTitle'].forEach(f=>{v('proj-'+f).addEventListener('input',()=>{state.project[f]=v('proj-'+f).value;markDirty();});});
 v('proj-maturity').addEventListener('change',()=>{state.project.maturity=v('proj-maturity').value;render();markDirty();});
@@ -2172,7 +2144,7 @@ function buildSpecGenPrompt(){
   const lines=[];
   lines.push(hr);
   lines.push('PLEX SPECGEN — SECTION 27 11 00 INJECTION PROMPT');
-  lines.push('Generated by PLEX v2.62 · Limited Energy eXperts · limitedenergy.net');
+  lines.push('Generated by PLEX v2.63 · Limited Energy eXperts · limitedenergy.net');
   lines.push(hr);
   lines.push('');
   lines.push('HOW TO USE THIS PROMPT:');
@@ -2252,13 +2224,7 @@ function buildSpecGenPrompt(){
   lines.push(`  Total Amperage   : ${ampParts.length?ampParts.join('  '):'See rack schedule'}`);
   lines.push(`  Circuit Count    : ${state.racks.length} rack circuit(s) — see rack schedule above`);
   lines.push('');
-  lines.push('PoE SUMMARY:');
-  const poeSwitches=state.items.filter(i=>i.poeS);
-  const poeDevices=state.items.filter(i=>i.poeC);
-  lines.push(`  PoE Switches     : ${poeSwitches.length}`);
-  lines.push(`  PoE Budget       : ${Math.round(s.poeBW||0)} W total`);
-  lines.push(`  PoE Devices      : ${poeDevices.length} connected`);
-  lines.push(`  PoE Consumed     : ${Math.round(s.poeCW||0)} W`);
+
   lines.push('');
   lines.push('COOLING (PRELIMINARY — coordinate with MEP/HVAC EOR):');
   lines.push(`  IT Equipment Heat Load   : ${Math.round(s.itBtu).toLocaleString()} BTU/hr`);
@@ -2319,7 +2285,6 @@ function exportProjectJson(){
       ups:{upsBackedWatts:Math.round(s.upsBackedW),recommendedVA:s.recUpsVA||null,planningVA:parseFloat(s.upsPlanningVA.toFixed(0)),loadPct:s.recUpsVA?parseFloat(s.upsLoadPct.toFixed(1)):null,targetLoadPct:sets.upsLoadTarget,upsType:sets.upsType,selectedModel:sets.upsModelPreset||null},
       cooling:{itBtuPerHour:Math.round(s.itBtu),ambientBtuPerHour:Math.round(s.btu-s.itBtu),totalDesignBtuPerHour:Math.round(s.recBtu),designTons:parseFloat(s.recTons.toFixed(2)),coolingBuffer:COOLING_BUFFER,ambientGainPct:sets.ambientGain},
       generator:{required:s.generatorKW>0,continuousKW:parseFloat(s.generatorKW.toFixed(2)),nextStandardKW:s.generatorKW>0?parseFloat(standardGenerator(s.generatorKW)):null,note:fp.generatorNote||''},
-      poe:{totalPoEBudgetWatts:Math.round(s.poeBW||0),totalPoEConsumedWatts:Math.round(s.poeCW||0),poeSwitchCount:state.items.filter(i=>i.poeS).length,poeDeviceCount:state.items.filter(i=>i.poeC).length},
       electrical:{racks:Object.values(s.perRack).map(r=>({label:r.rack.label,sizeU:r.rack.sizeU,voltage:r.rack.voltage,redundant:r.rack.redundant,loadWatts:Math.round(r.watts),nonUpsWatts:Math.round(r.nonUpsWatts),amperage:parseFloat(r.amps.toFixed(2)),continuousAmps:parseFloat((r.amps*1.25).toFixed(2)),breaker:r.breaker,fillPct:parseFloat(r.fillPct.toFixed(1))})),wallDevices:s.perWall.map(wd=>({name:wd.item.name,qty:wd.item.qty||1,voltage:wd.item.v,watts:Math.round(wd.watts),amperage:parseFloat(wd.amps.toFixed(2)),continuousAmps:parseFloat((wd.amps*1.25).toFixed(2)),breaker:wd.breaker,circuitNotes:wd.item.circuitNotes||''}))}
     }],
     _meta:{signature:PLEX_SIG,version:PLEX_VERSION,exported:new Date().toISOString(),credit:'Compiled by Limited Energy eXperts · limitedenergy.net'}
@@ -2343,7 +2308,7 @@ function exportDesignReport(){
   const sec=(title,content)=>`<div class="rpt-section"><div class="rpt-section-title">${title}</div>${content}</div>`;
   // Cover page
   const cover=`<div class="report-cover">
-    <div class="rpt-header"><div class="rpt-logo">PLEX<span style="font-weight:300;opacity:0.5;margin-left:6pt;">v2.62</span></div><div class="rpt-sub">Power &amp; Cooling Planning Tool &mdash; Limited Energy eXperts &middot; limitedenergy.net</div></div>
+    <div class="rpt-header"><div class="rpt-logo">PLEX<span style="font-weight:300;opacity:0.5;margin-left:6pt;">v2.63</span></div><div class="rpt-sub">Power &amp; Cooling Planning Tool &mdash; Limited Energy eXperts &middot; limitedenergy.net</div></div>
     <div class="cover-title">ICT Infrastructure Design Report</div>
     <div class="cover-subtitle">${esc(p.room||'Unnamed Room')}${p.building?' &mdash; '+esc(p.building):''}${p.name?' &mdash; '+esc(p.name):''}</div>
     <hr class="rpt-hr">
@@ -2359,7 +2324,7 @@ function exportDesignReport(){
       <div class="cover-grid-item"><div class="cover-grid-label">Schedule Title</div><div class="cover-grid-val">${esc(p.scheduleTitle||'ICT Equipment Schedule')}</div></div>
     </div>
     <hr class="rpt-hr-light">
-    <div class="cover-tool-block">Report generated ${today} using PLEX v2.62, a preliminary planning tool developed by<br>Limited Energy eXperts &mdash; ICT Design and Consulting Practice<br>Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer</div>
+    <div class="cover-tool-block">Report generated ${today} using PLEX v2.63, a preliminary planning tool developed by<br>Limited Energy eXperts &mdash; ICT Design and Consulting Practice<br>Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer</div>
     <div class="cover-disclaimer">${esc(matD)}</div>
   </div>`;
   // Section 1 — Basis of Design
@@ -2445,9 +2410,9 @@ function exportDesignReport(){
   const s8=sec('Section 8 &mdash; Consultant Notes &amp; Assumptions',
     noteHtml+autoHtml+
     `<div style="margin-top:10pt;"><div style="font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#666;margin-bottom:4pt;">Designer Notes (handwritten):</div><div class="rpt-notes-box"></div></div>`+
-    `<div class="rpt-disclaimer">This report was prepared using PLEX v2.62, a preliminary planning tool. All values are estimates based on entered equipment data and planning factors. Results must be verified against manufacturer specifications, coordinated MEP drawings, and applicable codes prior to construction document issuance. This document does not constitute an engineered design and shall not be used as a basis for construction without review and stamp from the Engineer of Record.<br><br>Prepared by: Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer &mdash; Limited Energy eXperts (limitedenergy.net)</div>`
+    `<div class="rpt-disclaimer">This report was prepared using PLEX v2.63, a preliminary planning tool. All values are estimates based on entered equipment data and planning factors. Results must be verified against manufacturer specifications, coordinated MEP drawings, and applicable codes prior to construction document issuance. This document does not constitute an engineered design and shall not be used as a basis for construction without review and stamp from the Engineer of Record.<br><br>Prepared by: Shawn Tovey, ICT Design Consultant &amp; Physical Security Systems Designer &mdash; Limited Energy eXperts (limitedenergy.net)</div>`
   );
-  v('view-report').innerHTML=cover+s1+s2+s3+s4+s5+s6+s7+s8+`<div class="rpt-footer">PLEX v2.62 &mdash; Limited Energy eXperts &mdash; limitedenergy.net &mdash; Preliminary Planning Document &mdash; ${today}</div>`;
+  v('view-report').innerHTML=cover+s1+s2+s3+s4+s5+s6+s7+s8+`<div class="rpt-footer">PLEX v2.63 &mdash; Limited Energy eXperts &mdash; limitedenergy.net &mdash; Preliminary Planning Document &mdash; ${today}</div>`;
   document.body.classList.add('print-report');
   window.addEventListener('afterprint',()=>{document.body.classList.remove('print-report');v('view-report').innerHTML='';},{once:true});
   setTimeout(()=>window.print(),200);

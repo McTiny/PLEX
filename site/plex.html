@@ -1163,51 +1163,51 @@ const TEMPLATES=[
   {id:3,name:"Milestone XProtect Recording Server",w:500,u:2,qty:1,v:120,loc:"rack",rackId:1,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:4,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:5,name:"APC Smart-UPS SRT 5kVA + Ext Battery (4500W)",w:100,u:4,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:4500,cVA:5000,rtMin:39,ups:true,upsBacking:'none',circuitNotes:"",level:""},
-  {id:6,name:"LifeSafety Power FPO75-2 (4A)",w:150,u:0,qty:2,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'critical',circuitNotes:"",level:""},
-  {id:7,name:"Operator Workstation",w:300,u:0,qty:1,v:120,loc:"wall",category:"Workstations (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""}
+  {id:6,name:"LifeSafety Power FPO75-2 (4A)",w:150,u:0,qty:2,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:"",level:""},
+  {id:7,name:"Operator Workstation",w:300,u:0,qty:1,v:120,loc:"wall",category:"Workstations (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 {name:"Medium SER",desc:"6 PoE switches · 2 ACS + 2 VMS servers · storage · intercom · UPS — 8–20 kW",facilityType:'unknown',
  project:{name:'',room:'SER-1',building:'',floor:'',designer:'',date:'',notes:'Corporate campus or industrial site with centralized security management. Extended UPS runtime.',scheduleTitle:'SER Power Consumption & Circuit Schedule',rooms:[{type:'ser'}]},
  settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.25,upsLoadTarget:80,upsType:'security',runtimeTarget:60,inverterEfficiency:90},
  racks:[
-  {id:1,label:'Rack 1 — Security Switching / ACS',sizeU:42,voltage:120,notes:'PoE switches, ACS servers, UPS',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''},
+  {id:1,label:'Rack 1 — Security Switching / ACS',sizeU:42,voltage:208,notes:'PoE switches, ACS servers, UPS',redundant:false,level:'',outletType:'NEMA L6-30R',circuitNum:''},
   {id:2,label:'Rack 2 — VMS / Storage',sizeU:42,voltage:120,notes:'Video management, storage, intercom',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''}
  ],
  items:[
-  {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:6,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:2,name:"Genetec Security Center Server",w:400,u:2,qty:2,v:120,loc:"rack",rackId:1,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:3,name:"APC Smart-UPS 10kVA + Ext Battery (9000W)",w:250,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:43,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:6,v:208,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:2,name:"Genetec Security Center Server",w:400,u:2,qty:2,v:208,loc:"rack",rackId:1,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:3,name:"APC Smart-UPS 10kVA + Ext Battery (9000W)",w:250,u:6,qty:1,v:208,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:43,ups:true,upsBacking:'none',circuitNotes:"",level:""},
   {id:4,name:"Milestone XProtect Recording Server",w:500,u:2,qty:2,v:120,loc:"rack",rackId:2,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:5,name:"Dell PowerVault ME5024 Storage",w:400,u:2,qty:1,v:120,loc:"rack",rackId:2,category:"Storage (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:6,name:"Aiphone IX-DVF-P2 Intercom Controller",w:75,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:7,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
   {id:10,name:"APC Smart-UPS 3kVA + Ext Battery (2700W)",w:75,u:4,qty:1,v:120,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:2700,cVA:3000,rtMin:38,ups:true,upsBacking:'none',circuitNotes:"",level:""},
-  {id:8,name:"LifeSafety Power FPO75-2 (4A)",w:150,u:0,qty:4,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'critical',circuitNotes:"",level:""},
-  {id:9,name:"Operator Workstation",w:300,u:0,qty:2,v:120,loc:"wall",category:"Workstations (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""}
+  {id:8,name:"LifeSafety Power FPO75-2 (4A)",w:150,u:0,qty:4,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:"",level:""},
+  {id:9,name:"Operator Workstation",w:300,u:0,qty:2,v:120,loc:"wall",category:"Workstations (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:"",level:""}
 ]},
 {name:"Large SER",desc:"12 PoE switches · 2 ACS + 4 VMS servers · dual storage · dual UPS — 20–40+ kW",facilityType:'unknown',
  project:{name:'',room:'SER-1',building:'',floor:'',designer:'',date:'',notes:'Airport, hospital campus, or major government facility. Dual UPS, extended runtime.',scheduleTitle:'SER Power Consumption & Circuit Schedule',rooms:[{type:'ser'}]},
  settings:{powerFactor:0.9,ambientGain:10,demandFactor:1.00,growthFactor:1.35,upsLoadTarget:80,upsType:'security',runtimeTarget:60,inverterEfficiency:90},
  racks:[
-  {id:1,label:'Rack 1 — Security Switching A / ACS',sizeU:42,voltage:120,notes:'4 PoE switches, ACS servers, UPS A',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''},
-  {id:2,label:'Rack 2 — Security Switching B / VMS',sizeU:42,voltage:120,notes:'4 PoE switches, VMS servers, UPS B',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''},
-  {id:3,label:'Rack 3 — Security Switching C / Storage',sizeU:42,voltage:120,notes:'4 PoE switches, storage, intercom',redundant:false,level:'',outletType:'NEMA 5-20R',circuitNum:''}
+  {id:1,label:'Rack 1 — Security Switching A / ACS',sizeU:42,voltage:208,notes:'4 PoE switches, ACS servers, UPS A',redundant:false,level:'',outletType:'NEMA L6-30R',circuitNum:''},
+  {id:2,label:'Rack 2 — Security Switching B / VMS',sizeU:42,voltage:208,notes:'4 PoE switches, VMS servers, UPS B',redundant:false,level:'',outletType:'NEMA L6-30R',circuitNum:''},
+  {id:3,label:'Rack 3 — Security Switching C / Storage',sizeU:42,voltage:208,notes:'4 PoE switches, storage, intercom',redundant:false,level:'',outletType:'NEMA L6-30R',circuitNum:''}
  ],
  items:[
-  {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:4,v:120,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:2,name:"Genetec Security Center Server",w:600,u:2,qty:2,v:120,loc:"rack",rackId:1,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:3,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:4,name:"APC Smart-UPS 10kVA + Ext Battery (9000W)",w:250,u:6,qty:1,v:120,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:34,ups:true,upsBacking:'none',circuitNotes:"",level:""},
-  {id:5,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:4,v:120,loc:"rack",rackId:2,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:6,name:"Milestone XProtect Recording Server",w:750,u:2,qty:4,v:120,loc:"rack",rackId:2,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:7,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:120,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:8,name:"APC Smart-UPS SRT 15kVA + Ext Battery (13500W)",w:400,u:7,qty:1,v:120,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:32,ups:true,upsBacking:'none',circuitNotes:"",level:""},
-  {id:9,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:4,v:120,loc:"rack",rackId:3,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:10,name:"Dell PowerVault ME5024 Storage",w:500,u:2,qty:2,v:120,loc:"rack",rackId:3,category:"Storage (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:11,name:"Aiphone IX-DVF-P2 Intercom Controller",w:75,u:1,qty:1,v:120,loc:"rack",rackId:3,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
-  {id:14,name:"APC Smart-UPS 10kVA + Ext Battery (9000W)",w:250,u:6,qty:1,v:120,loc:"rack",rackId:3,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:33,ups:true,upsBacking:'none',circuitNotes:"",level:""},
-  {id:12,name:"LifeSafety Power FPO150-2 (8A)",w:150,u:0,qty:8,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'critical',circuitNotes:"",level:""},
-  {id:13,name:"Operator Workstation",w:300,u:0,qty:4,v:120,loc:"wall",category:"Workstations (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""}
+  {id:1,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:4,v:208,loc:"rack",rackId:1,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:2,name:"Genetec Security Center Server",w:600,u:2,qty:2,v:208,loc:"rack",rackId:1,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:3,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:208,loc:"rack",rackId:1,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:4,name:"APC Smart-UPS 10kVA + Ext Battery (9000W)",w:250,u:6,qty:1,v:208,loc:"rack",rackId:1,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:34,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:5,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:4,v:208,loc:"rack",rackId:2,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:6,name:"Milestone XProtect Recording Server",w:750,u:2,qty:4,v:208,loc:"rack",rackId:2,category:"NVR / VMS Servers",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:7,name:"Vertiv Geist IMD-3E Environmental Monitor",w:40,u:1,qty:1,v:208,loc:"rack",rackId:2,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:8,name:"APC Smart-UPS SRT 15kVA + Ext Battery (13500W)",w:400,u:7,qty:1,v:208,loc:"rack",rackId:2,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:13500,cVA:15000,rtMin:32,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:9,name:"Cisco Catalyst 9300-48P PoE+",w:826,u:1,qty:4,v:208,loc:"rack",rackId:3,category:"PoE Switches",poeC:false,poeS:true,poeP:48,poeB:740,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:10,name:"Dell PowerVault ME5024 Storage",w:500,u:2,qty:2,v:208,loc:"rack",rackId:3,category:"Storage (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:11,name:"Aiphone IX-DVF-P2 Intercom Controller",w:75,u:1,qty:1,v:208,loc:"rack",rackId:3,category:"Networking / Other (Rack)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'ups',circuitNotes:"",level:""},
+  {id:14,name:"APC Smart-UPS 10kVA + Ext Battery (9000W)",w:250,u:6,qty:1,v:208,loc:"rack",rackId:3,category:"UPS",poeC:false,poeS:false,poeP:0,poeB:0,cW:9000,cVA:10000,rtMin:33,ups:true,upsBacking:'none',circuitNotes:"",level:""},
+  {id:12,name:"LifeSafety Power FPO150-2 (8A)",w:150,u:0,qty:8,v:120,loc:"wall",category:"ACS Power Supplies (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:"",level:""},
+  {id:13,name:"Operator Workstation",w:300,u:0,qty:4,v:120,loc:"wall",category:"Workstations (Wall)",poeC:false,poeS:false,poeP:0,poeB:0,cW:0,cVA:0,rtMin:0,ups:false,upsBacking:'none',circuitNotes:"",level:""}
 ]}
 ];
 const ROOM_TYPE_LABELS={tr:'Telecom Room (TR)',er:'Equipment Room (ER)',ser:'Security Equipment Room',dc:'Data Center Space',cabinet:'Outdoor Cabinet'};
@@ -1320,7 +1320,9 @@ function calc(){
     runtimeAtGrowthMin=(effectiveBatteryWh*invEff)/(upsBackedW*gf_set)*60;
   }
   const requiredWh=upsBackedW>0?(upsBackedW*(rtTarget/60))/invEff:0;
+  const requiredWhPlanning=upsBackedW>0?(upsBackedW*gf_set*(rtTarget/60))/invEff:0;
   const batteryDeltaWh=effectiveBatteryWh-requiredWh;
+  const batteryDeltaWhPlanning=effectiveBatteryWh-requiredWhPlanning;
   // Electrical sizing uses diversity-adjusted totals (VA)
   const totalVA=pf>0?totalDivW/pf:0;
   // BTU/cooling uses diversity-adjusted watts + ambient gain
@@ -1366,7 +1368,7 @@ function calc(){
     rk.upsRuntime=rRuntime;
     rk.upsOk=rBackedW===0||(rRuntime!==null&&rRuntime>=rtTarget);
   });
-  return{totalW:totalRawW,totalDivW,totalVA,btu,tons:recTons,itBtu,recBtu,recTons,ambientGainFrac:ag,wallW:wallRawW,nonUpsW:nonUpsRawW,upsW,upsVA,upsP,upsRuntimeMin,allUpsItems,generatorKW,perRack,perWall,a120:totalVA/120,a208:totalVA/(208*Math.sqrt(3)),a240:totalVA/240,roomWperU,hasRedundant,maxRackBtu,upsBackedW,upsBackedVA,genOnlyW,criticalW,nonUpsBackedW,upsPlanningW,upsPlanningVA,recUpsVA,upsLoadPct,upsHeadroomVA,upsHeadroomPct,totalBatteryWh,effectiveBatteryWh,runtimeMin,requiredWh,batteryDeltaWh,runtimeAtGrowthMin};
+  return{totalW:totalRawW,totalDivW,totalVA,btu,tons:recTons,itBtu,recBtu,recTons,ambientGainFrac:ag,wallW:wallRawW,nonUpsW:nonUpsRawW,upsW,upsVA,upsP,upsRuntimeMin,allUpsItems,generatorKW,perRack,perWall,a120:totalVA/120,a208:totalVA/(208*Math.sqrt(3)),a240:totalVA/240,roomWperU,hasRedundant,maxRackBtu,upsBackedW,upsBackedVA,genOnlyW,criticalW,nonUpsBackedW,upsPlanningW,upsPlanningVA,recUpsVA,upsLoadPct,upsHeadroomVA,upsHeadroomPct,totalBatteryWh,effectiveBatteryWh,runtimeMin,requiredWh,requiredWhPlanning,batteryDeltaWh,batteryDeltaWhPlanning,runtimeAtGrowthMin};
 }
 const pillCls=s=>({ok:'pill-ok',warn:'pill-warn',orange:'pill-orange',over:'pill-over',none:'pill-none'}[s]);
 const pillTxt=s=>({ok:'OK',warn:'MARGINAL',orange:'HIGH',over:'OVER',none:'N/A'}[s]);
@@ -1405,7 +1407,7 @@ function render(){
   v('sc-watts').textContent=s.totalW.toFixed(0)+' W';v('sc-va').textContent=s.totalVA.toFixed(0)+' VA';
   v('sc-btu').textContent=s.btu.toFixed(0)+' BTU/hr';v('sc-tons').textContent=s.tons.toFixed(2)+' tons';
   v('sc-gen').textContent=s.generatorKW.toFixed(2)+' kW';
-  {const rks=Object.values(s.perRack);const rtTgt=state.settings.runtimeTarget||15;const html=rks.map(rk=>{const hU=rk.upsItems.length>0;const hB=rk.upsBackedW>0;if(!hU&&!hB)return '';const rtPct=(rk.upsRuntime!==null&&rtTgt>0)?(rk.upsRuntime/rtTgt*100):0;let st=(!hU&&hB)?'over':(!hB)?'ok':(rk.upsRuntime===null)?'warn':(rtPct>=100)?'ok':(rtPct>=90)?'warn':(rtPct>=75)?'orange':'over';const lbl=esc(rk.rack.label||('Rack '+rk.rack.id));const col=st==='ok'?'var(--green)':st==='warn'?'var(--warn)':st==='orange'?'var(--orange)':'var(--danger)';if(!hU)return '<div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;color:var(--gray-light)">'+lbl+'</span><span style="font-size:10px;color:var(--danger)">No UPS &mdash; '+Math.round(rk.upsBackedW)+'W unprotected</span></div></div>';const capPct=rk.upsCapW>0?Math.min(rk.upsBackedW/rk.upsCapW*100,100).toFixed(1):'0';return '<div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;gap:8px"><span style="font-size:10px;color:var(--gray-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">'+lbl+'</span><span style="font-size:10px;color:'+col+';white-space:nowrap;flex-shrink:0">'+rtPct.toFixed(0)+'% &middot; ~'+Math.round(rk.upsRuntime)+' min</span></div><div class="gauge-track"><div class="gauge-fill" style="width:'+capPct+'%;background:'+col+'"></div></div></div>';}).join('');const gRt=s.runtimeMin;const gPct=(gRt!==null&&rtTgt>0)?(gRt/rtTgt*100):0;const wSt=s.upsBackedW===0?'none':gRt===null?'warn':gPct>=100?'ok':gPct>=90?'warn':gPct>=75?'orange':'over';v('ups-per-rack').innerHTML=html||'<span style="color:var(--gray-dark)">No UPS-backed loads</span>';setPill('pill-ups',wSt);}
+  {const rks=Object.values(s.perRack);const rtTgt=state.settings.runtimeTarget||15;const html=rks.map(rk=>{const hU=rk.upsItems.length>0;const hB=rk.upsBackedW>0;if(!hU&&!hB)return '';const rtPct=(rk.upsRuntime!==null&&rtTgt>0)?(rk.upsRuntime/rtTgt*100):0;let st=(!hU&&hB)?'over':(!hB)?'ok':(rk.upsRuntime===null)?'warn':(rtPct>=100)?'ok':(rtPct>=90)?'warn':(rtPct>=75)?'orange':'over';const lbl=esc(rk.rack.label||('Rack '+rk.rack.id));const col=st==='ok'?'var(--green)':st==='warn'?'var(--warn)':st==='orange'?'var(--orange)':'var(--danger)';if(!hU)return '<div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;color:var(--gray-light)">'+lbl+'</span><span style="font-size:10px;color:var(--danger)">No UPS &mdash; '+Math.round(rk.upsBackedW)+'W unprotected</span></div></div>';const capPct=rk.upsCapW>0?Math.min(rk.upsBackedW/rk.upsCapW*100,100).toFixed(1):'0';return '<div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;gap:8px"><span style="font-size:10px;color:var(--gray-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">'+lbl+'</span><span style="font-size:10px;color:'+col+';white-space:nowrap;flex-shrink:0">'+rtPct.toFixed(0)+'% &middot; '+Math.round(rk.upsRuntime)+' min</span></div><div class="gauge-track"><div class="gauge-fill" style="width:'+capPct+'%;background:'+col+'"></div></div></div>';}).join('');const gRt=s.runtimeMin;const gPct=(gRt!==null&&rtTgt>0)?(gRt/rtTgt*100):0;const wSt=s.upsBackedW===0?'none':gRt===null?'warn':gPct>=100?'ok':gPct>=90?'warn':gPct>=75?'orange':'over';v('ups-per-rack').innerHTML=html||'<span style="color:var(--gray-dark)">No UPS-backed loads</span>';setPill('pill-ups',wSt);}
 
     renderRackTabs();renderRack(s);renderWall(s);renderSummary(s);renderAssistant(s);
 }
@@ -1497,23 +1499,29 @@ function renderSummary(s){
       html+=sRow('Battery Capacity',_bwhLabel);
       let _critMis=false;
       if(s.runtimeMin!=null){
-        const rtColor=s.runtimeMin<(sets.runtimeTarget||15)?'var(--danger)':'var(--green)';
-        html+=`<div class="sum-row"><span class="sum-key">Est. Runtime at Planning Load</span><span style="font-family:var(--mono);font-weight:700;color:${rtColor};">${s.runtimeMin.toFixed(0)} min</span></div>`;
-        html+=sRow('Est. Runtime After Growth',s.runtimeAtGrowthMin!=null?s.runtimeAtGrowthMin.toFixed(0)+' min':'—');
-        html+=sRow('Required Battery for Target',s.requiredWh.toFixed(1)+' Wh');
+        const rtTarget2=sets.runtimeTarget||15;
+        const rtColCur=s.runtimeMin<rtTarget2?'var(--danger)':'var(--green)';
+        const rtColPlan=s.runtimeAtGrowthMin!=null&&s.runtimeAtGrowthMin<rtTarget2?'var(--danger)':'var(--green)';
+        html+=`<div class="sum-row"><span class="sum-key">Est. Runtime &mdash; Current Load</span><span style="font-family:var(--mono);font-weight:700;color:${rtColCur};">${s.runtimeMin.toFixed(0)} min</span></div>`;
+        html+=`<div class="sum-row"><span class="sum-key">Est. Runtime &mdash; Planning Load</span><span style="font-family:var(--mono);font-weight:700;color:${rtColPlan};">${s.runtimeAtGrowthMin!=null?s.runtimeAtGrowthMin.toFixed(0)+' min':'—'}</span></div>`;
+        html+=sRow('Battery Required &mdash; Current Load',(s.requiredWh/1000).toFixed(2)+' kWh');
+        html+=sRow('Battery Required &mdash; Planning Load',(s.requiredWhPlanning/1000).toFixed(2)+' kWh');
         const deltaColor=s.batteryDeltaWh>=0?'var(--green)':'var(--danger)';
+        const deltaColorPlan=s.batteryDeltaWhPlanning>=0?'var(--green)':'var(--danger)';
         const deltaSign=s.batteryDeltaWh>=0?'+':'';
-        html+=`<div class="sum-row"><span class="sum-key">Battery Surplus / Shortfall</span><span style="font-family:var(--mono);font-weight:700;color:${deltaColor};">${deltaSign}${s.batteryDeltaWh.toFixed(1)} Wh</span></div>`;
+        const deltaSignPlan=s.batteryDeltaWhPlanning>=0?'+':'';
+        html+=`<div class="sum-row"><span class="sum-key">Surplus / Shortfall &mdash; Current</span><span style="font-family:var(--mono);font-weight:700;color:${deltaColor};">${deltaSign}${(s.batteryDeltaWh/1000).toFixed(2)} kWh</span></div>`;
+        html+=`<div class="sum-row"><span class="sum-key">Surplus / Shortfall &mdash; Planning</span><span style="font-family:var(--mono);font-weight:700;color:${deltaColorPlan};">${deltaSignPlan}${(s.batteryDeltaWhPlanning/1000).toFixed(2)} kWh</span></div>`;
         const _rtTgt=sets.runtimeTarget||15;
         _critMis=(_rtTgt>=60||(state.project.intent?.recoveryObjective==='continuous'))&&s.runtimeMin<(_rtTgt*0.5);
-        if(_critMis){const _sfMin=Math.round(_rtTgt-s.runtimeMin);const _sfPct=Math.round((_sfMin/_rtTgt)*100);html+=`<div class="ups-critical-warning"><div class="ucw-title">⚠ Runtime Objective Cannot Be Met With Selected Equipment</div><div class="ucw-row">Estimated runtime at planning load: ${Math.round(s.runtimeMin)} min</div><div class="ucw-row">Runtime objective: ${_rtTgt} min</div><div class="ucw-row">Shortfall: ${_sfMin} min (${_sfPct}% of objective)</div><ul class="ucw-list"><li>Increase UPS capacity or add external battery modules</li><li>Reduce UPS-backed load to lower battery draw</li><li>Coordinate centralized UPS/generator strategy with electrical engineer</li><li>Confirm generator automatic transfer time and accept shorter ride-through</li></ul><div class="ucw-footer">Final UPS selection and battery runtime must be verified using manufacturer runtime charts and confirmed with the Engineer of Record.</div></div>`;}
+        if(_critMis){const _sfMin=Math.round(_rtTgt-s.runtimeMin);const _sfPct=Math.round((_sfMin/_rtTgt)*100);const _sfPlanMin=s.runtimeAtGrowthMin!=null?Math.round(_rtTgt-s.runtimeAtGrowthMin):null;html+=`<div class="ups-critical-warning"><div class="ucw-title">⚠ Runtime Objective Cannot Be Met With Selected Equipment</div><div class="ucw-row">Est. runtime — current load: ${Math.round(s.runtimeMin)} min</div><div class="ucw-row">Est. runtime — planning load: ${s.runtimeAtGrowthMin!=null?Math.round(s.runtimeAtGrowthMin)+' min':'—'}</div><div class="ucw-row">Runtime objective: ${_rtTgt} min</div><div class="ucw-row">Shortfall at current load: ${_sfMin} min (${_sfPct}% of objective)</div>${_sfPlanMin!=null?`<div class="ucw-row">Shortfall at planning load: ${_sfPlanMin} min</div>`:''}<ul class="ucw-list"><li>Increase UPS capacity or add external battery modules</li><li>Reduce UPS-backed load to lower battery draw</li><li>Coordinate centralized UPS/generator strategy with electrical engineer</li><li>Confirm generator automatic transfer time and accept shorter ride-through</li></ul><div class="ucw-footer">Final UPS selection and battery runtime must be verified using manufacturer runtime charts and confirmed with the Engineer of Record.</div></div>`;}
       } else {
         html+='<div style="padding:8px 0;font-size:11px;color:var(--gray-mid);">Add UPS units from the device library to calculate runtime.</div>';
       }
       // Warnings
       let warns='';
       if(s.upsLoadPct>(sets.upsLoadTarget||80))warns+='<div style="color:var(--warn);font-size:11px;margin-top:8px;">&#9888; UPS is above recommended planning load target.</div>';
-      if(s.runtimeMin!=null&&s.runtimeMin<(sets.runtimeTarget||15)&&!_critMis)warns+='<div style="color:var(--warn);font-size:11px;margin-top:4px;">&#9888; Runtime target not met. Additional battery capacity required.</div>';
+      if(s.runtimeMin!=null&&!_critMis){if(s.runtimeMin<(sets.runtimeTarget||15))warns+='<div style="color:var(--warn);font-size:11px;margin-top:4px;">&#9888; Runtime target not met at current load. Additional battery capacity required.</div>';else if(s.runtimeAtGrowthMin!=null&&s.runtimeAtGrowthMin<(sets.runtimeTarget||15))warns+='<div style="color:var(--warn);font-size:11px;margin-top:4px;">&#9888; Runtime target not met at planning load. Review battery capacity for growth.</div>';}
       warns+='<div style="color:var(--gray-mid);font-size:10px;margin-top:8px;font-style:italic;">Final UPS model and battery runtime must be verified using manufacturer data and the UPS vendor sizing tool.</div>';
       html+=warns;
       // Per-rack UPS status table
@@ -1672,7 +1680,7 @@ function renderSummary(s){
       ${s.recUpsVA?sRow('Recommended UPS Size',s.recUpsVA.toLocaleString()+' VA'):sRow('Recommended UPS Size','See UPS sizing panel')}
       ${sRow('UPS Loading at Recommended',s.upsLoadPct.toFixed(1)+'%')}
       ${sRow('Runtime Target',(sets.runtimeTarget||15)+' minutes')}
-      ${s.runtimeMin!=null?sRow('Est. Runtime at Planning Load',s.runtimeMin.toFixed(0)+' minutes'):sRow('Est. Runtime','Add UPS units to calculate')}
+      ${s.runtimeMin!=null?sRow('Est. Runtime — Current Load',s.runtimeMin.toFixed(0)+' min'+(s.runtimeAtGrowthMin!=null?' · Planning: '+s.runtimeAtGrowthMin.toFixed(0)+' min':'')):(sRow('Est. Runtime','Add UPS units to calculate'))}
       ${s.requiredWh>0?sRow('Required Battery Capacity',s.requiredWh.toFixed(1)+' Wh ('+((s.requiredWh/1000)).toFixed(2)+' kWh)'):sRow('Required Battery Capacity','—')}
       <div class="mep-disclaimer">${maturityDisclaimer(state.project.maturity||'schematic')} PLEX provides preliminary ICT/ESS UPS planning values for coordination only. Final UPS selection, circuiting, battery runtime, available fault current, grounding, code compliance, and manufacturer verification remain the responsibility of the electrical engineer, UPS vendor, and Engineer of Record.</div>
     </div>`;
@@ -2043,7 +2051,7 @@ function getAssistantMessages(s){
   if(s.totalW===0){msgs.push({icon:'&#9654;',text:'Add equipment to your rack or wall schedule to see planning estimates.',warn:false});return msgs;}
   if(s.upsBackedW>0){
     msgs.push({icon:'&#9889;',text:(s.recUpsVA?s.recUpsVA.toLocaleString()+' VA':s.upsPlanningVA.toFixed(0)+' VA')+' UPS recommended at '+(s.recUpsVA?s.upsLoadPct.toFixed(0)+'%':'TBD')+' loading.',warn:false});
-    if(s.runtimeMin!=null&&s.runtimeMin<(sets.runtimeTarget||15)){const _rtA=sets.runtimeTarget||15;const _isCrit=(_rtA>=60||(state.project.intent?.recoveryObjective==='continuous'))&&s.runtimeMin<(_rtA*0.5);msgs.push({icon:'&#9888;',text:_isCrit?'Runtime objective cannot be met: '+Math.round(s.runtimeMin)+' min estimated vs. '+_rtA+' min target. Increase battery capacity, reduce backed load, or coordinate generator strategy.':'UPS runtime '+Math.round(s.runtimeMin)+' min — '+_rtA+' min target not met. Battery shortfall '+Math.abs(s.batteryDeltaWh).toFixed(0)+' Wh.',warn:true});}
+    if(s.runtimeMin!=null&&s.runtimeMin<(sets.runtimeTarget||15)){const _rtA=sets.runtimeTarget||15;const _isCrit=(_rtA>=60||(state.project.intent?.recoveryObjective==='continuous'))&&s.runtimeMin<(_rtA*0.5);msgs.push({icon:'&#9888;',text:_isCrit?'Runtime objective cannot be met — current load: '+Math.round(s.runtimeMin)+' min, planning load: '+(s.runtimeAtGrowthMin!=null?Math.round(s.runtimeAtGrowthMin)+' min':'—')+' vs. '+_rtA+' min target. Increase battery capacity or reduce backed load.':'UPS runtime: current load '+Math.round(s.runtimeMin)+' min / planning load '+(s.runtimeAtGrowthMin!=null?Math.round(s.runtimeAtGrowthMin)+' min':'—')+' — '+_rtA+' min target not met. Planning shortfall '+(s.batteryDeltaWhPlanning/1000).toFixed(2)+' kWh.',warn:true});}
     else if(s.runtimeMin!=null){msgs.push({icon:'&#10003;',text:'Runtime ~'+Math.round(s.runtimeMin)+'min. Target of '+(sets.runtimeTarget||15)+'min met.',warn:false});}
   }else{msgs.push({icon:'&#9889;',text:'Tag devices with backup status (UPS Backed or Critical) to enable UPS sizing.',warn:false});}
   // Per-rack UPS alerts — which rack is undersized or missing UPS
@@ -2057,6 +2065,11 @@ function getAssistantMessages(s){
     }
   });
 
+  const _serErRoom=(state.project.rooms||[]).some(r=>r.type==='ser'||r.type==='er'||r.type==='dc');
+  const _hc120=Object.values(s.perRack).filter(rk=>_serErRoom&&rk.rack.voltage===120&&rk.nonUpsWatts>3000);
+  _hc120.forEach(rk=>msgs.push({warn:true,icon:'&#9888;',text:esc(rk.rack.label)+': '+rk.nonUpsWatts.toFixed(0)+'W at 120V ('+rk.amps.toFixed(0)+'A). For loads over 3 kW, consider 208V rack PDU.'}));
+  const _pduMis=Object.values(s.perRack).filter(rk=>{if(!_serErRoom)return false;const ot=(rk.rack.outletType||'').toLowerCase();return(ot.includes('5-20')||ot.includes('5-15'))&&rk.rack.voltage===120&&rk.breaker>=30;});
+  _pduMis.forEach(rk=>msgs.push({warn:true,icon:'&#9888;',text:esc(rk.rack.label)+': NEMA 5-20R rack outlet (20A) on '+rk.breaker+'A circuit — rack PDU input must match circuit amperage.'}));
   msgs.push({icon:'&#10052;',text:'Cooling: ~'+s.recTons.toFixed(1)+' tons / '+s.recBtu.toFixed(0)+' BTU/hr (incl. 1.25&#215; buffer + ambient).',warn:false});
   if(s.roomWperU>100)msgs.push({icon:'&#9888;',text:'High density: '+s.roomWperU.toFixed(0)+' W/U. Confirm precision cooling with MEP.',warn:true});
   if(s.generatorKW>0)msgs.push({icon:'&#128267;',text:'Generator: '+s.generatorKW.toFixed(1)+' kW continuous. Next standard: '+standardGenerator(s.generatorKW)+'.',warn:false});

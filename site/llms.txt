@@ -10,12 +10,13 @@ Limited Energy eXperts (LEX) is an independent consulting practice operated by S
 **Credential:** Registered Communications Distribution Designer (RCDD) — BICSI
 **Contact:** stovey@limitedenergy.net
 **LinkedIn:** https://www.linkedin.com/in/mctovey/
+**GitHub:** https://github.com/LimitedEnergyX
 **Website:** https://limitedenergy.net
 
 ## Pages
 
 - [Home](https://limitedenergy.net/): Professional profile and overview of LEX services, credentials, and tools.
-- [PLEX — Power Load EXaminer](https://limitedenergy.net/plex): Free web-based load sizing tool for telecom rooms and equipment rooms. Calculates UPS, generator, PoE, and cooling loads for Division 27/28 coordination. Version 2.32. No login required, runs entirely in the browser.
+- [PLEX — Power Load EXaminer](https://limitedenergy.net/plex): Free web-based load sizing tool for telecom rooms and equipment rooms. Calculates UPS, generator, PoE, and cooling loads for Division 27/28 coordination. Version 2.71. No login required, runs entirely in the browser.
 - [Smart Home Design](https://limitedenergy.net/home-automation): Local-first smart home system design and programming. No cloud subscriptions, no vendor lock-in. Engineered for practical, long-term reliability.
 - [About](https://limitedenergy.net/about): Professional profile for Shawn C. Tovey, RCDD. Background, BICSI credential detail, and links to free tools.
 - [The Estimator](https://limitedenergy.net/estimate): Free web-based job estimation tool for Division 27/28 low-voltage work. Schedule-driven crew sizing, BICSI-coded scope, federal/California overtime math, local/remote cost variants. Version 1.25. No login required, runs entirely in the browser.

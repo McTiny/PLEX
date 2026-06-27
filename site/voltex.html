@@ -76,30 +76,16 @@
 
     /* HERO */
     .voltex-hero {
-      position: relative;
-      min-height: 88vh;
-      background: url('/voltex-hero.png') center top / cover no-repeat;
+      background: linear-gradient(160deg, #0a1525 0%, var(--navy-deep) 40%, #111e38 100%);
+      border-bottom: 1px solid var(--border-dim);
       display: flex;
-      align-items: flex-end;
-    }
-    .voltex-hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(14,27,48,0.35) 0%,
-        rgba(14,27,48,0.65) 45%,
-        rgba(14,27,48,0.93) 80%,
-        rgba(14,27,48,1) 100%
-      );
+      align-items: center;
     }
     .voltex-hero-content {
-      position: relative;
-      z-index: 1;
       width: 100%;
       max-width: 960px;
       margin: 0 auto;
-      padding: 0 2.5rem 5rem;
+      padding: 6rem 2.5rem 5rem;
     }
     .voltex-dev-badge {
       display: inline-block;
@@ -137,8 +123,8 @@
       line-height: 1.75;
     }
     @media (max-width: 600px) {
-      .voltex-hero { min-height: 75vh; }
-      .voltex-hero-content { padding: 0 1.25rem 3rem; }
+      .voltex-hero-content { padding: 4rem 1.25rem 3.5rem; text-align: center; }
+      .voltex-hero-desc { margin: 0 auto; }
     }
 
     /* SECTIONS */
@@ -379,7 +365,6 @@
 
 <!-- HERO -->
 <section class="voltex-hero">
-  <div class="voltex-hero-overlay"></div>
   <div class="voltex-hero-content">
     <div class="voltex-dev-badge">In Development</div>
     <div class="voltex-wordmark">VolTex</div>

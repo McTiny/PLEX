@@ -639,6 +639,25 @@
   <a href="#connect">Connect</a>
 </div>
 
+<script>
+(function(){
+  var ham = document.getElementById('ham');
+  var mob = document.getElementById('mob');
+  if(ham && mob){
+    ham.addEventListener('click', function(){
+      ham.classList.toggle('open');
+      mob.classList.toggle('open');
+    });
+    mob.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        ham.classList.remove('open');
+        mob.classList.remove('open');
+      });
+    });
+  }
+})();
+</script>
+
 <!-- NEC NOTICE -->
 <div class="nec-notice">
   <div class="nec-notice-inner">

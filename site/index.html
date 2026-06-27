@@ -11,14 +11,14 @@
     gtag('config', 'G-ECRHM5MP0Y');
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LEX | Shawn C. Tovey, RCDD</title>
-  <meta name="description" content="Limited Energy eXperts — Shawn C. Tovey, RCDD. ICT design consultant, physical security systems designer, and AI tooling builder specializing in Division 27 and 28 design workflows.">
+  <title>Shawn C. Tovey, RCDD — Physical Security Engineer & Technologist</title>
+  <meta name="description" content="Shawn C. Tovey, RCDD — physical security engineer, infrastructure designer, and builder of free tools for the Division 27 and 28 community. U.S. Navy veteran. BICSI credentialed.">
   <link rel="canonical" href="https://limitedenergy.net/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <meta property="og:title" content="LEX | Shawn C. Tovey, RCDD">
-  <meta property="og:description" content="ICT design consultant, physical security systems designer, and AI tooling builder specializing in Division 27 and 28 design workflows.">
+  <meta property="og:title" content="Shawn C. Tovey, RCDD — Physical Security Engineer & Technologist">
+  <meta property="og:description" content="Physical security engineer, infrastructure designer, and builder of free tools for the Division 27 and 28 community. BICSI RCDD. U.S. Navy veteran.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://limitedenergy.net/">
   <meta property="og:site_name" content="Limited Energy eXperts">
@@ -26,8 +26,8 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="LEX | Shawn C. Tovey, RCDD">
-  <meta name="twitter:description" content="ICT design consultant, physical security systems designer, and AI tooling builder specializing in Division 27 and 28 design workflows.">
+  <meta name="twitter:title" content="Shawn C. Tovey, RCDD — Physical Security Engineer & Technologist">
+  <meta name="twitter:description" content="Physical security engineer, infrastructure designer, and builder of free tools for the Division 27 and 28 community. BICSI RCDD. U.S. Navy veteran.">
   <meta name="twitter:image" content="https://limitedenergy.net/og-image.png">
   <script type="application/ld+json">
   {
@@ -38,18 +38,36 @@
         "@id": "https://limitedenergy.net/#shawn-tovey",
         "name": "Shawn C. Tovey",
         "honorificSuffix": "RCDD",
-        "jobTitle": "ICT Design Consultant & Physical Security Systems Designer",
-        "description": "Limited energy systems designer specializing in Division 27 and 28 — ICT infrastructure, physical security systems, and AI tooling for design workflows.",
+        "jobTitle": "Physical Security Engineer & Infrastructure Designer",
+        "description": "Physical security engineer and infrastructure designer with BICSI RCDD credential. Specializes in Division 27 and 28 systems, physical security architecture, and AI-assisted engineering workflows. U.S. Navy veteran.",
         "url": "https://limitedenergy.net",
         "email": "stovey@limitedenergy.net",
         "sameAs": ["https://www.linkedin.com/in/mctovey/", "https://github.com/LimitedEnergyX"],
         "knowsAbout": [
+          "Physical Security Systems Design",
+          "Access Control Systems",
+          "Video Surveillance",
+          "Perimeter Intrusion Detection",
           "Division 27 Communications Systems",
           "Division 28 Electronic Safety and Security",
           "ICT Infrastructure Design",
-          "Physical Security Systems Design",
-          "Low-Voltage Systems",
-          "AI Tooling for Design"
+          "Limited Energy Systems",
+          "OSDP Secure Channel",
+          "AI-Assisted Engineering",
+          "Emergency Communications",
+          "Amateur Radio",
+          "UAS Operations",
+          "BICSI Standards"
+        ],
+        "memberOf": [
+          {
+            "@type": "Organization",
+            "name": "BICSI Educational Technology Standards Committee"
+          }
+        ],
+        "alumniOf": [
+          { "@type": "Organization", "name": "U.S. Navy" },
+          { "@type": "Organization", "name": "Army National Guard" }
         ],
         "hasCredential": {
           "@type": "EducationalOccupationalCredential",
@@ -70,7 +88,7 @@
         "url": "https://limitedenergy.net",
         "email": "stovey@limitedenergy.net",
         "founder": { "@id": "https://limitedenergy.net/#shawn-tovey" },
-        "description": "ICT design and consulting practice specializing in Division 27 and 28 design workflows, low-voltage systems, and AI tooling for design productivity.",
+        "description": "Professional engineering brand and technical resource platform for physical security systems, ICT infrastructure, limited energy engineering, and AI-assisted design workflows.",
         "knowsAbout": [
           "Telecom Room Design", "Equipment Room Design",
           "Physical Security Systems", "ICT Infrastructure",
@@ -160,6 +178,11 @@
       transition: background 0.2s, color 0.2s; white-space: nowrap; flex-shrink: 0;
     }
     .nav-cta:hover { background: var(--red); color: var(--text); }
+    .nav-icon {
+      display: flex; align-items: center; color: var(--text-dim);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-icon:hover { color: var(--text-muted); }
 
     /* hamburger */
     .hamburger {
@@ -322,6 +345,17 @@
       transition: border-color 0.2s, color 0.2s;
     }
     .sector-tag:hover { border-color: var(--red); color: var(--text); }
+    .interest-grid {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;
+    }
+    .interest-tag {
+      font-family: var(--font-mono); font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-dim); border: 1px solid var(--border-dim);
+      padding: 0.4rem 0.85rem; border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .interest-tag:hover { border-color: var(--border); color: var(--text-muted); }
     .exp-highlight {
       max-width: 680px; background: var(--navy-mid);
       border-left: 3px solid var(--red); padding: 1.25rem 1.5rem; margin-top: 2rem;
@@ -398,6 +432,10 @@
     .tool-status.homelab {
       background: rgba(22,35,56,0.6); color: var(--text-dim);
       border: 1px solid var(--border);
+    }
+    .tool-status.dev {
+      background: rgba(100,80,200,0.12); color: #a99ee8;
+      border: 1px solid rgba(100,80,200,0.25);
     }
     .tool-name {
       font-family: var(--font-head); font-weight: 600; font-size: 1.25rem;
@@ -525,6 +563,19 @@
     .contact-submit { align-self: flex-start; background: transparent; border: 1px solid var(--red); color: var(--text); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.65rem 1.5rem; cursor: pointer; transition: background 0.2s; }
     .contact-submit:hover { background: var(--red); }
     .contact-submit:disabled { opacity: 0.5; cursor: default; }
+    /* --- PHILOSOPHY CALLOUT -------------------------------- */
+    .philosophy-callout {
+      max-width: 680px; margin-top: 3rem;
+      border-left: 3px solid var(--border);
+      background: rgba(22,35,56,0.5);
+      padding: 1.5rem 1.75rem;
+    }
+    .philosophy-callout p {
+      font-family: var(--font-body); font-size: 0.92rem; font-weight: 400;
+      color: var(--text-muted); line-height: 1.9; margin-bottom: 0.9rem;
+    }
+    .philosophy-callout p:last-child { margin-bottom: 0; }
+
     @media (max-width: 600px) {
 
       /* Tool cards: stack badge above content on mobile */
@@ -552,12 +603,24 @@
 
 <!-- NAV -->
 <nav id="top">
-  <a href="#" class="nav-brand">
+  <a href="/" class="nav-brand">
     <span class="lex">LEX</span>
     <span class="tagline">Limited Energy eXperts</span>
   </a>
+  <ul class="nav-links">
+    <li><a href="/about">About</a></li>
+    <li><a href="/work">Work</a></li>
+    <li><a href="/writing">Writing</a></li>
+    <li><a href="/plex">PLEX</a></li>
+    <li><a href="/estimate">Estimator</a></li>
+  </ul>
   <div class="nav-right">
-    <a href="/plex" class="nav-cta">The Dude &nbsp;→</a>
+    <a href="https://www.linkedin.com/in/mctovey/" target="_blank" rel="noopener" class="nav-icon" aria-label="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://github.com/LimitedEnergyX" target="_blank" rel="noopener" class="nav-icon" aria-label="GitHub">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+    </a>
     <button class="hamburger" id="ham" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -566,17 +629,20 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mob">
+  <a href="/">Home</a>
   <a href="/about">About</a>
-  <a href="/plex">The Dude</a>
-  <a href="/estimate">The Estimator</a>
+  <a href="/work">Work</a>
+  <a href="/writing">Writing</a>
+  <a href="/plex">PLEX</a>
+  <a href="/estimate">Estimator</a>
   <a href="/home-automation">Home Automation</a>
-  <a href="/#contact">Contact</a>
+  <a href="#connect">Connect</a>
 </div>
 
 <!-- NEC NOTICE -->
 <div class="nec-notice">
   <div class="nec-notice-inner">
-    <strong>NEC 2026</strong> formally adopts <em>limited energy</em> as the standard terminology for the class of systems previously referred to as low voltage — including communications, data, security, audio/visual, and control wiring. Limited Energy eXperts was built around this language from the start.
+    <strong>NEC 2026</strong> formally adopts <em>limited energy</em> as the standard terminology for the class of systems previously referred to as low voltage, including communications, data, security, audio/visual, and control wiring. Limited Energy eXperts was built around this language from the start.
   </div>
 </div>
 
@@ -585,14 +651,14 @@
   <div class="hero-inner">
 
     <div class="hero-text">
-      <div class="hero-kicker">Independent Consulting · AI-Enabled Design · Smart Automation</div>
+      <div class="hero-kicker">Physical Security Engineer · Infrastructure Designer · Technologist</div>
       <h1 class="hero-name">Shawn C. Tovey <span class="rcdd">/ RCDD</span></h1>
       <p class="hero-role">LIMITED ENERGY EXPERTS</p>
       <div class="hero-divider"></div>
       <blockquote class="hero-quote">
         AI does not replace the design engineer, just as the tractor did not replace the farmer. It is a tool. A well-qualified and experienced engineer of record is required to drive the AI tractor.
       </blockquote>
-      <p class="hero-quote-attr">— Shawn C. Tovey, RCDD</p>
+      <p class="hero-quote-attr">Shawn C. Tovey, RCDD</p>
     </div>
 
     <div class="hero-portrait">
@@ -601,11 +667,11 @@
 
     <div class="hero-bio-block">
       <p class="hero-bio">
-        Limited Energy eXperts (LEX) is an independent consulting practice focused on practical AI adoption for engineering, limited energy design, and home automation workflows. LEX helps turn repetitive technical work into structured, repeatable processes — from Division 27 and Division 28 design support to AI-assisted estimating, documentation, coordination, and system planning.
+        I design physical security and ICT systems for environments where failure carries real consequence: federal installations, hyperscale data centers, airports, hospitals, correctional facilities, and enterprise campuses. The work is about anticipating how systems fail and designing to prevent it. The RCDD credential from BICSI is the formal acknowledgment of that discipline.
       </p>
       <br>
       <p class="hero-bio">
-        The focus is not AI for its own sake. It is using AI where it actually helps: reducing manual effort, improving consistency, accelerating design decisions, and giving engineers, contractors, and homeowners better tools to solve real problems.
+        The tools and projects on this site exist because good engineering problems deserve better instruments. The free tools are available to anyone in the limited energy community. The research is shared because the field improves when practitioners understand the vulnerabilities they are designing around.
       </p>
     </div>
 
@@ -614,9 +680,9 @@
 
 <!-- SECTORS -->
 <section class="section" id="sectors">
-  <div class="section-kicker">Project Experience</div>
-  <h2 class="section-heading">Sectors Served</h2>
-  <p class="section-sub">Physical security and ICT design experience across a broad range of facility types — from hyperscale mission-critical infrastructure to public-serving facilities, federal installations, and healthcare environments.</p>
+  <div class="section-kicker">Career Experience</div>
+  <h2 class="section-heading">Where I've Worked</h2>
+  <p class="section-sub">Over two decades designing and supporting integrated technology systems across a wide range of environments, from single facilities to large multi-site deployments spanning Division 27 and Division 28 systems.</p>
 
   <div class="sectors-grid">
     <span class="sector-tag">Hyperscale Data Centers</span>
@@ -624,8 +690,10 @@
     <span class="sector-tag">Defense Facilities</span>
     <span class="sector-tag">Law Enforcement</span>
     <span class="sector-tag">Corrections</span>
-    <span class="sector-tag">Education</span>
+    <span class="sector-tag">K–12 Education</span>
+    <span class="sector-tag">Higher Education</span>
     <span class="sector-tag">Healthcare</span>
+    <span class="sector-tag">Airports</span>
     <span class="sector-tag">Finance</span>
     <span class="sector-tag">Enterprise Campuses</span>
     <span class="sector-tag">Critical Infrastructure</span>
@@ -637,7 +705,7 @@
 
   <div class="exp-highlight">
     <p>
-      <strong>Hyperscale Data Center Security Program.</strong> Contributed to more than $170M in physical security solution proposals for hyperscale data center and mission-critical clients. Scope included full physical security architecture — access control, VMS, PIDS, and perimeter defense design — validated against operational requirements and constructability constraints. Developed automated estimating and proposal tools that standardized solution development and enabled scalable design support across project teams. Experienced in design-assist delivery, owner-stakeholder coordination, and translating complex security requirements into defensible, code-compliant construction documents.
+      Experience spans education, healthcare, aviation, government, manufacturing, enterprise campuses, correctional facilities, and hyperscale data centers. Work ranges from individual facilities to nationwide deployments, including design development, construction documents, design-assist delivery, proposal development, and owner-stakeholder coordination. Volume of proposal activity has reached nine figures across physical security architecture alone.
     </p>
   </div>
 </section>
@@ -646,20 +714,20 @@
 <section class="section" id="credentials">
   <div class="section-kicker">Qualified. Verified.</div>
   <h2 class="section-heading">Credentials</h2>
-  <p class="cred-intro">The list below reflects manufacturer training and platform exposure carried through years of design and field work — not a dated certification roster. The work shows what the training built.</p>
+  <p class="cred-intro">The list below reflects manufacturer training and platform exposure carried through years of design and field work, not a dated certification roster. The work shows what the training built.</p>
 
   <div class="cred-grid">
     <div class="cred-card">
       <div class="cred-abbr">RCDD</div>
       <div class="cred-full">Registered Communications Distribution Designer</div>
       <div class="cred-issuer">BICSI</div>
-      <div class="cred-desc">BICSI's senior credential for ICT distribution design — structured cabling systems, pathways and spaces, and engineering documentation.</div>
+      <div class="cred-desc">BICSI's senior credential for ICT distribution design: structured cabling systems, pathways and spaces, and engineering documentation.</div>
     </div>
     <div class="cred-card">
       <div class="cred-abbr">MCDE</div>
       <div class="cred-full">Milestone Certified Design Engineer</div>
       <div class="cred-issuer">Milestone Systems</div>
-      <div class="cred-desc">Design of complex video surveillance systems on Milestone XProtect — server sizing, storage calculation, and recording infrastructure.</div>
+      <div class="cred-desc">Design of complex video surveillance systems on Milestone XProtect: server sizing, storage calculation, and recording infrastructure.</div>
     </div>
     <div class="cred-card">
       <div class="cred-abbr">Hanwha</div>
@@ -671,7 +739,7 @@
       <div class="cred-abbr">Exacqvision</div>
       <div class="cred-full">VMS System Engineering</div>
       <div class="cred-issuer">Exacq Technologies</div>
-      <div class="cred-desc">System engineering on Exacqvision VMS — installation, configuration, and performance tuning.</div>
+      <div class="cred-desc">System engineering on Exacqvision VMS: installation, configuration, and performance tuning.</div>
     </div>
     <div class="cred-card">
       <div class="cred-abbr">Salient</div>
@@ -683,13 +751,13 @@
       <div class="cred-abbr">Axis CP</div>
       <div class="cred-full">Axis Certified Professional</div>
       <div class="cred-issuer">Axis Communications</div>
-      <div class="cred-desc">Network video system design — Axis camera platform, edge processing, and IP networking fundamentals.</div>
+      <div class="cred-desc">Network video system design: Axis camera platform, edge processing, and IP networking fundamentals.</div>
     </div>
     <div class="cred-card">
       <div class="cred-abbr">Genetec</div>
       <div class="cred-full">Omnicast &amp; Synergis Platform</div>
       <div class="cred-issuer">Genetec Inc.</div>
-      <div class="cred-desc">Security Center deployment and configuration — Omnicast video management and Synergis access control.</div>
+      <div class="cred-desc">Security Center deployment and configuration: Omnicast video management and Synergis access control.</div>
     </div>
     <div class="cred-card">
       <div class="cred-abbr">2N</div>
@@ -701,7 +769,7 @@
       <div class="cred-abbr">Optex</div>
       <div class="cred-full">Redscan LiDAR Detection</div>
       <div class="cred-issuer">Optex Inc.</div>
-      <div class="cred-desc">Laser-based outdoor perimeter intrusion detection — zone configuration and false-alarm reduction.</div>
+      <div class="cred-desc">Laser-based outdoor perimeter intrusion detection: zone configuration and false-alarm reduction.</div>
     </div>
     <div class="cred-card">
       <div class="cred-abbr">FCMP</div>
@@ -711,134 +779,98 @@
     </div>
     <div class="cred-card">
       <div class="cred-abbr">FAA</div>
-      <div class="cred-full">UAS Remote Pilot — Part 107</div>
+      <div class="cred-full">UAS Remote Pilot, Part 107</div>
       <div class="cred-issuer">Federal Aviation Administration</div>
-      <div class="cred-desc">Commercial drone operator license — federal airspace regulations, operating limits, and UAS safety protocols.</div>
+      <div class="cred-desc">Commercial drone operator license: federal airspace regulations, operating limits, and UAS safety protocols.</div>
     </div>
     <div class="cred-card">
       <div class="cred-abbr">FCC</div>
-      <div class="cred-full">Amateur Radio Operator — W9SCT</div>
+      <div class="cred-full">Amateur Radio Operator, W9SCT</div>
       <div class="cred-issuer">Federal Communications Commission</div>
       <div class="cred-desc">RF operations, communications electronics, regulatory compliance, and emergency radio infrastructure.</div>
     </div>
     <div class="cred-card">
       <div class="cred-abbr">OSHA</div>
-      <div class="cred-full">OSHA 30 — Construction Safety</div>
+      <div class="cred-full">OSHA 30: Construction Safety</div>
       <div class="cred-issuer">U.S. Department of Labor</div>
-      <div class="cred-desc">30-hour construction safety training — hazard recognition, federal safety standards, and worksite risk management.</div>
+      <div class="cred-desc">30-hour construction safety training: hazard recognition, federal safety standards, and worksite risk management.</div>
     </div>
     <div class="cred-card">
       <div class="cred-abbr">Operator</div>
       <div class="cred-full">Aerial Lift, Lift Truck, and Loader</div>
       <div class="cred-issuer">OSHA-Aligned Operator Certification</div>
-      <div class="cred-desc">Equipment training — safety and load handling for boom lifts, aerial work platforms, forklifts, and loaders.</div>
+      <div class="cred-desc">Equipment training: safety and load handling for boom lifts, aerial work platforms, forklifts, and loaders.</div>
     </div>
   </div>
 </section>
 
-<!-- TOOLS -->
-<section class="section" id="tools">
-  <div class="section-kicker">What I'm Building</div>
-  <h2 class="section-heading">Tools</h2>
-  <p class="section-sub">The free tools on this site — The Dude and The Estimator — came from real project needs. The Dude was built to simplify telecom room power, UPS, generator, and cooling coordination. The Estimator was built because limited energy bidding still depends too heavily on spreadsheets that were never designed for Division 27/28 scope. The remaining tools run on a private local stack.</p>
-
-  <div class="tools-framing">
-    Each agent performs 90–95% of the lift — intake, parsing, comparison, draft output.
-    The engineer of record reviews, owns, and stands behind the result. The judgment calls stay with the human.
-  </div>
+<!-- ENGINEERING PROJECTS -->
+<section class="section" id="work">
+  <div class="section-kicker">Engineering Projects</div>
+  <h2 class="section-heading">What I Build</h2>
+  <p class="section-sub">Each project started as a problem I needed to solve. They are engineering explorations: built to work, shared to be useful, and continued as long as they remain interesting.</p>
 
   <div class="tools-grid">
 
     <div class="tool-card">
       <div class="tool-card-body">
-        <div class="tool-name">The Dude</div>
-        <div class="tool-subtitle">Your helpful guide for PLEX Power Load EXaminer</div>
-        <p class="tool-desc">Purpose-built utility for sizing telecom room and equipment room infrastructure. Input active equipment loads and The Dude calculates power distribution requirements, UPS sizing, generator sizing, PoE budget, and cooling demand — aligned to BICSI and TIA standards.</p>
-        <a href="/plex" class="tool-link">The Dude →</a>
+        <div class="tool-name">PLEX: Power Load EXaminer</div>
+        <div class="tool-subtitle">Division 27/28 Power Planning &nbsp;·&nbsp; Free &amp; Browser-Native</div>
+        <p class="tool-desc"><strong>Why:</strong> Telecom room power coordination was a repeated pain point: sizing UPS, generators, PoE budgets, and cooling loads by hand from scattered references on every project.</p>
+        <p class="tool-desc"><strong>What it solves:</strong> A single browser-native calculator that handles UPS sizing, generator sizing, PoE budget, and cooling demand for telecom rooms and equipment rooms. No login, no server, no data leaves the browser.</p>
+        <p class="tool-desc"><strong>Technologies:</strong> Vanilla HTML, CSS, JavaScript. Runs entirely client-side. Aligned to BICSI and TIA standards.</p>
+        <p class="tool-desc"><strong>Where it's headed:</strong> Continued refinement based on field use and community feedback. The goal is to reduce the class of power coordination errors that happen when engineers estimate UPS and generator requirements from memory or incomplete references.</p>
+        <a href="/plex" class="tool-link">Launch PLEX →</a>
       </div>
-      <span class="tool-status live">Live</span>
+      <span class="tool-status live">Live · Open</span>
     </div>
 
     <div class="tool-card">
       <div class="tool-card-body">
         <div class="tool-name">The Estimator</div>
-        <div class="tool-subtitle">BICSI WBS &nbsp;·&nbsp; Limited Energy Job Costing &nbsp;·&nbsp; Customer Proposal &amp; Internal Bid Report</div>
-        <p class="tool-desc">Client-side job estimator purpose-built for limited energy contractors. Builds from BICSI WBS section codes, calculates labor using configurable crew roles, workweek patterns, and federal or California OT rules. Generates sell-side pricing using margin form, produces a customer-ready proposal, and an internal bid report with financial roll-up, bid health indicators, and auto-generated risk flags. No account required. No data leaves the browser.</p>
+        <div class="tool-subtitle">BICSI WBS &nbsp;·&nbsp; Limited Energy Job Costing &nbsp;·&nbsp; Free &amp; Browser-Native</div>
+        <p class="tool-desc"><strong>Why:</strong> Limited energy estimating still relies heavily on general-purpose spreadsheets that were never designed for Division 27/28 scope or BICSI work breakdown structures.</p>
+        <p class="tool-desc"><strong>What it solves:</strong> A complete job estimator built around BICSI WBS codes. Configurable crew roles, workweek patterns, and federal or California overtime rules. Generates a customer-ready proposal and an internal bid report with financial roll-up, bid health indicators, and risk flags. No account required.</p>
+        <p class="tool-desc"><strong>Technologies:</strong> Vanilla HTML, CSS, JavaScript. Entirely client-side. No data transmitted.</p>
+        <p class="tool-desc"><strong>Where it's headed:</strong> Expanding scope coverage and improving risk flag logic: the bid health indicators that surface problems before a job is priced wrong and the damage is done downstream.</p>
         <a href="/estimate" class="tool-link">Launch The Estimator →</a>
       </div>
-      <span class="tool-status live">Live</span>
+      <span class="tool-status live">Live · Open</span>
     </div>
 
     <div class="tool-card">
       <div class="tool-card-body">
-        <div class="tool-name">Spec Generator</div>
-        <div class="tool-subtitle">CSI MasterFormat &nbsp;·&nbsp; Div 27 and Div 28 &nbsp;·&nbsp; Construction-Ready Output</div>
-        <p class="tool-desc">Generates complete, construction-ready specification sections driven by structured project intake. Prohibited items flagged automatically. Mandatory standards enforced by default. Outputs one section at a time for practitioner review before proceeding. Built around a knowledge base of pre-approved base specification templates — adaptable to a firm's own standard templates so output matches in-house format.</p>
+        <div class="tool-name">Purple Rainmaker</div>
+        <div class="tool-subtitle">Local Network Security Awareness &nbsp;·&nbsp; Home &amp; Small Office</div>
+        <p class="tool-desc"><strong>Why:</strong> Local networks accumulate unknown devices, exposed ports, outdated services, and unnoticed configuration drift. Most home and small office environments have no repeatable way to see what's actually running on the network.</p>
+        <p class="tool-desc"><strong>What it solves:</strong> A local-first network awareness and vulnerability assessment tool that runs automated subnet audits (ARP device discovery, port scanning, and CVE assessment via nmap scripts) and streams results live to a browser dashboard. Generates a PDF report with findings, risk level, CVSS scores, and recommendations. Tracks device baseline changes between scans.</p>
+        <p class="tool-desc"><strong>Technologies:</strong> Python, Flask, Flask-Sock, HTML, Shell, nmap, arp-scan, WeasyPrint, CVE/CVSS lookup. Runs on Linux/Kali Purple.</p>
+        <p class="tool-desc"><strong>Where it's headed:</strong> Improving baseline comparison, remediation guidance, and reporting so small environments can identify weak points and track progress before those weak points become operational or security problems.</p>
       </div>
-      <span class="tool-status private">Private Stack</span>
+      <span class="tool-status dev">In Development</span>
     </div>
 
     <div class="tool-card">
       <div class="tool-card-body">
-        <div class="tool-name">Spec Reviewer</div>
-        <div class="tool-subtitle">BOM Extraction &nbsp;·&nbsp; Responsibility Matrix &nbsp;·&nbsp; Integrator Intake</div>
-        <p class="tool-desc">Reviews specifications from the integrator's seat. Extracts the Bill of Materials automatically to accelerate quoting, and builds a responsibility matrix mapping scope items to trades. Designed to turn a slow manual takeoff into a fast first pass the estimator can refine.</p>
+        <div class="tool-name">VolTex</div>
+        <div class="tool-subtitle">A Volley of Intelligence &nbsp;·&nbsp; Built in Texas</div>
+        <p class="tool-desc"><strong>Why:</strong> Modern AI assistants each have unique strengths and limitations. VolTex coordinates a structured volley of analysis between independent AI agents to produce recommendations built on consensus, not a single perspective. You make the final call.</p>
+        <p class="tool-desc"><strong>What it solves:</strong> A local-first multi-agent AI orchestration platform. Independent agents bring different strengths and perspectives to the same problem. Ideas are exchanged, challenged, and refined through a bounded process. One designated execution agent interacts with approved tools. The others focus on independent reasoning and review. The consensus recommendation is presented to you for approval.</p>
+        <p class="tool-desc"><strong>Technologies:</strong> Multi-agent orchestration, Git Integration, Desktop Commander, Chrome MCP, Discord operator interface, structured consensus protocol, local inference.</p>
+        <p class="tool-desc"><strong>Where it's headed:</strong> Expanding into a general-purpose collaboration platform for engineering reviews, technical writing, documentation, planning, research, and design critiques. Any domain where independent AI perspectives improve decision quality while preserving human oversight.</p>
       </div>
-      <span class="tool-status private">Private Stack</span>
+      <span class="tool-status dev">In Development</span>
     </div>
 
     <div class="tool-card">
       <div class="tool-card-body">
-        <div class="tool-name">Submittal Reviewer</div>
-        <div class="tool-subtitle">Submittal vs. Specification Comparison &nbsp;·&nbsp; EOR Workflow</div>
-        <p class="tool-desc">Compares incoming submittal packages against the contract specification. Flags deviations, missing items, and proposed substitutions for engineer-of-record review. Drafts the markup so the EOR focuses on the judgment calls, not the line-by-line cross-check.</p>
-      </div>
-      <span class="tool-status private">Private Stack</span>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-card-body">
-        <div class="tool-name">RFI Assistant</div>
-        <div class="tool-subtitle">RFI Review &nbsp;·&nbsp; Specification Cross-Check &nbsp;·&nbsp; Response Structure</div>
-        <p class="tool-desc">Reviews incoming RFIs against the specification, identifies the governing clauses, and prepares a structured draft response for the engineer of record. EOR provides the technical answer; the assistant handles the lookup, structure, and formatting.</p>
-      </div>
-      <span class="tool-status private">Private Stack</span>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-card-body">
-        <div class="tool-name">Field QA Assistant</div>
-        <div class="tool-subtitle">Jobsite Walk &nbsp;·&nbsp; Photo Capture &nbsp;·&nbsp; QA Site Survey Report</div>
-        <p class="tool-desc">Walk the jobsite capturing photos of key items. At the end of the walk, the assistant identifies equipment and installation details, compares observations against the specification and applicable standards, and assists with generation of the QA site survey report.</p>
-      </div>
-      <span class="tool-status private">Private Stack</span>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-card-body">
-        <div class="tool-name">Home Automation Platform</div>
-        <div class="tool-subtitle">Local Inference &amp; Home Automation Stack &nbsp;·&nbsp; Private Lab</div>
-        <p class="tool-desc">
-          Dedicated home server running the private inference stack and home automation platform. All LEX private stack tools run here — no cloud inference, no third-party data exposure. Tailscale VPN keeps the stack accessible and off the public internet.
-        </p>
-        <p class="tool-desc">
-          Home automation integrates a full sensor and device network via Home Assistant (Lovelace UI), with Node.js services connecting to TP-Link Kasa lighting, YoLink leak and environmental sensors, SmartThings appliances, Resideo thermostat, Tesla Powerwall energy monitoring, and Aladdin Connect garage access. Dashboards are built in Grafana against InfluxDB time-series data, with JSON and HTML customization throughout.
-        </p>
-        <a href="/home-automation" class="tool-link">See Home Automation Design →</a>
-        <div class="tool-tags">
-          <span class="tool-tag">Docker</span>
-          <span class="tool-tag">Ollama</span>
-          <span class="tool-tag">Open-WebUI</span>
-          <span class="tool-tag">Home Assistant</span>
-          <span class="tool-tag">Lovelace</span>
-          <span class="tool-tag">Node.js</span>
-          <span class="tool-tag">Grafana</span>
-          <span class="tool-tag">InfluxDB</span>
-          <span class="tool-tag">Tesla Powerwall</span>
-          <span class="tool-tag">YoLink</span>
-          <span class="tool-tag">Tailscale</span>
-          <span class="tool-tag">JSON / HTML</span>
-        </div>
+        <div class="tool-name">Home Automation &amp; Inference Stack</div>
+        <div class="tool-subtitle">Local Inference &nbsp;·&nbsp; Home Assistant &nbsp;·&nbsp; Private Lab</div>
+        <p class="tool-desc"><strong>Why:</strong> Cloud-dependent home automation creates single points of failure, data exposure risks, and subscription lock-in. Local inference enables private AI tooling without sending sensitive information to external services.</p>
+        <p class="tool-desc"><strong>What it solves:</strong> A dedicated home server running a private inference stack and home automation platform. All private engineering tools run here. Sensor network covers environmental monitoring, energy monitoring, lighting, appliances, and access. Dashboards built in Grafana against InfluxDB time-series data.</p>
+        <p class="tool-desc"><strong>Technologies:</strong> Docker, Ollama, Open-WebUI, Home Assistant, Node.js, Grafana, InfluxDB, Tailscale, YoLink, Tesla Powerwall, TP-Link Kasa.</p>
+        <p class="tool-desc"><strong>Where it's headed:</strong> Deeper integration between the inference stack and automation triggers, and improved energy visibility through solar and Powerwall data, building toward a home that maintains capability when normal infrastructure degrades.</p>
+        <a href="/home-automation" class="tool-link">See the build →</a>
       </div>
       <span class="tool-status homelab">Home Lab</span>
     </div>
@@ -846,28 +878,55 @@
   </div>
 </section>
 
-<!-- AI + DIV 27/28 -->
-<section class="section" id="ai">
-  <div class="section-kicker">Perspective</div>
-  <h2 class="section-heading">AI in Div 27 / 28 Design</h2>
-  <p class="section-sub">How this tooling gets built and why it is being built this way.</p>
+<!-- AREAS OF INTEREST -->
+<section class="section" id="interests">
+  <div class="section-kicker">Areas of Interest</div>
+  <h2 class="section-heading">Where My Curiosity Points</h2>
+  <p class="section-sub">Not a credentials list. A window into what I find genuinely interesting, and where my thinking is going.</p>
+
+  <div class="interest-grid">
+    <span class="interest-tag">Physical Security</span>
+    <span class="interest-tag">Division 27 &amp; 28</span>
+    <span class="interest-tag">Critical Infrastructure</span>
+    <span class="interest-tag">Resilient Systems</span>
+    <span class="interest-tag">AI-Assisted Engineering</span>
+    <span class="interest-tag">Physical Security Research</span>
+    <span class="interest-tag">Cyber-Physical Systems</span>
+    <span class="interest-tag">Engineering Automation</span>
+    <span class="interest-tag">Emergency Communications</span>
+    <span class="interest-tag">Infrastructure Resilience</span>
+    <span class="interest-tag">Continuity Planning</span>
+    <span class="interest-tag">Standards Development</span>
+    <span class="interest-tag">Amateur Radio</span>
+    <span class="interest-tag">Power Resilience</span>
+  </div>
+</section>
+
+<!-- HOW I WORK -->
+<section class="section" id="how-i-work">
+  <div class="section-kicker">How I Work</div>
+  <h2 class="section-heading">Philosophy &amp; Approach</h2>
+  <p class="section-sub">The thinking behind the tooling.</p>
 
   <div class="ai-body">
     <p>
-      The limited energy design space has a documentation problem. Specifications get recycled from project to project, BOMs drift from drawings, and the practitioners with the most domain knowledge spend a disproportionate amount of time on formatting, cross-referencing, and administrative output that adds no design value.
+      I view AI as an engineering accelerator, not a replacement for expertise. My workflow combines industry standards, practical field experience, structured peer review, and AI-assisted automation to improve consistency, documentation quality, and engineering efficiency, while maintaining human oversight at every decision point that matters.
     </p>
     <p>
-      A model that understands TIA-568, knows the difference between a TR and an ER, and can generate Section 270000 language from a design intent conversation is a force multiplier. It still requires the credentialed practitioner who has to review it, own it, and stand behind it. <strong>The RCDD drives. The AI handles the repetitive field work.</strong>
+      <strong>Engineering is fundamentally about reducing uncertainty.</strong> Every standard, every calculation, every review cycle exists to narrow the gap between what was designed and what gets built, and between what was intended and what fails. AI is one tool in that effort. Engineering judgment remains the most important component. Technology assists; engineers remain accountable.
     </p>
     <p>
-      Everything runs locally on <strong>dedicated on-premise hardware</strong> — a private inference and home automation server I own and operate. No cloud inference. No third-party data exposure. Sensitive project information stays where it belongs. The stack is built on open-weight models grounded in real standards language, not generalist models that hallucinate BICSI references and invent TIA clause numbers. Secure remote access via Tailscale keeps the stack off the public internet entirely.
+      The RCDD drives. The tools handle the repetitive coordination work. A model that understands TIA-568 and can cross-reference BICSI TDMM against a project specification is a force multiplier. It still requires the credentialed practitioner who must review it, own it, and stand behind it. That line does not move.
+    </p>
+    <p>
+      Everything sensitive runs on <strong>dedicated on-premise hardware</strong>. The stack is built on open-weight models grounded in real standards language, not generalist models that hallucinate clause numbers. Secure remote access via Tailscale keeps it off the public internet entirely.
     </p>
   </div>
 
   <!-- Video section -->
   <div class="video-section">
     <div class="video-section-title">See It in Action</div>
-    <p class="video-section-sub">AI-generated overviews of the LEX tooling stack — the design philosophy, how PLEX and The Estimator work, and why these tools were built for the limited energy trade.</p>
+    <p class="video-section-sub">Overviews of the tooling stack: the design philosophy, how PLEX and The Estimator work, and why these tools were built for the limited energy trade.</p>
     <div class="video-grid">
       <div class="video-wrap">
         <iframe src="https://www.youtube.com/embed/nqQwl1cT6Ls" title="LEX AI Tooling Overview — Part 1" allowfullscreen></iframe>
@@ -879,103 +938,4 @@
         <iframe src="https://www.youtube.com/embed/1KWX2oAvS1o" title="Free Web-Based Estimator for Limited Energy Contractors" allowfullscreen></iframe>
       </div>
       <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/z-BjVoI20HM" title="Free Power Load Sizing Tool for Telecom Rooms" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="section" id="contact">
-  <div class="section-kicker">Get in Touch</div>
-  <h2 class="section-heading">Contact</h2>
-  <p class="section-sub">Professional inquiries, tool feedback, and industry conversation are welcome.</p>
-
-  <div class="contact-grid">
-    <div class="contact-item">
-      <div class="contact-label">Email</div>
-      <div class="contact-value"><a href="mailto:stovey@limitedenergy.net">stovey@limitedenergy.net</a></div>
-    </div>
-    <div class="contact-item">
-      <div class="contact-label">LinkedIn</div>
-      <div class="contact-value"><a href="https://linkedin.com/in/mctovey" target="_blank" rel="noopener">linkedin.com/in/mctovey</a></div>
-    </div>
-    <div class="contact-item">
-      <div class="contact-label">GitHub</div>
-      <div class="contact-value"><a href="https://github.com/LimitedEnergyX" target="_blank" rel="noopener">github.com/LimitedEnergyX</a></div>
-    </div>
-  </div>
-
-  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
-    <input type="hidden" name="form-name" value="contact">
-    <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
-    <div class="contact-form-row">
-      <label for="cf-name">Name</label>
-      <input type="text" id="cf-name" name="name" required placeholder="Your name">
-    </div>
-    <div class="contact-form-row">
-      <label for="cf-email">Email</label>
-      <input type="email" id="cf-email" name="email" required placeholder="your@email.com">
-    </div>
-    <div class="contact-form-row">
-      <label for="cf-message">Message</label>
-      <textarea id="cf-message" name="message" required rows="4" placeholder="What's on your mind?"></textarea>
-    </div>
-    <button type="submit" class="contact-submit">Send &nbsp;→</button>
-  </form>
-
-  <p class="contact-note">Independent consulting for AI-enabled design workflows and smart automation. The Dude and The Estimator are free tools built from real design problems.</p>
-
-  <p class="contact-disclaimer">
-    Shawn C. Tovey holds the RCDD credential from BICSI. LEX is not a licensed engineering firm and does not offer professional engineering (PE) services. All work is ICT design consulting and AI tooling. The views, tools, and content on this site are personal and independent. They do not represent the positions, products, or work product of any current or former employer. No warranty is expressed or implied regarding the accuracy, completeness, or fitness for purpose of any tool, calculation, or specification language presented here. All output is provided for preliminary coordination only and must be reviewed and stamped by a qualified professional of record before construction use. No liability is accepted for errors, omissions, or downstream use.
-  </p>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span class="footer-brand">LEX</span>
-  <span class="footer-copy">Limited Energy eXperts &nbsp;·&nbsp; Shawn C. Tovey, RCDD &nbsp;·&nbsp; Built for the craft.</span>
-</footer>
-
-<script>
-  const ham = document.getElementById('ham');
-  const mob = document.getElementById('mob');
-  ham.addEventListener('click', () => {
-    ham.classList.toggle('open');
-    mob.classList.toggle('open');
-  });
-  mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    ham.classList.remove('open');
-    mob.classList.remove('open');
-  }));
-</script>
-<script>
-  // Contact form — AJAX submit so user stays on page
-  const contactForm = document.querySelector('form[name="contact"]');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = contactForm.querySelector('.contact-submit');
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
-      fetch('/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams(new FormData(contactForm)).toString()
-      }).then(() => {
-        contactForm.innerHTML = '<p style="font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.1em;color:var(--text);padding:1rem 0">✓ Message sent. I\'ll be in touch.</p>';
-        gtag('event', 'contact_form_submit');
-      }).catch(() => {
-        btn.textContent = 'Send →';
-        btn.disabled = false;
-      });
-    });
-  }
-  document.addEventListener('click', function(e) {
-    var a = e.target.closest('a[href^="mailto:"]');
-    if (a) gtag('event', 'email_click', {link_url: a.href});
-  });
-</script>
-
-</body>
-</html>
+        <iframe src="https://www.youtube.com/embed/z-BjVoI20HM" title="Free Power Load Sizing 

@@ -1,13 +1,15 @@
 # Limited Energy eXperts (LEX)
 
-> Independent consulting for AI-enabled design and smart automation by Shawn C. Tovey, RCDD. Practical AI adoption for low-voltage design, home automation, and design workflow productivity.
+> Professional engineering portfolio and technical resource center for Shawn C. Tovey, RCDD, physical security engineer, infrastructure designer, and builder of free tools for the Division 27 and 28 community. U.S. Navy veteran. BICSI credentialed.
 
 ## About
 
-Limited Energy eXperts (LEX) is an independent consulting practice operated by Shawn C. Tovey, RCDD (Registered Communications Distribution Designer — credentialed by BICSI). LEX focuses on practical AI adoption for engineering and home automation workflows — helping turn repetitive technical work into structured, repeatable processes through AI-assisted estimating, documentation, coordination, and system planning. Shawn also builds free tools for the Division 27/28 community, including PLEX (power load sizing) and The Estimator (job costing).
+Limited Energy eXperts (LEX) is the professional engineering brand and technical resource platform of Shawn C. Tovey, RCDD (Registered Communications Distribution Designer, credentialed by BICSI). The site serves as an engineering portfolio, knowledge hub, and home for free tools built for the Division 27 and 28 community, including PLEX (power load sizing) and The Estimator (job costing and crew planning). Shawn focuses on physical security systems design, ICT infrastructure, limited energy engineering, and AI-assisted workflows for technical professionals.
 
 **Owner:** Shawn C. Tovey, RCDD
-**Credential:** Registered Communications Distribution Designer (RCDD) — BICSI
+**Credential:** Registered Communications Distribution Designer (RCDD), BICSI
+**Military:** U.S. Navy veteran · Army National Guard veteran
+**Standards:** Member, BICSI Educational Technology Standards Committee
 **Contact:** stovey@limitedenergy.net
 **LinkedIn:** https://www.linkedin.com/in/mctovey/
 **GitHub:** https://github.com/LimitedEnergyX
@@ -15,23 +17,15 @@ Limited Energy eXperts (LEX) is an independent consulting practice operated by S
 
 ## Pages
 
-- [Home](https://limitedenergy.net/): Professional profile and overview of LEX services, credentials, and tools.
-- [PLEX — Power Load EXaminer](https://limitedenergy.net/plex): Free web-based load sizing tool for telecom rooms and equipment rooms. Calculates UPS, generator, PoE, and cooling loads for Division 27/28 coordination. Version 2.71. No login required, runs entirely in the browser.
-- [Smart Home Design](https://limitedenergy.net/home-automation): Local-first smart home system design and programming. No cloud subscriptions, no vendor lock-in. Engineered for practical, long-term reliability.
-- [About](https://limitedenergy.net/about): Professional profile for Shawn C. Tovey, RCDD. Background, BICSI credential detail, and links to free tools.
-- [The Estimator](https://limitedenergy.net/estimate): Free web-based job estimation tool for Division 27/28 low-voltage work. Schedule-driven crew sizing, BICSI-coded scope, federal/California overtime math, local/remote cost variants. Version 1.25. No login required, runs entirely in the browser.
+- [Home](https://limitedenergy.net/): Personal engineering portfolio and professional brand for Shawn C. Tovey, RCDD. Physical security engineer, infrastructure designer, and builder of free tools for the limited energy community.
+- [About](https://limitedenergy.net/about): Engineering background, military service, BICSI credentials, and professional profile for Shawn C. Tovey, RCDD.
+- [Work](https://limitedenergy.net/work): Engineering projects: PLEX, The Estimator, Purple Rainmaker (local network security awareness), VolTex (local-first multi-agent AI consensus platform, built in Texas. A volley of intelligence, human approved.), and the home automation and inference stack.
+- [Writing](https://limitedenergy.net/writing): Technical resources, design guides, engineering articles, checklists, and standards references for the Division 27 and 28 community. In development.
+- [PLEX: Power Load EXaminer](https://limitedenergy.net/plex): Free web-based load sizing tool for telecom rooms and equipment rooms. Calculates UPS, generator, PoE, and cooling loads for Division 27/28 coordination. Version 2.71. No login required, runs entirely in the browser.
+- [The Estimator](https://limitedenergy.net/estimate): Free web-based job estimation tool for Division 27/28 limited energy work. Schedule-driven crew sizing, BICSI-coded scope, federal/California overtime math, local/remote cost variants. Version 1.25. No login required, runs entirely in the browser.
+- [Home Automation](https://limitedenergy.net/home-automation): Local-first home automation stack: Home Assistant, Docker, Grafana, Ollama, and private inference. No cloud subscriptions, no vendor lock-in.
 
 ## Key Facts
 
-- Shawn C. Tovey holds the RCDD credential from BICSI — a professional certification for communications infrastructure design.
-- LEX specializes in Division 27 (Communications Systems) and Division 28 (Electronic Safety and Security) per MasterFormat/CSI.
-- PLEX is a free, client-side design calculator for preliminary sizing of telecom and equipment room power, cooling, UPS, and generator loads.
-- The Estimator is a free, client-side job estimation tool for Division 27/28 low-voltage work, with schedule-driven crew sizing, BICSI-coded scope, and overtime math.
-- LEX builds custom AI tooling and automation to improve design workflow efficiency.
-- All site content is authored by Shawn C. Tovey, RCDD.
-
-## What LEX Does Not Do
-
-- General IT support or managed services
-- Residential electrical work (licensed electrician scope)
-- Network administration
+- Shawn C. Tovey holds the RCDD credential (Registered Communications Distribution Designer), credentialed by BICSI.
+- VolTex is a local-first multi-agent AI consensus and orchestration platform built in Texas. It coordinates a structured volley of analysis between independent AI agents. Each agent brings different strengths and perspectives. Ideas are exchanged, challenged, and refined until agents converge on a recommendation. One designated execution agent interacts with approved tools. All others focus on independent reasoning and review. The consensus recommendation is presented to the user for approval. Your data stays local. Human oversight is a core design requirement, not an afterthought. Tagline: A volley of intelligence. Built in Texas.

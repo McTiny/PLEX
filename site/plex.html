@@ -348,7 +348,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
 .print-tip{background:#fffbeb;border:1px solid #f59e0b;border-radius:4px;color:#92400e;font-size:10.5px;padding:8px 14px;margin:0 0 10pt;text-align:center;font-family:sans-serif;line-height:1.5;}
 
 /* ===== LANDING ===== */
-#view-landing{min-height:calc(100vh - 38px);display:flex;align-items:center;justify-content:center;padding:48px 24px;background:var(--navy);}
+#view-landing{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:48px 24px;background:var(--navy);}
 .landing-inner{max-width:600px;width:100%;display:flex;flex-direction:column;align-items:center;gap:28px;}
 .landing-hero{display:flex;flex-direction:row;align-items:center;gap:36px;flex-wrap:wrap;justify-content:center;}
 .landing-text{text-align:left;}
@@ -363,7 +363,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
 .cta-link-btn{background:transparent;border:none;color:var(--gray-mid);font-family:var(--mono);font-size:10px;letter-spacing:0.1em;cursor:pointer;text-transform:uppercase;padding:6px;width:100%;}
 .cta-link-btn:hover{color:var(--teal);}
 /* ===== WIZARD ===== */
-#view-wizard{min-height:calc(100vh - 38px);display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;background:var(--navy);}
+#view-wizard{min-height:calc(100vh - 64px);display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;background:var(--navy);}
 .wizard-wrap{width:100%;max-width:540px;}
 .wizard-progress-bar{height:3px;background:var(--border);border-radius:2px;margin-bottom:24px;overflow:hidden;}
 .wizard-progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width 0.3s;}
@@ -382,7 +382,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
 /* ===== ASSISTANT PANEL ===== */
 #view-calculator{display:none;flex-direction:row;width:100%;max-width:100vw;}
 #calc-main-col{flex:1;min-width:0;overflow-x:hidden;max-width:100%;}
-#plex-assistant{width:240px;background:var(--navy-mid);border-left:1px solid var(--border);padding:12px;position:sticky;top:38px;max-height:calc(100vh - 38px);overflow-y:auto;flex-shrink:0;transition:all 0.2s;border-radius:12px 0 0 12px;}
+#plex-assistant{width:240px;background:var(--navy-mid);border-left:1px solid var(--border);padding:12px;position:sticky;top:64px;max-height:calc(100vh - 64px);overflow-y:auto;flex-shrink:0;transition:all 0.2s;border-radius:12px 0 0 12px;}
 #plex-assistant.asst-collapsed{width:0;padding:0;overflow:hidden;border-left:none;}
 .assist-msg{background:var(--navy-light);border-radius:4px;padding:8px 10px;margin-bottom:8px;display:flex;gap:8px;align-items:flex-start;font-size:11px;color:var(--gray-light);line-height:1.5;}
 .assist-warn{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);}
@@ -417,13 +417,74 @@ body{background:white !important;color:black !important;font-size:9pt;}
 </head>
 <body>
 <style>
-#lex-sitenav{background:var(--navy);border-bottom:1px solid rgba(200,16,46,0.2);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:38px;position:sticky;top:0;z-index:9999;}
-#lex-sitenav .lsn-brand{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:0.2em;color:var(--red);}
+/* SITE NAV — self-contained */
+.lex-nav{position:sticky;top:0;z-index:9999;background:#0E1B30;border-bottom:1px solid #162338;display:flex;justify-content:space-between;align-items:center;padding:0 2.5rem;height:64px;}
+.lex-nav-brand{display:flex;align-items:baseline;gap:0.75rem;text-decoration:none;}
+.lex-nav-brand .lex{font-family:var(--display);font-weight:700;font-size:1.5rem;letter-spacing:0.2em;color:var(--red);}
+.lex-nav-brand .tagline{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.12em;color:#6B7C95;text-transform:uppercase;}
+.lex-nav-right{display:flex;align-items:center;gap:2rem;}
+.lex-nav-links{display:flex;gap:1.75rem;list-style:none;}
+@media(max-width:860px){.lex-nav-links{display:none;}}
+.lex-nav-links a{font-family:var(--display);font-weight:400;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;color:#B8C5D3;text-decoration:none;transition:color 0.2s;}
+.lex-nav-links a:hover,.lex-nav-links a.active{color:var(--red);}
+.lex-nav-icon{display:flex;align-items:center;color:#6B7C95;text-decoration:none;transition:color 0.2s;}
+.lex-nav-icon:hover{color:#B8C5D3;}
+.lex-hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:4px;width:32px;height:32px;}
+.lex-hamburger span{display:block;width:22px;height:2px;background:#B8C5D3;border-radius:2px;transition:all 0.25s;}
+.lex-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.lex-hamburger.open span:nth-child(2){opacity:0;}
+.lex-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.lex-mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:#122040;border-bottom:1px solid #162338;z-index:9998;padding:1.5rem 2rem;flex-direction:column;}
+.lex-mobile-menu.open{display:flex;}
+.lex-mobile-menu a{font-family:var(--display);font-weight:400;font-size:1rem;letter-spacing:0.14em;text-transform:uppercase;color:#B8C5D3;text-decoration:none;padding:0.85rem 0;border-bottom:1px solid #162338;transition:color 0.2s;}
+.lex-mobile-menu a:last-child{border-bottom:none;}
+.lex-mobile-menu a:hover{color:var(--red);}
 </style>
-<div id="lex-sitenav">
-  <span class="lsn-brand">PLEX</span>
+<nav class="lex-nav">
+  <a href="/" class="lex-nav-brand">
+    <span class="lex">LEX</span>
+    <span class="tagline">Limited Energy eXperts</span>
+  </a>
+  <ul class="lex-nav-links">
+    <li><a href="/about">About</a></li>
+    <li><a href="/work">Work</a></li>
+    <li><a href="/writing">Writing</a></li>
+    <li><a href="/plex" class="active">PLEX</a></li>
+    <li><a href="/estimate">Estimator</a></li>
+  </ul>
+  <div class="lex-nav-right">
+    <a href="https://www.linkedin.com/in/mctovey/" target="_blank" rel="noopener" class="lex-nav-icon" aria-label="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://github.com/LimitedEnergyX" target="_blank" rel="noopener" class="lex-nav-icon" aria-label="GitHub">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+    </a>
+    <button class="lex-hamburger" id="lex-ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="lex-mobile-menu" id="lex-mob">
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/work">Work</a>
+  <a href="/writing">Writing</a>
+  <a href="/plex">PLEX</a>
+  <a href="/estimate">Estimator</a>
+  <a href="/home-automation">Home Automation</a>
+  <a href="/#connect">Connect</a>
 </div>
-<div id="view-landing" style="min-height:calc(100vh - 38px);display:flex;align-items:center;justify-content:center;padding:48px 24px;background:var(--navy);">
+<script>
+(function(){
+  var ham=document.getElementById('lex-ham');
+  var mob=document.getElementById('lex-mob');
+  if(ham&&mob){
+    ham.addEventListener('click',function(){ham.classList.toggle('open');mob.classList.toggle('open');});
+    mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){ham.classList.remove('open');mob.classList.remove('open');});});
+  }
+})();
+</script>
+<div id="view-landing" style="min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:48px 24px;background:var(--navy);">
   <div class="landing-inner">
     <div class="landing-hero">
       <img src="dude.png" style="width:130px;height:130px;object-fit:cover;border-radius:50%;border:2px solid var(--teal);display:block;box-shadow:0 4px 24px rgba(20,184,166,0.25);" alt="PLEX — Power Load EXaminer">
@@ -440,7 +501,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     </div>
   </div>
 </div>
-<div id="view-wizard" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 38px);padding:48px 24px;background:var(--navy);">
+<div id="view-wizard" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 64px);padding:48px 24px;background:var(--navy);">
   <div class="wizard-wrap">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
       <span id="wizard-step-lbl" class="wizard-step-lbl">STEP 1 OF 4</span>
@@ -453,7 +514,7 @@ body{background:white !important;color:black !important;font-size:9pt;}
     </div>
   </div>
 </div>
-<div id="view-dashboard" style="display:none;flex-direction:column;min-height:calc(100vh - 38px);background:var(--navy);padding:0 0 80px 0;">
+<div id="view-dashboard" style="display:none;flex-direction:column;min-height:calc(100vh - 64px);background:var(--navy);padding:0 0 80px 0;">
   <div style="background:var(--navy-mid);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:12px;">
     <button class="hbtn" onclick="setView('calculator')" style="font-size:11px;">&#8592; Calculator</button>
     <div style="font-family:var(--display);font-size:13px;color:var(--red);letter-spacing:0.1em;">PROJECT DASHBOARD</div>

@@ -17,3 +17,8 @@ node_modules/
 
 # Claude Code
 .claude/
+
+# Dev/fix scripts (not for public repo)
+site/*.py
+site/*.bat
+site/*.js.bak

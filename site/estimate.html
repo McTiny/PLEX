@@ -42,7 +42,7 @@
   "applicationCategory": "EngineeringApplication",
   "operatingSystem": "Web Browser",
   "url": "https://limitedenergy.net/estimate",
-  "description": "Schedule-driven crew sizing and job estimation for Division 27/28 low-voltage work. BICSI-coded scope, federal and California overtime math, local and remote cost variants. Client-side JSON save/load.",
+  "description": "Schedule-driven crew sizing and job estimation for Division 27/28 limited energy work. BICSI-coded scope, federal and California overtime math, local and remote cost variants. Client-side JSON save/load.",
   "version": "1.25",
   "featureList": ["Schedule-driven crew sizing", "BICSI-coded scope items", "Federal and California overtime calculation", "Local and remote cost variants", "Client-side JSON save/load", "Division 27/28 estimating"],
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -348,39 +348,73 @@ input[type=checkbox],input[type=radio]{width:auto;cursor:pointer;accent-color:va
 </head>
 <body>
 <style>
-#lex-sitenav{background:var(--navy);border-bottom:1px solid rgba(200,16,46,0.2);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:38px;position:sticky;top:0;z-index:9999;}
-#lex-sitenav .lsn-brand{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:0.2em;color:var(--red);text-decoration:none;}
-#lex-sitenav .lsn-right{display:flex;align-items:center;gap:0.75rem;}
-.lsn-nav-cta{font-family:var(--label);font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);text-decoration:none;border:1px solid var(--red);padding:0.3rem 0.75rem;border-radius:2px;transition:background 0.15s,color 0.15s;white-space:nowrap;}
-.lsn-nav-cta:hover{background:var(--red);color:var(--white);}
-.lsn-ham{display:flex;flex-direction:column;justify-content:center;gap:4px;background:none;border:none;cursor:pointer;padding:3px;width:28px;height:28px;}
-.lsn-ham span{display:block;width:18px;height:2px;background:var(--gray-mid);border-radius:2px;transition:all 0.25s;}
-.lsn-ham.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
-.lsn-ham.open span:nth-child(2){opacity:0;}
-.lsn-ham.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
-.lsn-mob{display:none;position:fixed;top:38px;left:0;right:0;background:var(--navy-mid);border-bottom:1px solid rgba(200,16,46,0.2);z-index:9998;padding:1.25rem 1.5rem;flex-direction:column;}
-.lsn-mob.open{display:flex;}
-.lsn-mob a{font-family:var(--label);font-weight:600;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-mid);text-decoration:none;padding:0.7rem 0;border-bottom:1px solid var(--border);transition:color 0.15s;}
-.lsn-mob a:last-child{border-bottom:none;}
-.lsn-mob a:hover{color:var(--white);}
+/* SITE NAV — self-contained */
+.lex-nav{position:sticky;top:0;z-index:9999;background:#0E1B30;border-bottom:1px solid #162338;display:flex;justify-content:space-between;align-items:center;padding:0 2.5rem;height:64px;}
+.lex-nav-brand{display:flex;align-items:baseline;gap:0.75rem;text-decoration:none;}
+.lex-nav-brand .lex{font-family:var(--display);font-weight:700;font-size:1.5rem;letter-spacing:0.2em;color:var(--red);}
+.lex-nav-brand .tagline{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.12em;color:#6B7C95;text-transform:uppercase;}
+.lex-nav-right{display:flex;align-items:center;gap:2rem;}
+.lex-nav-links{display:flex;gap:1.75rem;list-style:none;}
+@media(max-width:860px){.lex-nav-links{display:none;}}
+.lex-nav-links a{font-family:var(--display);font-weight:400;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;color:#B8C5D3;text-decoration:none;transition:color 0.2s;}
+.lex-nav-links a:hover,.lex-nav-links a.active{color:var(--red);}
+.lex-nav-icon{display:flex;align-items:center;color:#6B7C95;text-decoration:none;transition:color 0.2s;}
+.lex-nav-icon:hover{color:#B8C5D3;}
+.lex-hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:4px;width:32px;height:32px;}
+.lex-hamburger span{display:block;width:22px;height:2px;background:#B8C5D3;border-radius:2px;transition:all 0.25s;}
+.lex-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.lex-hamburger.open span:nth-child(2){opacity:0;}
+.lex-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.lex-mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:#122040;border-bottom:1px solid #162338;z-index:9998;padding:1.5rem 2rem;flex-direction:column;}
+.lex-mobile-menu.open{display:flex;}
+.lex-mobile-menu a{font-family:var(--display);font-weight:400;font-size:1rem;letter-spacing:0.14em;text-transform:uppercase;color:#B8C5D3;text-decoration:none;padding:0.85rem 0;border-bottom:1px solid #162338;transition:color 0.2s;}
+.lex-mobile-menu a:last-child{border-bottom:none;}
+.lex-mobile-menu a:hover{color:var(--red);}
 </style>
-<div id="lex-sitenav">
-  <a href="/" class="lsn-brand">LEX</a>
-  <div class="lsn-right">
-    <a href="/plex" class="lsn-nav-cta">Launch PLEX &nbsp;→</a>
-    <button class="lsn-ham" id="lsn-ham" aria-label="Menu">
+<nav class="lex-nav">
+  <a href="/" class="lex-nav-brand">
+    <span class="lex">LEX</span>
+    <span class="tagline">Limited Energy eXperts</span>
+  </a>
+  <ul class="lex-nav-links">
+    <li><a href="/about">About</a></li>
+    <li><a href="/work">Work</a></li>
+    <li><a href="/writing">Writing</a></li>
+    <li><a href="/plex">PLEX</a></li>
+    <li><a href="/estimate" class="active">Estimator</a></li>
+  </ul>
+  <div class="lex-nav-right">
+    <a href="https://www.linkedin.com/in/mctovey/" target="_blank" rel="noopener" class="lex-nav-icon" aria-label="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://github.com/LimitedEnergyX" target="_blank" rel="noopener" class="lex-nav-icon" aria-label="GitHub">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+    </a>
+    <button class="lex-hamburger" id="lex-ham" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
-</div>
-<div class="lsn-mob" id="lsn-mob">
+</nav>
+<div class="lex-mobile-menu" id="lex-mob">
   <a href="/">Home</a>
   <a href="/about">About</a>
+  <a href="/work">Work</a>
+  <a href="/writing">Writing</a>
   <a href="/plex">PLEX</a>
-  <a href="/estimate">The Estimator</a>
+  <a href="/estimate">Estimator</a>
   <a href="/home-automation">Home Automation</a>
-  <a href="/#contact">Contact</a>
+  <a href="/#connect">Connect</a>
 </div>
+<script>
+(function(){
+  var ham=document.getElementById('lex-ham');
+  var mob=document.getElementById('lex-mob');
+  if(ham&&mob){
+    ham.addEventListener('click',function(){ham.classList.toggle('open');mob.classList.toggle('open');});
+    mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){ham.classList.remove('open');mob.classList.remove('open');});});
+  }
+})();
+</script>
 <div id="header">
   <div class="header-inner">
     <div class="header-brand">
@@ -2873,10 +2907,6 @@ if(!state.project.proposalDate) state.project.proposalDate = new Date().toISOStr
 bindAll();
 render();
 updateSavedIndicator();
-const lsnHam = document.getElementById('lsn-ham');
-const lsnMob = document.getElementById('lsn-mob');
-lsnHam.addEventListener('click', () => { lsnHam.classList.toggle('open'); lsnMob.classList.toggle('open'); });
-document.addEventListener('click', e => { if (!lsnHam.contains(e.target) && !lsnMob.contains(e.target)) { lsnHam.classList.remove('open'); lsnMob.classList.remove('open'); } });
 document.addEventListener('click', function(e) {
   var a = e.target.closest('a[href^="mailto:"]');
   if (a) gtag('event', 'email_click', {link_url: a.href});
